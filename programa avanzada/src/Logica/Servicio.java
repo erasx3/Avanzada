@@ -10,5 +10,43 @@ package Logica;
  * @author Facu
  */
 public class Servicio {
+    private int codigo;
+    private String descripcion;
+    private double subTotal;
+
+    public Servicio() {
+    }
+
+    public Servicio(int codigo, String descripcion, double subTotal) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.subTotal = subTotal;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public double getSubTotal() {
+        return subTotal;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setSubTotal(double subTotal) {
+        this.subTotal = subTotal;
+    }
+    
+    
     
 }

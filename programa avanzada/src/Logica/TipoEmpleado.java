@@ -10,5 +10,32 @@ package Logica;
  * @author Facu
  */
 public class TipoEmpleado {
+    private int codigo;
+    private String puesto;
+
+    public TipoEmpleado(){
+    }
+    
+    public TipoEmpleado(int codigo, String puesto) {
+        this.codigo = codigo;
+        this.puesto = puesto;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
+    }
+    
     
 }

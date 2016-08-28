@@ -7,20 +7,18 @@ package Logica;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class Concepto {
+public class DetalleLiquidacion {// ver para extender desde detalle
     private int codigo;
     private String descripcion;
-    private double monto;
 
-    public Concepto() {
+    public DetalleLiquidacion() {
     }
 
-    public Concepto(int codigo, String descripcion, double monto) {
+    public DetalleLiquidacion(int codigo, String descripcion) {
         this.codigo = codigo;
         this.descripcion = descripcion;
-        this.monto = monto;
     }
 
     public int getCodigo() {
@@ -31,20 +29,12 @@ public class Concepto {
         return descripcion;
     }
 
-    public double getMonto() {
-        return monto;
-    }
-
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public void setMonto(double monto) {
-        this.monto = monto;
     }
     
     

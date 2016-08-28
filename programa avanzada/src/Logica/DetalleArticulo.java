@@ -7,35 +7,27 @@ package Logica;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class Stock {
-    private int codigoInterno;
+public class DetalleArticulo extends Detalle {
     private short cantidad;
 
-    public Stock() {
+    public DetalleArticulo() {
     }
 
-    public Stock(int codigoInterno, short cantidad) {
-        this.codigoInterno = codigoInterno;
+    public DetalleArticulo(short cantidad, int codigo, double subTotal) {
+        super(codigo, subTotal);
         this.cantidad = cantidad;
-    }
-
-    public int getCodigoInterno() {
-        return codigoInterno;
     }
 
     public short getCantidad() {
         return cantidad;
     }
 
-    public void setCodigoInterno(int codigoInterno) {
-        this.codigoInterno = codigoInterno;
-    }
-
     public void setCantidad(short cantidad) {
         this.cantidad = cantidad;
     }
+    
     
     
     

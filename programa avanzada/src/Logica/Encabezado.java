@@ -5,22 +5,26 @@
  */
 package Logica;
 
+import java.util.Date;
+
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class Concepto {
+public class Encabezado {
     private int codigo;
     private String descripcion;
-    private double monto;
+    private Date fecha;
+    private float total;
 
-    public Concepto() {
+    public Encabezado() {
     }
 
-    public Concepto(int codigo, String descripcion, double monto) {
+    public Encabezado(int codigo, String descripcion, Date fecha, float total) {
         this.codigo = codigo;
         this.descripcion = descripcion;
-        this.monto = monto;
+        this.fecha = fecha;
+        this.total = total;
     }
 
     public int getCodigo() {
@@ -31,8 +35,12 @@ public class Concepto {
         return descripcion;
     }
 
-    public double getMonto() {
-        return monto;
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public float getTotal() {
+        return total;
     }
 
     public void setCodigo(int codigo) {
@@ -43,10 +51,13 @@ public class Concepto {
         this.descripcion = descripcion;
     }
 
-    public void setMonto(double monto) {
-        this.monto = monto;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
-    
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
     
     
 }

@@ -9,6 +9,12 @@ package Logica;
  *
  * @author eras
  */
-public class main {
+public class Abonado extends Cliente{
+
+    public Abonado(int codigo, float dni, String nombre, String apellido, String direccion, long telefono) {
+        super(codigo, dni, nombre, apellido, direccion, telefono);
+    }
+    
+    
     
 }
