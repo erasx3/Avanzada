@@ -7,78 +7,35 @@ package Logica;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class Empleado {
-    private int codigo;
-    private float dni;
-    private String nombre;
-    private String apellido;
-    private String direccion;
-    private long telefono;
+public class Empleado extends Persona{
+    private String dni;
+    private String cuil;
 
-     public Empleado(){
-     }
-     
-    public Empleado(int codigo, float dni, String nombre, String apellido, String direccion, long telefono) {
-        this.codigo = codigo;
+    public Empleado() {
+    }
+
+    public Empleado(String dni, int codigo, String nombre, String direccion, String telefono, String email) {
+        super(codigo, nombre, direccion, telefono, email);
         this.dni = dni;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.telefono = telefono;
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public float getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getCuil() {
+        return cuil;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public long getTelefono() {
-        return telefono;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public void setDni(float dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public void setTelefono(long telefono) {
-        this.telefono = telefono;
+    public void setCuil(String cuil) {
+        this.cuil = cuil;
     }
     
-    
-    
-           
     
 }

@@ -7,20 +7,20 @@ package Logica;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class Servicio {
+public abstract class Servicio {
     private int codigo;
     private String descripcion;
-    private double subTotal;
+    private Double subtotal;
 
     public Servicio() {
     }
 
-    public Servicio(int codigo, String descripcion, double subTotal) {
+    public Servicio(int codigo, String descripcion, Double subtotal) {
         this.codigo = codigo;
         this.descripcion = descripcion;
-        this.subTotal = subTotal;
+        this.subtotal = subtotal;
     }
 
     public int getCodigo() {
@@ -31,8 +31,8 @@ public class Servicio {
         return descripcion;
     }
 
-    public double getSubTotal() {
-        return subTotal;
+    public Double getSubtotal() {
+        return subtotal;
     }
 
     public void setCodigo(int codigo) {
@@ -43,10 +43,9 @@ public class Servicio {
         this.descripcion = descripcion;
     }
 
-    public void setSubTotal(double subTotal) {
-        this.subTotal = subTotal;
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
     }
-    
     
     
 }

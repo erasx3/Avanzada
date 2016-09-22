@@ -9,34 +9,13 @@ package Logica;
  *
  * @author eras
  */
-public class DetalleLiquidacion {// ver para extender desde detalle
-    private int codigo;
-    private String descripcion;
+public class DetalleLiquidacion extends Detalle {
 
     public DetalleLiquidacion() {
     }
 
-    public DetalleLiquidacion(int codigo, String descripcion) {
-        this.codigo = codigo;
-        this.descripcion = descripcion;
+    public DetalleLiquidacion(int codigo, String descripcion, Double subtotal) {
+        super(codigo, descripcion, subtotal);
     }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-    
-    
     
 }

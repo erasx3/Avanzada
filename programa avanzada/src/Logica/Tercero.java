@@ -9,35 +9,34 @@ package Logica;
  *
  * @author eras
  */
-public class Tercero extends Servicio{
-    private float monto;
-    private float porcentajeGanancia;
+public class Tercero extends Servicio {
+    private Double monto;
+    private Double ganancia;
 
     public Tercero() {
     }
 
-    public Tercero(float monto, float porcentajeGanancia, int codigo, String descripcion, double subTotal) {
-        super(codigo, descripcion, subTotal);
+    public Tercero(Double monto, Double ganancia, int codigo, String descripcion, Double subtotal) {
+        super(codigo, descripcion, subtotal);
         this.monto = monto;
-        this.porcentajeGanancia = porcentajeGanancia;
+        this.ganancia = ganancia;
     }
 
-    public float getMonto() {
+    public Double getMonto() {
         return monto;
     }
 
-    public float getPorcentajeGanancia() {
-        return porcentajeGanancia;
+    public Double getGanancia() {
+        return ganancia;
     }
 
-    public void setMonto(float monto) {
+    public void setMonto(Double monto) {
         this.monto = monto;
     }
 
-    public void setPorcentajeGanancia(float porcentajeGanancia) {
-        this.porcentajeGanancia = porcentajeGanancia;
+    public void setGanancia(Double ganancia) {
+        this.ganancia = ganancia;
     }
-    
     
     
 }

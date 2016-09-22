@@ -7,9 +7,9 @@ package Logica;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class TipoComprobante {
+public abstract class TipoComprobante {
     private int codigo;
     private String descripcion;
 
@@ -36,7 +36,6 @@ public class TipoComprobante {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
     
     
 }

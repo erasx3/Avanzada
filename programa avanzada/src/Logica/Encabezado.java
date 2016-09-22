@@ -15,12 +15,12 @@ public class Encabezado {
     private int codigo;
     private String descripcion;
     private Date fecha;
-    private float total;
+    private Double total;
 
     public Encabezado() {
     }
 
-    public Encabezado(int codigo, String descripcion, Date fecha, float total) {
+    public Encabezado(int codigo, String descripcion, Date fecha, Double total) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.fecha = fecha;
@@ -39,7 +39,7 @@ public class Encabezado {
         return fecha;
     }
 
-    public float getTotal() {
+    public Double getTotal() {
         return total;
     }
 
@@ -55,7 +55,7 @@ public class Encabezado {
         this.fecha = fecha;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
     

@@ -7,7 +7,7 @@ package Logica;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
 public class Estado {
     private int codigo;

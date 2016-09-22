@@ -7,47 +7,26 @@ package Logica;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class Proyecto extends Servicio{
-    private float porcentajePorProductividad;
-    private float tiempoEstimado; // ver tipo de dato
-    private float horasTrabajadas;
+public class Proyecto extends Servicio {
+    private Float tiempoEstimado;
 
     public Proyecto() {
     }
 
-    public Proyecto(float porcentajePorProductividad, float tiempoEstimado, float horasTrabajadas, int codigo, String descripcion, double subTotal) {
-        super(codigo, descripcion, subTotal);
-        this.porcentajePorProductividad = porcentajePorProductividad;
+    public Proyecto(Float tiempoEstimado, int codigo, String descripcion, Double subtotal) {
+        super(codigo, descripcion, subtotal);
         this.tiempoEstimado = tiempoEstimado;
-        this.horasTrabajadas = horasTrabajadas;
     }
 
-    public float getPorcentajePorProductividad() {
-        return porcentajePorProductividad;
-    }
-
-    public float getTiempoEstimado() {
+    public Float getTiempoEstimado() {
         return tiempoEstimado;
     }
 
-    public float getHorasTrabajadas() {
-        return horasTrabajadas;
-    }
-
-    public void setPorcentajePorProductividad(float porcentajePorProductividad) {
-        this.porcentajePorProductividad = porcentajePorProductividad;
-    }
-
-    public void setTiempoEstimado(float tiempoEstimado) {
+    public void setTiempoEstimado(Float tiempoEstimado) {
         this.tiempoEstimado = tiempoEstimado;
     }
-
-    public void setHorasTrabajadas(float horasTrabajadas) {
-        this.horasTrabajadas = horasTrabajadas;
-    }
-    
     
     
 }

@@ -7,7 +7,7 @@ package Logica;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
 public class Equipo {
     private int codigo;
@@ -36,7 +36,6 @@ public class Equipo {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
     
     
 }

@@ -14,10 +14,10 @@ public class Tecnico extends Servicio {
     public Tecnico() {
     }
 
-    public Tecnico(int codigo, String descripcion, double subTotal) {
-        super(codigo, descripcion, subTotal);
+    public Tecnico(int codigo, String descripcion, Double subtotal) {
+        super(codigo, descripcion, subtotal);
     }
     
-    
+       
     
 }

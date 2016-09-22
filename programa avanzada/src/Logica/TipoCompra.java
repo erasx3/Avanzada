@@ -5,21 +5,17 @@
  */
 package Logica;
 
-import java.util.Date;
-
 /**
  *
  * @author eras
  */
-public class EncabezadoCompra extends Encabezado {
+public class TipoCompra extends TipoComprobante {
 
-    public EncabezadoCompra() {
+    public TipoCompra() {
     }
 
-    public EncabezadoCompra(int codigo, String descripcion, Date fecha, float total) {
-        super(codigo, descripcion, fecha, total);
+    public TipoCompra(int codigo, String descripcion) {
+        super(codigo, descripcion);
     }
-    
-    
     
 }

@@ -7,44 +7,34 @@ package Logica;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class Concepto {
-    private int codigo;
+public class OrdenTrabajo {
+    private int codgo;
     private String descripcion;
-    private double monto;
 
-    public Concepto() {
+    public OrdenTrabajo() {
     }
 
-    public Concepto(int codigo, String descripcion, double monto) {
-        this.codigo = codigo;
+    public OrdenTrabajo(int codgo, String descripcion) {
+        this.codgo = codgo;
         this.descripcion = descripcion;
-        this.monto = monto;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getCodgo() {
+        return codgo;
     }
 
     public String getDescripcion() {
         return descripcion;
     }
 
-    public double getMonto() {
-        return monto;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCodgo(int codgo) {
+        this.codgo = codgo;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public void setMonto(double monto) {
-        this.monto = monto;
     }
     
     

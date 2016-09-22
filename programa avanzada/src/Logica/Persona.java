@@ -9,18 +9,22 @@ package Logica;
  *
  * @author eras
  */
-public class Empresa {
+public abstract class Persona implements InterfacePersonariaJuridica {
     private int codigo;
     private String nombre;
     private String direccion;
+    private String telefono;
+    private String email;
 
-    public Empresa() {
-    }
-
-    public Empresa(int codigo, String nombre, String direccion) {
+    public Persona(int codigo, String nombre, String direccion, String telefono, String email) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.direccion = direccion;
+        this.telefono = telefono;
+        this.email = email;
+    }
+
+    public Persona() {
     }
 
     public int getCodigo() {
@@ -35,6 +39,14 @@ public class Empresa {
         return direccion;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
@@ -45,6 +57,14 @@ public class Empresa {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
     

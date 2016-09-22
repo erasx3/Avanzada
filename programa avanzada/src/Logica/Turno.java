@@ -5,22 +5,26 @@
  */
 package Logica;
 
+import java.util.Date;
+
 /**
  *
- * @author Facu
+ * @author eras
  */
 public class Turno {
-    private int codigo;
-    private String descripcion;
-    private String hora; // preguntar por formato para hora
-    
-     public Turno() {
+   private int codigo;
+   private String descripcion;
+   private Float hora;
+   private Date fecha;
+
+    public Turno() {
     }
-     
-    public Turno(int codigo, String descripcion, String hora) {
+
+    public Turno(int codigo, String descripcion, Float hora, Date fecha) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.hora = hora;
+        this.fecha = fecha;
     }
 
     public int getCodigo() {
@@ -31,8 +35,12 @@ public class Turno {
         return descripcion;
     }
 
-    public String getHora() {
+    public Float getHora() {
         return hora;
+    }
+
+    public Date getFecha() {
+        return fecha;
     }
 
     public void setCodigo(int codigo) {
@@ -43,13 +51,15 @@ public class Turno {
         this.descripcion = descripcion;
     }
 
-    public void setHora(String hora) {
+    public void setHora(Float hora) {
         this.hora = hora;
     }
-    
-    
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+  
    
-    
-    
-    
+   
 }

@@ -9,12 +9,13 @@ package Logica;
  *
  * @author eras
  */
-public class Minorista extends Cliente {
+public class TipoLiquidacion extends TipoComprobante {
 
-    public Minorista(int codigo, float dni, String nombre, String apellido, String direccion, long telefono) {
-        super(codigo, dni, nombre, apellido, direccion, telefono);
+    public TipoLiquidacion() {
     }
-    
-    
+
+    public TipoLiquidacion(int codigo, String descripcion) {
+        super(codigo, descripcion);
+    }
     
 }

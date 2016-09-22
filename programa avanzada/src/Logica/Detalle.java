@@ -7,36 +7,45 @@ package Logica;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class Detalle {
+public abstract class Detalle {
     private int codigo;
-    private double subTotal;
+    private String descripcion;
+    private Double subtotal;
 
     public Detalle() {
     }
 
-    public Detalle(int codigo, double subTotal) {
+    public Detalle(int codigo, String descripcion, Double subtotal) {
         this.codigo = codigo;
-        this.subTotal = subTotal;
+        this.descripcion = descripcion;
+        this.subtotal = subtotal;
     }
 
     public int getCodigo() {
         return codigo;
     }
 
-    public double getSubTotal() {
-        return subTotal;
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public Double getSubtotal() {
+        return subtotal;
     }
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
-    public void setSubTotal(double subTotal) {
-        this.subTotal = subTotal;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
-    
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
+    }
     
     
 }

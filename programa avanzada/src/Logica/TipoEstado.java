@@ -7,20 +7,18 @@ package Logica;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class TipoTecnologia {
+public class TipoEstado {
     private int codigo;
     private String nombre;
-    private String decripcion;
 
-    public TipoTecnologia() {
+    public TipoEstado() {
     }
 
-    public TipoTecnologia(int codigo, String nombre, String decripcion) {
+    public TipoEstado(int codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.decripcion = decripcion;
     }
 
     public int getCodigo() {
@@ -31,20 +29,12 @@ public class TipoTecnologia {
         return nombre;
     }
 
-    public String getDecripcion() {
-        return decripcion;
-    }
-
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public void setDecripcion(String decripcion) {
-        this.decripcion = decripcion;
     }
     
     
