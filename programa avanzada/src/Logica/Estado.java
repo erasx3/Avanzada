@@ -12,6 +12,9 @@ package Logica;
 public class Estado {
     private int codigo;
     private String descripcion;
+    
+    //Relaciones
+    private TipoEstado unTipoEstado;
 
     public Estado() {
     }

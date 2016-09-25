@@ -10,6 +10,10 @@ package Logica;
  * @author eras
  */
 public class DetalleLiquidacion extends Detalle {
+    
+    //Relaciones
+    private ManoDeObra unaManoDeObra;
+    
 
     public DetalleLiquidacion() {
     }

@@ -5,12 +5,19 @@
  */
 package Logica;
 
+import java.util.List;
+
 /**
  *
  * @author eras
  */
 public class Proyecto extends Servicio {
     private Float tiempoEstimado;
+    
+    //Relaciones
+    private List<Concepto> unosConceptos;
+    private List<Tecnologia> unosTecnologias;
+    private List<OrdenTrabajo> unasOrdenesTrabajos;
 
     public Proyecto() {
     }

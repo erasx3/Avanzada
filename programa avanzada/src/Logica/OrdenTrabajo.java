@@ -5,6 +5,8 @@
  */
 package Logica;
 
+import java.util.List;
+
 /**
  *
  * @author eras
@@ -12,7 +14,13 @@ package Logica;
 public class OrdenTrabajo {
     private int codgo;
     private String descripcion;
-
+    
+    //Relaciones
+    private Turno unTurno;
+    private List<Servicio> unosServicios;
+    private Equipo unEquipo;
+    
+    
     public OrdenTrabajo() {
     }
 

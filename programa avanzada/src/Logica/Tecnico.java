@@ -5,11 +5,16 @@
  */
 package Logica;
 
+import java.util.List;
+
 /**
  *
  * @author eras
  */
 public class Tecnico extends Servicio {
+    
+    //Relaciones
+    private List<Articulo> unosArticulos;
 
     public Tecnico() {
     }

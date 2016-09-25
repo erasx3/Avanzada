@@ -16,6 +16,9 @@ public class Turno {
    private String descripcion;
    private Float hora;
    private Date fecha;
+   
+   //Relaciones
+   private Cliente unCliente;
 
     public Turno() {
     }

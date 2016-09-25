@@ -5,6 +5,8 @@
  */
 package Logica;
 
+import java.util.List;
+
 /**
  *
  * @author eras
@@ -12,6 +14,9 @@ package Logica;
 public class Equipo {
     private int codigo;
     private String descripcion;
+    
+    //Relaciones
+    private List<Estado> unosEstados;
 
     public Equipo() {
     }

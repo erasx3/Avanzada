@@ -9,6 +9,6 @@ package Logica;
  *
  * @author eras
  */
-public interface InterfacePersonariaJuridica {
+public interface InterfacePersoneriaJuridica {
     
 }

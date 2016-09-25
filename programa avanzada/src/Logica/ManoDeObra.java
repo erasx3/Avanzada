@@ -13,6 +13,11 @@ public class ManoDeObra {
     
     private int codigo;
     private int horasTrabajadas;
+    
+    //Relaciones
+    private Actividad unaActividad;
+    private Servicio unServicio;
+    private Empleado unEmpleado;
 
     public ManoDeObra() {
     }

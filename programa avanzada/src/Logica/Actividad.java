@@ -38,6 +38,4 @@ public abstract class Actividad {
         this.descripcion = descripcion;
     }
     
-    
-    
 }

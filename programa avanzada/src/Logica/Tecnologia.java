@@ -9,15 +9,15 @@ package Logica;
  *
  * @author Facu
  */
-public class Tecnologias {
+public class Tecnologia {
     
     private int codigo;
     private String descripcion;
 
-    public Tecnologias() {
+    public Tecnologia() {
     }
 
-    public Tecnologias(int codigo, String descripcion) {
+    public Tecnologia(int codigo, String descripcion) {
         this.codigo = codigo;
         this.descripcion = descripcion;
     }

@@ -6,6 +6,7 @@
 package Logica;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,12 @@ public class Encabezado {
     private String descripcion;
     private Date fecha;
     private Double total;
+    
+    //Relaciones
+    private TipoComprobante unTipoComprobante;
+    private List<Detalle> unosDetalles;
+    private InterfacePersoneriaJuridica unaPersoneriaJuridica;
+    
 
     public Encabezado() {
     }

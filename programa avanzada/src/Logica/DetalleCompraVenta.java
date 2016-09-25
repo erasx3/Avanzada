@@ -10,7 +10,11 @@ package Logica;
  * @author eras
  */
 public class DetalleCompraVenta extends Detalle{
+    
     private int cantidad;
+    
+    //Relaciones
+    private InterfaceConsumible unConsumible;
 
     public DetalleCompraVenta(int cantidad, int codigo, String descripcion, Double subtotal) {
         super(codigo, descripcion, subtotal);

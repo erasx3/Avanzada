@@ -5,6 +5,8 @@
  */
 package Logica;
 
+import java.util.List;
+
 /**
  *
  * @author eras
@@ -13,6 +15,25 @@ public class Empresa {
     private int codigo;
     private String nombre;
     private String direccion;
+    
+    //Relaciones
+    private List<Encabezado> unosEncabezados;
+    private List<Cliente> unosClientes;
+    private List<Proveedor> unosProveedores;
+    private List<Empleado> unosEmpleados;
+    private List<Actividad> unasActividades;
+    private List<TipoComprobante> unosTiposDeComprobantes;
+    private List<Articulo> unosArticulos;
+    private List<Tecnico> unosTecnicos;
+    private List<Tercero> unosTerceros;
+    private List<Proyecto> unosProyectos;
+    private List<Turno> unosTurnos;
+    private List<OrdenTrabajo> unasOrdenesTrabajos;
+    private List<Equipo> unosEquipos;
+    private List<TipoEstado> unosTiposEstados;
+    private List<Concepto> unosServicios;
+    private List<Tecnologia> unasTecnologias;
+    private List<TipoTecnologia> unosTiposTecnologias;
 
     public Empresa() {
     }
@@ -46,6 +67,7 @@ public class Empresa {
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
+    
     
     
 }
