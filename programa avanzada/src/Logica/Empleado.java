@@ -97,7 +97,9 @@ public class Empleado implements InterfacePersoneriaJuridica{
         this.cuil = cuil;
     }
 
-    
+    public boolean isEmpleado(int codigo){
+        return true;
+    }
     
     
 }

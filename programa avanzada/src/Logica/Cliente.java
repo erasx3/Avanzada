@@ -18,7 +18,7 @@ public class Cliente implements InterfacePersoneriaJuridica {
     private String direccion;
     private long telefono;
     private String email;
-    private String dni;
+    private long dni;
     private String cuil;
     
     //Relaciones
@@ -27,7 +27,7 @@ public class Cliente implements InterfacePersoneriaJuridica {
     public Cliente() {
     }
 
-    public Cliente(int codigo, String nombre, String apellido, String direccion, long telefono, String email, String dni, String cuil) {
+    public Cliente(int codigo, String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -62,7 +62,7 @@ public class Cliente implements InterfacePersoneriaJuridica {
         return email;
     }
 
-    public String getDni() {
+    public long getDni() {
         return dni;
     }
 
@@ -94,7 +94,7 @@ public class Cliente implements InterfacePersoneriaJuridica {
         this.email = email;
     }
 
-    public void setDni(String dni) {
+    public void setDni(long dni) {
         this.dni = dni;
     }
 
@@ -102,5 +102,9 @@ public class Cliente implements InterfacePersoneriaJuridica {
         this.cuil = cuil;
     }
 
+    public boolean isCliente(long dni){
+        return true;
+    }
+    
     
 }

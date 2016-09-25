@@ -5,6 +5,8 @@
  */
 package Logica;
 
+import java.util.List;
+
 /**
  *
  * @author eras
@@ -13,6 +15,8 @@ public abstract class Servicio implements InterfaceConsumible {
     private int codigo;
     private String descripcion;
     private Double subtotal;
+    
+    //Relaciones
 
     public Servicio() {
     }
@@ -47,5 +51,12 @@ public abstract class Servicio implements InterfaceConsumible {
         this.subtotal = subtotal;
     }
     
+    public boolean isServicio(int codigo){
+        return true;
+    }
+    
+    public void calcularSubtotal(){
+        
+    }
     
 }

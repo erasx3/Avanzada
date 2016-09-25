@@ -15,6 +15,7 @@ public class Estado {
     
     //Relaciones
     private TipoEstado unTipoEstado;
+    private Equipo unEquipo;
 
     public Estado() {
     }

@@ -38,4 +38,8 @@ public abstract class Actividad {
         this.descripcion = descripcion;
     }
     
+    
+    public boolean isActividad(int codigo){
+        return true;
+    }
 }

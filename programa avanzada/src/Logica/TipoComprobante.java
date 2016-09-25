@@ -37,5 +37,7 @@ public abstract class TipoComprobante {
         this.descripcion = descripcion;
     }
     
-    
+    public boolean isComprobante(int codigo){
+        return true;
+    }
 }

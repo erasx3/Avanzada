@@ -5,6 +5,8 @@
  */
 package Logica;
 
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -68,6 +70,107 @@ public class Empresa {
         this.direccion = direccion;
     }
     
+    public void buscarCliente (long dni){
+    }
     
     
+    public void crearCliente(int codigo, String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil){ 
+    }
+    
+    public void buscarTurnoDisponible (Date fecha, Float hora){
+    }
+    
+    public void GenerarTurno(Cliente unCliente, int codigo, String descripcion, Date fecha, Float hora){
+    }
+    
+    public Turno buscarTurno (int codigo){
+        Turno miTurno = new Turno();
+        return miTurno;
+    }
+    
+    public Equipo buscarEquipo(int codigo){
+        Equipo miEquipo = new Equipo();
+        return miEquipo;
+    }
+    
+    public void crearEquipo(int codigo, String descripcion){
+    }
+    
+    public void buscarTipoEstado(int codigo){  
+    }
+    
+    public void crearTipoEstado(int codigo, String nombre){
+    }
+    
+    public void generarEstadoEquipo(int codigo, String descripcion, Equipo unEquipo, TipoEstado unTipoEstado){ 
+    }
+    
+    public void generarServicioTenico(int codigo, String descripcion){
+        
+    }
+    
+    public void generarServicioTercero(int codigo, String descripcion, Double monto, int ganancia){
+        
+    }
+    
+    public void generarOrdenTrabajo(int codigo, String descripcion, Turno unTurno, Equipo unEquipo, Servicio unServicio){
+        
+    }
+    
+    public void buscarOrdenTrabajo(int codigo){
+        
+    }
+    
+    public void agregarServicio(OrdenTrabajo unaOrdenTrabajo, Servicio unServicio){
+        
+    }
+    
+    public void buscarEmpleado(int codigo){
+        
+    }
+    
+    public void crearEmpleado(int codigo, String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil){
+        
+    }
+    
+    public void buscarServicio(int codigo){
+        
+    }
+    
+    public void buscarActividad(int codigo){
+        
+    }
+    
+    public void crearActividadAdministrativa(int codigo, String descripcion, Double PrecioHora){
+        
+    }
+    
+    public void crearActividadTenica(int codigo, String descripcion, Double PrecioFijo){
+        
+    }
+    
+    public void crearActividadProyecto(int codigo, String descripcion, int Porcentaje){
+        
+    }
+    
+    public void generarManoDeObra(int codigo, long horasTrabajadas, Date fecha, Empleado unEmpleado, Servicio unServicio, Actividad unaActividad){
+        
+    }
+    
+    public void buscarTipoVenta(int codigo){
+        
+    }
+    
+    public List<Servicio> buscarServicioOrdenTrabajo(Cliente unCliente){
+        List misServicios = new LinkedList();
+        return misServicios;
+    }
+    
+    public void generarDetalleCompraVenta(int codigo, String descripcion, int cantidad, InterfaceConsumible unConsumible){
+        
+    }
+
+    
+    
+            
 }

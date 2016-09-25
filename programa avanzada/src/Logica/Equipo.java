@@ -42,5 +42,11 @@ public class Equipo {
         this.descripcion = descripcion;
     }
     
+    public boolean isEquipo(int codigo){
+        return true;
+    }
+    
+    public void agregarEstado(Estado unEstado){
+    }
     
 }

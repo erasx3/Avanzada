@@ -5,6 +5,8 @@
  */
 package Logica;
 
+import java.util.Date;
+
 /**
  *
  * @author Facu
@@ -12,7 +14,8 @@ package Logica;
 public class ManoDeObra {
     
     private int codigo;
-    private int horasTrabajadas;
+    private long horasTrabajadas;
+    private Date fecha;
     
     //Relaciones
     private Actividad unaActividad;
@@ -22,7 +25,7 @@ public class ManoDeObra {
     public ManoDeObra() {
     }
 
-    public ManoDeObra(int codigo, int horasTrabajadas) {
+    public ManoDeObra(int codigo, long horasTrabajadas) {
         this.codigo = codigo;
         this.horasTrabajadas = horasTrabajadas;
     }
@@ -31,7 +34,7 @@ public class ManoDeObra {
         return codigo;
     }
 
-    public int getHorasTrabajadas() {
+    public long getHorasTrabajadas() {
         return horasTrabajadas;
     }
 
@@ -39,8 +42,16 @@ public class ManoDeObra {
         this.codigo = codigo;
     }
 
-    public void setHorasTrabajadas(int horasTrabajadas) {
+    public void setHorasTrabajadas(long horasTrabajadas) {
         this.horasTrabajadas = horasTrabajadas;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
     
     

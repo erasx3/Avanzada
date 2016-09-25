@@ -11,12 +11,12 @@ package Logica;
  */
 public class Tercero extends Servicio {
     private Double monto;
-    private Double ganancia;
+    private int ganancia;
 
     public Tercero() {
     }
 
-    public Tercero(Double monto, Double ganancia, int codigo, String descripcion, Double subtotal) {
+    public Tercero(Double monto, int ganancia, int codigo, String descripcion, Double subtotal) {
         super(codigo, descripcion, subtotal);
         this.monto = monto;
         this.ganancia = ganancia;
@@ -26,7 +26,7 @@ public class Tercero extends Servicio {
         return monto;
     }
 
-    public Double getGanancia() {
+    public int getGanancia() {
         return ganancia;
     }
 
@@ -34,7 +34,7 @@ public class Tercero extends Servicio {
         this.monto = monto;
     }
 
-    public void setGanancia(Double ganancia) {
+    public void setGanancia(int ganancia) {
         this.ganancia = ganancia;
     }
     

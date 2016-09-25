@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -45,6 +46,17 @@ public class OrdenTrabajo {
         this.descripcion = descripcion;
     }
     
+    public boolean isOrden(int codigo){
+        return true;
+    }
     
+    public void agregarServicio(Servicio unServicio){
+        
+    }
+    
+    public List<Servicio> devolverServicios(){
+        List misServicios = new LinkedList();
+        return misServicios;
+    }
     
 }

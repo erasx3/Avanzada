@@ -37,6 +37,8 @@ public class TipoEstado {
         this.nombre = nombre;
     }
     
-    
+    public boolean isTipoEstado(int codigo){
+        return true;
+    }
     
 }
