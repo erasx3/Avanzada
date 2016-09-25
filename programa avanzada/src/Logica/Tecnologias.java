@@ -7,20 +7,19 @@ package Logica;
 
 /**
  *
- * @author eras
+ * @author Facu
  */
-public abstract class Servicio implements InterfaceConsumible {
+public class Tecnologias {
+    
     private int codigo;
     private String descripcion;
-    private Double subtotal;
 
-    public Servicio() {
+    public Tecnologias() {
     }
 
-    public Servicio(int codigo, String descripcion, Double subtotal) {
+    public Tecnologias(int codigo, String descripcion) {
         this.codigo = codigo;
         this.descripcion = descripcion;
-        this.subtotal = subtotal;
     }
 
     public int getCodigo() {
@@ -31,10 +30,6 @@ public abstract class Servicio implements InterfaceConsumible {
         return descripcion;
     }
 
-    public Double getSubtotal() {
-        return subtotal;
-    }
-
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
@@ -42,10 +37,7 @@ public abstract class Servicio implements InterfaceConsumible {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public void setSubtotal(Double subtotal) {
-        this.subtotal = subtotal;
-    }
+    
     
     
 }

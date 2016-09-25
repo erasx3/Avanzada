@@ -7,44 +7,45 @@ package Logica;
 
 /**
  *
- * @author eras
+ * @author Facu
  */
-public abstract class Servicio implements InterfaceConsumible {
+public class TipoTecnologia {
+    
     private int codigo;
+    private String nombre;
     private String descripcion;
-    private Double subtotal;
 
-    public Servicio() {
+    public TipoTecnologia() {
     }
 
-    public Servicio(int codigo, String descripcion, Double subtotal) {
+    public TipoTecnologia(int codigo, String nombre, String descripcion) {
         this.codigo = codigo;
+        this.nombre = nombre;
         this.descripcion = descripcion;
-        this.subtotal = subtotal;
     }
 
     public int getCodigo() {
         return codigo;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getNombre() {
+        return nombre;
     }
 
-    public Double getSubtotal() {
-        return subtotal;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setSubtotal(Double subtotal) {
-        this.subtotal = subtotal;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
     
