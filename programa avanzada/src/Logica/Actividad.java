@@ -9,7 +9,7 @@ package Logica;
  *
  * @author Facu
  */
-public class Actividad {
+public abstract class Actividad {
     
     private int codigo;
     private String descripcion;
