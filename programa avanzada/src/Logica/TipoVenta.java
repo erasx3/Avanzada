@@ -18,4 +18,12 @@ public class TipoVenta extends TipoComprobante {
         super(codigo, descripcion);
     }
     
+    public boolean isTipoVenta(int codigo){
+        boolean aux = false;
+        if(super.getCodigo() == codigo){
+            aux = true;
+        }
+        return aux;
+    }
+    
 }

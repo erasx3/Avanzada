@@ -11,13 +11,13 @@ package Logica;
  */
 public class ActividadTecnica extends Actividad {
     
-    private double precioFijo;
+    private Double precioFijo;
 
-    public ActividadTecnica(double precioFijo) {
+    public ActividadTecnica(Double precioFijo) {
         super();
     }
 
-    public ActividadTecnica(double precioFijo, int codigo, String descripcion) {
+    public ActividadTecnica(Double precioFijo, int codigo, String descripcion) {
         super(codigo, descripcion);
         this.precioFijo = precioFijo;
     }

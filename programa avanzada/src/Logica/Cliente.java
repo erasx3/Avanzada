@@ -103,7 +103,11 @@ public class Cliente implements InterfacePersoneriaJuridica {
     }
 
     public boolean isCliente(long dni){
-        return true;
+        boolean aux = false;
+        if(this.dni == dni){
+            aux = true;
+        }
+        return aux;
     }
     
     

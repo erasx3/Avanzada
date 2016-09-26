@@ -22,8 +22,8 @@ public class Proyecto extends Servicio {
     public Proyecto() {
     }
 
-    public Proyecto(Float tiempoEstimado, int codigo, String descripcion, Double subtotal) {
-        super(codigo, descripcion, subtotal);
+    public Proyecto(Float tiempoEstimado, int codigo, String descripcion) {
+        super(codigo, descripcion);
         this.tiempoEstimado = tiempoEstimado;
     }
 

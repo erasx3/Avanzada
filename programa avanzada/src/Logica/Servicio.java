@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author eras
  */
-public abstract class Servicio implements InterfaceConsumible {
+public class Servicio implements InterfaceConsumible {
     private int codigo;
     private String descripcion;
     private Double subtotal;
@@ -21,10 +21,9 @@ public abstract class Servicio implements InterfaceConsumible {
     public Servicio() {
     }
 
-    public Servicio(int codigo, String descripcion, Double subtotal) {
+    public Servicio(int codigo, String descripcion) {
         this.codigo = codigo;
         this.descripcion = descripcion;
-        this.subtotal = subtotal;
     }
 
     public int getCodigo() {
@@ -52,7 +51,11 @@ public abstract class Servicio implements InterfaceConsumible {
     }
     
     public boolean isServicio(int codigo){
-        return true;
+        boolean aux = false;
+        if(this.codigo == codigo){
+            aux = true;
+        }
+        return aux;
     }
     
     public void calcularSubtotal(){

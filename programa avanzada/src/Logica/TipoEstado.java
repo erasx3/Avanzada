@@ -38,7 +38,11 @@ public class TipoEstado {
     }
     
     public boolean isTipoEstado(int codigo){
-        return true;
+        boolean aux = false;
+        if(this.codigo == codigo){
+            aux = true;
+        }
+        return aux;
     }
     
 }

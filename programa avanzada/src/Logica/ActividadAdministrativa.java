@@ -9,15 +9,15 @@ package Logica;
  *
  * @author Facu
  */
-public class ActividadAdministrativas extends Actividad {
+public class ActividadAdministrativa extends Actividad {
     
     private Double precioHora;
 
-    public ActividadAdministrativas() {
+    public ActividadAdministrativa() {
         super();
     }
 
-    public ActividadAdministrativas(Double precioHora, int codigo, String descripcion) {
+    public ActividadAdministrativa(Double precioHora, int codigo, String descripcion) {
         super(codigo, descripcion);
         this.precioHora = precioHora;
     }

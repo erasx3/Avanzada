@@ -9,7 +9,7 @@ package Logica;
  *
  * @author Facu
  */
-public abstract class Actividad {
+public class Actividad {
     
     private int codigo;
     private String descripcion;
@@ -40,6 +40,10 @@ public abstract class Actividad {
     
     
     public boolean isActividad(int codigo){
-        return true;
+        boolean aux = false;
+        if(this.codigo == codigo){
+            aux = true;
+        }
+        return aux;
     }
 }

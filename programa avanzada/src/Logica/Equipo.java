@@ -43,7 +43,11 @@ public class Equipo {
     }
     
     public boolean isEquipo(int codigo){
-        return true;
+        boolean aux = false;
+        if(this.codigo == codigo){
+            aux = true;
+        }
+        return aux;
     }
     
     public void agregarEstado(Estado unEstado){

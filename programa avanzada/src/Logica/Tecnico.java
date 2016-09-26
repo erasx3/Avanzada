@@ -19,8 +19,8 @@ public class Tecnico extends Servicio {
     public Tecnico() {
     }
 
-    public Tecnico(int codigo, String descripcion, Double subtotal) {
-        super(codigo, descripcion, subtotal);
+    public Tecnico(int codigo, String descripcion) {
+        super(codigo, descripcion);
     }
     
        

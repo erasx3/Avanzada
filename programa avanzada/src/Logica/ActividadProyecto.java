@@ -11,13 +11,13 @@ package Logica;
  */
 public class ActividadProyecto extends Actividad{
     
-    private double porcentaje;
+    private Double porcentaje;
 
     public ActividadProyecto() {
         super();
     }
 
-    public ActividadProyecto(int codigo, String descripcion) {
+    public ActividadProyecto(int codigo, String descripcion, Double porcentaje) {
         super(codigo, descripcion);
         this.porcentaje = porcentaje;
     }

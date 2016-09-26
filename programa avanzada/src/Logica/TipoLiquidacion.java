@@ -18,4 +18,7 @@ public class TipoLiquidacion extends TipoComprobante {
         super(codigo, descripcion);
     }
     
+    public boolean isTipoLiquidacion(int codigo){
+        return true;
+    }
 }

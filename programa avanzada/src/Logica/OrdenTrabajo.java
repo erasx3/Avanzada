@@ -13,7 +13,7 @@ import java.util.List;
  * @author eras
  */
 public class OrdenTrabajo {
-    private int codgo;
+    private int codigo;
     private String descripcion;
     
     //Relaciones
@@ -25,13 +25,16 @@ public class OrdenTrabajo {
     public OrdenTrabajo() {
     }
 
-    public OrdenTrabajo(int codgo, String descripcion) {
-        this.codgo = codgo;
+    public OrdenTrabajo(int codigo, String descripcion, Turno unTurno, Servicio unServicio, Equipo unEquipo) {
+        this.codigo = codigo;
         this.descripcion = descripcion;
+        this.unTurno = unTurno;
+        this.unosServicios.add(unServicio);
+        this.unEquipo = unEquipo;
     }
 
-    public int getCodgo() {
-        return codgo;
+    public int getCodigo() {
+        return codigo;
     }
 
     public String getDescripcion() {
@@ -39,19 +42,23 @@ public class OrdenTrabajo {
     }
 
     public void setCodgo(int codgo) {
-        this.codgo = codgo;
+        this.codigo = codgo;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
     
-    public boolean isOrden(int codigo){
-        return true;
+    public boolean isOrdenTrabajo(int codigo){
+        boolean aux = false;
+        if(this.codigo == codigo){
+            aux = true;
+        }
+        return aux;
     }
     
     public void agregarServicio(Servicio unServicio){
-        
+        this.unosServicios.add(unServicio);
     }
     
     public List<Servicio> devolverServicios(){
@@ -59,4 +66,11 @@ public class OrdenTrabajo {
         return misServicios;
     }
     
+    public boolean isOrdenTrabajo(Equipo unEquipo){
+        boolean aux = false;
+        if(this.unEquipo.equals(unEquipo)){
+            aux = true;
+        }
+        return aux;
+    }
 }

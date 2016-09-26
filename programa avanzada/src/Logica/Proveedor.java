@@ -77,7 +77,9 @@ public class Proveedor implements InterfacePersoneriaJuridica{
         this.cuit = cuit;
     }
 
-    
+    public boolean isProveedor(int codigo){
+        return true;
+    }
     
     
 }

@@ -18,4 +18,7 @@ public class TipoCompra extends TipoComprobante {
         super(codigo, descripcion);
     }
     
+    public boolean isTipoCompra(){
+        return true;
+    }
 }

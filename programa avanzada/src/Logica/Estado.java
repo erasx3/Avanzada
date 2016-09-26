@@ -16,13 +16,17 @@ public class Estado {
     //Relaciones
     private TipoEstado unTipoEstado;
     private Equipo unEquipo;
+    private OrdenTrabajo unaOrdenTrabajo;
 
     public Estado() {
     }
 
-    public Estado(int codigo, String descripcion) {
+    public Estado(int codigo, String descripcion, Equipo unEquipo, TipoEstado unTipoEstado, OrdenTrabajo unaOrdenTrabajo) {
         this.codigo = codigo;
         this.descripcion = descripcion;
+        this.unEquipo = unEquipo;
+        this.unTipoEstado = unTipoEstado;
+        this.unaOrdenTrabajo = unaOrdenTrabajo;
     }
 
     public int getCodigo() {
