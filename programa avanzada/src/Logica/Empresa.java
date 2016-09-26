@@ -488,4 +488,24 @@ public class Empresa {
         Proyecto unProyecto = new Proyecto(tiempoEstimado,unosConceptos,unasTecnologias,codigo,descripcion);
         unosProyectos.add(unProyecto);
     }
+    
+    public void crearTipoVenta(int codiog,String descripcion){
+        TipoVenta unTipoVenta = new TipoVenta(codigo,descripcion);
+        unosTiposVentas.add(unTipoVenta);
+    }
+    
+    public void crearTipoCompra(int codiog,String descripcion){
+        TipoCompra unTipoCompra = new TipoCompra(codigo,descripcion);
+        unosTiposCompras.add(unTipoCompra);
+    }
+    
+    public void crearTipoLiquidacion(int codiog,String descripcion){
+        TipoLiquidacion unTipoLiquidacion = new TipoLiquidacion(codigo,descripcion);
+        unosTiposLiquidaciones.add(unTipoLiquidacion);
+    }
+    
+    public void crearArticulo(int codigo,String nombre,String descripcion,Double precio,int cantidad){
+        Articulo unArticulo = new Articulo(codigo,nombre,descripcion,precio,cantidad);
+        unosArticulos.add(unArticulo);
+    }
 }

@@ -14,13 +14,13 @@ public class Articulo implements InterfaceConsumible{
     private int codigo;
     private String nombre;
     private String descripcion;
-    private double precio;
+    private Double precio;
     private int cantidad;
 
     public Articulo() {
     }
 
-    public Articulo(int codigo, String nombre, String descripcion, double precio, int cantidad) {
+    public Articulo(int codigo, String nombre, String descripcion, Double precio, int cantidad) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -40,7 +40,7 @@ public class Articulo implements InterfaceConsumible{
         return descripcion;
     }
 
-    public double getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
@@ -60,7 +60,7 @@ public class Articulo implements InterfaceConsumible{
         this.descripcion = descripcion;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
