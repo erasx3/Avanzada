@@ -16,7 +16,7 @@ public class Proyecto extends Servicio {
     
     //Relaciones
     private List<Concepto> unosConceptos;
-    private List<Tecnologia> unosTecnologias;
+    private List<Tecnologia> unasTecnologias;
     private List<OrdenTrabajo> unasOrdenesTrabajos;
 
     public Proyecto() {
@@ -26,6 +26,14 @@ public class Proyecto extends Servicio {
         super(codigo, descripcion);
         this.tiempoEstimado = tiempoEstimado;
     }
+
+    public Proyecto(Float tiempoEstimado, List<Concepto> unosConceptos, List<Tecnologia> unasTecnologias, int codigo, String descripcion) {
+        super(codigo, descripcion);
+        this.tiempoEstimado = tiempoEstimado;
+        this.unosConceptos.addAll(unosConceptos);
+        this.unasTecnologias.addAll(unasTecnologias);
+    }
+    
 
     public Float getTiempoEstimado() {
         return tiempoEstimado;

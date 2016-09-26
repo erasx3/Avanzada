@@ -27,11 +27,13 @@ public class Encabezado {
     public Encabezado() {
     }
 
-    public Encabezado(int codigo, String descripcion, Date fecha, Double total) {
+    public Encabezado(int codigo, String descripcion, Date fecha, TipoComprobante unTipoComprobante, List<Detalle> unosDetalles, InterfacePersoneriaJuridica unaPersoneriaJuridica) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.fecha = fecha;
-        this.total = total;
+        this.unTipoComprobante = unTipoComprobante;
+        this.unosDetalles.addAll(unosDetalles);
+        this.unaPersoneriaJuridica = unaPersoneriaJuridica;
     }
 
     public int getCodigo() {

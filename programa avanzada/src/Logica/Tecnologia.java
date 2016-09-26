@@ -13,6 +13,9 @@ public class Tecnologia {
     
     private int codigo;
     private String descripcion;
+    
+    //Relaciones
+    private TipoTecnologia unTipoTecnologia;
 
     public Tecnologia() {
     }
@@ -22,6 +25,13 @@ public class Tecnologia {
         this.descripcion = descripcion;
     }
 
+    public Tecnologia(int codigo, String descripcion, TipoTecnologia unTipoTecnologia) {
+        this.codigo = codigo;
+        this.descripcion = descripcion;
+        this.unTipoTecnologia = unTipoTecnologia;
+    }
+    
+    
     public int getCodigo() {
         return codigo;
     }
@@ -38,6 +48,12 @@ public class Tecnologia {
         this.descripcion = descripcion;
     }
     
-    
+    public boolean isTecnologia(int codigo){
+        boolean aux = false;
+        if(this.codigo == codigo){
+            aux = true;
+        }
+        return aux;
+    }
     
 }

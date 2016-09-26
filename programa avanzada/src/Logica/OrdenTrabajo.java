@@ -33,6 +33,34 @@ public class OrdenTrabajo {
         this.unEquipo = unEquipo;
     }
 
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setUnTurno(Turno unTurno) {
+        this.unTurno = unTurno;
+    }
+
+    public void setUnosServicios(List<Servicio> unosServicios) {
+        this.unosServicios = unosServicios;
+    }
+
+    public void setUnEquipo(Equipo unEquipo) {
+        this.unEquipo = unEquipo;
+    }
+
+    public Turno getUnTurno() {
+        return unTurno;
+    }
+
+    public List<Servicio> getUnosServicios() {
+        return unosServicios;
+    }
+
+    public Equipo getUnEquipo() {
+        return unEquipo;
+    }
+
     public int getCodigo() {
         return codigo;
     }
@@ -61,10 +89,6 @@ public class OrdenTrabajo {
         this.unosServicios.add(unServicio);
     }
     
-    public List<Servicio> devolverServicios(){
-        List misServicios = new LinkedList();
-        return misServicios;
-    }
     
     public boolean isOrdenTrabajo(Equipo unEquipo){
         boolean aux = false;

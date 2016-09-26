@@ -40,8 +40,11 @@ public class Empresa {
     private List<Tecnologia> unasTecnologias = new LinkedList();
     private List<TipoTecnologia> unosTiposTecnologias = new LinkedList();
     private List<Detalle> unosDetalles = new LinkedList();
+    private List<DetalleCompraVenta> unosDetallesCompraVenta = new LinkedList();
+    private List<DetalleLiquidacion> unosDetallesLiquidacion = new LinkedList();
     private List<Estado> unosEstados = new LinkedList();
     private List<Servicio> unosServicios = new LinkedList();
+    private List<ManoDeObra> unasManosDeObras = new LinkedList();
     
 
     public Empresa() {
@@ -279,7 +282,8 @@ public class Empresa {
     }
     
     public void generarManoDeObra(int codigo, long horasTrabajadas, Date fecha, Empleado unEmpleado, Servicio unServicio, Actividad unaActividad){
-        
+        ManoDeObra unaManoDeObra = new ManoDeObra(codigo,horasTrabajadas,fecha,unaActividad,unServicio,unEmpleado);
+        unasManosDeObras.add(unaManoDeObra);
     }
     
     public TipoVenta buscarTipoVenta(int codigo){
@@ -305,7 +309,7 @@ public class Empresa {
             aux = (Turno) itr.next();
             if(aux.isCliente(unCliente)){
                 aux3 = aux.getUnaOrdenTrabajo();
-                aux2 = aux3.devolverServicios();
+                aux2 = aux3.getUnosServicios();//preguntar si se puede ahcer asi
             }
            
         }
@@ -313,15 +317,28 @@ public class Empresa {
     }
     
     public void generarDetalleCompraVenta(int codigo, String descripcion, int cantidad, InterfaceConsumible unConsumible){
-        
+        DetalleCompraVenta unDetalleCompraVenta = new DetalleCompraVenta(cantidad, codigo, descripcion,unConsumible);
+        unosDetallesCompraVenta.add(unDetalleCompraVenta);
+        unosDetalles.add(unDetalleCompraVenta);
     }
 
     public void generarEncabezado(int codigo, String descripcion, Date fecha, List<Detalle> unosDetalles, InterfacePersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante){
-        
+        Encabezado unEncabezado = new Encabezado(codigo, descripcion,fecha,unTipoComprobante,unosDetalles,unaPersoneriaJuridica);
+        unosEncabezados.add(unEncabezado);
     }
     
-    public void buscarArticulo(int codigo){
-        
+    public Articulo buscarArticulo(int codigo){
+        Articulo aux = new Articulo();
+        Iterator itr = unosArticulos.iterator();
+        int band = 0;
+        while(itr.hasNext() && band == 0){
+            aux = (Articulo) itr.next();
+            if(aux.isArticulo(codigo)){
+                band = 1;
+            }
+           
+        }
+        return aux;
     }
     
     public void sumarArticulo(int cantidad, Articulo unArticulo){
@@ -338,29 +355,71 @@ public class Empresa {
 
     }
     
-    public void buscarProveedor(int codigo){
-        
+    public Proveedor buscarProveedor(int codigo){
+        Proveedor aux = new Proveedor();
+        Iterator itr = unosProveedores.iterator();
+        int band = 0;
+        while(itr.hasNext() && band == 0){
+            aux = (Proveedor) itr.next();
+            if(aux.isProveedor(codigo)){
+                band = 1;
+            }
+           
+        }
+        return aux;    
     }
     
     public void crearProveedor(int codigo, String nombre, String direccion, long telefono, String email, String cuit){
-        
+        Proveedor unProveedor = new Proveedor(codigo,nombre,direccion,telefono,email,cuit);
+        unosProveedores.add(unProveedor);
     }
     
-    public void buscarTipoCompra(int codigo){
-        
+    public TipoCompra buscarTipoCompra(int codigo){
+        TipoCompra aux = new TipoCompra();
+        Iterator itr = unosTiposCompras.iterator();
+        int band = 0;
+        while(itr.hasNext() && band == 0){
+            aux = (TipoCompra) itr.next();
+            if(aux.isTipoCompra(codigo)){
+                band = 1;
+            }
+           
+        }
+        return aux;    
     }
     
-    public void buscarTipoLiquidacion(int codigo){
-        
+    public TipoLiquidacion buscarTipoLiquidacion(int codigo){
+        TipoLiquidacion aux = new TipoLiquidacion();
+        Iterator itr = unosTiposLiquidaciones.iterator();
+        int band = 0;
+        while(itr.hasNext() && band == 0){
+            aux = (TipoLiquidacion) itr.next();
+            if(aux.isTipoLiquidacion(codigo)){
+                band = 1;
+            }
+           
+        }
+        return aux;    
     }
     
     public List<ManoDeObra> buscarManoDeObra(Empleado unEmpleado, Date fechaInicio, Date fechaFin){
-        List misManosDeObras = new LinkedList();
-        return misManosDeObras;
+        ManoDeObra aux = new ManoDeObra();
+        List<ManoDeObra> aux2 = new LinkedList();
+        Iterator itr = unasManosDeObras.iterator();
+        while(itr.hasNext()){
+            aux = (ManoDeObra) itr.next();
+            if(aux.isCliente(unEmpleado) && aux.isMayor(fechaInicio) && aux.isMenor(fechaFin)){
+                aux2.add(aux);
+            }
+           
+        }
+        return aux2;
     }
     
     public void generarDetalleLiquidacion(int codigo, String descripcion, ManoDeObra unaManoDeObra){
-        
+        DetalleLiquidacion unDetalleLiquidacion = new DetalleLiquidacion(codigo, descripcion,unaManoDeObra);
+        unosDetallesLiquidacion.add(unDetalleLiquidacion);
+        unosDetalles.add(unDetalleLiquidacion);   
     }
     
     public List<OrdenTrabajo> buscarOrdenTrabajo(Equipo unEquipo){
@@ -378,8 +437,55 @@ public class Empresa {
         
     }
     
-    
     public void agregarOrden (OrdenTrabajo unaOrdenTrabajo, Turno unTurno){
         unTurno.agregarOrden(unaOrdenTrabajo);
+    }
+    
+    public void generarConcepto(int codigo, String descripcion, Double monto){
+        Concepto unConcepto = new Concepto(codigo,descripcion,monto);
+        unosConceptos.add(unConcepto);
+    }
+    
+    public Tecnologia buscarTecnologia(int codigo){
+        Tecnologia aux = new Tecnologia();
+        Iterator itr = unasTecnologias.iterator();
+        int band = 0;
+        while(itr.hasNext() && band == 0){
+            aux = (Tecnologia) itr.next();
+            if(aux.isTecnologia(codigo)){
+                band = 1;
+            }
+           
+        }
+        return aux;
+    }
+    
+    public TipoTecnologia buscarTipoTecnologia(int codigo){
+        TipoTecnologia aux = new TipoTecnologia();
+        Iterator itr = unosTiposTecnologias.iterator();
+        int band = 0;
+        while(itr.hasNext() && band == 0){
+            aux = (TipoTecnologia) itr.next();
+            if(aux.isTipoTecnologia(codigo)){
+                band = 1;
+            }
+           
+        }
+        return aux;
+    }
+    
+    public void crearTipoTecnologia(int codigo,String nombre,String descripcion){
+        TipoTecnologia unosTipoTecnologia = new TipoTecnologia(codigo,nombre,descripcion);
+        unosTiposTecnologias.add(unosTipoTecnologia);
+    }
+    
+    public void crearTecnologia(int codigo,String descripcion,TipoTecnologia unTipoTecnologia){
+        Tecnologia unaTecnologia = new Tecnologia(codigo,descripcion,unTipoTecnologia);
+        unasTecnologias.add(unaTecnologia);
+    }
+    
+    public void generarProyecto(Float tiempoEstimado, List<Concepto> unosConceptos, List<Tecnologia> unasTecnologias, int codigo, String descripcion){
+        Proyecto unProyecto = new Proyecto(tiempoEstimado,unosConceptos,unasTecnologias,codigo,descripcion);
+        unosProyectos.add(unProyecto);
     }
 }

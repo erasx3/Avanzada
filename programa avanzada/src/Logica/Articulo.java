@@ -70,15 +70,19 @@ public class Articulo implements InterfaceConsumible{
     
     
     public boolean isArticulo(int codigo){
-        return true;
+        boolean aux = false;
+        if(this.codigo == codigo){
+            aux = true;
+        }
+        return aux;
     }
     
     public void sumarArticulo(int cantidad){
-        
+        this.cantidad = this.cantidad + cantidad;
     }
     
     public void descontarArticulo(int cantidad){
-        
+        this.cantidad = this.cantidad - cantidad;
     }
     
     public boolean comprobarStock(int cantidad){

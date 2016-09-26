@@ -48,5 +48,12 @@ public class TipoTecnologia {
         this.descripcion = descripcion;
     }
     
+    public boolean isTipoTecnologia(int codigo){
+        boolean aux = false;
+        if(this.codigo == codigo){
+            aux = true;
+        }
+        return aux;
+    }
     
 }

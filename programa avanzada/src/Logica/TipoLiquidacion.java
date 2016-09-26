@@ -19,6 +19,10 @@ public class TipoLiquidacion extends TipoComprobante {
     }
     
     public boolean isTipoLiquidacion(int codigo){
-        return true;
+        boolean aux = false;
+        if(super.getCodigo() == codigo){
+            aux = true;
+        }
+        return aux;
     }
 }

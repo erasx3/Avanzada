@@ -16,9 +16,10 @@ public class DetalleCompraVenta extends Detalle{
     //Relaciones
     private InterfaceConsumible unConsumible;
 
-    public DetalleCompraVenta(int cantidad, int codigo, String descripcion, Double subtotal) {
-        super(codigo, descripcion, subtotal);
+    public DetalleCompraVenta(int cantidad, int codigo, String descripcion, InterfaceConsumible unConsumible) {
+        super(codigo, descripcion);
         this.cantidad = cantidad;
+        this.unConsumible=unConsumible;
     }
 
     public DetalleCompraVenta() {

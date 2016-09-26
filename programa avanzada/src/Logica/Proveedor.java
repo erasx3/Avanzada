@@ -78,7 +78,11 @@ public class Proveedor implements InterfacePersoneriaJuridica{
     }
 
     public boolean isProveedor(int codigo){
-        return true;
+        boolean aux = false;
+        if(this.codigo == codigo){
+            aux = true;
+        }
+        return aux;
     }
     
     

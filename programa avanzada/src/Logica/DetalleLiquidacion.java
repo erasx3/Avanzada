@@ -18,8 +18,17 @@ public class DetalleLiquidacion extends Detalle {
     public DetalleLiquidacion() {
     }
 
-    public DetalleLiquidacion(int codigo, String descripcion, Double subtotal) {
-        super(codigo, descripcion, subtotal);
+    public DetalleLiquidacion(int codigo, String descripcion,ManoDeObra unaManoDeObra) {
+        super(codigo, descripcion);
+        this.unaManoDeObra = unaManoDeObra;
+    }
+
+    public ManoDeObra getUnaManoDeObra() {
+        return unaManoDeObra;
+    }
+
+    public void setUnaManoDeObra(ManoDeObra unaManoDeObra) {
+        this.unaManoDeObra = unaManoDeObra;
     }
     
 }

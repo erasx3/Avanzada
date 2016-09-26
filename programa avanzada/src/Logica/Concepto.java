@@ -13,17 +13,17 @@ public class Concepto {
     
     private int codigo;
     private String descripcion;
-    private double monto;
+    private Double monto;
 
     public Concepto() {
     }
 
-    public Concepto(int codigo, String descripcion, double monto) {
+    public Concepto(int codigo, String descripcion, Double monto) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.monto = monto;
     }
-
+    
     public int getCodigo() {
         return codigo;
     }
@@ -32,7 +32,7 @@ public class Concepto {
         return descripcion;
     }
 
-    public double getMonto() {
+    public Double getMonto() {
         return monto;
     }
 
@@ -48,7 +48,9 @@ public class Concepto {
         this.monto = monto;
     }
     
-    
+    public void setMonto(Double monto) {
+        this.monto = monto;
+    }
     
     
 }

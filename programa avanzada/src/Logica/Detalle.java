@@ -17,10 +17,9 @@ public abstract class Detalle {
     public Detalle() {
     }
 
-    public Detalle(int codigo, String descripcion, Double subtotal) {
+    public Detalle(int codigo, String descripcion) {
         this.codigo = codigo;
         this.descripcion = descripcion;
-        this.subtotal = subtotal;
     }
 
     public int getCodigo() {
