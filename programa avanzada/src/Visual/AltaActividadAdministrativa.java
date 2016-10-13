@@ -36,7 +36,7 @@ public class AltaActividadAdministrativa extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblActividadAdministrativa = new javax.swing.JTable();
 
         jLabel2.setText("Descripcion:");
 
@@ -53,7 +53,7 @@ public class AltaActividadAdministrativa extends javax.swing.JPanel {
 
         jButton3.setText("Borrar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblActividadAdministrativa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -72,7 +72,7 @@ public class AltaActividadAdministrativa extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblActividadAdministrativa);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,7 +147,7 @@ public class AltaActividadAdministrativa extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblActividadAdministrativa;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtPrecioPorHora;
     // End of variables declaration//GEN-END:variables

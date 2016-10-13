@@ -36,7 +36,7 @@ public class AltaActividadTecnica extends javax.swing.JPanel {
         cmdModificar = new javax.swing.JButton();
         cmdBorrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblActividadTecnica = new javax.swing.JTable();
 
         lblDescripcion.setText("Descripcion:");
 
@@ -54,7 +54,7 @@ public class AltaActividadTecnica extends javax.swing.JPanel {
 
         cmdBorrar.setText("Borrar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblActividadTecnica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -73,7 +73,7 @@ public class AltaActividadTecnica extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblActividadTecnica);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,9 +146,9 @@ public class AltaActividadTecnica extends javax.swing.JPanel {
     private javax.swing.JButton cmdModificar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblPrecioFijo;
+    private javax.swing.JTable tblActividadTecnica;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtPrecioFijo;
     // End of variables declaration//GEN-END:variables
