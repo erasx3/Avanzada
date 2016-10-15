@@ -21,13 +21,13 @@ public class Encabezado {
     //Relaciones
     private TipoComprobante unTipoComprobante;
     private List<Detalle> unosDetalles;
-    private InterfacePersoneriaJuridica unaPersoneriaJuridica;
+    private PersoneriaJuridica unaPersoneriaJuridica;
     
 
     public Encabezado() {
     }
 
-    public Encabezado(int codigo, String descripcion, Date fecha, TipoComprobante unTipoComprobante, List<Detalle> unosDetalles, InterfacePersoneriaJuridica unaPersoneriaJuridica) {
+    public Encabezado(int codigo, String descripcion, Date fecha, TipoComprobante unTipoComprobante, List<Detalle> unosDetalles, PersoneriaJuridica unaPersoneriaJuridica) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.fecha = fecha;

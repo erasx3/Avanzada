@@ -9,52 +9,23 @@ package Logica;
  *
  * @author eras
  */
-public class Empleado implements InterfacePersoneriaJuridica{
-    private int codigo;
-    private String nombre;
+public class Empleado extends PersoneriaJuridica{ 
     private String apellido;
-    private String direccion;
-    private long telefono;
-    private String email;
     private long dni;
     private String cuil;
 
     public Empleado() {
     }
 
-    public Empleado(int codigo, String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil) {
-        this.codigo = codigo;
-        this.nombre = nombre;
+    public Empleado(String apellido, long dni, String cuil, int codigo, String nombre, String direccion, long telefono, String email) {
+        super(codigo, nombre, direccion, telefono, email);
         this.apellido = apellido;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.email = email;
         this.dni = dni;
         this.cuil = cuil;
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
     public String getApellido() {
         return apellido;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public long getTelefono() {
-        return telefono;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public long getDni() {
@@ -65,28 +36,8 @@ public class Empleado implements InterfacePersoneriaJuridica{
         return cuil;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public void setApellido(String apellido) {
         this.apellido = apellido;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public void setTelefono(long telefono) {
-        this.telefono = telefono;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public void setDni(long dni) {
@@ -99,7 +50,7 @@ public class Empleado implements InterfacePersoneriaJuridica{
 
     public boolean isEmpleado(int codigo){
         boolean aux = false;
-        if(this.codigo == codigo){
+        if(super.getCodigo() == codigo){
             aux = true;
         }
         return aux;

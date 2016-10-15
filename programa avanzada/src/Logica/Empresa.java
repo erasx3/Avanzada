@@ -96,7 +96,7 @@ public class Empresa {
     
     
     public void crearCliente(int codigo, String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil){
-        Cliente unCliente = new Cliente(codigo, nombre, apellido, direccion, telefono, email, dni, cuil);
+        Cliente unCliente = new Cliente(apellido,dni,cuil,codigo,nombre,direccion,telefono,email);
         unosClientes.add(unCliente);
     }
     
@@ -232,7 +232,7 @@ public class Empresa {
     }
     
     public void crearEmpleado(int codigo, String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil){
-        Empleado unEmpleado = new Empleado(codigo, nombre, apellido, direccion, telefono, email, dni, cuil);
+        Empleado unEmpleado = new Empleado(apellido,dni,cuil,codigo,nombre,direccion,telefono,email);
         unosEmpleados.add(unEmpleado);
     }
     
@@ -322,7 +322,7 @@ public class Empresa {
         unosDetalles.add(unDetalleCompraVenta);
     }
 
-    public void generarEncabezado(int codigo, String descripcion, Date fecha, List<Detalle> unosDetalles, InterfacePersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante){
+    public void generarEncabezado(int codigo, String descripcion, Date fecha, List<Detalle> unosDetalles, PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante){
         Encabezado unEncabezado = new Encabezado(codigo, descripcion,fecha,unTipoComprobante,unosDetalles,unaPersoneriaJuridica);
         unosEncabezados.add(unEncabezado);
     }
@@ -370,7 +370,7 @@ public class Empresa {
     }
     
     public void crearProveedor(int codigo, String nombre, String direccion, long telefono, String email, String cuit){
-        Proveedor unProveedor = new Proveedor(codigo,nombre,direccion,telefono,email,cuit);
+        Proveedor unProveedor = new Proveedor(cuit,codigo,nombre,direccion,telefono,email);
         unosProveedores.add(unProveedor);
     }
     
