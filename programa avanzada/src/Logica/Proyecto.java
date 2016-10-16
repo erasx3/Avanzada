@@ -5,18 +5,30 @@
  */
 package Logica;
 
+import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author eras
  */
-public class Proyecto extends Servicio {
+@Entity
+public class Proyecto extends Servicio implements Serializable {
+    @Basic
     private Float tiempoEstimado;
     
     //Relaciones
+    @OneToMany
     private List<Concepto> unosConceptos;
+    @OneToMany
     private List<Tecnologia> unasTecnologias;
+    @OneToMany
     private List<OrdenTrabajo> unasOrdenesTrabajos;
 
     public Proyecto() {

@@ -5,17 +5,31 @@
  */
 package Logica;
 
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 /**
  *
  * @author eras
  */
-public class Estado {
+@Entity
+public class Estado implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
+    @Basic
     private String descripcion;
     
     //Relaciones
+    @OneToOne
     private TipoEstado unTipoEstado;
+    @OneToOne
     private Equipo unEquipo;
+    @OneToOne
     private OrdenTrabajo unaOrdenTrabajo;
 
     public Estado() {

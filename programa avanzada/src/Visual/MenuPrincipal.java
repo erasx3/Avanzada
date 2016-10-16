@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 package Visual;
-
+import Logica.Empresa;
 /**
  *
  * @author Facu
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    private Empresa unaEmpresa = new Empresa();
     /**
      * Creates new form MenuPrincipal
      */

@@ -5,15 +5,25 @@
  */
 package Logica;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 /**
  *
  * @author eras
  */
+@Entity
 public class DetalleCompraVenta extends Detalle{
     
+    @Basic
     private int cantidad;
     
     //Relaciones
+    @OneToOne
     private InterfaceConsumible unConsumible;
 
     public DetalleCompraVenta(int cantidad, int codigo, String descripcion, InterfaceConsumible unConsumible) {

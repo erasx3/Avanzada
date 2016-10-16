@@ -5,15 +5,27 @@
  */
 package Logica;
 
+import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  *
  * @author eras
  */
-public class Servicio implements InterfaceConsumible {
+@Entity
+public class Servicio implements InterfaceConsumible, Serializable {
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
+    @Basic
     private String descripcion;
+    @Basic
     private Double subtotal;
     
     //Relaciones

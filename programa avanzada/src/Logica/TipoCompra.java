@@ -5,11 +5,18 @@
  */
 package Logica;
 
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 /**
  *
  * @author eras
  */
-public class TipoCompra extends TipoComprobante {
+@Entity
+public class TipoCompra extends TipoComprobante implements Serializable {
 
     public TipoCompra() {
     }

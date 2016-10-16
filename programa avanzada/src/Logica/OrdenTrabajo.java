@@ -5,20 +5,35 @@
  */
 package Logica;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author eras
  */
-public class OrdenTrabajo {
+@Entity
+public class OrdenTrabajo implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
+    @Basic
     private String descripcion;
     
     //Relaciones
+    @OneToOne
     private Turno unTurno;
+    @OneToMany
     private List<Servicio> unosServicios;
+    @OneToOne
     private Equipo unEquipo;
     
     
@@ -96,5 +111,13 @@ public class OrdenTrabajo {
             aux = true;
         }
         return aux;
+    }
+
+    public void add(OrdenTrabajo ordenTrabajo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void remove(OrdenTrabajo ordenTrabajo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

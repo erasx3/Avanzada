@@ -5,45 +5,82 @@
  */
 package Logica;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Iterator;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author eras
  */
-public class Empresa {
+@Entity
+public class Empresa implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
+    @Basic
     private String nombre;
+    @Basic
     private String direccion;
     
     //Relaciones
+    @OneToMany
     private List<Encabezado> unosEncabezados = new LinkedList();
+    @OneToMany
     private List<Cliente> unosClientes = new LinkedList();
+    @OneToMany
     private List<Proveedor> unosProveedores = new LinkedList();
+    @OneToMany
     private List<Empleado> unosEmpleados = new LinkedList();
+    @OneToMany
     private List<Actividad> unasActividades = new LinkedList();
+    @OneToMany
     private List<TipoLiquidacion> unosTiposLiquidaciones = new LinkedList();
+    @OneToMany
     private List<TipoCompra> unosTiposCompras = new LinkedList();
+    @OneToMany
     private List<TipoVenta> unosTiposVentas = new LinkedList();
+    @OneToMany
     private List<Articulo> unosArticulos = new LinkedList();
+    @OneToMany
     private List<Tecnico> unosTecnicos = new LinkedList();
+    @OneToMany
     private List<Tercero> unosTerceros = new LinkedList();
+    @OneToMany
     private List<Proyecto> unosProyectos = new LinkedList();
+    @OneToMany
     private List<Turno> unosTurnos = new LinkedList();
+    @OneToMany
     private List<OrdenTrabajo> unasOrdenesTrabajos = new LinkedList();
+    @OneToMany
     private List<Equipo> unosEquipos = new LinkedList();
+    @OneToMany
     private List<TipoEstado> unosTiposEstados = new LinkedList();
+    @OneToMany
     private List<Concepto> unosConceptos = new LinkedList();
+    @OneToMany
     private List<Tecnologia> unasTecnologias = new LinkedList();
+    @OneToMany
     private List<TipoTecnologia> unosTiposTecnologias = new LinkedList();
+    @OneToMany
     private List<Detalle> unosDetalles = new LinkedList();
+    @OneToMany
     private List<DetalleCompraVenta> unosDetallesCompraVenta = new LinkedList();
+    @OneToMany
     private List<DetalleLiquidacion> unosDetallesLiquidacion = new LinkedList();
+    @OneToMany
     private List<Estado> unosEstados = new LinkedList();
+    @OneToMany
     private List<Servicio> unosServicios = new LinkedList();
+    @OneToMany
     private List<ManoDeObra> unasManosDeObras = new LinkedList();
     
 

@@ -5,18 +5,30 @@
  */
 package Logica;
 
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.List;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author eras
  */
-public class Cliente extends PersoneriaJuridica{
+@Entity
+public class Cliente extends PersoneriaJuridica implements Serializable{
+    @Basic
     private String apellido;
+    @Basic
     private long dni;
+    @Basic
     private String cuil;
     
     //Relaciones
+    @OneToMany
     private List<Turno> unosTurnos;
 
     public Cliente() {

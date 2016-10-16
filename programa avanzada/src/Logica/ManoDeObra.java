@@ -5,21 +5,36 @@
  */
 package Logica;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Facu
  */
-public class ManoDeObra {
+@Entity
+public class ManoDeObra implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
+    @Basic
     private long horasTrabajadas;
+    @Basic
     private Date fecha;
     
     //Relaciones
+    @OneToOne
     private Actividad unaActividad;
+    @OneToOne
     private Servicio unServicio;
+    @OneToOne
     private Empleado unEmpleado;
 
     public ManoDeObra() {

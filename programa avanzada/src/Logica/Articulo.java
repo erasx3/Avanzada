@@ -5,16 +5,30 @@
  */
 package Logica;
 
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author Facu
  */
-public class Articulo implements InterfaceConsumible{
+@Entity
+public class Articulo implements InterfaceConsumible, Serializable{
     
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
+    @Basic
     private String nombre;
+    @Basic
     private String descripcion;
+    @Basic
     private Double precio;
+    @Basic
     private int cantidad;
 
     public Articulo() {

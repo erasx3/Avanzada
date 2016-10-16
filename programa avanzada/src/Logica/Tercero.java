@@ -5,12 +5,20 @@
  */
 package Logica;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 /**
  *
  * @author eras
  */
+@Entity
 public class Tercero extends Servicio {
+    @Basic
     private Double monto;
+    @Basic
     private int ganancia;
 
     public Tercero() {

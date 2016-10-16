@@ -5,22 +5,39 @@
  */
 package Logica;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author eras
  */
-public class Encabezado {
+@Entity
+public class Encabezado implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
+    @Basic
     private String descripcion;
+    @Basic
     private Date fecha;
+    @Basic
     private Double total;
     
     //Relaciones
+    @OneToOne
     private TipoComprobante unTipoComprobante;
+    @OneToMany
     private List<Detalle> unosDetalles;
+    @OneToOne
     private PersoneriaJuridica unaPersoneriaJuridica;
     
 

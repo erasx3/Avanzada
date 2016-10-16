@@ -6,14 +6,22 @@
 package Logica;
 
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author eras
  */
+@Entity
 public class Tecnico extends Servicio {
     
     //Relaciones
+    @OneToMany
     private List<Articulo> unosArticulos;
 
     public Tecnico() {

@@ -5,13 +5,24 @@
  */
 package Logica;
 
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author eras
  */
-public class Empleado extends PersoneriaJuridica{ 
+@Entity
+public class Empleado extends PersoneriaJuridica implements Serializable{ 
+    @Basic
     private String apellido;
+    @Basic
     private long dni;
+    @Basic
     private String cuil;
 
     public Empleado() {

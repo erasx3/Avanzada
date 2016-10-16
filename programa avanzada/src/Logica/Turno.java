@@ -5,16 +5,28 @@
  */
 package Logica;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * COMO HACER CRITERIO DE ORDENACION TURNOS DE CLASE DE EMPRESA, ORDENADOR POR CRITERIO DE EMPRESA
  * @author eras
  */
-public class Turno {
+@Entity
+public class Turno implements Serializable {
+   @Id
+   @GeneratedValue(strategy=GenerationType.AUTO)
    private int codigo;
+   @Basic
    private String descripcion;
+   @Basic
    private Float hora;
+   @Basic
    private Date fecha;
    
    //Relaciones

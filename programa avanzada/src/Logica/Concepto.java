@@ -5,14 +5,26 @@
  */
 package Logica;
 
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author Facu
  */
-public class Concepto {
+@Entity
+public class Concepto implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
+    @Basic
     private String descripcion;
+    @Basic
     private Double monto;
 
     public Concepto() {
