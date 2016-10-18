@@ -288,7 +288,7 @@ public class Empresa implements Serializable {
         
     }
     
-    public Actividad buscarActividad(int codigo){
+    public Actividad buscarActividad(int codigo) {
         Actividad aux = new Actividad();
         Iterator itr = unasActividades.iterator();
         int band = 0;
