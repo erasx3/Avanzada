@@ -10,7 +10,39 @@ import Logica.Empresa;
  * @author Facu
  */
 public class MenuPrincipal extends javax.swing.JFrame {
+    
+    //Controladora Logica
     private Empresa unaEmpresa = new Empresa();
+    
+    //Relaciones
+    private AgregarOrdenDeTrabajo unAgregarOrdenDeTrabajo = new AgregarOrdenDeTrabajo();
+    private AgregarServicioOrden unAgregarServicioOrden = new AgregarServicioOrden();
+    private AltaActividadAdministrativa unAltaActividadAdministrativa = new AltaActividadAdministrativa();
+    private AltaActividadProyecto unAltaActividadProyecto = new AltaActividadProyecto();
+    private AltaActividadTecnica unAltaActividadTecnica = new AltaActividadTecnica();
+    private AltaArticulo unAltaArticulo = new AltaArticulo();
+    private AltaCliente unAltaCliente = new AltaCliente();
+    private AltaEmpleado unAltaEmpleado = new AltaEmpleado();
+    private AltaEquipo unAltaEquipo = new AltaEquipo();
+    private AltaProveedor unAltaProveedor = new AltaProveedor();
+    private AltaProyecto unAltaProyecto = new AltaProyecto();
+    private AltaTecnologia unAltaTecnologia = new AltaTecnologia();
+    private AltaTipoTecnologia unAltaTipoTecnologia = new AltaTipoTecnologia();
+    private AltaTipoCompra unAltaTipoCompra = new AltaTipoCompra();
+    private AltaTipoEstado unAltaTipoEstado = new AltaTipoEstado();
+    private AltaTipoLiquidacion unAltaTipoLiquidacion = new AltaTipoLiquidacion();
+    private AltaTipoVenta unAltaTipoVenta = new AltaTipoVenta();
+    private AsignarEmpleadoProyecto unAsignarEmpleadoProyecto = new AsignarEmpleadoProyecto();
+    private AsignarEmpleadoServicio unAsignarEmpleadoServicio = new AsignarEmpleadoServicio();
+    private GenerarCompra unGenerarCompra = new GenerarCompra();
+    private GenerarIngresoEquipo unGenerarIngresoEquipo = new GenerarIngresoEquipo();
+    private GenerarSalidaEquipo unGenerarSalidaEquipo = new GenerarSalidaEquipo();
+    private GenerarOrden unGenerarOrden = new GenerarOrden();
+    private GenerarLiquidacion unGenerarLiquidacion = new GenerarLiquidacion();
+    private VentaArticulo unVentaArticulo = new VentaArticulo();
+    private VentaServicio unVentaServicio = new VentaServicio();
+    
+    
     /**
      * Creates new form MenuPrincipal
      */
@@ -30,6 +62,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jInternalFrame1 = new javax.swing.JInternalFrame();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        mitActividadAdministrativa = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -37,6 +70,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jInternalFrame1.setVisible(true);
 
         jMenu1.setText("File");
+
+        mitActividadAdministrativa.setText("Actividad Administrativa");
+        mitActividadAdministrativa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitActividadAdministrativaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mitActividadAdministrativa);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -68,6 +110,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void mitActividadAdministrativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitActividadAdministrativaActionPerformed
+           // TODO add your handling code here:
+    }//GEN-LAST:event_mitActividadAdministrativaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,5 +155,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mitActividadAdministrativa;
     // End of variables declaration//GEN-END:variables
 }

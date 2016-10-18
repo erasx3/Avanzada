@@ -9,12 +9,12 @@ package Visual;
  *
  * @author Facu
  */
-public class Liquidacion extends javax.swing.JPanel {
+public class GenerarCompra extends javax.swing.JPanel {
 
     /**
-     * Creates new form Liquidacion
+     * Creates new form Compra
      */
-    public Liquidacion() {
+    public GenerarCompra() {
         initComponents();
     }
 
