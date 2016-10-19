@@ -10,7 +10,8 @@ package Visual;
  * @author Facu
  */
 public class AltaCliente extends javax.swing.JPanel {
-
+    
+    
     /**
      * Creates new form AltaCliente
      */
@@ -282,7 +283,7 @@ public class AltaCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCUILActionPerformed
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
-        // TODO add your handling code here:
+                // TODO add your handling code here:
     }//GEN-LAST:event_cmdAgregarActionPerformed
 
 
