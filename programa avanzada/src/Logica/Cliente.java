@@ -34,8 +34,8 @@ public class Cliente extends PersoneriaJuridica implements Serializable{
     public Cliente() {
     }
 
-    public Cliente(String apellido, long dni, String cuil, int codigo, String nombre, String direccion, long telefono, String email) {
-        super(codigo, nombre, direccion, telefono, email);
+    public Cliente(String apellido, long dni, String cuil,String nombre, String direccion, long telefono, String email) {
+        super(nombre, direccion, telefono, email);
         this.apellido = apellido;
         this.dni = dni;
         this.cuil = cuil;

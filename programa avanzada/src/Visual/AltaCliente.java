@@ -10,8 +10,10 @@ package Visual;
  * @author Facu
  */
 public class AltaCliente extends javax.swing.JPanel {
-    
-    
+
+    //Relacion con Controladora Visual
+    private ControladoraVisual miControladoraVisual = new ControladoraVisual();
+
     /**
      * Creates new form AltaCliente
      */
@@ -283,7 +285,28 @@ public class AltaCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_txtCUILActionPerformed
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
-                // TODO add your handling code here:
+        
+        int codigo;
+        long dni;
+        String cuil;
+        String nombre;
+        String apellido;
+        String direccion;
+        String email;
+        long telefono;
+        
+        //Casting de TextFields
+        dni = Long.parseLong(this.txtDNI.getText());
+        cuil= this.txtCUIL.getText();
+        nombre=this.txtNombre.getText();
+        apellido=this.txtApellido.getText();
+        direccion=this.txtDireccion.getText();
+        email=this.txtEmail.getText();
+        telefono=Long.parseLong(this.txtTelefono.getText());
+        
+        //Metodo agregar
+        this.miControladoraVisual.crearCliente(nombre, apellido, direccion, telefono, email, dni, cuil);
+        
     }//GEN-LAST:event_cmdAgregarActionPerformed
 
 

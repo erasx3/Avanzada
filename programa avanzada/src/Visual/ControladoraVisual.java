@@ -53,8 +53,8 @@ public class ControladoraVisual {
         return this.unaEmpresa.buscarCliente(dni);
     }
 
-    public void crearCliente(int codigo, String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil) {
-        this.unaEmpresa.crearCliente(codigo, nombre, apellido, direccion, telefono, email, dni, cuil);
+    public void crearCliente(String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil) {
+        this.unaEmpresa.crearCliente(nombre, apellido, direccion, telefono, email, dni, cuil);
     }
 
     public boolean buscarTurnoDisponible(Date fecha, Float hora) {

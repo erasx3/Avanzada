@@ -34,8 +34,7 @@ public abstract class PersoneriaJuridica implements Serializable {
     public PersoneriaJuridica() {
     }
 
-    public PersoneriaJuridica(int codigo, String nombre, String direccion, long telefono, String email) {
-        this.codigo = codigo;
+    public PersoneriaJuridica(String nombre, String direccion, long telefono, String email) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;

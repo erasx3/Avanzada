@@ -132,8 +132,8 @@ public class Empresa implements Serializable {
     }
     
     
-    public void crearCliente(int codigo, String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil){
-        Cliente unCliente = new Cliente(apellido,dni,cuil,codigo,nombre,direccion,telefono,email);
+    public void crearCliente(String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil){
+        Cliente unCliente = new Cliente(apellido,dni,cuil,nombre,direccion,telefono,email);
         unosClientes.add(unCliente);
     }
     
