@@ -5,32 +5,7 @@
  */
 package Visual;
 
-import Logica.Actividad;
-import Logica.Articulo;
-import Logica.Cliente;
-import Logica.Concepto;
-import Logica.Detalle;
-import Logica.Empleado;
-import Logica.Empresa;
-import Logica.Equipo;
-import Logica.InterfaceConsumible;
-import Logica.ManoDeObra;
-import Logica.OrdenTrabajo;
-import Logica.PersoneriaJuridica;
-import Logica.Proveedor;
-import Logica.Servicio;
-import Logica.Tecnologia;
-import Logica.TipoCompra;
-import Logica.TipoComprobante;
-import Logica.TipoEstado;
-import Logica.TipoLiquidacion;
-import Logica.TipoTecnologia;
-import Logica.TipoVenta;
-import Logica.Turno;
-import java.awt.BorderLayout;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+
 
 /**
  *
@@ -95,6 +70,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        mnuActAdministrativa = new javax.swing.JMenuItem();
+        mnuActProyecto = new javax.swing.JMenuItem();
+        mnuActTecnica = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,7 +90,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+            .addGap(0, 527, Short.MAX_VALUE)
         );
 
         jMenu1.setText("File");
@@ -150,6 +131,41 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Altas");
+
+        jMenu4.setText("Actividades");
+
+        mnuActAdministrativa.setText("Administrativa");
+        mnuActAdministrativa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuActAdministrativaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnuActAdministrativa);
+
+        mnuActProyecto.setText("Proyecto");
+        mnuActProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuActProyectoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnuActProyecto);
+
+        mnuActTecnica.setText("Tecnica");
+        mnuActTecnica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuActTecnicaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnuActTecnica);
+
+        jMenu3.add(jMenu4);
+
+        jMenuItem4.setText("jMenuItem4");
+        jMenu3.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu3);
 
         jInternalFrame1.setJMenuBar(jMenuBar1);
 
@@ -209,6 +225,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         unAlta.show();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void mnuActAdministrativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuActAdministrativaActionPerformed
+        AltaActividadAdministrativaInter AltaActAdmin = new AltaActividadAdministrativaInter();
+        this.Escritorio.add(AltaActAdmin);
+        AltaActAdmin.show();
+    }//GEN-LAST:event_mnuActAdministrativaActionPerformed
+
+    private void mnuActProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuActProyectoActionPerformed
+        AltaActividadProyectoInter AltaActProyec = new AltaActividadProyectoInter();
+        this.Escritorio.add(AltaActProyec);
+        AltaActProyec.show();
+    }//GEN-LAST:event_mnuActProyectoActionPerformed
+
+    private void mnuActTecnicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuActTecnicaActionPerformed
+        AltaActividadTecnicaInter AltaActTec = new AltaActividadTecnicaInter();
+        this.Escritorio.add(AltaActTec);
+        AltaActTec.show();
+    }//GEN-LAST:event_mnuActTecnicaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,11 +252,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem mitActividadAdministrativa;
+    private javax.swing.JMenuItem mnuActAdministrativa;
+    private javax.swing.JMenuItem mnuActProyecto;
+    private javax.swing.JMenuItem mnuActTecnica;
     // End of variables declaration//GEN-END:variables
 
     

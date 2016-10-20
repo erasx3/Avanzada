@@ -550,24 +550,20 @@ public class Empresa implements Serializable {
         unosArticulos.add(unArticulo);
     }
 
-    public void ConexionConBD() 
-    {
+    public void ConexionConBD() {
         this.unosTiposTecnologias = Persistencia.traerTiposTecnolgias();
         this.unasTecnologias = Persistencia.traerTecnolgias();
     }
 
-    public List<TipoTecnologia> traerTiposDeTecnologias() 
-    {
+    public List<TipoTecnologia> traerTiposDeTecnologias() {
         return this.unosTiposTecnologias;
     }
 
-    private int generarCodigoTipoTecnologia() 
-    {
+    private int generarCodigoTipoTecnologia() {
         Iterator<TipoTecnologia> itLista = this.unosTiposTecnologias.iterator();
         TipoTecnologia unTipo;
         int codigoTipo =0;
-        while(itLista.hasNext())
-        {
+        while(itLista.hasNext()){
                 unTipo = itLista.next();
                 if(unTipo.getCodigo()>codigoTipo)
                     codigoTipo = unTipo.getCodigo();
@@ -575,13 +571,11 @@ public class Empresa implements Serializable {
         return codigoTipo+1;
     }
 
-    private int generarCodigoTecnologia() 
-    {
+    private int generarCodigoTecnologia() {
         Iterator<Tecnologia> itLista = this.unasTecnologias.iterator();
         Tecnologia unaTecnologia;
         int codigoTipo =0;
-        while(itLista.hasNext())
-        {
+        while(itLista.hasNext()){
                 unaTecnologia = itLista.next();
                 if(unaTecnologia.getCodigo()>codigoTipo)
                     codigoTipo = unaTecnologia.getCodigo();
@@ -589,8 +583,7 @@ public class Empresa implements Serializable {
         return codigoTipo+1;
     }
 
-    public List<Tecnologia> traerTecnologias() 
-    {
+    public List<Tecnologia> traerTecnologias() {
         return this.unasTecnologias;
     }
     
