@@ -9,13 +9,13 @@ package Visual;
  *
  * @author Facu
  */
-public class VentaServicioInter extends javax.swing.JInternalFrame {
+public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form VentaServicioInter
-     */
-    public VentaServicioInter() {
+    private ControladoraVisual miControladoraVisual;
+    
+    public GenerarVentaArticuloInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.miControladoraVisual=miControladoraVisual;
     }
 
     /**

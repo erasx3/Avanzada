@@ -25,8 +25,8 @@ public class AltaTipoTecnologiaInter extends javax.swing.JInternalFrame {
      */
     public AltaTipoTecnologiaInter(ControladoraVisual miControladoraVisual) 
     {
-        this.miControladoraVisual = miControladoraVisual;
         initComponents();
+        this.miControladoraVisual = miControladoraVisual;
         this.modeloTiposTecnologia = (DefaultTableModel) this.tblTipoEstados.getModel();
         refrescarVentana();
     }

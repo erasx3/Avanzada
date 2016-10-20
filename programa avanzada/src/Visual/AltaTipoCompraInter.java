@@ -11,11 +11,11 @@ package Visual;
  */
 public class AltaTipoCompraInter extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AltaTipoCompraInter
-     */
-    public AltaTipoCompraInter() {
+    private ControladoraVisual miControladoraVisual;
+    
+    public AltaTipoCompraInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.miControladoraVisual=miControladoraVisual;
     }
 
     /**

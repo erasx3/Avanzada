@@ -11,11 +11,11 @@ package Visual;
  */
 public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AltaTipoLiquidacionInter
-     */
-    public AltaTipoLiquidacionInter() {
+    private ControladoraVisual miControladoraVisual;
+    
+    public AltaTipoLiquidacionInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.miControladoraVisual=miControladoraVisual;
     }
 
     /**

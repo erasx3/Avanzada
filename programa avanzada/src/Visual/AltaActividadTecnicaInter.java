@@ -11,11 +11,11 @@ package Visual;
  */
 public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AltaActividadTecnicaInter
-     */
-    public AltaActividadTecnicaInter() {
+    private ControladoraVisual miControladoraVisual;
+    
+    public AltaActividadTecnicaInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.miControladoraVisual=miControladoraVisual;
     }
 
     /**
@@ -37,6 +37,8 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
         cmdBorrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblActividadTecnica = new javax.swing.JTable();
+
+        setClosable(true);
 
         lblDescripcion.setText("Descripcion:");
 

@@ -11,11 +11,11 @@ package Visual;
  */
 public class GenerarLiquidacionInter extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form GenerarLiquidacionInter
-     */
-    public GenerarLiquidacionInter() {
+    private ControladoraVisual miControladoraVisual;
+    
+    public GenerarLiquidacionInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.miControladoraVisual=miControladoraVisual;
     }
 
     /**

@@ -11,11 +11,11 @@ package Visual;
  */
 public class GenerarCompraInter extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form GenerarCompraInter
-     */
-    public GenerarCompraInter() {
+    private ControladoraVisual miControladoraVisual;
+    
+    public GenerarCompraInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.miControladoraVisual=miControladoraVisual;
     }
 
     /**

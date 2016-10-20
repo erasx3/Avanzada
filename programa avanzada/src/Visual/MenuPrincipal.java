@@ -65,17 +65,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        mitActividadAdministrativa = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        mnuCompra = new javax.swing.JMenuItem();
+        mnuLiquidacion = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        mnuVentaServicio = new javax.swing.JMenuItem();
+        mnuVentaArticulo = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         mnuActAdministrativa = new javax.swing.JMenuItem();
         mnuActProyecto = new javax.swing.JMenuItem();
         mnuActTecnica = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        mnuArticulo = new javax.swing.JMenuItem();
+        mnuCliente = new javax.swing.JMenuItem();
+        mnuEmpleado = new javax.swing.JMenuItem();
+        mnuEquipo = new javax.swing.JMenuItem();
+        mnuProveedor = new javax.swing.JMenuItem();
+        manuTecnologia = new javax.swing.JMenuItem();
+        mnuTipoTecnologia = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        mnuTipoCompra = new javax.swing.JMenuItem();
+        mnuTipoVenta = new javax.swing.JMenuItem();
+        mnuTipoLiquidacion = new javax.swing.JMenuItem();
+        mnuTipoEstado = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,47 +101,48 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 527, Short.MAX_VALUE)
+            .addGap(0, 707, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
+        jMenu1.setText("Archivo");
 
-        mitActividadAdministrativa.setText("Actividad Administrativa");
-        mitActividadAdministrativa.addActionListener(new java.awt.event.ActionListener() {
+        mnuCompra.setText("Compra");
+        mnuCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mitActividadAdministrativaActionPerformed(evt);
+                mnuCompraActionPerformed(evt);
             }
         });
-        jMenu1.add(mitActividadAdministrativa);
+        jMenu1.add(mnuCompra);
 
-        jMenuItem1.setText("Cliente");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        mnuLiquidacion.setText("Liquidacion");
+        mnuLiquidacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                mnuLiquidacionActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(mnuLiquidacion);
 
-        jMenuItem2.setText("Tipo de Tecnologia");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenu2.setText("Venta");
+
+        mnuVentaServicio.setText("Facturar Servicio");
+        mnuVentaServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                mnuVentaServicioActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu2.add(mnuVentaServicio);
 
-        jMenuItem3.setText("Tecnologia");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        mnuVentaArticulo.setText("Facturar Articulos");
+        mnuVentaArticulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                mnuVentaArticuloActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        jMenu2.add(mnuVentaArticulo);
+
+        jMenu1.add(jMenu2);
 
         jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Altas");
 
@@ -162,8 +174,97 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu3.add(jMenu4);
 
-        jMenuItem4.setText("jMenuItem4");
-        jMenu3.add(jMenuItem4);
+        mnuArticulo.setText("Articulo");
+        mnuArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuArticuloActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuArticulo);
+
+        mnuCliente.setText("Cliente");
+        mnuCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuClienteActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuCliente);
+
+        mnuEmpleado.setText("Empleado");
+        mnuEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuEmpleadoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuEmpleado);
+
+        mnuEquipo.setText("Equipo");
+        mnuEquipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuEquipoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuEquipo);
+
+        mnuProveedor.setText("Proveedor");
+        mnuProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuProveedorActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuProveedor);
+
+        manuTecnologia.setText("Tecnologia");
+        manuTecnologia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manuTecnologiaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(manuTecnologia);
+
+        mnuTipoTecnologia.setText("Tipo de Tecnologia");
+        mnuTipoTecnologia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTipoTecnologiaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuTipoTecnologia);
+
+        jMenu5.setText("Tipo de Comprobante");
+
+        mnuTipoCompra.setText("Comprobante de Compra");
+        mnuTipoCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTipoCompraActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnuTipoCompra);
+
+        mnuTipoVenta.setText("Comprobante de Venta");
+        mnuTipoVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTipoVentaActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnuTipoVenta);
+
+        mnuTipoLiquidacion.setText("Comprobante de Liquidacion");
+        mnuTipoLiquidacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTipoLiquidacionActionPerformed(evt);
+            }
+        });
+        jMenu5.add(mnuTipoLiquidacion);
+
+        jMenu3.add(jMenu5);
+
+        mnuTipoEstado.setText("Tipo de Estado");
+        mnuTipoEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTipoEstadoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuTipoEstado);
 
         jMenuBar1.add(jMenu3);
 
@@ -200,48 +301,113 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mitActividadAdministrativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitActividadAdministrativaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mitActividadAdministrativaActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        AltaClienteInter unAltaCliente = new AltaClienteInter();
-        this.Escritorio.add(unAltaCliente);
-        unAltaCliente.show();
-        
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        AltaTipoTecnologiaInter unAlta = new AltaTipoTecnologiaInter(this.miControladoraVisual);
-        this.Escritorio.add(unAlta);
-        unAlta.show();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        AltaTecnologiaInter unAlta = new AltaTecnologiaInter(this.miControladoraVisual);
-        this.Escritorio.add(unAlta);
-        unAlta.show();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void mnuCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCompraActionPerformed
+        GenerarCompraInter GenerarCompra = new GenerarCompraInter(this.miControladoraVisual);
+        this.Escritorio.add(GenerarCompra);
+        GenerarCompra.show();
+    }//GEN-LAST:event_mnuCompraActionPerformed
 
     private void mnuActAdministrativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuActAdministrativaActionPerformed
-        AltaActividadAdministrativaInter AltaActAdmin = new AltaActividadAdministrativaInter();
+        AltaActividadAdministrativaInter AltaActAdmin = new AltaActividadAdministrativaInter(this.miControladoraVisual);
         this.Escritorio.add(AltaActAdmin);
         AltaActAdmin.show();
     }//GEN-LAST:event_mnuActAdministrativaActionPerformed
 
     private void mnuActProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuActProyectoActionPerformed
-        AltaActividadProyectoInter AltaActProyec = new AltaActividadProyectoInter();
+        AltaActividadProyectoInter AltaActProyec = new AltaActividadProyectoInter(this.miControladoraVisual);
         this.Escritorio.add(AltaActProyec);
         AltaActProyec.show();
     }//GEN-LAST:event_mnuActProyectoActionPerformed
 
     private void mnuActTecnicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuActTecnicaActionPerformed
-        AltaActividadTecnicaInter AltaActTec = new AltaActividadTecnicaInter();
+        AltaActividadTecnicaInter AltaActTec = new AltaActividadTecnicaInter(this.miControladoraVisual);
         this.Escritorio.add(AltaActTec);
         AltaActTec.show();
     }//GEN-LAST:event_mnuActTecnicaActionPerformed
+
+    private void mnuArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuArticuloActionPerformed
+        AltaArticuloInter AltaArticulo = new AltaArticuloInter(this.miControladoraVisual);
+        this.Escritorio.add(AltaArticulo);
+        AltaArticulo.show();
+    }//GEN-LAST:event_mnuArticuloActionPerformed
+
+    private void mnuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuClienteActionPerformed
+        AltaClienteInter AltaCliente = new AltaClienteInter(this.miControladoraVisual);
+        this.Escritorio.add(AltaCliente);
+        AltaCliente.show();
+    }//GEN-LAST:event_mnuClienteActionPerformed
+
+    private void mnuEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuEmpleadoActionPerformed
+        AltaEmpleadoInter AltaEmp = new AltaEmpleadoInter(this.miControladoraVisual);
+        this.Escritorio.add(AltaEmp);
+        AltaEmp.show();
+    }//GEN-LAST:event_mnuEmpleadoActionPerformed
+
+    private void mnuEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuEquipoActionPerformed
+        AltaEquipoInter AltaEquipo = new AltaEquipoInter(this.miControladoraVisual);
+        this.Escritorio.add(AltaEquipo);
+        AltaEquipo.show();
+    }//GEN-LAST:event_mnuEquipoActionPerformed
+
+    private void mnuProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProveedorActionPerformed
+        AltaProveedorInter AltaProveedor = new AltaProveedorInter(this.miControladoraVisual);
+        this.Escritorio.add(AltaProveedor);
+        AltaProveedor.show();
+    }//GEN-LAST:event_mnuProveedorActionPerformed
+
+    private void manuTecnologiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuTecnologiaActionPerformed
+        AltaTecnologiaInter AltaTecnologia = new AltaTecnologiaInter(this.miControladoraVisual);
+        this.Escritorio.add(AltaTecnologia);
+        AltaTecnologia.show();
+    }//GEN-LAST:event_manuTecnologiaActionPerformed
+
+    private void mnuTipoTecnologiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTipoTecnologiaActionPerformed
+        AltaTipoTecnologiaInter AltaTipoTecnologia = new AltaTipoTecnologiaInter(this.miControladoraVisual);
+        this.Escritorio.add(AltaTipoTecnologia);
+        AltaTipoTecnologia.show();
+    }//GEN-LAST:event_mnuTipoTecnologiaActionPerformed
+
+    private void mnuTipoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTipoCompraActionPerformed
+        AltaTipoCompraInter AltaTipoCompra = new AltaTipoCompraInter(this.miControladoraVisual);
+        this.Escritorio.add(AltaTipoCompra);
+        AltaTipoCompra.show();
+    }//GEN-LAST:event_mnuTipoCompraActionPerformed
+
+    private void mnuTipoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTipoVentaActionPerformed
+        AltaTipoVentaInter AltaTipoVenta = new AltaTipoVentaInter(this.miControladoraVisual);
+        this.Escritorio.add(AltaTipoVenta);
+        AltaTipoVenta.show();
+    }//GEN-LAST:event_mnuTipoVentaActionPerformed
+
+    private void mnuTipoLiquidacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTipoLiquidacionActionPerformed
+        AltaTipoLiquidacionInter AltaTipoLiquidacion = new AltaTipoLiquidacionInter(this.miControladoraVisual);
+        this.Escritorio.add(AltaTipoLiquidacion);
+        AltaTipoLiquidacion.show();
+    }//GEN-LAST:event_mnuTipoLiquidacionActionPerformed
+
+    private void mnuTipoEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTipoEstadoActionPerformed
+        AltaTipoEstadoInter AltaTipoEstado = new AltaTipoEstadoInter(this.miControladoraVisual);
+        this.Escritorio.add(AltaTipoEstado);
+        AltaTipoEstado.show();
+    }//GEN-LAST:event_mnuTipoEstadoActionPerformed
+
+    private void mnuVentaServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVentaServicioActionPerformed
+        GenerarVentaServicioInter VentaServicio = new GenerarVentaServicioInter(this.miControladoraVisual);
+        this.Escritorio.add(VentaServicio);
+        VentaServicio.show();
+    }//GEN-LAST:event_mnuVentaServicioActionPerformed
+
+    private void mnuVentaArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVentaArticuloActionPerformed
+        GenerarVentaArticuloInter VentaArticulo = new GenerarVentaArticuloInter(this.miControladoraVisual);
+        this.Escritorio.add(VentaArticulo);
+        VentaArticulo.show();
+    }//GEN-LAST:event_mnuVentaArticuloActionPerformed
+
+    private void mnuLiquidacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuLiquidacionActionPerformed
+        GenerarLiquidacionInter Liquidacion = new GenerarLiquidacionInter(this.miControladoraVisual);
+        this.Escritorio.add(Liquidacion);
+        Liquidacion.show();
+    }//GEN-LAST:event_mnuLiquidacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,15 +420,26 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem mitActividadAdministrativa;
+    private javax.swing.JMenuItem manuTecnologia;
     private javax.swing.JMenuItem mnuActAdministrativa;
     private javax.swing.JMenuItem mnuActProyecto;
     private javax.swing.JMenuItem mnuActTecnica;
+    private javax.swing.JMenuItem mnuArticulo;
+    private javax.swing.JMenuItem mnuCliente;
+    private javax.swing.JMenuItem mnuCompra;
+    private javax.swing.JMenuItem mnuEmpleado;
+    private javax.swing.JMenuItem mnuEquipo;
+    private javax.swing.JMenuItem mnuLiquidacion;
+    private javax.swing.JMenuItem mnuProveedor;
+    private javax.swing.JMenuItem mnuTipoCompra;
+    private javax.swing.JMenuItem mnuTipoEstado;
+    private javax.swing.JMenuItem mnuTipoLiquidacion;
+    private javax.swing.JMenuItem mnuTipoTecnologia;
+    private javax.swing.JMenuItem mnuTipoVenta;
+    private javax.swing.JMenuItem mnuVentaArticulo;
+    private javax.swing.JMenuItem mnuVentaServicio;
     // End of variables declaration//GEN-END:variables
 
     

@@ -11,11 +11,11 @@ package Visual;
  */
 public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AltaTipoVentaInter
-     */
-    public AltaTipoVentaInter() {
+    private ControladoraVisual miControladoraVisual;
+    
+    public AltaTipoVentaInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.miControladoraVisual=miControladoraVisual;
     }
 
     /**

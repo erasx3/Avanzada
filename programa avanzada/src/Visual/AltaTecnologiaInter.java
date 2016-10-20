@@ -25,8 +25,8 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
      * Creates new form AltaTecnologia
      */
     public AltaTecnologiaInter(ControladoraVisual miControladoraVisual) {
-        this.miControladoraVisual = miControladoraVisual;
         initComponents();
+        this.miControladoraVisual = miControladoraVisual;
         this.modeloTecnologias = (DefaultTableModel) this.tblTecnologia.getModel();
         refrescarVentana();
 

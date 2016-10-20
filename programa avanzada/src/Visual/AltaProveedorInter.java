@@ -11,11 +11,11 @@ package Visual;
  */
 public class AltaProveedorInter extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AltaProveedorInter
-     */
-    public AltaProveedorInter() {
+    private ControladoraVisual micontroladoraVisual;
+    
+    public AltaProveedorInter(ControladoraVisual micontroladoraVisual) {
         initComponents();
+        this.micontroladoraVisual=micontroladoraVisual;
     }
 
     /**

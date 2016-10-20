@@ -14,8 +14,11 @@ public class AltaClienteInter extends javax.swing.JInternalFrame {
     /**
      * Creates new form AltaClienteInter
      */
-    public AltaClienteInter() {
+    private ControladoraVisual miControladoraVisual;
+    
+    public AltaClienteInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.miControladoraVisual=miControladoraVisual;
     }
 
     /**

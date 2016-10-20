@@ -11,11 +11,11 @@ package Visual;
  */
 public class AltaActividadAdministrativaInter extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form AltaActividadAdministrativaInter
-     */
-    public AltaActividadAdministrativaInter() {
+    private ControladoraVisual miControladoraVisual;
+    
+    public AltaActividadAdministrativaInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.miControladoraVisual=miControladoraVisual;
     }
 
     /**
