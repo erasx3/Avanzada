@@ -27,6 +27,7 @@ import Logica.TipoLiquidacion;
 import Logica.TipoTecnologia;
 import Logica.TipoVenta;
 import Logica.Turno;
+import java.awt.BorderLayout;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -38,40 +39,41 @@ import java.util.List;
 public class MenuPrincipal extends javax.swing.JFrame {
 
     //Controladora Visual
-    private ControladoraVisual miControladoraVisual = new ControladoraVisual();
-    
-    //Relaciones
-    private AgregarOrdenDeTrabajo unAgregarOrdenDeTrabajo = new AgregarOrdenDeTrabajo();
-    private AgregarServicioOrden unAgregarServicioOrden = new AgregarServicioOrden();
-    private AltaActividadAdministrativa unAltaActividadAdministrativa = new AltaActividadAdministrativa();
-    private AltaActividadProyecto unAltaActividadProyecto = new AltaActividadProyecto();
-    private AltaActividadTecnica unAltaActividadTecnica = new AltaActividadTecnica();
-    private AltaArticulo unAltaArticulo = new AltaArticulo();
-    private AltaCliente unAltaCliente = new AltaCliente();
-    private AltaEmpleado unAltaEmpleado = new AltaEmpleado();
-    private AltaEquipo unAltaEquipo = new AltaEquipo();
-    private AltaProveedor unAltaProveedor = new AltaProveedor();
-    private AltaProyecto unAltaProyecto = new AltaProyecto();
-    private AltaTecnologia unAltaTecnologia = new AltaTecnologia();
-    private AltaTipoTecnologia unAltaTipoTecnologia = new AltaTipoTecnologia();
-    private AltaTipoCompra unAltaTipoCompra = new AltaTipoCompra();
-    private AltaTipoEstado unAltaTipoEstado = new AltaTipoEstado();
-    private AltaTipoLiquidacion unAltaTipoLiquidacion = new AltaTipoLiquidacion();
-    private AltaTipoVenta unAltaTipoVenta = new AltaTipoVenta();
-    private AsignarEmpleadoProyecto unAsignarEmpleadoProyecto = new AsignarEmpleadoProyecto();
-    private AsignarEmpleadoServicio unAsignarEmpleadoServicio = new AsignarEmpleadoServicio();
-    private GenerarCompra unGenerarCompra = new GenerarCompra();
-    private GenerarIngresoEquipo unGenerarIngresoEquipo = new GenerarIngresoEquipo();
-    private GenerarSalidaEquipo unGenerarSalidaEquipo = new GenerarSalidaEquipo();
-    private GenerarOrden unGenerarOrden = new GenerarOrden();
-    private GenerarLiquidacion unGenerarLiquidacion = new GenerarLiquidacion();
-    private VentaArticulo unVentaArticulo = new VentaArticulo();
-    private VentaServicio unVentaServicio = new VentaServicio();
+    private ControladoraVisual miControladoraVisual;
 
+    //Relaciones
+//        private AgregarOrdenDeTrabajo unAgregarOrdenDeTrabajo = new AgregarOrdenDeTrabajo();
+//        private AgregarServicioOrden unAgregarServicioOrden = new AgregarServicioOrden();
+//        private AltaActividadAdministrativa unAltaActividadAdministrativa = new AltaActividadAdministrativa();
+//        private AltaActividadProyecto unAltaActividadProyecto = new AltaActividadProyecto();
+//        private AltaActividadTecnica unAltaActividadTecnica = new AltaActividadTecnica();
+//        private AltaArticulo unAltaArticulo = new AltaArticulo();
+//
+//        private AltaEmpleado unAltaEmpleado = new AltaEmpleado();
+//        private AltaEquipo unAltaEquipo = new AltaEquipo();
+//        private AltaProveedor unAltaProveedor = new AltaProveedor();
+//        private AltaProyecto unAltaProyecto = new AltaProyecto();
+//        private AltaTecnologia unAltaTecnologia = new AltaTecnologia();
+//        private AltaTipoTecnologia unAltaTipoTecnologia = new AltaTipoTecnologia();
+//        private AltaTipoCompra unAltaTipoCompra = new AltaTipoCompra();
+//        private AltaTipoEstado unAltaTipoEstado = new AltaTipoEstado();
+//        private AltaTipoLiquidacion unAltaTipoLiquidacion = new AltaTipoLiquidacion();
+//        private AltaTipoVençççta unAltaTipoVenta = new AltaTipoVenta();
+//        private AsignarEmpleadoProyecto unAsignarEmpleadoProyecto = new AsignarEmpleadoProyecto();
+//        private AsignarEmpleadoServicio unAsignarEmpleadoServicio = new AsignarEmpleadoServicio();
+//        private GenerarCompra unGenerarCompra = new GenerarCompra();
+//        private GenerarIngresoEquipo unGenerarIngresoEquipo = new GenerarIngresoEquipo();
+//        private GenerarSalidaEquipo unGenerarSalidaEquipo = new GenerarSalidaEquipo();
+//        private GenerarOrden unGenerarOrden = new GenerarOrden();
+//        private GenerarLiquidacion unGenerarLiquidacion = new GenerarLiquidacion();
+//        private VentaArticulo unVentaArticulo = new VentaArticulo();
+//        private VentaServicio unVentaServicio = new VentaServicio();
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal() {
+    public MenuPrincipal(ControladoraVisual miControladoraVisual) 
+    {
+        this.miControladoraVisual = miControladoraVisual;
         initComponents();
     }
 
@@ -85,15 +87,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
+        Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mitActividadAdministrativa = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jInternalFrame1.setResizable(true);
         jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout EscritorioLayout = new javax.swing.GroupLayout(Escritorio);
+        Escritorio.setLayout(EscritorioLayout);
+        EscritorioLayout.setHorizontalGroup(
+            EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1020, Short.MAX_VALUE)
+        );
+        EscritorioLayout.setVerticalGroup(
+            EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 463, Short.MAX_VALUE)
+        );
 
         jMenu1.setText("File");
 
@@ -113,6 +130,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setText("Tipo de Tecnologia");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Tecnologia");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -124,22 +157,28 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 249, Short.MAX_VALUE)
+            .addComponent(Escritorio)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jInternalFrame1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,20 +189,41 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mitActividadAdministrativaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        this.unAltaCliente.setVisible(true);   
+        AltaClienteInter unAltaCliente = new AltaClienteInter();
+        this.Escritorio.add(unAltaCliente);
+        unAltaCliente.show();
+        
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        AltaTipoTecnologiaInter unAlta = new AltaTipoTecnologiaInter(this.miControladoraVisual);
+        this.Escritorio.add(unAlta);
+        unAlta.show();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        AltaTecnologiaInter unAlta = new AltaTecnologiaInter(this.miControladoraVisual);
+        this.Escritorio.add(unAlta);
+        unAlta.show();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane Escritorio;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem mitActividadAdministrativa;
     // End of variables declaration//GEN-END:variables
+
+    
 }

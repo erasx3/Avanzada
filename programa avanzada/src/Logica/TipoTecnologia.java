@@ -20,8 +20,7 @@ import javax.persistence.Id;
 public class TipoTecnologia implements Serializable {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int codigo;
+    private int codigoTipo;
     @Basic
     private String nombre;
     @Basic
@@ -31,13 +30,13 @@ public class TipoTecnologia implements Serializable {
     }
 
     public TipoTecnologia(int codigo, String nombre, String descripcion) {
-        this.codigo = codigo;
+        this.codigoTipo = codigo;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
 
     public int getCodigo() {
-        return codigo;
+        return codigoTipo;
     }
 
     public String getNombre() {
@@ -49,7 +48,7 @@ public class TipoTecnologia implements Serializable {
     }
 
     public void setCodigo(int codigo) {
-        this.codigo = codigo;
+        this.codigoTipo = codigo;
     }
 
     public void setNombre(String nombre) {
@@ -62,7 +61,7 @@ public class TipoTecnologia implements Serializable {
     
     public boolean isTipoTecnologia(int codigo){
         boolean aux = false;
-        if(this.codigo == codigo){
+        if(this.codigoTipo == codigo){
             aux = true;
         }
         return aux;

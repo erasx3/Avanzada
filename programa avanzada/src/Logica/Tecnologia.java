@@ -6,11 +6,14 @@
 package Logica;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 /**
  *
@@ -19,13 +22,13 @@ import javax.persistence.OneToMany;
 @Entity
 public class Tecnologia implements Serializable {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
     @Basic
     private String descripcion;
     
     //Relaciones
-    @OneToMany
+    @ManyToOne
+    @JoinColumn(name = "tipoTecnologia_FK", referencedColumnName = "codigoTipo")
     private TipoTecnologia unTipoTecnologia;
 
     public Tecnologia() {
@@ -41,7 +44,14 @@ public class Tecnologia implements Serializable {
         this.descripcion = descripcion;
         this.unTipoTecnologia = unTipoTecnologia;
     }
-    
+
+    public TipoTecnologia getUnTipoTecnologia() {
+        return this.unTipoTecnologia;
+    }
+
+    public void setUnTipoTecnologia(TipoTecnologia unTipoTecnologia) {
+        this.unTipoTecnologia = unTipoTecnologia;
+    }
     
     public int getCodigo() {
         return codigo;
@@ -66,5 +76,6 @@ public class Tecnologia implements Serializable {
         }
         return aux;
     }
+    
     
 }

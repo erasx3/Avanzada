@@ -511,14 +511,18 @@ public class Empresa implements Serializable {
         return aux;
     }
     
-    public void crearTipoTecnologia(int codigo,String nombre,String descripcion){
-        TipoTecnologia unosTipoTecnologia = new TipoTecnologia(codigo,nombre,descripcion);
+    public void crearTipoTecnologia(String nombre,String descripcion) throws Exception{
+        int codigoTipo = generarCodigoTipoTecnologia();
+        TipoTecnologia unosTipoTecnologia = new TipoTecnologia(codigoTipo, nombre,descripcion);
         unosTiposTecnologias.add(unosTipoTecnologia);
+        Persistencia.crearTipoTecnologia(unosTipoTecnologia);
     }
     
-    public void crearTecnologia(int codigo,String descripcion,TipoTecnologia unTipoTecnologia){
-        Tecnologia unaTecnologia = new Tecnologia(codigo,descripcion,unTipoTecnologia);
+    public void crearTecnologia(String descripcion,TipoTecnologia unTipoTecnologia) throws Exception{
+        int codigoTecnologia = generarCodigoTecnologia();
+        Tecnologia unaTecnologia = new Tecnologia(codigoTecnologia,descripcion,unTipoTecnologia);
         unasTecnologias.add(unaTecnologia);
+        Persistencia.crearTecnologia(unaTecnologia);
     }
     
     public void generarProyecto(Float tiempoEstimado, List<Concepto> unosConceptos, List<Tecnologia> unasTecnologias, int codigo, String descripcion){
@@ -545,4 +549,50 @@ public class Empresa implements Serializable {
         Articulo unArticulo = new Articulo(codigo,nombre,descripcion,precio,cantidad);
         unosArticulos.add(unArticulo);
     }
+
+    public void ConexionConBD() 
+    {
+        this.unosTiposTecnologias = Persistencia.traerTiposTecnolgias();
+        this.unasTecnologias = Persistencia.traerTecnolgias();
+    }
+
+    public List<TipoTecnologia> traerTiposDeTecnologias() 
+    {
+        return this.unosTiposTecnologias;
+    }
+
+    private int generarCodigoTipoTecnologia() 
+    {
+        Iterator<TipoTecnologia> itLista = this.unosTiposTecnologias.iterator();
+        TipoTecnologia unTipo;
+        int codigoTipo =0;
+        while(itLista.hasNext())
+        {
+                unTipo = itLista.next();
+                if(unTipo.getCodigo()>codigoTipo)
+                    codigoTipo = unTipo.getCodigo();
+        }
+        return codigoTipo+1;
+    }
+
+    private int generarCodigoTecnologia() 
+    {
+        Iterator<Tecnologia> itLista = this.unasTecnologias.iterator();
+        Tecnologia unaTecnologia;
+        int codigoTipo =0;
+        while(itLista.hasNext())
+        {
+                unaTecnologia = itLista.next();
+                if(unaTecnologia.getCodigo()>codigoTipo)
+                    codigoTipo = unaTecnologia.getCodigo();
+        }
+        return codigoTipo+1;
+    }
+
+    public List<Tecnologia> traerTecnologias() 
+    {
+        return this.unasTecnologias;
+    }
+    
+    
 }

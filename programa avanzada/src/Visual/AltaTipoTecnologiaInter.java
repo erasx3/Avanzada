@@ -5,17 +5,30 @@
  */
 package Visual;
 
+import Logica.TipoTecnologia;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class AltaTipoTecnologia extends javax.swing.JPanel {
+public class AltaTipoTecnologiaInter extends javax.swing.JInternalFrame {
 
+    private ControladoraVisual miControladoraVisual;
+    private DefaultTableModel modeloTiposTecnologia;
     /**
-     * Creates new form AltaTipoTecnologia
+     * Creates new form AltaTipoTecnologiaInter
      */
-    public AltaTipoTecnologia() {
+    public AltaTipoTecnologiaInter(ControladoraVisual miControladoraVisual) 
+    {
+        this.miControladoraVisual = miControladoraVisual;
         initComponents();
+        this.modeloTiposTecnologia = (DefaultTableModel) this.tblTipoEstados.getModel();
+        refrescarVentana();
     }
 
     /**
@@ -38,7 +51,14 @@ public class AltaTipoTecnologia extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
 
+        setClosable(true);
+
         cmdAgregar.setText("Agregar");
+        cmdAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nombre:");
 
@@ -116,15 +136,15 @@ public class AltaTipoTecnologia extends javax.swing.JPanel {
                     .addComponent(cmdModificar)
                     .addComponent(cmdBorrar)
                     .addComponent(cmdAgregar))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -133,11 +153,22 @@ public class AltaTipoTecnologia extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescripcionActionPerformed
+
+    private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
+        try {
+            miControladoraVisual.crearTipoTecnologia(this.txtNombre.getText(), this.txtDescripcion.getText());
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaTipoTecnologiaInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdAgregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -152,4 +183,25 @@ public class AltaTipoTecnologia extends javax.swing.JPanel {
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescarVentana() 
+    {
+        this.txtDescripcion.setText(null);
+        this.txtNombre.setText(null);
+        this.modeloTiposTecnologia.setRowCount(0);
+        cargarTablaTiposTecnologias();
+        
+    }
+
+    private void cargarTablaTiposTecnologias() 
+    {
+        Iterator <TipoTecnologia> itTiposDeTecnologias = this.miControladoraVisual.traerTiposDeTecnologias().iterator();
+        TipoTecnologia unTipo;
+        while(itTiposDeTecnologias.hasNext())
+        {
+            unTipo = itTiposDeTecnologias.next();
+            modeloTiposTecnologia.addRow(new Object[]{unTipo.getCodigo(),unTipo.getNombre(),unTipo.getDescripcion()});
+        }
+    }
+    
 }

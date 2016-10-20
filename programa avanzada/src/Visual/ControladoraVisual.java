@@ -29,6 +29,7 @@ import Logica.TipoVenta;
 import Logica.Turno;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JTextField;
 
 /**
  *
@@ -39,13 +40,16 @@ public class ControladoraVisual {
     //Relaciones
     
      //Controladora Logica
-    private Empresa unaEmpresa = new Empresa();
+    private Empresa unaEmpresa;
+
+    public ControladoraVisual() {
+        this.unaEmpresa = new Empresa();
+        this.unaEmpresa.ConexionConBD();
+    }
+    
+    
     
     //Metodo Main
-    public static void main(String[] args){
-        MenuPrincipal miMenuPrincipal = new MenuPrincipal();
-        miMenuPrincipal.show();
-    }
     
     
     //Metodo de conexion con la Logica
@@ -217,12 +221,12 @@ public class ControladoraVisual {
         return this.unaEmpresa.buscarTipoTecnologia(codigo);
     }
     
-    public void crearTipoTecnologia(int codigo,String nombre,String descripcion){
-        this.unaEmpresa.crearTipoTecnologia(codigo, nombre, descripcion);
+    public void crearTipoTecnologia(String nombre,String descripcion) throws Exception{
+        this.unaEmpresa.crearTipoTecnologia(nombre, descripcion);
     }
     
-    public void crearTecnologia(int codigo,String descripcion,TipoTecnologia unTipoTecnologia){
-        this.unaEmpresa.crearTecnologia(codigo, descripcion, unTipoTecnologia);
+    public void crearTecnologia(String descripcion,TipoTecnologia unTipoTecnologia) throws Exception{
+        this.unaEmpresa.crearTecnologia(descripcion, unTipoTecnologia);
     }
     
     public void generarProyecto(Float tiempoEstimado, List<Concepto> unosConceptos, List<Tecnologia> unasTecnologias, int codigo, String descripcion){
@@ -244,6 +248,17 @@ public class ControladoraVisual {
     public void crearArticulo(int codigo,String nombre,String descripcion,Double precio,int cantidad){
         this.unaEmpresa.crearArticulo(codigo, nombre, descripcion, precio, cantidad);
     }
+
+    public List<TipoTecnologia> traerTiposDeTecnologias() 
+    {
+        return this.unaEmpresa.traerTiposDeTecnologias();
+    }
+    
+    public List <Tecnologia> traerTecnologias() 
+    {
+        return this.unaEmpresa.traerTecnologias();
+    }
+
     
     
 }

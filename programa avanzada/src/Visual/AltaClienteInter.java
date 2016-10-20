@@ -7,17 +7,14 @@ package Visual;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class AltaCliente extends javax.swing.JPanel {
-
-    //Relacion con Controladora Visual
-    private ControladoraVisual miControladoraVisual = new ControladoraVisual();
+public class AltaClienteInter extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form AltaCliente
+     * Creates new form AltaClienteInter
      */
-    public AltaCliente() {
+    public AltaClienteInter() {
         initComponents();
     }
 
@@ -193,7 +190,7 @@ public class AltaCliente extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addComponent(cmdBorrar))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -202,7 +199,7 @@ public class AltaCliente extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -237,15 +234,15 @@ public class AltaCliente extends javax.swing.JPanel {
                             .addComponent(cmdAgregar)
                             .addComponent(cmdModificar)
                             .addComponent(cmdBorrar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmdAceptar)
                             .addComponent(cmdCancelar))))
                 .addGap(24, 24, 24))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -260,7 +257,34 @@ public class AltaCliente extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
+
+        int codigo;
+        long dni;
+        String cuil;
+        String nombre;
+        String apellido;
+        String direccion;
+        String email;
+        long telefono;
+
+        //Casting de TextFields
+        dni = Long.parseLong(this.txtDNI.getText());
+        cuil= this.txtCUIL.getText();
+        nombre=this.txtNombre.getText();
+        apellido=this.txtApellido.getText();
+        direccion=this.txtDireccion.getText();
+        email=this.txtEmail.getText();
+        telefono=Long.parseLong(this.txtTelefono.getText());
+
+        //Metodo agregar
+        this.miControladoraVisual.crearCliente(nombre, apellido, direccion, telefono, email, dni, cuil);
+
+    }//GEN-LAST:event_cmdAgregarActionPerformed
 
     private void txtDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDNIActionPerformed
         // TODO add your handling code here:
@@ -289,31 +313,6 @@ public class AltaCliente extends javax.swing.JPanel {
     private void txtCUILActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCUILActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCUILActionPerformed
-
-    private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
-        
-        int codigo;
-        long dni;
-        String cuil;
-        String nombre;
-        String apellido;
-        String direccion;
-        String email;
-        long telefono;
-        
-        //Casting de TextFields
-        dni = Long.parseLong(this.txtDNI.getText());
-        cuil= this.txtCUIL.getText();
-        nombre=this.txtNombre.getText();
-        apellido=this.txtApellido.getText();
-        direccion=this.txtDireccion.getText();
-        email=this.txtEmail.getText();
-        telefono=Long.parseLong(this.txtTelefono.getText());
-        
-        //Metodo agregar
-        this.miControladoraVisual.crearCliente(nombre, apellido, direccion, telefono, email, dni, cuil);
-        
-    }//GEN-LAST:event_cmdAgregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
