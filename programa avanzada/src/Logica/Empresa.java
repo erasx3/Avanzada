@@ -513,9 +513,22 @@ public class Empresa implements Serializable {
     
     public void crearTipoTecnologia(String nombre,String descripcion) throws Exception{
         int codigoTipo = generarCodigoTipoTecnologia();
-        TipoTecnologia unosTipoTecnologia = new TipoTecnologia(codigoTipo, nombre,descripcion);
-        unosTiposTecnologias.add(unosTipoTecnologia);
-        Persistencia.crearTipoTecnologia(unosTipoTecnologia);
+        TipoTecnologia unTipoTecnologia = new TipoTecnologia(codigoTipo, nombre,descripcion);
+        unosTiposTecnologias.add(unTipoTecnologia);
+        Persistencia.crearTipoTecnologia(unTipoTecnologia);
+    }
+    
+    public void modificarTipoTecnoligia(int codigo,String nombre,String descripcion) throws Exception{
+        TipoTecnologia unTipoTecnologia = buscarTipoTecnologia(codigo);
+        unTipoTecnologia.setNombre(nombre);
+        unTipoTecnologia.setDescripcion(descripcion);
+        Persistencia.modificarTipoTecnologia(unTipoTecnologia);
+    }
+    
+    public void borrarTipoTecnologia(int codigo,String nombre,String descripcion) throws Exception{
+        TipoTecnologia unTipoTecnologia = buscarTipoTecnologia(codigo);
+        unosTiposTecnologias.remove(unTipoTecnologia);
+        Persistencia.eliminarTipoTecnologia(codigo);
     }
     
     public void crearTecnologia(String descripcion,TipoTecnologia unTipoTecnologia) throws Exception{

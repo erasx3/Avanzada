@@ -225,6 +225,14 @@ public class ControladoraVisual {
         this.unaEmpresa.crearTipoTecnologia(nombre, descripcion);
     }
     
+    public void modificarTipoTecnoligia(int codigo,String nombre,String descripcion) throws Exception{
+        this.unaEmpresa.modificarTipoTecnoligia(codigo, nombre, descripcion);
+    }
+    
+    public void borrarTipoTecnologia(int codigo,String nombre,String descripcion) throws Exception{
+        this.unaEmpresa.borrarTipoTecnologia(codigo, nombre, descripcion);
+    }
+    
     public void crearTecnologia(String descripcion,TipoTecnologia unTipoTecnologia) throws Exception{
         this.unaEmpresa.crearTecnologia(descripcion, unTipoTecnologia);
     }

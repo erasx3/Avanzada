@@ -61,5 +61,5 @@ public class Persistencia {
     static List<Tecnologia> traerTecnolgias() {
         return jpaTecnologia.findTecnologiaEntities();
     }
-    
+
 }
