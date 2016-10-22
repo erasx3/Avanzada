@@ -24,7 +24,7 @@ public class Proveedor extends PersoneriaJuridica{
     }
 
     public Proveedor(String cuit, int codigo, String nombre, String direccion, long telefono, String email) {
-        super(codigo, nombre, direccion, telefono, email);
+        super(nombre, direccion, telefono, email);
         this.cuit = cuit;
     }
 

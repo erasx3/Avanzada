@@ -36,6 +36,8 @@ public class AltaTipoCompraInter extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCompras = new javax.swing.JTable();
 
+        setClosable(true);
+
         jLabel1.setText("Descripcion:");
 
         cmdModificar.setText("Modificar");

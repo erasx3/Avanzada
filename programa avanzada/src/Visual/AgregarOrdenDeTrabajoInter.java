@@ -43,6 +43,8 @@ public class AgregarOrdenDeTrabajoInter extends javax.swing.JInternalFrame {
         tblOrdenTrabajo = new javax.swing.JTable();
         cmdDisponibilidad = new javax.swing.JButton();
 
+        setClosable(true);
+
         jLabel1.setText("Cliente:");
 
         jLabel2.setText("Descripcion:");

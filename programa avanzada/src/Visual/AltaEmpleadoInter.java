@@ -48,6 +48,8 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmpleado = new javax.swing.JTable();
 
+        setClosable(true);
+
         jLabel2.setText("DNI:");
 
         jLabel3.setText("CUIL:");

@@ -29,7 +29,7 @@ public class Empleado extends PersoneriaJuridica implements Serializable{
     }
 
     public Empleado(String apellido, long dni, String cuil, int codigo, String nombre, String direccion, long telefono, String email) {
-        super(codigo, nombre, direccion, telefono, email);
+        super(nombre, direccion, telefono, email);
         this.apellido = apellido;
         this.dni = dni;
         this.cuil = cuil;

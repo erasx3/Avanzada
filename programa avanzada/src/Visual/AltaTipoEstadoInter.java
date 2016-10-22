@@ -35,6 +35,8 @@ public class AltaTipoEstadoInter extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTipoEstados = new javax.swing.JTable();
 
+        setClosable(true);
+
         cmdAgregar.setText("Agregar");
 
         jLabel1.setText("Nombre:");

@@ -44,6 +44,8 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblArticulo = new javax.swing.JTable();
 
+        setClosable(true);
+
         jLabel1.setText("Codigo:");
 
         jLabel2.setText("Nombre:");

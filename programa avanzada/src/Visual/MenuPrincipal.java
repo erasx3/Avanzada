@@ -90,6 +90,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jInternalFrame1.setClosable(true);
         jInternalFrame1.setResizable(true);
         jInternalFrame1.setVisible(true);
 
@@ -101,7 +102,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
+            .addGap(0, 715, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Archivo");

@@ -53,6 +53,8 @@ public class AltaClienteInter extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCliente = new javax.swing.JTable();
 
+        setClosable(true);
+
         cmdAgregar.setText("Agregar");
         cmdAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -44,6 +44,8 @@ public class GenerarOrdenInter extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrdenTrabajo = new javax.swing.JTable();
 
+        setClosable(true);
+
         jLabel1.setText("Descripcion:");
 
         jLabel2.setText("Turno:");

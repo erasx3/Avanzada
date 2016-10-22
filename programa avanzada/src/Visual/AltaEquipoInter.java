@@ -36,6 +36,8 @@ public class AltaEquipoInter extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEquipo = new javax.swing.JTable();
 
+        setClosable(true);
+
         jLabel1.setText("Descripcion:");
 
         cmdAgregar.setText("Agregar");

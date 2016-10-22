@@ -48,6 +48,8 @@ public class AltaProveedorInter extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProveedor = new javax.swing.JTable();
 
+        setClosable(true);
+
         jLabel1.setText("Codigo:");
 
         jLabel2.setText("CUIT:");

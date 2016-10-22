@@ -36,6 +36,8 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblVentas = new javax.swing.JTable();
 
+        setClosable(true);
+
         cmdAgregar2.setText("Agregar");
 
         jLabel5.setText("Descripcion:");
@@ -122,33 +124,13 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cmdAgregar;
-    private javax.swing.JButton cmdAgregar1;
     private javax.swing.JButton cmdAgregar2;
-    private javax.swing.JButton cmdBorrar;
-    private javax.swing.JButton cmdBorrar1;
     private javax.swing.JButton cmdBorrar2;
-    private javax.swing.JButton cmdModificar;
-    private javax.swing.JButton cmdModificar1;
     private javax.swing.JButton cmdModificar2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblTipoEstados;
-    private javax.swing.JTable tblTipoEstados1;
     private javax.swing.JTable tblVentas;
-    private javax.swing.JTextField txtDescripcion;
-    private javax.swing.JTextField txtDescripcion1;
     private javax.swing.JTextField txtDescripcion2;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
     // End of variables declaration//GEN-END:variables
 }
