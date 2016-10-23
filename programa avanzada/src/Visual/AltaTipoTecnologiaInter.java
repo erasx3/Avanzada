@@ -218,7 +218,7 @@ public class AltaTipoTecnologiaInter extends javax.swing.JInternalFrame {
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
         try {
-            this.miControladoraVisual.borrarTipoTecnologia(Integer.parseInt(txtCodigo.getText()),txtNombre.getText(), txtDescripcion.getText());
+            this.miControladoraVisual.borrarTipoTecnologia(Integer.parseInt(txtCodigo.getText()));
             refrescarVentana();
         } catch (Exception ex) {
             Logger.getLogger(AltaTipoTecnologiaInter.class.getName()).log(Level.SEVERE, null, ex);

@@ -5,6 +5,8 @@
  */
 package Visual;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Facu
@@ -12,10 +14,14 @@ package Visual;
 public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
+    private DefaultTableModel modeloActProyecto;
     
     public AltaActividadProyectoInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        txtCodigo.setVisible(false);
         this.miControladoraVisual=miControladoraVisual;
+        this.modeloActProyecto = (DefaultTableModel) this.tblActividadProyecto.getModel();
+        refrescarVentana();
     }
 
     /**
@@ -37,6 +43,7 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
         cmdBorrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblActividadProyecto = new javax.swing.JTable();
+        txtCodigo = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -95,9 +102,10 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
                             .addComponent(lblDescripcion)
                             .addComponent(lblPorcentaje))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPorcentaje, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPorcentaje, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(txtCodigo))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -105,7 +113,9 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(39, 39, 39)
+                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -152,7 +162,20 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblPorcentaje;
     private javax.swing.JTable tblActividadProyecto;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtPorcentaje;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescarVentana() {
+        txtCodigo.setText(null);
+        txtDescripcion.setText(null);
+        txtPorcentaje.setText(null);
+        this.modeloActProyecto.setRowCount(0);
+        cargarTablaActProyecto();
+    }
+
+    private void cargarTablaActProyecto() {
+        
+    }
 }

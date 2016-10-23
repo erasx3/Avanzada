@@ -6,6 +6,8 @@
 package Visual;
 
 import Logica.Actividad;
+import Logica.ActividadAdministrativa;
+import Logica.ActividadProyecto;
 import Logica.Articulo;
 import Logica.Cliente;
 import Logica.Concepto;
@@ -129,16 +131,24 @@ public class ControladoraVisual {
         return this.unaEmpresa.buscarActividad(codigo);
     }
 
-    public void crearActividadAdministrativa(int codigo, String descripcion, Double precioHora) {
-        this.unaEmpresa.crearActividadAdministrativa(codigo, descripcion, precioHora);
+    public void crearActividadAdministrativa(String descripcion, Double precioHora) {
+        this.unaEmpresa.crearActividadAdministrativa(descripcion, precioHora);
+    }
+    
+    public void modificarActividadAdministrativa(int codigo, String descripcion, Double precioHora){
+        this.unaEmpresa.modificarActividadAdministrativa(codigo, descripcion, precioHora);
+    }
+    
+    public void borrarActAdministrativa(int codigo){
+        this.unaEmpresa.borrarActAdministrativa(codigo);
     }
 
     public void crearActividadTecnica(int codigo, String descripcion, Double precioFijo) {
         this.unaEmpresa.crearActividadTecnica(codigo, descripcion, precioFijo);
     }
 
-    public void crearActividadProyecto(int codigo, String descripcion, Double porcentaje) {
-        this.unaEmpresa.crearActividadProyecto(codigo, descripcion, porcentaje);
+    public void crearActividadProyecto(String descripcion, Double porcentaje) {
+        this.unaEmpresa.crearActividadProyecto(descripcion, porcentaje);
     }
     
     public void generarManoDeObra(int codigo, long horasTrabajadas, Date fecha, Empleado unEmpleado, Servicio unServicio, Actividad unaActividad){
@@ -229,12 +239,20 @@ public class ControladoraVisual {
         this.unaEmpresa.modificarTipoTecnoligia(codigo, nombre, descripcion);
     }
     
-    public void borrarTipoTecnologia(int codigo,String nombre,String descripcion) throws Exception{
-        this.unaEmpresa.borrarTipoTecnologia(codigo, nombre, descripcion);
+    public void borrarTipoTecnologia(int codigo) throws Exception{
+        this.unaEmpresa.borrarTipoTecnologia(codigo);
     }
     
     public void crearTecnologia(String descripcion,TipoTecnologia unTipoTecnologia) throws Exception{
         this.unaEmpresa.crearTecnologia(descripcion, unTipoTecnologia);
+    }
+    
+    public void modificarTecnologia(int codigo,String descripcion,TipoTecnologia unTipoTecnologia) throws Exception{
+        this.unaEmpresa.modificarTecnologia(codigo, descripcion, unTipoTecnologia);
+    }
+    
+    public void borrarTecnologia(int codigo) throws Exception{
+        this.unaEmpresa.borrarTecnologia(codigo);
     }
     
     public void generarProyecto(Float tiempoEstimado, List<Concepto> unosConceptos, List<Tecnologia> unasTecnologias, int codigo, String descripcion){
@@ -266,7 +284,16 @@ public class ControladoraVisual {
     {
         return this.unaEmpresa.traerTecnologias();
     }
-
+    
+    public List <ActividadAdministrativa> traerActAdministrativa()
+    {
+        return this.unaEmpresa.traerActAdministrativa();
+    }
+    
+    public List <ActividadProyecto> traerActProyecto()
+    {
+        return this.unaEmpresa.traerActProyecto();
+    } 
     
     
 }

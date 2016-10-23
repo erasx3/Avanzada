@@ -53,9 +53,10 @@
                               <Component id="lblPorcentaje" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtPorcentaje" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                              <Component id="txtDescripcion" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="txtPorcentaje" alignment="0" pref="130" max="32767" attributes="0"/>
+                              <Component id="txtDescripcion" alignment="0" pref="130" max="32767" attributes="0"/>
+                              <Component id="txtCodigo" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -68,7 +69,9 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                  <Component id="txtCodigo" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane1" alignment="0" min="-2" pref="361" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
@@ -150,6 +153,8 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JTextField" name="txtCodigo">
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

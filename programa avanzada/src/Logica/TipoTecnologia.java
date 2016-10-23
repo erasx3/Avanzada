@@ -66,5 +66,11 @@ public class TipoTecnologia implements Serializable {
         }
         return aux;
     }
+
+    @Override
+    public String toString() {
+        return this.codigoTipo + "-" + this.nombre;
+    }
+    
     
 }

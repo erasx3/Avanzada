@@ -76,6 +76,12 @@ public class Tecnologia implements Serializable {
         }
         return aux;
     }
+
+    @Override
+    public String toString() {
+        return "Tecnologia{" + "codigo=" + codigo + ", descripcion=" + descripcion + '}';
+    }
+    
     
     
 }

@@ -26,6 +26,7 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
      */
     public AltaTecnologiaInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.txtCodigo.setVisible(false);
         this.miControladoraVisual = miControladoraVisual;
         this.modeloTecnologias = (DefaultTableModel) this.tblTecnologia.getModel();
         refrescarVentana();
@@ -51,6 +52,7 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
         tblTecnologia = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         CmbTipoTecnologia = new javax.swing.JComboBox<>();
+        txtCodigo = new javax.swing.JTextField();
 
         setClosable(true);
         setResizable(true);
@@ -65,8 +67,18 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
         jLabel1.setText("Descripcion:");
 
         cmdModificar.setText("Modificar");
+        cmdModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificarActionPerformed(evt);
+            }
+        });
 
         cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
 
         tblTecnologia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,6 +99,11 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        tblTecnologia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTecnologiaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblTecnologia);
 
         jLabel2.setText("Tipo de Tecnologia:");
@@ -104,47 +121,52 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                    .addComponent(CmbTipoTecnologia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                            .addComponent(CmbTipoTecnologia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(cmdAgregar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cmdModificar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cmdBorrar))
-                        .addComponent(jLabel1))
+                    .addComponent(cmdAgregar)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(cmdModificar)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(cmdBorrar)
                     .addContainerGap(643, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(29, 29, 29)
+                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(CmbTipoTecnologia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 156, Short.MAX_VALUE))
+                        .addGap(0, 176, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(58, 58, 58)
-                    .addComponent(jLabel1)
-                    .addGap(67, 67, 67)
+                    .addGap(139, 139, 139)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cmdModificar)
                         .addComponent(cmdBorrar)
@@ -168,11 +190,12 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            // TODO add your handling code here:
+           
             String string = (String) this.CmbTipoTecnologia.getSelectedItem();
             String[] parts = string.split("-");
             int codigoTipo = Integer.parseInt(parts[0]);
             TipoTecnologia unTipoTecnologia = this.miControladoraVisual.buscarTipoTecnologia(codigoTipo);
+//            TipoTecnologia unTipoTecnologia = (TipoTecnologia) this.CmbTipoTecnologia.getSelectedItem();
             this.miControladoraVisual.crearTecnologia(this.txtDescripcion.getText(), unTipoTecnologia);
             refrescarVentana();
         } catch (Exception ex) {
@@ -185,6 +208,39 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_CmbTipoTecnologiaActionPerformed
 
+    private void tblTecnologiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTecnologiaMouseClicked
+       txtCodigo.setText(null);
+       txtDescripcion.setText(null);
+       
+       int fila = this.tblTecnologia.rowAtPoint(evt.getPoint());
+       
+       txtCodigo.setText(this.modeloTecnologias.getValueAt(fila, 0).toString());
+       txtDescripcion.setText(this.modeloTecnologias.getValueAt(fila, 1).toString());
+       CmbTipoTecnologia.setSelectedItem(this.modeloTecnologias.getValueAt(fila, 2).toString());
+    }//GEN-LAST:event_tblTecnologiaMouseClicked
+
+    private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
+        try {
+            String string = (String) this.CmbTipoTecnologia.getSelectedItem();
+            String[] parts = string.split("-");
+            int codigoTipo = Integer.parseInt(parts[0]);
+            TipoTecnologia unTipoTecnologia = this.miControladoraVisual.buscarTipoTecnologia(codigoTipo);
+            this.miControladoraVisual.modificarTecnologia(Integer.parseInt(txtCodigo.getText()), txtDescripcion.getText(),unTipoTecnologia);
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaTecnologiaInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdModificarActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+        try {
+            this.miControladoraVisual.borrarTecnologia(Integer.parseInt(txtCodigo.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaTecnologiaInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdBorrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CmbTipoTecnologia;
@@ -196,10 +252,12 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblTecnologia;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
 
     private void refrescarVentana() {
+        this.txtCodigo.setText(null);
         this.txtDescripcion.setText(null);
         this.modeloTecnologias.setRowCount(0);
         this.CmbTipoTecnologia.removeAllItems();
@@ -213,7 +271,7 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
         Tecnologia unaTecnologia;
         while (itTecnologia.hasNext()) {
             unaTecnologia = itTecnologia.next();
-            modeloTecnologias.addRow(new Object[]{unaTecnologia.getCodigo(), unaTecnologia.getDescripcion(), unaTecnologia.getUnTipoTecnologia().getNombre()});
+            modeloTecnologias.addRow(new Object[]{unaTecnologia.getCodigo(), unaTecnologia.getDescripcion(), unaTecnologia.getUnTipoTecnologia().toString()});
         }
     }
 
@@ -222,7 +280,7 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
         TipoTecnologia unTipo;
         while (itTiposDeTecnologias.hasNext()) {
             unTipo = itTiposDeTecnologias.next();
-            this.CmbTipoTecnologia.addItem(unTipo.getCodigo() + "-" + unTipo.getNombre());
+            this.CmbTipoTecnologia.addItem(unTipo.toString());
         }
     }
 
