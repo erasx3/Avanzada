@@ -4,6 +4,9 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Logica.TipoTecnologia</class>
     <class>Logica.Tecnologia</class>
+    <class>Logica.Actividad</class>
+    <class>Logica.ActividadAdministrativa</class>
+    <class>Logica.ActividadProyecto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

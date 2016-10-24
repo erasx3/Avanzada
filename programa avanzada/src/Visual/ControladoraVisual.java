@@ -29,6 +29,7 @@ import Logica.TipoLiquidacion;
 import Logica.TipoTecnologia;
 import Logica.TipoVenta;
 import Logica.Turno;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JTextField;
@@ -135,11 +136,11 @@ public class ControladoraVisual {
         this.unaEmpresa.crearActividadAdministrativa(descripcion, precioHora);
     }
     
-    public void modificarActividadAdministrativa(int codigo, String descripcion, Double precioHora){
+    public void modificarActividadAdministrativa(int codigo, String descripcion, Double precioHora) throws Exception{
         this.unaEmpresa.modificarActividadAdministrativa(codigo, descripcion, precioHora);
     }
     
-    public void borrarActAdministrativa(int codigo){
+    public void borrarActAdministrativa(int codigo) throws NonexistentEntityException{
         this.unaEmpresa.borrarActAdministrativa(codigo);
     }
 
@@ -149,6 +150,14 @@ public class ControladoraVisual {
 
     public void crearActividadProyecto(String descripcion, Double porcentaje) {
         this.unaEmpresa.crearActividadProyecto(descripcion, porcentaje);
+    }
+    
+    public void modificarActividadProyecto(int codigo,String descripcion,Double porcentaje) throws Exception{
+        this.unaEmpresa.modificarActividadProyecto(codigo, descripcion, porcentaje);
+    }
+    
+    public void borrarActividadProyecto(int codigo) throws NonexistentEntityException{
+        this.unaEmpresa.borrarActividadProyecto(codigo);
     }
     
     public void generarManoDeObra(int codigo, long horasTrabajadas, Date fecha, Empleado unEmpleado, Servicio unServicio, Actividad unaActividad){

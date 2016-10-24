@@ -5,6 +5,11 @@
  */
 package Visual;
 
+import Logica.ActividadProyecto;
+import Persistencia.exceptions.NonexistentEntityException;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -46,6 +51,8 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
         txtCodigo = new javax.swing.JTextField();
 
         setClosable(true);
+        setResizable(true);
+        setTitle("Actividad de Proyectos");
 
         lblDescripcion.setText("Descripcion:");
 
@@ -58,10 +65,25 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
         });
 
         cmdAgregar.setText("Agregar");
+        cmdAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregarActionPerformed(evt);
+            }
+        });
 
         cmdModificar.setText("Modificar");
+        cmdModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificarActionPerformed(evt);
+            }
+        });
 
         cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
 
         tblActividadProyecto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,6 +102,11 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        tblActividadProyecto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblActividadProyectoMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblActividadProyecto);
@@ -149,8 +176,43 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtDescripcionActionPerformed
+
+    private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
+        this.miControladoraVisual.crearActividadProyecto(txtDescripcion.getText(), Double.valueOf(txtPorcentaje.getText()));
+        refrescarVentana();
+    }//GEN-LAST:event_cmdAgregarActionPerformed
+
+    private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
+        try {
+            this.miControladoraVisual.modificarActividadProyecto(Integer.parseInt(txtCodigo.getText()), txtDescripcion.getText(), Double.valueOf(txtPorcentaje.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaActividadProyectoInter.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    }//GEN-LAST:event_cmdModificarActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+        try {
+            this.miControladoraVisual.borrarActividadProyecto(Integer.parseInt(txtCodigo.getText()));
+            refrescarVentana();
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(AltaActividadProyectoInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void tblActividadProyectoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblActividadProyectoMouseClicked
+        txtCodigo.setText(null);
+        txtDescripcion.setText(null);
+        txtPorcentaje.setText(null);
+        
+        int fila = this.tblActividadProyecto.rowAtPoint(evt.getPoint());
+        
+        txtCodigo.setText(this.modeloActProyecto.getValueAt(fila, 0).toString());
+        txtDescripcion.setText(this.modeloActProyecto.getValueAt(fila, 1).toString());
+        txtPorcentaje.setText(this.modeloActProyecto.getValueAt(fila, 2).toString());
+    }//GEN-LAST:event_tblActividadProyectoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -176,6 +238,12 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
     }
 
     private void cargarTablaActProyecto() {
-        
+        Iterator <ActividadProyecto> itActAdministrativa = this.miControladoraVisual.traerActProyecto().iterator();
+        ActividadProyecto unTipo;
+        while(itActAdministrativa.hasNext())
+        {
+            unTipo = itActAdministrativa.next();
+            modeloActProyecto.addRow(new Object[]{unTipo.getCodigo(),unTipo.getDescripcion(),unTipo.getPorcentaje()});
+        }
     }
 }

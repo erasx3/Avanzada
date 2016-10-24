@@ -30,6 +30,7 @@ public class TecnologiaJpaController implements Serializable {
     public TecnologiaJpaController() {
         this.emf = Persistence.createEntityManagerFactory("programa_avanzadaPU");
     }
+    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {

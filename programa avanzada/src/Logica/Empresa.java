@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
@@ -319,27 +320,41 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
+    
+    public ActividadProyecto buscarActividadProyecto(int codigo) {
+        ActividadProyecto aux = new ActividadProyecto();
+        Iterator itr = unasActProyecto.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (ActividadProyecto) itr.next();
+            if (aux.isActividad(codigo)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
 
     public void crearActividadAdministrativa(String descripcion, Double precioHora) {
         int codigo = generarCodigoActAdministrativa();
         ActividadAdministrativa unaActividadAdministrativa = new ActividadAdministrativa(precioHora, codigo, descripcion);
         unasActividades.add(unaActividadAdministrativa);
         unasActAdministrativas.add(unaActividadAdministrativa);
-        //agregar persistencia
+        Persistencia.jpaActividadAdministrativa.create(unaActividadAdministrativa);
     }
 
-    public void modificarActividadAdministrativa(int codigo, String descripcion, Double precioHora) {
+    public void modificarActividadAdministrativa(int codigo, String descripcion, Double precioHora) throws Exception {
         ActividadAdministrativa unaActAdministrativa = buscarActAdministrativa(codigo);
         unaActAdministrativa.setDescripcion(descripcion);
         unaActAdministrativa.setPrecioHora(precioHora);
-        //agregar persistencia
+        Persistencia.jpaActividadAdministrativa.edit(unaActAdministrativa);
     }
 
-    public void borrarActAdministrativa(int codigo) {
+    public void borrarActAdministrativa(int codigo) throws NonexistentEntityException {
         ActividadAdministrativa unaActAdministrativa = buscarActAdministrativa(codigo);
         unasActividades.remove(unaActAdministrativa);
         unasActAdministrativas.remove(unaActAdministrativa);
-        //agregarpersistencia
+        Persistencia.jpaActividadAdministrativa.destroy(codigo);
     }
 
     public void crearActividadTecnica(int codigo, String descripcion, Double precioFijo) {
@@ -351,9 +366,22 @@ public class Empresa implements Serializable {
         ActividadProyecto unaActividadProyecto = new ActividadProyecto(codigo, descripcion, porcentaje);
         unasActividades.add(unaActividadProyecto);
         unasActProyecto.add(unaActividadProyecto);
+        Persistencia.jpaActividadProyecto.create(unaActividadProyecto);
     }
     
-    public 
+    public void modificarActividadProyecto(int codigo,String descripcion,Double porcentaje) throws Exception{
+        ActividadProyecto unaActividadProyecto = buscarActividadProyecto(codigo);
+        unaActividadProyecto.setDescripcion(descripcion);
+        unaActividadProyecto.setPorcentaje(porcentaje);
+        Persistencia.jpaActividadProyecto.edit(unaActividadProyecto);
+    }
+    
+    public void borrarActividadProyecto(int codigo) throws NonexistentEntityException{
+        ActividadProyecto unaActividadProyecto = buscarActividadProyecto(codigo);
+        unasActividades.remove(unaActividadProyecto);
+        unasActProyecto.remove(unaActividadProyecto);
+        Persistencia.jpaActividadProyecto.destroy(codigo);
+    }
 
     public void generarManoDeObra(int codigo, long horasTrabajadas, Date fecha, Empleado unEmpleado, Servicio unServicio, Actividad unaActividad) {
         ManoDeObra unaManoDeObra = new ManoDeObra(codigo, horasTrabajadas, fecha, unaActividad, unServicio, unEmpleado);
@@ -616,6 +644,8 @@ public class Empresa implements Serializable {
     public void ConexionConBD() {
         this.unosTiposTecnologias = Persistencia.traerTiposTecnolgias();
         this.unasTecnologias = Persistencia.traerTecnolgias();
+        this.unasActAdministrativas=Persistencia.traerActividadesAdministrativas();
+        this.unasActProyecto=Persistencia.traerActividadesProyectos();
     }
 
     public List<TipoTecnologia> traerTiposDeTecnologias() {

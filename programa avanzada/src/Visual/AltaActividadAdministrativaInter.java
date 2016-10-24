@@ -6,6 +6,7 @@
 package Visual;
 
 import Logica.ActividadAdministrativa;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +51,7 @@ public class AltaActividadAdministrativaInter extends javax.swing.JInternalFrame
         txtCodigo = new javax.swing.JTextField();
 
         setClosable(true);
+        setTitle("Actividades Administrativas");
 
         jLabel2.setText("Descripcion:");
 
@@ -178,12 +180,22 @@ public class AltaActividadAdministrativaInter extends javax.swing.JInternalFrame
     }//GEN-LAST:event_cmdAgregarActionPerformed
 
     private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
-        miControladoraVisual.modificarActividadAdministrativa(Integer.parseInt(txtCodigo.getText()), txtDescripcion.getText(),Double.valueOf(txtPrecioPorHora.getText()));
+        try {
+            miControladoraVisual.modificarActividadAdministrativa(Integer.parseInt(txtCodigo.getText()), txtDescripcion.getText(),Double.valueOf(txtPrecioPorHora.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaActividadAdministrativaInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
         refrescarVentana();
     }//GEN-LAST:event_cmdModificarActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
-        miControladoraVisual.borrarActAdministrativa(Integer.parseInt(txtCodigo.getText()));
+        try {
+            miControladoraVisual.borrarActAdministrativa(Integer.parseInt(txtCodigo.getText()));
+            refrescarVentana();
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(AltaActividadAdministrativaInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cmdBorrarActionPerformed
 
     private void tblActividadAdministrativaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblActividadAdministrativaMouseClicked

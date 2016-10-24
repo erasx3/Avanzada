@@ -16,6 +16,7 @@ import Persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -26,6 +27,11 @@ public class OrdenTrabajoJpaController implements Serializable {
     public OrdenTrabajoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+    
+    public OrdenTrabajoJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("programa_avanzadaPU");
+    }
+    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {

@@ -11,12 +11,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Facu
  */
 @Entity
+@Table(name = "ActProyecto")
 public class ActividadProyecto extends Actividad implements Serializable{
     
     @Basic
@@ -28,6 +30,14 @@ public class ActividadProyecto extends Actividad implements Serializable{
 
     public ActividadProyecto(int codigo, String descripcion, Double porcentaje) {
         super(codigo, descripcion);
+        this.porcentaje = porcentaje;
+    }
+
+    public Double getPorcentaje() {
+        return porcentaje;
+    }
+
+    public void setPorcentaje(Double porcentaje) {
         this.porcentaje = porcentaje;
     }
     

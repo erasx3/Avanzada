@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -25,6 +26,11 @@ public class DetalleJpaController implements Serializable {
     public DetalleJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
+    
+    public DetalleJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("programa_avanzadaPU");
+    }
+    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
