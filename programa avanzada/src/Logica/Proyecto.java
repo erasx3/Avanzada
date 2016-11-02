@@ -45,6 +45,30 @@ public class Proyecto extends Servicio implements Serializable {
         this.unosConceptos.addAll(unosConceptos);
         this.unasTecnologias.addAll(unasTecnologias);
     }
+
+    public List<Concepto> getUnosConceptos() {
+        return unosConceptos;
+    }
+
+    public void setUnosConceptos(List<Concepto> unosConceptos) {
+        this.unosConceptos = unosConceptos;
+    }
+
+    public List<Tecnologia> getUnasTecnologias() {
+        return unasTecnologias;
+    }
+
+    public void setUnasTecnologias(List<Tecnologia> unasTecnologias) {
+        this.unasTecnologias = unasTecnologias;
+    }
+
+    public List<OrdenTrabajo> getUnasOrdenesTrabajos() {
+        return unasOrdenesTrabajos;
+    }
+
+    public void setUnasOrdenesTrabajos(List<OrdenTrabajo> unasOrdenesTrabajos) {
+        this.unasOrdenesTrabajos = unasOrdenesTrabajos;
+    }
     
 
     public Float getTiempoEstimado() {

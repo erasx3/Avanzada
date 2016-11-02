@@ -10,12 +10,14 @@ package Visual;
  * @author Facu
  */
 public class GenerarOrdenInter extends javax.swing.JInternalFrame {
-
+    
+    ControladoraVisual miControladoraVisual;
     /**
      * Creates new form GenerarOrdenInter
      */
-    public GenerarOrdenInter() {
+    public GenerarOrdenInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.miControladoraVisual=miControladoraVisual;
     }
 
     /**
@@ -45,6 +47,7 @@ public class GenerarOrdenInter extends javax.swing.JInternalFrame {
         tblOrdenTrabajo = new javax.swing.JTable();
 
         setClosable(true);
+        setTitle("Generar Orden de Trabajo");
 
         jLabel1.setText("Descripcion:");
 

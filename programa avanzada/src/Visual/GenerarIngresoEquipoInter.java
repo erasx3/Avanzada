@@ -28,6 +28,7 @@ public class GenerarIngresoEquipoInter extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         setClosable(true);
+        setTitle("Generar Estado del Equipo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

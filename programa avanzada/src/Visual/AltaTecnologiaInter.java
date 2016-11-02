@@ -56,7 +56,7 @@ public class AltaTecnologiaInter extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setResizable(true);
-        setTitle("Tecnologia");
+        setTitle("Tecnologias");
 
         cmdAgregar.setText("Agregar");
         cmdAgregar.addActionListener(new java.awt.event.ActionListener() {

@@ -23,12 +23,20 @@ public class ActividadTecnica extends Actividad {
     @Basic
     private Double precioFijo;
 
-    public ActividadTecnica(Double precioFijo) {
+    public ActividadTecnica() {
         super();
     }
 
     public ActividadTecnica(Double precioFijo, int codigo, String descripcion) {
         super(codigo, descripcion);
+        this.precioFijo = precioFijo;
+    }
+
+    public Double getPrecioFijo() {
+        return precioFijo;
+    }
+
+    public void setPrecioFijo(Double precioFijo) {
         this.precioFijo = precioFijo;
     }
     

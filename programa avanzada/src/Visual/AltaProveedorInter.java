@@ -5,6 +5,12 @@
  */
 package Visual;
 
+import Logica.Proveedor;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Facu
@@ -12,10 +18,14 @@ package Visual;
 public class AltaProveedorInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual micontroladoraVisual;
-    
+    private DefaultTableModel modeloProveedor;
+
     public AltaProveedorInter(ControladoraVisual micontroladoraVisual) {
         initComponents();
-        this.micontroladoraVisual=micontroladoraVisual;
+        this.txtCodigo.setVisible(false);
+        this.micontroladoraVisual = micontroladoraVisual;
+        this.modeloProveedor = (DefaultTableModel) this.tblProveedor.getModel();
+        refrescarVentana();
     }
 
     /**
@@ -28,7 +38,6 @@ public class AltaProveedorInter extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -43,14 +52,11 @@ public class AltaProveedorInter extends javax.swing.JInternalFrame {
         cmdAgregar = new javax.swing.JButton();
         cmdModificar = new javax.swing.JButton();
         cmdBorrar = new javax.swing.JButton();
-        cmdAceptar = new javax.swing.JButton();
-        cmdCancelar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProveedor = new javax.swing.JTable();
 
         setClosable(true);
-
-        jLabel1.setText("Codigo:");
+        setTitle("Proveedores");
 
         jLabel2.setText("CUIT:");
 
@@ -63,14 +69,25 @@ public class AltaProveedorInter extends javax.swing.JInternalFrame {
         jLabel6.setText("Telefono:");
 
         cmdAgregar.setText("Agregar");
+        cmdAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregarActionPerformed(evt);
+            }
+        });
 
         cmdModificar.setText("Modificar");
+        cmdModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificarActionPerformed(evt);
+            }
+        });
 
         cmdBorrar.setText("Borrar");
-
-        cmdAceptar.setText("Aceptar");
-
-        cmdCancelar.setText("Cancelar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
 
         tblProveedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,6 +108,11 @@ public class AltaProveedorInter extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        tblProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProveedorMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProveedor);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -100,34 +122,27 @@ public class AltaProveedorInter extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGap(34, 34, 34)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cmdCancelar)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(cmdAgregar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmdModificar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cmdBorrar))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cmdAceptar)
-                        .addGap(160, 160, 160)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cmdAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmdModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmdBorrar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -135,13 +150,13 @@ public class AltaProveedorInter extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(62, 62, 62)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -162,15 +177,11 @@ public class AltaProveedorInter extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmdAgregar)
                             .addComponent(cmdModificar)
-                            .addComponent(cmdBorrar))
-                        .addGap(88, 88, 88)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmdAceptar)
-                            .addComponent(cmdCancelar))))
+                            .addComponent(cmdBorrar))))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
 
@@ -192,14 +203,56 @@ public class AltaProveedorInter extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
+        try {
+            this.micontroladoraVisual.crearProveedor(txtNombre.getText(), txtDireccion.getText(), Long.parseLong(txtTelefono.getText()), txtEmail.getText(), txtCuit.getText());
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaProveedorInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdAgregarActionPerformed
+
+    private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
+        try {
+            this.micontroladoraVisual.modificarProveedor(Integer.parseInt(txtCodigo.getText()), txtNombre.getText(), txtDireccion.getText(), Long.parseLong(txtTelefono.getText()), txtEmail.getText(), txtCuit.getText());
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaProveedorInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdModificarActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+        try {
+            this.micontroladoraVisual.borrarProveedor(Integer.parseInt(txtCodigo.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaProveedorInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void tblProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProveedorMouseClicked
+        txtCodigo.setText(null);
+        txtCuit.setText(null);
+        txtNombre.setText(null);
+        txtDireccion.setText(null);
+        txtEmail.setText(null);
+        txtTelefono.setText(null);
+
+        int fila = this.tblProveedor.rowAtPoint(evt.getPoint());
+
+        txtCodigo.setText(this.modeloProveedor.getValueAt(fila, 0).toString());
+        txtCuit.setText(this.modeloProveedor.getValueAt(fila, 1).toString());
+        txtNombre.setText(this.modeloProveedor.getValueAt(fila, 2).toString());
+        txtDireccion.setText(this.modeloProveedor.getValueAt(fila, 3).toString());
+        txtEmail.setText(this.modeloProveedor.getValueAt(fila, 4).toString());
+        txtTelefono.setText(this.modeloProveedor.getValueAt(fila, 5).toString());
+    }//GEN-LAST:event_tblProveedorMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cmdAceptar;
     private javax.swing.JButton cmdAgregar;
     private javax.swing.JButton cmdBorrar;
-    private javax.swing.JButton cmdCancelar;
     private javax.swing.JButton cmdModificar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -215,4 +268,24 @@ public class AltaProveedorInter extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescarVentana() {
+        txtCodigo.setText(null);
+        txtCuit.setText(null);
+        txtNombre.setText(null);
+        txtDireccion.setText(null);
+        txtEmail.setText(null);
+        txtTelefono.setText(null);
+        modeloProveedor.setRowCount(0);
+        cargarTablaProveedor();
+    }
+
+    private void cargarTablaProveedor() {
+        Iterator<Proveedor> itProveedor = this.micontroladoraVisual.traerProveedor().iterator();
+        Proveedor unProveedor;
+        while (itProveedor.hasNext()) {
+            unProveedor = itProveedor.next();
+            modeloProveedor.addRow(new Object[]{unProveedor.getCodigo(), unProveedor.getCuit(), unProveedor.getNombre(), unProveedor.getDireccion(), unProveedor.getEmail(), unProveedor.getTelefono()});
+        }
+    }
 }

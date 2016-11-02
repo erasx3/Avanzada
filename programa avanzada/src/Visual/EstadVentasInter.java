@@ -7,13 +7,14 @@ package Visual;
 
 /**
  *
- * @author Facu
+ * @author eras
  */
-public class GenerarLiquidacionInter extends javax.swing.JInternalFrame {
-
-    private ControladoraVisual miControladoraVisual;
-    
-    public GenerarLiquidacionInter(ControladoraVisual miControladoraVisual) {
+public class EstadVentasInter extends javax.swing.JInternalFrame {
+    ControladoraVisual miControladoraVisual;
+    /**
+     * Creates new form EstadVentasInter
+     */
+    public EstadVentasInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         this.miControladoraVisual=miControladoraVisual;
     }
@@ -28,7 +29,7 @@ public class GenerarLiquidacionInter extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         setClosable(true);
-        setTitle("Liquidacion de Sueldo");
+        setTitle("Estadistica de Ventas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

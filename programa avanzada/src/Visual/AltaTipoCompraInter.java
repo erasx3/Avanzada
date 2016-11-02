@@ -37,6 +37,7 @@ public class AltaTipoCompraInter extends javax.swing.JInternalFrame {
         tblCompras = new javax.swing.JTable();
 
         setClosable(true);
+        setTitle("Tipos de Compra");
 
         jLabel1.setText("Descripcion:");
 

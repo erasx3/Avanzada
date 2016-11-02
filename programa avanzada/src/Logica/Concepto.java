@@ -63,6 +63,14 @@ public class Concepto implements Serializable {
     public void setMonto(Double monto) {
         this.monto = monto;
     }
+
+    boolean isConcepto(int codigo) {
+        boolean aux = false;
+        if(this.getCodigo() == codigo){
+            aux = true;
+        }
+        return aux;
+    }
     
     
 }

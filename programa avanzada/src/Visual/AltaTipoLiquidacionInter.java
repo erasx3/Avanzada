@@ -37,6 +37,7 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
         tblLiquidacion = new javax.swing.JTable();
 
         setClosable(true);
+        setTitle("Tipo de Liquidacion");
 
         cmdAgregar.setText("Agregar");
 

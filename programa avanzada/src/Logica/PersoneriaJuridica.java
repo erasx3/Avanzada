@@ -7,20 +7,20 @@ package Logica;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 /**
  *
  * @author Facu
  */
-@Entity
+@MappedSuperclass
 public abstract class PersoneriaJuridica implements Serializable {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int codigo;
     @Basic
     private String nombre;
@@ -34,7 +34,8 @@ public abstract class PersoneriaJuridica implements Serializable {
     public PersoneriaJuridica() {
     }
 
-    public PersoneriaJuridica(String nombre, String direccion, long telefono, String email) {
+    public PersoneriaJuridica(int codigo,String nombre, String direccion, long telefono, String email) {
+        this.codigo=codigo;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;

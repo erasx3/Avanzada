@@ -28,6 +28,7 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         setClosable(true);
+        setTitle("Venta de Articulo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

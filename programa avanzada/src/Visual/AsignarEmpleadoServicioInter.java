@@ -28,6 +28,7 @@ public class AsignarEmpleadoServicioInter extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         setClosable(true);
+        setTitle("Asignar Empleado a Servicio");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

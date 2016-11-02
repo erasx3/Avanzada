@@ -28,6 +28,7 @@ public class GenerarCompraInter extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         setClosable(true);
+        setTitle("Compra");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

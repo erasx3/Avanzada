@@ -28,6 +28,7 @@ public class AsignarEmpleadoProyectoInter extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         setClosable(true);
+        setTitle("Asignar Empleado a Proyecto");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

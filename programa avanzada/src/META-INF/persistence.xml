@@ -7,6 +7,11 @@
     <class>Logica.Actividad</class>
     <class>Logica.ActividadAdministrativa</class>
     <class>Logica.ActividadProyecto</class>
+    <class>Logica.Articulo</class>
+    <class>Logica.ActividadTecnica</class>
+    <class>Logica.Proveedor</class>
+    <class>Logica.Empleado</class>
+    <class>Logica.Concepto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

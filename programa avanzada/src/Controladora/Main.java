@@ -11,6 +11,7 @@ public class Main {
         ControladoraVisual unaControladora = new ControladoraVisual();
         MenuPrincipal miMenuPrincipal = new MenuPrincipal(unaControladora);
         miMenuPrincipal.show();
+       
         
         
     }

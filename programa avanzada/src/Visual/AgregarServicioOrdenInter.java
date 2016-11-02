@@ -38,6 +38,7 @@ public class AgregarServicioOrdenInter extends javax.swing.JInternalFrame {
         cmdBorrar = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("Agregar Servicio a Orden de Trabajo");
 
         jLabel1.setText("Orden de Trabajo:");
 

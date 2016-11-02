@@ -37,6 +37,7 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
         tblVentas = new javax.swing.JTable();
 
         setClosable(true);
+        setTitle("Tipo de Venta");
 
         cmdAgregar2.setText("Agregar");
 

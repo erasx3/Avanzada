@@ -193,7 +193,7 @@ public class AltaActividadAdministrativaInter extends javax.swing.JInternalFrame
         try {
             miControladoraVisual.borrarActAdministrativa(Integer.parseInt(txtCodigo.getText()));
             refrescarVentana();
-        } catch (NonexistentEntityException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(AltaActividadAdministrativaInter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_cmdBorrarActionPerformed

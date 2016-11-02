@@ -5,6 +5,8 @@
  */
 package Visual;
 
+import java.awt.Dimension;
+
 
 
 /**
@@ -50,6 +52,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     {
         this.miControladoraVisual = miControladoraVisual;
         initComponents();
+        Dimension dimension = super.getToolkit().getScreenSize();
+        super.setSize(dimension);
+        this.jInternalFrame1.setSize(dimension);
     }
 
     /**
@@ -70,6 +75,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         mnuVentaServicio = new javax.swing.JMenuItem();
         mnuVentaArticulo = new javax.swing.JMenuItem();
+        mnuProyecto = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         mnuActAdministrativa = new javax.swing.JMenuItem();
@@ -87,11 +93,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         mnuTipoVenta = new javax.swing.JMenuItem();
         mnuTipoLiquidacion = new javax.swing.JMenuItem();
         mnuTipoEstado = new javax.swing.JMenuItem();
+        mnuOrdendeTrabajo = new javax.swing.JMenuItem();
+        mnuTurno = new javax.swing.JMenuItem();
+        mnuConcepto = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        mnuBalanceVentas = new javax.swing.JMenuItem();
+        mnuBalanceCompras = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jInternalFrame1.setClosable(true);
-        jInternalFrame1.setResizable(true);
         jInternalFrame1.setTitle("GuaraSoft S.R.L.");
         jInternalFrame1.setVisible(true);
 
@@ -103,7 +114,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 723, Short.MAX_VALUE)
+            .addGap(0, 787, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Archivo");
@@ -144,9 +155,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.add(jMenu2);
 
+        mnuProyecto.setText("Proyecto");
+        mnuProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuProyectoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuProyecto);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Altas");
+        jMenu3.setText("ABM");
 
         jMenu4.setText("Actividades");
 
@@ -268,7 +287,51 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(mnuTipoEstado);
 
+        mnuOrdendeTrabajo.setText("Orden de Trabajo");
+        mnuOrdendeTrabajo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuOrdendeTrabajoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuOrdendeTrabajo);
+
+        mnuTurno.setText("Turno");
+        mnuTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuTurnoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuTurno);
+
+        mnuConcepto.setText("Concepto");
+        mnuConcepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuConceptoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnuConcepto);
+
         jMenuBar1.add(jMenu3);
+
+        jMenu6.setText("Estadisticas");
+
+        mnuBalanceVentas.setText("Balance Ventas");
+        mnuBalanceVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuBalanceVentasActionPerformed(evt);
+            }
+        });
+        jMenu6.add(mnuBalanceVentas);
+
+        mnuBalanceCompras.setText("Balance Compras");
+        mnuBalanceCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuBalanceComprasActionPerformed(evt);
+            }
+        });
+        jMenu6.add(mnuBalanceCompras);
+
+        jMenuBar1.add(jMenu6);
 
         jInternalFrame1.setJMenuBar(jMenuBar1);
 
@@ -277,8 +340,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(Escritorio)
+                .addGap(0, 0, 0))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,15 +353,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jInternalFrame1)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jInternalFrame1)
+                .addGap(0, 0, 0))
         );
+
+        try {
+            jInternalFrame1.setMaximum(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -411,6 +480,42 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Liquidacion.show();
     }//GEN-LAST:event_mnuLiquidacionActionPerformed
 
+    private void mnuBalanceVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBalanceVentasActionPerformed
+        EstadVentasInter EstadVenta = new EstadVentasInter(this.miControladoraVisual);
+        this.Escritorio.add(EstadVenta);
+        EstadVenta.show();
+    }//GEN-LAST:event_mnuBalanceVentasActionPerformed
+
+    private void mnuBalanceComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBalanceComprasActionPerformed
+        EstadComprasInter EstadCompra = new EstadComprasInter(this.miControladoraVisual);
+        this.Escritorio.add(EstadCompra);
+        EstadCompra.show();
+    }//GEN-LAST:event_mnuBalanceComprasActionPerformed
+
+    private void mnuOrdendeTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuOrdendeTrabajoActionPerformed
+        GenerarOrdenInter Orden = new GenerarOrdenInter(this.miControladoraVisual);
+        this.Escritorio.add(Orden);
+        Orden.show();
+    }//GEN-LAST:event_mnuOrdendeTrabajoActionPerformed
+
+    private void mnuTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTurnoActionPerformed
+        GenerarTurnoInter Turno = new GenerarTurnoInter(this.miControladoraVisual);
+        this.Escritorio.add(Turno);
+        Turno.show();
+    }//GEN-LAST:event_mnuTurnoActionPerformed
+
+    private void mnuConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuConceptoActionPerformed
+        AltaConceptoInter Concepto=new AltaConceptoInter(this.miControladoraVisual);
+        this.Escritorio.add(Concepto);
+        Concepto.show();
+    }//GEN-LAST:event_mnuConceptoActionPerformed
+
+    private void mnuProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuProyectoActionPerformed
+        AltaProyectoInter unProyecto = new AltaProyectoInter(miControladoraVisual);
+        this.Escritorio.add(unProyecto);
+        unProyecto.show();
+    }//GEN-LAST:event_mnuProyectoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -423,23 +528,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem manuTecnologia;
     private javax.swing.JMenuItem mnuActAdministrativa;
     private javax.swing.JMenuItem mnuActProyecto;
     private javax.swing.JMenuItem mnuActTecnica;
     private javax.swing.JMenuItem mnuArticulo;
+    private javax.swing.JMenuItem mnuBalanceCompras;
+    private javax.swing.JMenuItem mnuBalanceVentas;
     private javax.swing.JMenuItem mnuCliente;
     private javax.swing.JMenuItem mnuCompra;
+    private javax.swing.JMenuItem mnuConcepto;
     private javax.swing.JMenuItem mnuEmpleado;
     private javax.swing.JMenuItem mnuEquipo;
     private javax.swing.JMenuItem mnuLiquidacion;
+    private javax.swing.JMenuItem mnuOrdendeTrabajo;
     private javax.swing.JMenuItem mnuProveedor;
+    private javax.swing.JMenuItem mnuProyecto;
     private javax.swing.JMenuItem mnuTipoCompra;
     private javax.swing.JMenuItem mnuTipoEstado;
     private javax.swing.JMenuItem mnuTipoLiquidacion;
     private javax.swing.JMenuItem mnuTipoTecnologia;
     private javax.swing.JMenuItem mnuTipoVenta;
+    private javax.swing.JMenuItem mnuTurno;
     private javax.swing.JMenuItem mnuVentaArticulo;
     private javax.swing.JMenuItem mnuVentaServicio;
     // End of variables declaration//GEN-END:variables

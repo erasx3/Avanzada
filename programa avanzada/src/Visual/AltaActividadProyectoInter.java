@@ -52,7 +52,7 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setResizable(true);
-        setTitle("Actividad de Proyectos");
+        setTitle("Actividades de Proyectos");
 
         lblDescripcion.setText("Descripcion:");
 
@@ -180,8 +180,13 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDescripcionActionPerformed
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
-        this.miControladoraVisual.crearActividadProyecto(txtDescripcion.getText(), Double.valueOf(txtPorcentaje.getText()));
-        refrescarVentana();
+        try {
+            this.miControladoraVisual.crearActividadProyecto(txtDescripcion.getText(), Double.valueOf(txtPorcentaje.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaActividadProyectoInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_cmdAgregarActionPerformed
 
     private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
@@ -198,6 +203,8 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
             this.miControladoraVisual.borrarActividadProyecto(Integer.parseInt(txtCodigo.getText()));
             refrescarVentana();
         } catch (NonexistentEntityException ex) {
+            Logger.getLogger(AltaActividadProyectoInter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(AltaActividadProyectoInter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_cmdBorrarActionPerformed

@@ -36,6 +36,7 @@ public class AltaTipoEstadoInter extends javax.swing.JInternalFrame {
         tblTipoEstados = new javax.swing.JTable();
 
         setClosable(true);
+        setTitle("Tipo de Estado");
 
         cmdAgregar.setText("Agregar");
 

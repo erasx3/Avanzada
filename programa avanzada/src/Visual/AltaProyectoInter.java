@@ -5,17 +5,41 @@
  */
 package Visual;
 
+import Logica.Concepto;
+import Logica.Tecnologia;
+import Logica.TipoTecnologia;
+import java.util.Iterator;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Facu
  */
 public class AltaProyectoInter extends javax.swing.JInternalFrame {
 
+    private ControladoraVisual miControladoraVisual;
+    private DefaultTableModel modeloProyecto;
+    private DefaultTableModel modeloConcepto;
+    private DefaultTableModel modeloTecnologia;
+    private DefaultTableModel modeloConceptoProyec;
+    private DefaultTableModel modeloTecnologiaProyec;
     /**
      * Creates new form AltaProyectoInter
      */
-    public AltaProyectoInter() {
+    public AltaProyectoInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        ImageIcon img = new ImageIcon(getClass().getResource("../Img/buscar.png"));
+        this.cmdBuscarConcepto.setIcon(img);
+        this.cmdBuscarTecnologia.setIcon(img);
+        this.miControladoraVisual=miControladoraVisual;
+        this.modeloConcepto=(DefaultTableModel)this.tblConcepto.getModel();
+        this.modeloTecnologia=(DefaultTableModel)this.tblTecnologias.getModel();
+        this.modeloConceptoProyec=(DefaultTableModel)this.tblConceptoProyec.getModel();
+        this.modeloTecnologiaProyec=(DefaultTableModel)this.tblTecnologiaProyec.getModel();
+        this.cmdAgregarConcepto.setEnabled(false);
+        this.cmdAgregarTecnologia.setEnabled(false);
+        refrescarVentana();
     }
 
     /**
@@ -27,23 +51,315 @@ public class AltaProyectoInter extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
+        txtDescripcion = new javax.swing.JTextField();
+        txtTiempoEstimado = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblConcepto = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblTecnologias = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtConcepto = new javax.swing.JTextField();
+        txtTecnologia = new javax.swing.JTextField();
+        cmdBuscarConcepto = new javax.swing.JButton();
+        cmdBuscarTecnologia = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblConceptoProyec = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblTecnologiaProyec = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        cmdAgregarConcepto = new javax.swing.JButton();
+        cmdAgregarTecnologia = new javax.swing.JButton();
+
         setClosable(true);
+        setTitle("Proyectos");
+
+        jLabel1.setText("Descripcion:");
+
+        jLabel2.setText("Tiempo Estimado:");
+
+        tblConcepto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Codigo", "Descripcion", "Monto"
+            }
+        ));
+        tblConcepto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblConceptoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblConcepto);
+
+        tblTecnologias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Codigo", "Descripcion", "Tipo de Tecnologia"
+            }
+        ));
+        tblTecnologias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTecnologiasMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblTecnologias);
+
+        jLabel3.setText("Conceptos:");
+
+        jLabel4.setText("Tecnologias:");
+
+        cmdBuscarConcepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBuscarConceptoActionPerformed(evt);
+            }
+        });
+
+        tblConceptoProyec.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Codigo", "Descripcion", "Monto"
+            }
+        ));
+        jScrollPane3.setViewportView(tblConceptoProyec);
+
+        tblTecnologiaProyec.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Codigo", "Descripcion", "Tipo de Tecnologia"
+            }
+        ));
+        jScrollPane4.setViewportView(tblTecnologiaProyec);
+
+        jLabel5.setText("jLabel5");
+
+        jLabel6.setText("Tecnologias:");
+
+        jLabel7.setText("Conceptos:");
+
+        cmdAgregarConcepto.setText("<");
+        cmdAgregarConcepto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregarConceptoActionPerformed(evt);
+            }
+        });
+
+        cmdAgregarTecnologia.setText("<");
+        cmdAgregarTecnologia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregarTecnologiaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(cmdAgregarTecnologia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTecnologia, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmdBuscarTecnologia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmdAgregarConcepto)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cmdBuscarConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTiempoEstimado, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTiempoEstimado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(txtConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7))
+                            .addComponent(cmdBuscarConcepto, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(cmdAgregarConcepto))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel5)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel6)
+                        .addGap(60, 60, 60)
+                        .addComponent(cmdAgregarTecnologia))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(txtTecnologia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdBuscarTecnologia, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(306, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmdBuscarConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarConceptoActionPerformed
+        
+    }//GEN-LAST:event_cmdBuscarConceptoActionPerformed
+
+    private void tblConceptoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConceptoMouseClicked
+       this.cmdAgregarConcepto.setEnabled(true);
+    }//GEN-LAST:event_tblConceptoMouseClicked
+
+    private void tblTecnologiasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTecnologiasMouseClicked
+       this.cmdAgregarTecnologia.setEnabled(true);
+    }//GEN-LAST:event_tblTecnologiasMouseClicked
+
+    private void cmdAgregarConceptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarConceptoActionPerformed
+        
+        this.cmdAgregarConcepto.setEnabled(false);
+    }//GEN-LAST:event_cmdAgregarConceptoActionPerformed
+
+    private void cmdAgregarTecnologiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarTecnologiaActionPerformed
+       
+        this.cmdAgregarTecnologia.setEnabled(false);
+    }//GEN-LAST:event_cmdAgregarTecnologiaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdAgregarConcepto;
+    private javax.swing.JButton cmdAgregarTecnologia;
+    private javax.swing.JButton cmdBuscarConcepto;
+    private javax.swing.JButton cmdBuscarTecnologia;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tblConcepto;
+    private javax.swing.JTable tblConceptoProyec;
+    private javax.swing.JTable tblTecnologiaProyec;
+    private javax.swing.JTable tblTecnologias;
+    private javax.swing.JTextField txtConcepto;
+    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtTecnologia;
+    private javax.swing.JTextField txtTiempoEstimado;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescarVentana() {
+        txtConcepto.setText(null);
+        txtDescripcion.setText(null);
+        txtTiempoEstimado.setText(null);
+        txtTecnologia.setText(null);
+        txtConcepto.setText(null);
+        modeloConcepto.setRowCount(0);
+        modeloConceptoProyec.setRowCount(0);
+        modeloTecnologia.setRowCount(0);
+        modeloTecnologiaProyec.setRowCount(0);
+        
+        cargarConcepTecnol();
+   }
+    
+    private void cargarConcepTecnol(){
+        Iterator<Concepto> itConcepto = this.miControladoraVisual.traerConcepto().iterator();
+        Concepto unConcep;
+        while(itConcepto.hasNext()){
+            unConcep=itConcepto.next();
+            modeloConcepto.addRow(new Object[]{unConcep.getCodigo(),unConcep.getDescripcion(),unConcep.getMonto()});
+        }
+         Iterator<Tecnologia> itTecnologia = this.miControladoraVisual.traerTecnologias().iterator();
+        Tecnologia unaTecnologia;
+        while (itTecnologia.hasNext()) {
+            unaTecnologia = itTecnologia.next();
+            modeloTecnologia.addRow(new Object[]{unaTecnologia.getCodigo(), unaTecnologia.getDescripcion(), unaTecnologia.getUnTipoTecnologia().toString()});
+        }
+    }
 }

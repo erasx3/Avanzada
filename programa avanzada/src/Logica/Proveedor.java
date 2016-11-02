@@ -10,12 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author eras
  */
 @Entity
+@Table(name = "Proveedor")
 public class Proveedor extends PersoneriaJuridica{
     @Basic
     private String cuit;
@@ -24,7 +26,7 @@ public class Proveedor extends PersoneriaJuridica{
     }
 
     public Proveedor(String cuit, int codigo, String nombre, String direccion, long telefono, String email) {
-        super(nombre, direccion, telefono, email);
+        super(codigo,nombre, direccion, telefono, email);
         this.cuit = cuit;
     }
 

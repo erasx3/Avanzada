@@ -5,6 +5,12 @@
  */
 package Visual;
 
+import Logica.Empleado;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Facu
@@ -12,10 +18,14 @@ package Visual;
 public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
+    private DefaultTableModel modeloEmpleado;
     
     public AltaEmpleadoInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.txtCodigo.setVisible(false);
         this.miControladoraVisual=miControladoraVisual;
+        this.modeloEmpleado=(DefaultTableModel)tblEmpleado.getModel();
+        refrescarVentana();
     }
 
     /**
@@ -41,14 +51,16 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
         txtApellido = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        TxtTelefono = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         cmdAgregar = new javax.swing.JButton();
         cmdModificar = new javax.swing.JButton();
         cmdBorrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmpleado = new javax.swing.JTable();
+        txtCodigo = new javax.swing.JTextField();
 
         setClosable(true);
+        setTitle("Empleados");
 
         jLabel2.setText("DNI:");
 
@@ -100,15 +112,25 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
             }
         });
 
-        TxtTelefono.addActionListener(new java.awt.event.ActionListener() {
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtTelefonoActionPerformed(evt);
+                txtTelefonoActionPerformed(evt);
             }
         });
 
         cmdAgregar.setText("Agregar");
+        cmdAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregarActionPerformed(evt);
+            }
+        });
 
         cmdModificar.setText("Modificar");
+        cmdModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificarActionPerformed(evt);
+            }
+        });
 
         cmdBorrar.setText("Borrar");
         cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +158,11 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmpleadoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEmpleado);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -155,14 +182,15 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCuil, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtCuil, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txtCodigo)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(cmdAgregar)
@@ -182,7 +210,9 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(27, 27, 27)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -209,7 +239,7 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8)
-                            .addComponent(TxtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(47, 47, 47)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmdAgregar)
@@ -256,17 +286,61 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
 
-    private void TxtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtTelefonoActionPerformed
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtTelefonoActionPerformed
+    }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
-        // TODO add your handling code here:
+        try {
+            this.miControladoraVisual.borrarEmpleado(Integer.parseInt(txtCodigo.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaEmpleadoInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
+        try {
+            this.miControladoraVisual.crearEmpleado(txtNombre.getText(), txtApellido.getText(), txtDireccion.getText(), Long.parseLong(txtTelefono.getText()), txtEmail.getText(), Long.parseLong(txtDni.getText()), txtCuil.getText());
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaEmpleadoInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdAgregarActionPerformed
+
+    private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
+        try {
+            this.miControladoraVisual.modificarEmpleado(Integer.parseInt(txtCodigo.getText()), txtNombre.getText(), txtApellido.getText(), txtDireccion.getText(), Long.parseLong(txtTelefono.getText()), txtEmail.getText(), Long.parseLong(txtDni.getText()), txtCuil.getText());
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaEmpleadoInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdModificarActionPerformed
+
+    private void tblEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadoMouseClicked
+       txtCodigo.setText(null);
+       txtNombre.setText(null);
+       txtApellido.setText(null);
+       txtDireccion.setText(null);
+       txtEmail.setText(null);
+       txtTelefono.setText(null);
+       txtDni.setText(null);
+       txtCuil.setText(null);
+       
+       int fila=this.tblEmpleado.rowAtPoint(evt.getPoint());
+       
+       txtCodigo.setText(this.modeloEmpleado.getValueAt(fila, 0).toString());
+       txtDni.setText(this.modeloEmpleado.getValueAt(fila, 1).toString());
+       txtCuil.setText(this.modeloEmpleado.getValueAt(fila, 2).toString());
+       txtNombre.setText(this.modeloEmpleado.getValueAt(fila, 3).toString());
+       txtApellido.setText(this.modeloEmpleado.getValueAt(fila, 4).toString());
+       txtDireccion.setText(this.modeloEmpleado.getValueAt(fila, 5).toString());
+       txtEmail.setText(this.modeloEmpleado.getValueAt(fila, 6).toString());
+       txtTelefono.setText(this.modeloEmpleado.getValueAt(fila, 7).toString());
+    }//GEN-LAST:event_tblEmpleadoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TxtTelefono;
     private javax.swing.JButton cmdAgregar;
     private javax.swing.JButton cmdBorrar;
     private javax.swing.JButton cmdModificar;
@@ -281,10 +355,35 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblEmpleado;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCuil;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescarVentana() {
+        txtCodigo.setText(null);
+        txtCuil.setText(null);
+        txtDni.setText(null);
+        txtNombre.setText(null);
+        txtApellido.setText(null);
+        txtDireccion.setText(null);
+        txtEmail.setText(null);
+        txtTelefono.setText(null);
+        modeloEmpleado.setRowCount(0);
+        cargarTablaEmpleado();
+    }
+
+    private void cargarTablaEmpleado() {
+        Iterator<Empleado>itEmpleado=this.miControladoraVisual.traerEmpleado().iterator();
+        Empleado unEmpleado;
+        while(itEmpleado.hasNext())
+        {
+            unEmpleado=itEmpleado.next();
+            modeloEmpleado.addRow(new Object[]{unEmpleado.getCodigo(),unEmpleado.getDni(),unEmpleado.getCuil(),unEmpleado.getNombre(),unEmpleado.getApellido(),unEmpleado.getDireccion(),unEmpleado.getEmail(),unEmpleado.getTelefono()});
+        }
+    }
 }

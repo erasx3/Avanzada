@@ -11,12 +11,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author eras
  */
 @Entity
+@Table(name = "Empleado")
 public class Empleado extends PersoneriaJuridica implements Serializable{ 
     @Basic
     private String apellido;
@@ -29,7 +31,7 @@ public class Empleado extends PersoneriaJuridica implements Serializable{
     }
 
     public Empleado(String apellido, long dni, String cuil, int codigo, String nombre, String direccion, long telefono, String email) {
-        super(nombre, direccion, telefono, email);
+        super(codigo,nombre, direccion, telefono, email);
         this.apellido = apellido;
         this.dni = dni;
         this.cuil = cuil;

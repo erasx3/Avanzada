@@ -49,6 +49,8 @@ public class Empresa implements Serializable {
     @OneToMany
     private List<ActividadProyecto> unasActProyecto = new LinkedList();
     @OneToMany
+    private List<ActividadTecnica> unasActTecnicas = new LinkedList();
+    @OneToMany
     private List<TipoLiquidacion> unosTiposLiquidaciones = new LinkedList();
     @OneToMany
     private List<TipoCompra> unosTiposCompras = new LinkedList();
@@ -122,6 +124,19 @@ public class Empresa implements Serializable {
         this.direccion = direccion;
     }
 
+    public Cliente buscarClient(int codigo) {
+        Cliente aux = null;
+        Iterator itr = unosClientes.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Cliente) itr.next();
+            if (aux.isCliente(codigo)) {
+                band = 1;
+            }
+        }
+        return aux;
+    }
+
     public Cliente buscarCliente(long dni) {
         Cliente aux = new Cliente();
         Iterator itr = unosClientes.iterator();
@@ -136,9 +151,29 @@ public class Empresa implements Serializable {
         return aux;
     }
 
-    public void crearCliente(String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil) {
-        Cliente unCliente = new Cliente(apellido, dni, cuil, nombre, direccion, telefono, email);
+    public void crearCliente(String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil) throws Exception {
+        int codigo = generarCliente();
+        Cliente unCliente = new Cliente(codigo, apellido, dni, cuil, nombre, direccion, telefono, email);
         unosClientes.add(unCliente);
+        Persistencia.crearCliente(unCliente);
+    }
+
+    public void modificarCliente(int codigo, String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil) throws Exception {
+        Cliente unCliente = buscarCliente(codigo);
+        unCliente.setNombre(nombre);
+        unCliente.setApellido(apellido);
+        unCliente.setDireccion(direccion);
+        unCliente.setEmail(email);
+        unCliente.setTelefono(telefono);
+        unCliente.setDni(dni);
+        unCliente.setCuil(cuil);
+        Persistencia.modificarCliente(unCliente);
+    }
+
+    public void borrarCliente(int codigo) throws Exception {
+        Cliente unCliente = buscarClient(codigo);
+        unosClientes.remove(unCliente);
+        Persistencia.eliminarCliente(codigo);
     }
 
     public boolean buscarTurnoDisponible(Date fecha, Float hora) {
@@ -272,11 +307,31 @@ public class Empresa implements Serializable {
         return aux;
     }
 
-    public void crearEmpleado(int codigo, String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil) {
+    public void crearEmpleado(String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil) throws Exception {
+        int codigo=generarCodigoEmpleado();
         Empleado unEmpleado = new Empleado(apellido, dni, cuil, codigo, nombre, direccion, telefono, email);
         unosEmpleados.add(unEmpleado);
+        Persistencia.crearEmpleado(unEmpleado);
     }
 
+    public void modificarEmpleado(int codigo,String nombre,String apellido,String direccion, long telefono,String email,long dni,String cuil) throws Exception{
+        Empleado unEmpleado=buscarEmpleado(codigo);
+        unEmpleado.setNombre(nombre);
+        unEmpleado.setApellido(apellido);
+        unEmpleado.setDireccion(direccion);
+        unEmpleado.setTelefono(telefono);
+        unEmpleado.setEmail(email);
+        unEmpleado.setDni(dni);
+        unEmpleado.setCuil(cuil);
+        Persistencia.modificarEmpleado(unEmpleado);
+    }
+    
+    public void borrarEmpleado(int codigo) throws Exception{
+        Empleado unEmpleado=buscarEmpleado(codigo);
+        this.unosEmpleados.remove(unEmpleado);
+        Persistencia.eliminarEmpleado(codigo);
+    }
+    
     public Servicio buscarServicio(int codigo) {
         Servicio aux = new Servicio();
         Iterator itr = unosServicios.iterator();
@@ -320,7 +375,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
+
     public ActividadProyecto buscarActividadProyecto(int codigo) {
         ActividadProyecto aux = new ActividadProyecto();
         Iterator itr = unasActProyecto.iterator();
@@ -335,52 +390,83 @@ public class Empresa implements Serializable {
         return aux;
     }
 
-    public void crearActividadAdministrativa(String descripcion, Double precioHora) {
+    public ActividadTecnica buscarActTecnica(int codigo) {
+        ActividadTecnica aux = new ActividadTecnica();
+        Iterator itr = unasActTecnicas.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (ActividadTecnica) itr.next();
+            if (aux.isActividad(codigo)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
+
+    public void crearActividadAdministrativa(String descripcion, Double precioHora) throws Exception {
         int codigo = generarCodigoActAdministrativa();
         ActividadAdministrativa unaActividadAdministrativa = new ActividadAdministrativa(precioHora, codigo, descripcion);
         unasActividades.add(unaActividadAdministrativa);
         unasActAdministrativas.add(unaActividadAdministrativa);
-        Persistencia.jpaActividadAdministrativa.create(unaActividadAdministrativa);
+        Persistencia.crearActividadAdministrativa(unaActividadAdministrativa);
     }
 
     public void modificarActividadAdministrativa(int codigo, String descripcion, Double precioHora) throws Exception {
         ActividadAdministrativa unaActAdministrativa = buscarActAdministrativa(codigo);
         unaActAdministrativa.setDescripcion(descripcion);
         unaActAdministrativa.setPrecioHora(precioHora);
-        Persistencia.jpaActividadAdministrativa.edit(unaActAdministrativa);
+        Persistencia.modificarActividadAdministrativa(unaActAdministrativa);
     }
 
-    public void borrarActAdministrativa(int codigo) throws NonexistentEntityException {
+    public void borrarActAdministrativa(int codigo) throws NonexistentEntityException, Exception {
         ActividadAdministrativa unaActAdministrativa = buscarActAdministrativa(codigo);
         unasActividades.remove(unaActAdministrativa);
         unasActAdministrativas.remove(unaActAdministrativa);
-        Persistencia.jpaActividadAdministrativa.destroy(codigo);
+        Persistencia.eliminarActividadAdministrativa(codigo);
     }
 
-    public void crearActividadTecnica(int codigo, String descripcion, Double precioFijo) {
+    public void crearActividadTecnica(String descripcion, Double precioFijo) throws Exception {
+        int codigo = generarCodigoActTecnica();
         ActividadTecnica unaActividadTecnica = new ActividadTecnica(precioFijo, codigo, descripcion);
         unasActividades.add(unaActividadTecnica);
+        unasActTecnicas.add(unaActividadTecnica);
+        Persistencia.crearActividadTecnica(unaActividadTecnica);
     }
 
-    public void crearActividadProyecto(String descripcion, Double porcentaje) {
+    public void modificarActividadTecnica(int codigo, String descripcion, Double precioFijo) throws Exception {
+        ActividadTecnica unaActTecnica = buscarActTecnica(codigo);
+        unaActTecnica.setDescripcion(descripcion);
+        unaActTecnica.setPrecioFijo(precioFijo);
+        Persistencia.modificarActividadTecnica(unaActTecnica);
+    }
+
+    public void borrarActividadTecnica(int codigo) throws NonexistentEntityException, Exception {
+        ActividadTecnica unaActTecnica = buscarActTecnica(codigo);
+        unasActividades.remove(unaActTecnica);
+        unasActTecnicas.remove(unaActTecnica);
+        Persistencia.eliminarActividadTecnica(codigo);
+    }
+
+    public void crearActividadProyecto(String descripcion, Double porcentaje) throws Exception {
         ActividadProyecto unaActividadProyecto = new ActividadProyecto(codigo, descripcion, porcentaje);
         unasActividades.add(unaActividadProyecto);
         unasActProyecto.add(unaActividadProyecto);
-        Persistencia.jpaActividadProyecto.create(unaActividadProyecto);
+        Persistencia.crearActividadProyecto(unaActividadProyecto);
     }
-    
-    public void modificarActividadProyecto(int codigo,String descripcion,Double porcentaje) throws Exception{
+
+    public void modificarActividadProyecto(int codigo, String descripcion, Double porcentaje) throws Exception {
         ActividadProyecto unaActividadProyecto = buscarActividadProyecto(codigo);
         unaActividadProyecto.setDescripcion(descripcion);
         unaActividadProyecto.setPorcentaje(porcentaje);
-        Persistencia.jpaActividadProyecto.edit(unaActividadProyecto);
+        Persistencia.modificarActividadProyecto(unaActividadProyecto);
     }
-    
-    public void borrarActividadProyecto(int codigo) throws NonexistentEntityException{
+
+    public void borrarActividadProyecto(int codigo) throws Exception {
         ActividadProyecto unaActividadProyecto = buscarActividadProyecto(codigo);
         unasActividades.remove(unaActividadProyecto);
         unasActProyecto.remove(unaActividadProyecto);
-        Persistencia.jpaActividadProyecto.destroy(codigo);
+        Persistencia.eliminarActividadProyecto(codigo);
     }
 
     public void generarManoDeObra(int codigo, long horasTrabajadas, Date fecha, Empleado unEmpleado, Servicio unServicio, Actividad unaActividad) {
@@ -471,9 +557,27 @@ public class Empresa implements Serializable {
         return aux;
     }
 
-    public void crearProveedor(int codigo, String nombre, String direccion, long telefono, String email, String cuit) {
+    public void crearProveedor(String nombre, String direccion, long telefono, String email, String cuit) throws Exception {
+        int codigo = generarProveedor();
         Proveedor unProveedor = new Proveedor(cuit, codigo, nombre, direccion, telefono, email);
         unosProveedores.add(unProveedor);
+        Persistencia.crearProveedor(unProveedor);
+    }
+
+    public void modificarProveedor(int codigo, String nombre, String direccion, long telefono, String email, String cuit) throws Exception {
+        Proveedor unProveedor = buscarProveedor(codigo);
+        unProveedor.setNombre(nombre);
+        unProveedor.setDireccion(direccion);
+        unProveedor.setTelefono(telefono);
+        unProveedor.setEmail(email);
+        unProveedor.setCuit(cuit);
+        Persistencia.modificarProveedor(unProveedor);
+    }
+
+    public void borrarProveedor(int codigo) throws Exception {
+        Proveedor unProveedor = buscarProveedor(codigo);
+        this.unosProveedores.remove(unProveedor);
+        Persistencia.eliminarProveedor(codigo);
     }
 
     public TipoCompra buscarTipoCompra(int codigo) {
@@ -543,9 +647,24 @@ public class Empresa implements Serializable {
         unTurno.agregarOrden(unaOrdenTrabajo);
     }
 
-    public void generarConcepto(int codigo, String descripcion, Double monto) {
+    public void generarConcepto(String descripcion, Double monto) throws Exception {
+        int codigo=generarCodigoConcepto();
         Concepto unConcepto = new Concepto(codigo, descripcion, monto);
         unosConceptos.add(unConcepto);
+        Persistencia.crearConcepto(unConcepto);
+    }
+    
+    public void modificarConcepto(int codigo,String descripcion,Double monto) throws Exception{
+        Concepto unConcepto=buscarConcepto(codigo);
+        unConcepto.setDescripcion(descripcion);
+        unConcepto.setMonto(monto);
+        Persistencia.modificarConcepto(unConcepto);
+    }
+    
+    public void borrarConcepto(int codigo) throws Exception{
+        Concepto unConcepto=buscarConcepto(codigo);
+        this.unosConceptos.remove(unConcepto);
+        Persistencia.eliminarConcepto(codigo);
     }
 
     public Tecnologia buscarTecnologia(int codigo) {
@@ -636,20 +755,60 @@ public class Empresa implements Serializable {
         unosTiposLiquidaciones.add(unTipoLiquidacion);
     }
 
-    public void crearArticulo(int codigo, String nombre, String descripcion, Double precio, int cantidad) {
+    public void crearArticulo(String nombre, String descripcion, Double precio, int cantidad) throws Exception {
+        int codigo = generarCodigoArticulo();
         Articulo unArticulo = new Articulo(codigo, nombre, descripcion, precio, cantidad);
         unosArticulos.add(unArticulo);
+        Persistencia.crearArticulo(unArticulo);
+    }
+
+    public void modificarArticulo(int codigo, String nombre, String descripcion, Double precio, int cantidad) throws Exception {
+        Articulo unArticulo = buscarArticulo(codigo);
+        unArticulo.setNombre(nombre);
+        unArticulo.setDescripcion(descripcion);
+        unArticulo.setPrecio(precio);
+        unArticulo.setCantidad(cantidad);
+        Persistencia.modificarArticulo(unArticulo);
+    }
+
+    public void borrarArticulo(int codigo) throws NonexistentEntityException {
+        Articulo unArticulo = buscarArticulo(codigo);
+        unosArticulos.remove(unArticulo);
+        Persistencia.eliminarArticulo(codigo);
     }
 
     public void ConexionConBD() {
         this.unosTiposTecnologias = Persistencia.traerTiposTecnolgias();
         this.unasTecnologias = Persistencia.traerTecnolgias();
-        this.unasActAdministrativas=Persistencia.traerActividadesAdministrativas();
-        this.unasActProyecto=Persistencia.traerActividadesProyectos();
+        this.unasActAdministrativas = Persistencia.traerActividadesAdministrativas();
+        this.unasActProyecto = Persistencia.traerActividadesProyectos();
+        this.unasActTecnicas = Persistencia.traerActividadesTecnicas();
+        this.unosArticulos = Persistencia.traerArticulos();
+        this.unosProveedores = Persistencia.traerProveedores();
+        this.unosEmpleados = Persistencia.traerEmpleados();
+        this.unosConceptos=Persistencia.traerConceptos();
+        //this.unosClientes=Persistencia.traerClientes();
     }
 
     public List<TipoTecnologia> traerTiposDeTecnologias() {
         return this.unosTiposTecnologias;
+    }
+    
+    public List<Empleado> traerEmpleado(){
+        return this.unosEmpleados;
+    }
+    
+    private int generarCodigoEmpleado() {
+        Iterator<Empleado> itEmpleado = this.unosEmpleados.iterator();
+        Empleado unEmp;
+        int codigo = 0;
+        while (itEmpleado.hasNext()) {
+            unEmp = itEmpleado.next();
+            if (unEmp.getCodigo() > codigo) {
+                codigo = unEmp.getCodigo();
+            }
+        }
+        return codigo + 1;
     }
 
     private int generarCodigoTipoTecnologia() {
@@ -702,7 +861,7 @@ public class Empresa implements Serializable {
     public List<ActividadProyecto> traerActProyecto() {
         return this.unasActProyecto;
     }
-    
+
     private int generarCodigoActProyecto() {
         Iterator<ActividadProyecto> itLista = this.unasActProyecto.iterator();
         ActividadProyecto unaActProyecto;
@@ -714,5 +873,104 @@ public class Empresa implements Serializable {
             }
         }
         return codigo + 1;
+    }
+
+    public List<Articulo> traerArticulo() {
+        return this.unosArticulos;
+    }
+
+    private int generarCodigoArticulo() {
+        Iterator<Articulo> itLista = this.unosArticulos.iterator();
+        Articulo unTipo;
+        int codigoTipo = 0;
+        while (itLista.hasNext()) {
+            unTipo = itLista.next();
+            if (unTipo.getCodigo() > codigoTipo) {
+                codigoTipo = unTipo.getCodigo();
+            }
+        }
+        return codigoTipo + 1;
+    }
+
+    private int generarCodigoActTecnica() {
+        Iterator<ActividadTecnica> itLista = this.unasActTecnicas.iterator();
+        ActividadTecnica unaActTecnica;
+        int codigo = 0;
+        while (itLista.hasNext()) {
+            unaActTecnica = itLista.next();
+            if (unaActTecnica.getCodigo() > codigo) {
+                codigo = unaActTecnica.getCodigo();
+            }
+        }
+        return codigo + 1;
+    }
+
+    public List<ActividadTecnica> traerActTecnica() {
+        return this.unasActTecnicas;
+    }
+
+    public List<Cliente> traerCliente() {
+        return this.unosClientes;
+    }
+
+    public List<Proveedor> traerProveedor() {
+        return this.unosProveedores;
+    }
+    
+    public List<Concepto> traerConcepto(){
+        return this.unosConceptos;
+    }
+
+    private int generarCliente() {
+        Iterator<Cliente> itCliente = this.unosClientes.iterator();
+        Cliente unCliente;
+        int codigo = 0;
+        while (itCliente.hasNext()) {
+            unCliente = itCliente.next();
+            if (unCliente.getCodigo() > codigo) {
+                codigo = unCliente.getCodigo();
+            }
+        }
+        return codigo + 1;
+    }
+
+    private int generarProveedor() {
+        Iterator<Proveedor> itProveedor = this.unosProveedores.iterator();
+        Proveedor unProveedor;
+        int codigo = 0;
+        while (itProveedor.hasNext()) {
+            unProveedor = itProveedor.next();
+            if (unProveedor.getCodigo() > codigo) {
+                codigo = unProveedor.getCodigo();
+            }
+        }
+        return codigo + 1;
+    }
+
+    private int generarCodigoConcepto() {
+        Iterator<Concepto> itConcepto = this.unosConceptos.iterator();
+        Concepto unConcepto;
+        int codigo = 0;
+        while (itConcepto.hasNext()) {
+            unConcepto = itConcepto.next();
+            if (unConcepto.getCodigo() > codigo) {
+                codigo = unConcepto.getCodigo();
+            }
+        }
+        return codigo + 1;
+    }
+
+    public Concepto buscarConcepto(int codigo) {
+        Concepto aux = new Concepto();
+        Iterator itr = unosConceptos.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Concepto) itr.next();
+            if (aux.isConcepto(codigo)) {
+                band = 1;
+            }
+
+        }
+        return aux;
     }
 }

@@ -13,20 +13,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.List;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author eras
  */
 @Entity
-public class Cliente extends PersoneriaJuridica implements Serializable{
+@Table(name = "Cliente")
+public class Cliente extends PersoneriaJuridica implements Serializable {
+
     @Basic
     private String apellido;
     @Basic
     private long dni;
     @Basic
     private String cuil;
-    
+
     //Relaciones
     @OneToMany
     private List<Turno> unosTurnos;
@@ -34,13 +37,12 @@ public class Cliente extends PersoneriaJuridica implements Serializable{
     public Cliente() {
     }
 
-    public Cliente(String apellido, long dni, String cuil,String nombre, String direccion, long telefono, String email) {
-        super(nombre, direccion, telefono, email);
+    public Cliente(int codigo, String apellido, long dni, String cuil, String nombre, String direccion, long telefono, String email) {
+        super(codigo, nombre, direccion, telefono, email);
         this.apellido = apellido;
         this.dni = dni;
         this.cuil = cuil;
     }
-
 
     public String getApellido() {
         return apellido;
@@ -66,13 +68,28 @@ public class Cliente extends PersoneriaJuridica implements Serializable{
         this.cuil = cuil;
     }
 
-    public boolean isCliente(long dni){
+    public List<Turno> getUnosTurnos() {
+        return unosTurnos;
+    }
+
+    public void setUnosTurnos(List<Turno> unosTurnos) {
+        this.unosTurnos = unosTurnos;
+    }
+
+    public boolean isCliente(int codigo) {
         boolean aux = false;
-        if(this.dni == dni){
+        if (super.getCodigo() == codigo) {
             aux = true;
         }
         return aux;
     }
-    
-    
+
+    public boolean isCliente(long dni) {
+        boolean aux = false;
+        if (this.dni == dni) {
+            aux = true;
+        }
+        return aux;
+    }
+
 }

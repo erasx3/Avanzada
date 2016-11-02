@@ -32,6 +32,7 @@ import Persistencia.TipoLiquidacionJpaController;
 import Persistencia.TipoTecnologiaJpaController;
 import Persistencia.TipoVentaJpaController;
 import Persistencia.TurnoJpaController;
+import Persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
 
 /**
@@ -210,10 +211,10 @@ public class Persistencia {
         jpaArticulo.edit(unArticulo);
     }
     
-    static void eliminarActividadesTecnicas(int codigo) throws Exception
-    {
+    static void eliminarArticulo(int codigo) throws NonexistentEntityException{
         jpaArticulo.destroy(codigo);
     }
+    
 
     static List<Articulo> traerArticulos() {
         return jpaArticulo.findArticuloEntities();

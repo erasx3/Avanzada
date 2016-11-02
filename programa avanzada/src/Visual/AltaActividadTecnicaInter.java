@@ -5,6 +5,12 @@
  */
 package Visual;
 
+import Logica.ActividadTecnica;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Facu
@@ -12,10 +18,14 @@ package Visual;
 public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
+    private DefaultTableModel modeloActTecnica;
     
     public AltaActividadTecnicaInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.txtCodigo.setVisible(false);
         this.miControladoraVisual=miControladoraVisual;
+        this.modeloActTecnica = (DefaultTableModel) this.tblActividadTecnica.getModel();
+        refrescarVentana();
     }
 
     /**
@@ -37,8 +47,10 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
         cmdBorrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblActividadTecnica = new javax.swing.JTable();
+        txtCodigo = new javax.swing.JTextField();
 
         setClosable(true);
+        setTitle("Actividades Tecnicas");
 
         lblDescripcion.setText("Descripcion:");
 
@@ -51,10 +63,25 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
         });
 
         cmdAgregar.setText("Agregar");
+        cmdAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregarActionPerformed(evt);
+            }
+        });
 
         cmdModificar.setText("Modificar");
+        cmdModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificarActionPerformed(evt);
+            }
+        });
 
         cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
 
         tblActividadTecnica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,6 +102,11 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        tblActividadTecnica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblActividadTecnicaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblActividadTecnica);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -85,20 +117,22 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
                 .addGap(67, 67, 67)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblDescripcion)
-                            .addComponent(lblPrecioFijo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(txtPrecioFijo)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(cmdAgregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdBorrar)))
+                        .addComponent(cmdBorrar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblDescripcion)
+                            .addComponent(lblPrecioFijo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                .addComponent(txtPrecioFijo)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -106,7 +140,9 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(20, 20, 20)
+                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -139,11 +175,58 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescripcionActionPerformed
 
+    private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
+        try {
+            miControladoraVisual.crearActividadTecnica(txtDescripcion.getText(), Double.valueOf(txtPrecioFijo.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaActividadAdministrativaInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdAgregarActionPerformed
 
+    private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
+        try {
+            miControladoraVisual.modificarActividadTecnica(Integer.parseInt(txtCodigo.getText()), txtDescripcion.getText(),Double.valueOf(txtPrecioFijo.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaActividadTecnicaInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_cmdModificarActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+        try {
+            miControladoraVisual.borrarActividadTecnica(Integer.parseInt(txtCodigo.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaActividadTecnicaInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void tblActividadTecnicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblActividadTecnicaMouseClicked
+       txtCodigo.setText(null);
+       txtDescripcion.setText(null);
+       txtPrecioFijo.setText(null);
+       
+       int fila = this.tblActividadTecnica.rowAtPoint(evt.getPoint());
+       
+       this.txtCodigo.setText(this.modeloActTecnica.getValueAt(fila, 0).toString());
+       this.txtDescripcion.setText(this.modeloActTecnica.getValueAt(fila, 1).toString());
+       this.txtPrecioFijo.setText(this.modeloActTecnica.getValueAt(fila, 2).toString());
+    }//GEN-LAST:event_tblActividadTecnicaMouseClicked
+
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAgregar;
     private javax.swing.JButton cmdBorrar;
@@ -153,7 +236,30 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblPrecioFijo;
     private javax.swing.JTable tblActividadTecnica;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtPrecioFijo;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescarVentana() {
+        txtCodigo.setText(null);
+        txtDescripcion.setText(null);
+        txtPrecioFijo.setText(null);
+        this.modeloActTecnica.setRowCount(0);
+        cargarTablaActTecnica();
+    }
+    
+    private void cargarTablaActTecnica() {
+        Iterator <ActividadTecnica> itActTecnica = this.miControladoraVisual.traerActTecnica().iterator();
+        ActividadTecnica unTipo;
+        while(itActTecnica.hasNext())
+        {
+            unTipo = itActTecnica.next();
+            modeloActTecnica.addRow(new Object[]{unTipo.getCodigo(),unTipo.getDescripcion(),unTipo.getPrecioFijo()});
+        }
+    }
+    
+    
 }
+
+

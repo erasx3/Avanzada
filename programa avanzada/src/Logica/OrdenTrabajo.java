@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -33,7 +34,7 @@ public class OrdenTrabajo implements Serializable {
     private Turno unTurno;
     @OneToMany
     private List<Servicio> unosServicios;
-    @OneToOne
+    @ManyToOne
     private Equipo unEquipo;
     
     

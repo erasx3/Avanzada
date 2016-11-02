@@ -5,6 +5,13 @@
  */
 package Visual;
 
+import Logica.Articulo;
+import Persistencia.exceptions.NonexistentEntityException;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Facu
@@ -12,10 +19,14 @@ package Visual;
 public class AltaArticuloInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
+    private DefaultTableModel modeloArticulo;
     
     public AltaArticuloInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        txtCodigo.setVisible(false);
         this.miControladoraVisual=miControladoraVisual;
+        this.modeloArticulo= (DefaultTableModel)this.tblArticulo.getModel();
+        refrescarVentana();
     }
 
     /**
@@ -28,7 +39,6 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -45,8 +55,7 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
         tblArticulo = new javax.swing.JTable();
 
         setClosable(true);
-
-        jLabel1.setText("Codigo:");
+        setTitle("Articulos");
 
         jLabel2.setText("Nombre:");
 
@@ -63,10 +72,25 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
         });
 
         cmdAgregar.setText("Agregar");
+        cmdAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregarActionPerformed(evt);
+            }
+        });
 
         cmdModificar.setText("Modificar");
+        cmdModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificarActionPerformed(evt);
+            }
+        });
 
         cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
 
         tblArticulo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,6 +111,11 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        tblArticulo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblArticuloMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblArticulo);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -95,25 +124,24 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(cmdAgregar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(cmdModificar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmdBorrar))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel5))
-                            .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cmdAgregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmdBorrar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(txtPrecio)
-                                .addComponent(txtCodigo)
                                 .addComponent(txtNombre)
                                 .addComponent(txtDescripcion)
                                 .addComponent(txtCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))))
@@ -124,35 +152,33 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap()
+                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(51, 51, 51)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(74, 74, 74)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmdAgregar)
                             .addComponent(cmdBorrar)
                             .addComponent(cmdModificar))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -170,15 +196,59 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
+        try {
+            this.miControladoraVisual.crearArticulo(txtNombre.getText(), txtDescripcion.getText(), Double.valueOf(txtPrecio.getText()), Integer.parseInt(txtCantidad.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaArticuloInter.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    }//GEN-LAST:event_cmdAgregarActionPerformed
+
+    private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
+        try {
+            this.miControladoraVisual.modificarArticulo(Integer.parseInt(txtCodigo.getText()), txtNombre.getText(), txtDescripcion.getText(), Double.valueOf(txtPrecio.getText()), Integer.parseInt(txtCantidad.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaArticuloInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_cmdModificarActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+        try {
+            this.miControladoraVisual.borrarArticulo(Integer.parseInt(txtCodigo.getText()));
+            refrescarVentana();
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(AltaArticuloInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void tblArticuloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblArticuloMouseClicked
+       txtCodigo.setText(null);
+       txtNombre.setText(null);
+       txtDescripcion.setText(null);
+       txtPrecio.setText(null);
+       txtCantidad.setText(null);
+       
+       int fila = this.tblArticulo.rowAtPoint(evt.getPoint());
+       
+       txtCodigo.setText(this.modeloArticulo.getValueAt(fila, 0).toString());
+       txtNombre.setText(this.modeloArticulo.getValueAt(fila, 1).toString());
+       txtDescripcion.setText(this.modeloArticulo.getValueAt(fila, 2).toString());
+       txtPrecio.setText(this.modeloArticulo.getValueAt(fila, 3).toString());
+       txtCantidad.setText(this.modeloArticulo.getValueAt(fila, 4).toString());
+    }//GEN-LAST:event_tblArticuloMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAgregar;
     private javax.swing.JButton cmdBorrar;
     private javax.swing.JButton cmdModificar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -192,4 +262,24 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescarVentana() {
+        txtCodigo.setText(null);
+        txtDescripcion.setText(null);
+        txtCantidad.setText(null);
+        txtNombre.setText(null);
+        txtPrecio.setText(null);
+        this.modeloArticulo.setRowCount(0);
+        cargarTablaArticulo();
+    }
+
+    private void cargarTablaArticulo() {
+        Iterator <Articulo> itArticulo = this.miControladoraVisual.traerArticulo().iterator();
+        Articulo unTipo;
+        while(itArticulo.hasNext())
+        {
+            unTipo = itArticulo.next();
+            modeloArticulo.addRow(new Object[]{unTipo.getCodigo(),unTipo.getNombre(),unTipo.getDescripcion(),unTipo.getPrecio(),unTipo.getCantidad()});
+        }
+    }
 }

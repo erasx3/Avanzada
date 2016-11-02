@@ -37,6 +37,7 @@ public class AltaEquipoInter extends javax.swing.JInternalFrame {
         tblEquipo = new javax.swing.JTable();
 
         setClosable(true);
+        setTitle("Equipos");
 
         jLabel1.setText("Descripcion:");
 
