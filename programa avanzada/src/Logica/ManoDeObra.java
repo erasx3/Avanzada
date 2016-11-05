@@ -6,6 +6,7 @@
 package Logica;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -26,6 +29,10 @@ public class ManoDeObra implements Serializable {
     private int codigo;
     @Basic
     private long horasTrabajadas;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar horaIncio;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar horaFin;
     @Basic
     private Date fecha;
     
@@ -53,7 +60,46 @@ public class ManoDeObra implements Serializable {
         this.unServicio = unServicio;
         this.unEmpleado = unEmpleado;
     }
-    
+
+    public Calendar getHoraIncio() {
+        return horaIncio;
+    }
+
+    public void setHoraIncio(Calendar horaIncio) {
+        this.horaIncio = horaIncio;
+    }
+
+    public Calendar getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Calendar horaFin) {
+        this.horaFin = horaFin;
+    }
+
+    public Actividad getUnaActividad() {
+        return unaActividad;
+    }
+
+    public void setUnaActividad(Actividad unaActividad) {
+        this.unaActividad = unaActividad;
+    }
+
+    public Servicio getUnServicio() {
+        return unServicio;
+    }
+
+    public void setUnServicio(Servicio unServicio) {
+        this.unServicio = unServicio;
+    }
+
+    public Empleado getUnEmpleado() {
+        return unEmpleado;
+    }
+
+    public void setUnEmpleado(Empleado unEmpleado) {
+        this.unEmpleado = unEmpleado;
+    } 
     
     public int getCodigo() {
         return codigo;

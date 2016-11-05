@@ -18,33 +18,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     //Controladora Visual
     private ControladoraVisual miControladoraVisual;
 
-    //Relaciones
-//        private AgregarOrdenDeTrabajo unAgregarOrdenDeTrabajo = new AgregarOrdenDeTrabajo();
-//        private AgregarServicioOrden unAgregarServicioOrden = new AgregarServicioOrden();
-//        private AltaActividadAdministrativa unAltaActividadAdministrativa = new AltaActividadAdministrativa();
-//        private AltaActividadProyecto unAltaActividadProyecto = new AltaActividadProyecto();
-//        private AltaActividadTecnica unAltaActividadTecnica = new AltaActividadTecnica();
-//        private AltaArticulo unAltaArticulo = new AltaArticulo();
-//
-//        private AltaEmpleado unAltaEmpleado = new AltaEmpleado();
-//        private AltaEquipo unAltaEquipo = new AltaEquipo();
-//        private AltaProveedor unAltaProveedor = new AltaProveedor();
-//        private AltaProyecto unAltaProyecto = new AltaProyecto();
-//        private AltaTecnologia unAltaTecnologia = new AltaTecnologia();
-//        private AltaTipoTecnologia unAltaTipoTecnologia = new AltaTipoTecnologia();
-//        private AltaTipoCompra unAltaTipoCompra = new AltaTipoCompra();
-//        private AltaTipoEstado unAltaTipoEstado = new AltaTipoEstado();
-//        private AltaTipoLiquidacion unAltaTipoLiquidacion = new AltaTipoLiquidacion();
-//        private AltaTipoVençççta unAltaTipoVenta = new AltaTipoVenta();
-//        private AsignarEmpleadoProyecto unAsignarEmpleadoProyecto = new AsignarEmpleadoProyecto();
-//        private AsignarEmpleadoServicio unAsignarEmpleadoServicio = new AsignarEmpleadoServicio();
-//        private GenerarCompra unGenerarCompra = new GenerarCompra();
-//        private GenerarIngresoEquipo unGenerarIngresoEquipo = new GenerarIngresoEquipo();
-//        private GenerarSalidaEquipo unGenerarSalidaEquipo = new GenerarSalidaEquipo();
-//        private GenerarOrden unGenerarOrden = new GenerarOrden();
-//        private GenerarLiquidacion unGenerarLiquidacion = new GenerarLiquidacion();
-//        private VentaArticulo unVentaArticulo = new VentaArticulo();
-//        private VentaServicio unVentaServicio = new VentaServicio();
+   
     /**
      * Creates new form MenuPrincipal
      */
