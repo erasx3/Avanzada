@@ -12,6 +12,13 @@
     <class>Logica.Proveedor</class>
     <class>Logica.Empleado</class>
     <class>Logica.Concepto</class>
+    <class>Logica.TipoVenta</class>
+    <class>Logica.TipoCompra</class>
+    <class>Logica.TipoLiquidacion</class>
+    <class>Logica.DetalleCompraVenta</class>
+    <class>Logica.Consumible</class>
+    <class>Logica.PersoneriaJuridica</class>
+    <class>Logica.Cliente</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

@@ -18,7 +18,6 @@ import javax.persistence.Table;
  * @author eras
  */
 @Entity
-@Table(name = "Empleado")
 public class Empleado extends PersoneriaJuridica implements Serializable{ 
     @Basic
     private String apellido;

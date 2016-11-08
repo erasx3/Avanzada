@@ -10,11 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 /**
  *
  * @author eras
  */
 @Entity
+@Table(name="tipoventa")
 public class TipoVenta extends TipoComprobante {
 
     public TipoVenta() {
@@ -31,5 +33,11 @@ public class TipoVenta extends TipoComprobante {
         }
         return aux;
     }
+
+    @Override
+    public String toString() {
+        return super.getCodigo()+"-"+super.getDescripcion();
+    }
+    
     
 }

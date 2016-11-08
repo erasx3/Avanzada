@@ -5,29 +5,36 @@
  */
 package Logica;
 
-import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
+
 /**
  *
- * @author eras
+ * @author Pepe
  */
-@MappedSuperclass
-public abstract class TipoComprobante implements Serializable {
+
+
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Consumible {
+    
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.TABLE)
     private int codigo;
     @Basic
     private String descripcion;
 
-    public TipoComprobante() {
+    public Consumible() {
     }
 
-    public TipoComprobante(int codigo, String descripcion) {
+    public Consumible(int codigo, String descripcion) {
         this.codigo = codigo;
         this.descripcion = descripcion;
     }
@@ -36,19 +43,17 @@ public abstract class TipoComprobante implements Serializable {
         return codigo;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
     public void setCodigo(int codigo) {
         this.codigo = codigo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
     
-    public boolean isComprobante(int codigo){
-        return true;
-    }
+    
 }

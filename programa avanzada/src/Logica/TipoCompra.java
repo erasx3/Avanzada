@@ -11,11 +11,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 /**
  *
  * @author eras
  */
 @Entity
+@Table(name = "tipocompra")
 public class TipoCompra extends TipoComprobante implements Serializable {
 
     public TipoCompra() {

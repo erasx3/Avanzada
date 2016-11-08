@@ -24,6 +24,8 @@ public class AltaProyectoInter extends javax.swing.JInternalFrame {
     private DefaultTableModel modeloTecnologia;
     private DefaultTableModel modeloConceptoProyec;
     private DefaultTableModel modeloTecnologiaProyec;
+    private Concepto unConcepto;
+    private Tecnologia unaTecnologia;
     /**
      * Creates new form AltaProyectoInter
      */
@@ -290,6 +292,10 @@ public class AltaProyectoInter extends javax.swing.JInternalFrame {
 
     private void tblConceptoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblConceptoMouseClicked
        this.cmdAgregarConcepto.setEnabled(true);
+       
+       int fila=this.tblConcepto.rowAtPoint(evt.getPoint());
+       
+       
     }//GEN-LAST:event_tblConceptoMouseClicked
 
     private void tblTecnologiasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTecnologiasMouseClicked

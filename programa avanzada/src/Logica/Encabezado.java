@@ -6,7 +6,7 @@
 package Logica;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -15,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -27,8 +29,8 @@ public class Encabezado implements Serializable {
     private int codigo;
     @Basic
     private String descripcion;
-    @Basic
-    private Date fecha;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar fecha;
     @Basic
     private Double total;
     
@@ -44,7 +46,7 @@ public class Encabezado implements Serializable {
     public Encabezado() {
     }
 
-    public Encabezado(int codigo, String descripcion, Date fecha, TipoComprobante unTipoComprobante, List<Detalle> unosDetalles, PersoneriaJuridica unaPersoneriaJuridica) {
+    public Encabezado(int codigo, String descripcion, Calendar fecha, TipoComprobante unTipoComprobante, List<Detalle> unosDetalles, PersoneriaJuridica unaPersoneriaJuridica) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.fecha = fecha;
@@ -61,7 +63,7 @@ public class Encabezado implements Serializable {
         return descripcion;
     }
 
-    public Date getFecha() {
+    public Calendar getFecha() {
         return fecha;
     }
 
@@ -77,7 +79,7 @@ public class Encabezado implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(Calendar fecha) {
         this.fecha = fecha;
     }
 

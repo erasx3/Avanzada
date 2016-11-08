@@ -10,22 +10,16 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  *
  * @author Facu
  */
 @Entity
-public class Articulo implements InterfaceConsumible, Serializable{
+public class Articulo extends Consumible implements Serializable{
     
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int codigo;
     @Basic
     private String nombre;
-    @Basic
-    private String descripcion;
     @Basic
     private Double precio;
     @Basic
@@ -35,24 +29,17 @@ public class Articulo implements InterfaceConsumible, Serializable{
     }
 
     public Articulo(int codigo, String nombre, String descripcion, Double precio, int cantidad) {
-        this.codigo = codigo;
+        super(codigo,descripcion);
         this.nombre = nombre;
-        this.descripcion = descripcion;
         this.precio = precio;
         this.cantidad = cantidad;
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
 
     public Double getPrecio() {
         return precio;
@@ -62,17 +49,13 @@ public class Articulo implements InterfaceConsumible, Serializable{
         return cantidad;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
+   
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+   
 
     public void setPrecio(Double precio) {
         this.precio = precio;
@@ -85,7 +68,7 @@ public class Articulo implements InterfaceConsumible, Serializable{
     
     public boolean isArticulo(int codigo){
         boolean aux = false;
-        if(this.codigo == codigo){
+        if(super.getCodigo() == codigo){
             aux = true;
         }
         return aux;
@@ -106,4 +89,11 @@ public class Articulo implements InterfaceConsumible, Serializable{
         }
         return aux;
     }
+
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+    
+    
 }

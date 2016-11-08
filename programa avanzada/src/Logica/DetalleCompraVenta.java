@@ -10,23 +10,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author eras
  */
 @Entity
+@Table(name = "DetalleCompraVenta")
 public class DetalleCompraVenta extends Detalle{
     
     @Basic
     private int cantidad;
     
     //Relaciones
-    @OneToOne
-    private InterfaceConsumible unConsumible;
+    @ManyToOne
+    private Consumible unConsumible;
 
-    public DetalleCompraVenta(int cantidad, int codigo, String descripcion, InterfaceConsumible unConsumible) {
+    public DetalleCompraVenta(int cantidad, int codigo, String descripcion, Consumible unConsumible) {
         super(codigo, descripcion);
         this.cantidad = cantidad;
         this.unConsumible=unConsumible;
@@ -42,6 +45,21 @@ public class DetalleCompraVenta extends Detalle{
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+    public Consumible getUnConsumible() {
+        return unConsumible;
+    }
+
+    public void setUnConsumible(Consumible unConsumible) {
+        this.unConsumible = unConsumible;
+    }
     
+    public boolean isDetalleCompraVenta(int codigo){
+        boolean aux = false;
+        if(super.getCodigo()== codigo){
+            aux=true;
+        }
+        return aux;
+    }
     
 }

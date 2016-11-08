@@ -11,20 +11,15 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author eras
  */
 @Entity
-public class Servicio implements InterfaceConsumible, Serializable {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int codigo;
-    @Basic
-    private String descripcion;
+public class Servicio extends Consumible{
+   
     @Basic
     private Double subtotal;
     
@@ -34,37 +29,21 @@ public class Servicio implements InterfaceConsumible, Serializable {
     }
 
     public Servicio(int codigo, String descripcion) {
-        this.codigo = codigo;
-        this.descripcion = descripcion;
-    }
-
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
+        super(codigo, descripcion);
     }
 
     public Double getSubtotal() {
         return subtotal;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
     }
     
+    
     public boolean isServicio(int codigo){
         boolean aux = false;
-        if(this.codigo == codigo){
+        if(super.getCodigo() == codigo){
             aux = true;
         }
         return aux;

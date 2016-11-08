@@ -20,7 +20,6 @@ import javax.persistence.Table;
  * @author eras
  */
 @Entity
-@Table(name = "Cliente")
 public class Cliente extends PersoneriaJuridica implements Serializable {
 
     @Basic
@@ -31,8 +30,8 @@ public class Cliente extends PersoneriaJuridica implements Serializable {
     private String cuil;
 
     //Relaciones
-    @OneToMany
-    private List<Turno> unosTurnos;
+//    @OneToMany
+//    private List<Turno> unosTurnos;
 
     public Cliente() {
     }
@@ -68,13 +67,13 @@ public class Cliente extends PersoneriaJuridica implements Serializable {
         this.cuil = cuil;
     }
 
-    public List<Turno> getUnosTurnos() {
-        return unosTurnos;
-    }
-
-    public void setUnosTurnos(List<Turno> unosTurnos) {
-        this.unosTurnos = unosTurnos;
-    }
+//    public List<Turno> getUnosTurnos() {
+//        return unosTurnos;
+//    }
+//
+//    public void setUnosTurnos(List<Turno> unosTurnos) {
+//        this.unosTurnos = unosTurnos;
+//    }
 
     public boolean isCliente(int codigo) {
         boolean aux = false;

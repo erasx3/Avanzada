@@ -17,7 +17,6 @@ import javax.persistence.Table;
  * @author eras
  */
 @Entity
-@Table(name = "Proveedor")
 public class Proveedor extends PersoneriaJuridica{
     @Basic
     private String cuit;

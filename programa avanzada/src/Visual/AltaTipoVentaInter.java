@@ -5,6 +5,12 @@
  */
 package Visual;
 
+import Logica.TipoVenta;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Facu
@@ -12,10 +18,14 @@ package Visual;
 public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
+    private DefaultTableModel modeloTipoVenta;
     
     public AltaTipoVentaInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.txtCodigo.setVisible(false);
         this.miControladoraVisual=miControladoraVisual;
+        this.modeloTipoVenta=(DefaultTableModel)this.tblVentas.getModel();
+        refrescarVentana();
     }
 
     /**
@@ -28,24 +38,40 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        txtDescripcion2 = new javax.swing.JTextField();
+        txtDescripcion = new javax.swing.JTextField();
         cmdAgregar2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         cmdModificar2 = new javax.swing.JButton();
         cmdBorrar2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblVentas = new javax.swing.JTable();
+        txtCodigo = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Tipo de Venta");
 
         cmdAgregar2.setText("Agregar");
+        cmdAgregar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregar2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Descripcion:");
 
         cmdModificar2.setText("Modificar");
+        cmdModificar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificar2ActionPerformed(evt);
+            }
+        });
 
         cmdBorrar2.setText("Borrar");
+        cmdBorrar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrar2ActionPerformed(evt);
+            }
+        });
 
         tblVentas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,6 +92,11 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        tblVentas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVentasMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblVentas);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -84,7 +115,9 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDescripcion2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCodigo)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -97,16 +130,18 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addGap(20, 20, 20)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(txtDescripcion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(61, 61, 61)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmdModificar2)
                             .addComponent(cmdBorrar2)
                             .addComponent(cmdAgregar2))))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,6 +158,43 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmdAgregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregar2ActionPerformed
+        try {
+            this.miControladoraVisual.crearTipoVenta(txtDescripcion.getText());
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaTipoVentaInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdAgregar2ActionPerformed
+
+    private void cmdModificar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificar2ActionPerformed
+        try {
+            this.miControladoraVisual.modificarTipooVenta(Integer.parseInt(txtCodigo.getText()), txtDescripcion.getText());
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaTipoVentaInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdModificar2ActionPerformed
+
+    private void cmdBorrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrar2ActionPerformed
+        try {
+            this.miControladoraVisual.borrarTipoVenta(Integer.parseInt(txtCodigo.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaTipoVentaInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdBorrar2ActionPerformed
+
+    private void tblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVentasMouseClicked
+        txtCodigo.setText(null);
+        txtDescripcion.setText(null);
+        
+        int fila = this.tblVentas.rowAtPoint(evt.getPoint());
+        
+        txtCodigo.setText(this.modeloTipoVenta.getValueAt(fila, 0).toString());
+        txtDescripcion.setText(this.modeloTipoVenta.getValueAt(fila, 1).toString());
+    }//GEN-LAST:event_tblVentasMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAgregar2;
@@ -132,6 +204,23 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblVentas;
-    private javax.swing.JTextField txtDescripcion2;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescarVentana() {
+        txtCodigo.setText(null);
+        txtDescripcion.setText(null);
+        modeloTipoVenta.setRowCount(0);
+        cargarTablaVentas();
+}
+
+    private void cargarTablaVentas() {
+        Iterator<TipoVenta> itTipoVenta = this.miControladoraVisual.traerTipoVenta().iterator();
+        TipoVenta unTipo;
+        while(itTipoVenta.hasNext()){
+            unTipo=itTipoVenta.next();
+            modeloTipoVenta.addRow(new Object[]{unTipo.getCodigo(),unTipo.getDescripcion()});
+        }
+    }
 }

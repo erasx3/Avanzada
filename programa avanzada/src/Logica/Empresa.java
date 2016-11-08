@@ -7,6 +7,7 @@ package Logica;
 
 import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -138,7 +139,7 @@ public class Empresa implements Serializable {
     }
 
     public Cliente buscarCliente(long dni) {
-        Cliente aux = new Cliente();
+        Cliente aux = null;
         Iterator itr = unosClientes.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -178,7 +179,7 @@ public class Empresa implements Serializable {
 
     public boolean buscarTurnoDisponible(Date fecha, Float hora) {
         boolean disponibilidad = true;
-        Turno aux = new Turno();
+        Turno aux = null;
         Iterator itr = unosTurnos.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -198,7 +199,7 @@ public class Empresa implements Serializable {
     }
 
     public Turno buscarTurno(int codigo) {
-        Turno aux = new Turno();
+        Turno aux = null;
         Iterator itr = unosTurnos.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -212,7 +213,7 @@ public class Empresa implements Serializable {
     }
 
     public Equipo buscarEquipo(int codigo) {
-        Equipo aux = new Equipo();
+        Equipo aux = null;
         Iterator itr = unosEquipos.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -231,7 +232,7 @@ public class Empresa implements Serializable {
     }
 
     public TipoEstado buscarTipoEstado(int codigo) {
-        TipoEstado aux = new TipoEstado();
+        TipoEstado aux = null;
         Iterator itr = unosTiposEstados.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -275,7 +276,7 @@ public class Empresa implements Serializable {
     }
 
     public OrdenTrabajo buscarOrdenTrabajo(int codigo) {
-        OrdenTrabajo aux = new OrdenTrabajo();
+        OrdenTrabajo aux = null;
         Iterator itr = unasOrdenesTrabajos.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -294,7 +295,7 @@ public class Empresa implements Serializable {
     }
 
     public Empleado buscarEmpleado(int codigo) {
-        Empleado aux = new Empleado();
+        Empleado aux = null;
         Iterator itr = unosEmpleados.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -333,7 +334,7 @@ public class Empresa implements Serializable {
     }
     
     public Servicio buscarServicio(int codigo) {
-        Servicio aux = new Servicio();
+        Servicio aux = null;
         Iterator itr = unosServicios.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -363,7 +364,7 @@ public class Empresa implements Serializable {
     }
 
     public ActividadAdministrativa buscarActAdministrativa(int codigo) {
-        ActividadAdministrativa aux = new ActividadAdministrativa();
+        ActividadAdministrativa aux = null;
         Iterator itr = unasActAdministrativas.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -377,7 +378,7 @@ public class Empresa implements Serializable {
     }
 
     public ActividadProyecto buscarActividadProyecto(int codigo) {
-        ActividadProyecto aux = new ActividadProyecto();
+        ActividadProyecto aux = null;
         Iterator itr = unasActProyecto.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -391,7 +392,7 @@ public class Empresa implements Serializable {
     }
 
     public ActividadTecnica buscarActTecnica(int codigo) {
-        ActividadTecnica aux = new ActividadTecnica();
+        ActividadTecnica aux = null;
         Iterator itr = unasActTecnicas.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -475,7 +476,7 @@ public class Empresa implements Serializable {
     }
 
     public TipoVenta buscarTipoVenta(int codigo) {
-        TipoVenta aux = new TipoVenta();
+        TipoVenta aux = null;
         Iterator itr = unosTiposVentas.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -489,7 +490,7 @@ public class Empresa implements Serializable {
     }
 
     public List<Servicio> buscarServicioOrdenTrabajo(Cliente unCliente) {
-        Turno aux = new Turno();
+        Turno aux = null;
         List<Servicio> aux2 = new LinkedList();
         OrdenTrabajo aux3 = new OrdenTrabajo();
         Iterator itr = unosTurnos.iterator();
@@ -504,19 +505,22 @@ public class Empresa implements Serializable {
         return aux2;
     }
 
-    public void generarDetalleCompraVenta(int codigo, String descripcion, int cantidad, InterfaceConsumible unConsumible) {
+    public int generarDetalleCompraVenta(String descripcion, int cantidad,Consumible unConsumible) throws Exception {
+        int codigo=generarCodigoDetallerCompraVenta();
         DetalleCompraVenta unDetalleCompraVenta = new DetalleCompraVenta(cantidad, codigo, descripcion, unConsumible);
         unosDetallesCompraVenta.add(unDetalleCompraVenta);
         unosDetalles.add(unDetalleCompraVenta);
+        Persistencia.crearDetalleCompraVenta(unDetalleCompraVenta);
+        return codigo;
     }
 
-    public void generarEncabezado(int codigo, String descripcion, Date fecha, List<Detalle> unosDetalles, PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante) {
+    public void generarEncabezado(int codigo, String descripcion, Calendar fecha, List<Detalle> unosDetalles, PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante) {
         Encabezado unEncabezado = new Encabezado(codigo, descripcion, fecha, unTipoComprobante, unosDetalles, unaPersoneriaJuridica);
         unosEncabezados.add(unEncabezado);
     }
 
     public Articulo buscarArticulo(int codigo) {
-        Articulo aux = new Articulo();
+        Articulo aux = null;
         Iterator itr = unosArticulos.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -533,18 +537,19 @@ public class Empresa implements Serializable {
         unArticulo.sumarArticulo(cantidad);
     }
 
-    public void descontarArticulo(int cantidad, Articulo unArticulo) {
+    public void descontarArticulo(int cantidad, int codigo) {
+        Articulo unArticulo = buscarArticulo(codigo);
         unArticulo.descontarArticulo(cantidad);
     }
 
-    public boolean comprobarStock(Articulo unArticulo, int cantidad) {
-
+    public boolean comprobarStock(int codigo, int cantidad) {
+        Articulo unArticulo=buscarArticulo(codigo);
         return unArticulo.comprobarStock(cantidad);
 
     }
 
     public Proveedor buscarProveedor(int codigo) {
-        Proveedor aux = new Proveedor();
+        Proveedor aux =null;
         Iterator itr = unosProveedores.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -581,7 +586,7 @@ public class Empresa implements Serializable {
     }
 
     public TipoCompra buscarTipoCompra(int codigo) {
-        TipoCompra aux = new TipoCompra();
+        TipoCompra aux =null;
         Iterator itr = unosTiposCompras.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -595,7 +600,7 @@ public class Empresa implements Serializable {
     }
 
     public TipoLiquidacion buscarTipoLiquidacion(int codigo) {
-        TipoLiquidacion aux = new TipoLiquidacion();
+        TipoLiquidacion aux = null;
         Iterator itr = unosTiposLiquidaciones.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -609,7 +614,7 @@ public class Empresa implements Serializable {
     }
 
     public List<ManoDeObra> buscarManoDeObra(Empleado unEmpleado, Date fechaInicio, Date fechaFin) {
-        ManoDeObra aux = new ManoDeObra();
+        ManoDeObra aux = null;
         List<ManoDeObra> aux2 = new LinkedList();
         Iterator itr = unasManosDeObras.iterator();
         while (itr.hasNext()) {
@@ -629,7 +634,7 @@ public class Empresa implements Serializable {
     }
 
     public List<OrdenTrabajo> buscarOrdenTrabajo(Equipo unEquipo) {
-        OrdenTrabajo aux = new OrdenTrabajo();
+        OrdenTrabajo aux = null;
         List<OrdenTrabajo> aux2 = new LinkedList();
         Iterator itr = unasOrdenesTrabajos.iterator();
         while (itr.hasNext()) {
@@ -668,7 +673,7 @@ public class Empresa implements Serializable {
     }
 
     public Tecnologia buscarTecnologia(int codigo) {
-        Tecnologia aux = new Tecnologia();
+        Tecnologia aux = null;
         Iterator itr = unasTecnologias.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -680,9 +685,23 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
+    
+    public DetalleCompraVenta buscarDetalleCompraVenta(int codigo){
+        DetalleCompraVenta aux = null;
+        Iterator itr = unosDetallesCompraVenta.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (DetalleCompraVenta) itr.next();
+            if (aux.isDetalleCompraVenta(codigo)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
 
     public TipoTecnologia buscarTipoTecnologia(int codigo) {
-        TipoTecnologia aux = new TipoTecnologia();
+        TipoTecnologia aux = null;
         Iterator itr = unosTiposTecnologias.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -740,19 +759,61 @@ public class Empresa implements Serializable {
         unosProyectos.add(unProyecto);
     }
 
-    public void crearTipoVenta(int codiog, String descripcion) {
+    public void crearTipoVenta(String descripcion) throws Exception {
+        int codigo = generarCodigoTipoVenta();
         TipoVenta unTipoVenta = new TipoVenta(codigo, descripcion);
         unosTiposVentas.add(unTipoVenta);
+        Persistencia.crearTipoVenta(unTipoVenta);
+    }
+    
+    public void modificarTipooVenta(int codigo,String descripcion) throws Exception{
+        TipoVenta unTipoVenta = buscarTipoVenta(codigo);
+        unTipoVenta.setDescripcion(descripcion);
+        Persistencia.modificarTipoVenta(unTipoVenta);
+    }
+    
+    public void borrarTipoVenta(int codigo) throws Exception {
+        TipoVenta unTipoVenta=buscarTipoVenta(codigo);
+        unosTiposVentas.remove(unTipoVenta);
+        Persistencia.eliminarTipoVenta(codigo);
     }
 
-    public void crearTipoCompra(int codiog, String descripcion) {
+    public void crearTipoCompra(String descripcion) throws Exception {
+        int codigo=generarCodigoTipoCompra();
         TipoCompra unTipoCompra = new TipoCompra(codigo, descripcion);
         unosTiposCompras.add(unTipoCompra);
+        Persistencia.crearTipoCompra(unTipoCompra);
+    }
+    
+    public void modificarTipoCompra(int codigo,String descripcion) throws Exception{
+        TipoCompra unTipoCompra=buscarTipoCompra(codigo);
+        unTipoCompra.setDescripcion(descripcion);
+        Persistencia.modificarTipoCompra(unTipoCompra);
+    }
+    
+    public void borrarTipoCompra(int codigo) throws Exception{
+        TipoCompra unTipoCompra=buscarTipoCompra(codigo);
+        unosTiposCompras.remove(unTipoCompra);
+        Persistencia.eliminarTipoCompra(codigo);
     }
 
-    public void crearTipoLiquidacion(int codiog, String descripcion) {
+    public void crearTipoLiquidacion(String descripcion) throws Exception {
+        int codigo=generarCodigoTipoLiquidacion();
         TipoLiquidacion unTipoLiquidacion = new TipoLiquidacion(codigo, descripcion);
         unosTiposLiquidaciones.add(unTipoLiquidacion);
+        Persistencia.crearTipoLiquidacion(unTipoLiquidacion);
+    }
+    
+    public void modificarTipoLiquidacion(int codigo,String descripcion) throws Exception{
+        TipoLiquidacion unTipoLiquidacion=buscarTipoLiquidacion(codigo);
+        unTipoLiquidacion.setDescripcion(descripcion);
+        Persistencia.modificarTipoLiquidacion(unTipoLiquidacion);
+    }
+    
+    public void borrarTipoLiquidacion(int codigo) throws Exception{
+        TipoLiquidacion unTipoLiquidacion = buscarTipoLiquidacion(codigo);
+        unosTiposLiquidaciones.remove(unTipoLiquidacion);
+        Persistencia.eliminarTipoLiquidacion(codigo);
     }
 
     public void crearArticulo(String nombre, String descripcion, Double precio, int cantidad) throws Exception {
@@ -787,7 +848,10 @@ public class Empresa implements Serializable {
         this.unosProveedores = Persistencia.traerProveedores();
         this.unosEmpleados = Persistencia.traerEmpleados();
         this.unosConceptos=Persistencia.traerConceptos();
-        //this.unosClientes=Persistencia.traerClientes();
+        this.unosTiposVentas=Persistencia.traerTiposVentas();
+        this.unosTiposCompras=Persistencia.traerTiposCompras();
+        this.unosTiposLiquidaciones=Persistencia.traerTiposLiquidaciones();
+        this.unosClientes=Persistencia.traerClientes();
     }
 
     public List<TipoTecnologia> traerTiposDeTecnologias() {
@@ -961,7 +1025,7 @@ public class Empresa implements Serializable {
     }
 
     public Concepto buscarConcepto(int codigo) {
-        Concepto aux = new Concepto();
+        Concepto aux = null;
         Iterator itr = unosConceptos.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -972,5 +1036,69 @@ public class Empresa implements Serializable {
 
         }
         return aux;
+    }
+
+    public List<TipoVenta> traerTipoVenta() {
+        return this.unosTiposVentas;
+    }
+
+    private int generarCodigoTipoVenta() {
+        Iterator<TipoVenta> itLista = this.unosTiposVentas.iterator();
+        TipoVenta unaTipoVenta;
+        int codigoTipo = 0;
+        while (itLista.hasNext()) {
+            unaTipoVenta = itLista.next();
+            if (unaTipoVenta.getCodigo() > codigoTipo) {
+                codigoTipo = unaTipoVenta.getCodigo();
+            }
+        }
+        return codigoTipo + 1;
+    }
+
+    public List<TipoCompra> traerTipoCompra() {
+        return this.unosTiposCompras;
+    }
+
+    private int generarCodigoTipoCompra() {
+        Iterator<TipoCompra> itLista = this.unosTiposCompras.iterator();
+        TipoCompra unaTipoCompra;
+        int codigoTipo = 0;
+        while (itLista.hasNext()) {
+            unaTipoCompra = itLista.next();
+            if (unaTipoCompra.getCodigo() > codigoTipo) {
+                codigoTipo = unaTipoCompra.getCodigo();
+            }
+        }
+        return codigoTipo + 1;
+    }
+
+    public List<TipoLiquidacion> traerLiquidacion() {
+        return this.unosTiposLiquidaciones;
+    }
+
+    private int generarCodigoTipoLiquidacion() {
+        Iterator<TipoLiquidacion> itLista = this.unosTiposLiquidaciones.iterator();
+        TipoLiquidacion unaTipoLiquidacion;
+        int codigoTipo = 0;
+        while (itLista.hasNext()) {
+            unaTipoLiquidacion = itLista.next();
+            if (unaTipoLiquidacion.getCodigo() > codigoTipo) {
+                codigoTipo = unaTipoLiquidacion.getCodigo();
+            }
+        }
+        return codigoTipo + 1;
+    }
+
+    private int generarCodigoDetallerCompraVenta() {
+        Iterator<DetalleCompraVenta> itLista = this.unosDetallesCompraVenta.iterator();
+        DetalleCompraVenta unDetalleCompraVenta;
+        int codigoTipo = 0;
+        while (itLista.hasNext()) {
+            unDetalleCompraVenta = itLista.next();
+            if (unDetalleCompraVenta.getCodigo() > codigoTipo) {
+                codigoTipo = unDetalleCompraVenta.getCodigo();
+            }
+        }
+        return codigoTipo + 1;
     }
 }

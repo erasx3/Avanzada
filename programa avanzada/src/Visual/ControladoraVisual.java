@@ -12,7 +12,9 @@ import Logica.ActividadTecnica;
 import Logica.Articulo;
 import Logica.Cliente;
 import Logica.Concepto;
+import Logica.Consumible;
 import Logica.Detalle;
+import Logica.DetalleCompraVenta;
 import Logica.Empleado;
 import Logica.Empresa;
 import Logica.Equipo;
@@ -31,6 +33,7 @@ import Logica.TipoTecnologia;
 import Logica.TipoVenta;
 import Logica.Turno;
 import Persistencia.exceptions.NonexistentEntityException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JTextField;
@@ -197,11 +200,11 @@ public class ControladoraVisual {
         return this.unaEmpresa.buscarServicioOrdenTrabajo(unCliente);
     }
     
-    public void generarDetalleCompraVenta(int codigo, String descripcion, int cantidad, InterfaceConsumible unConsumible){
-        this.unaEmpresa.generarDetalleCompraVenta(codigo, descripcion, cantidad, unConsumible);
+    public int generarDetalleCompraVenta(String descripcion, int cantidad, Consumible unConsumible) throws Exception{
+        return this.unaEmpresa.generarDetalleCompraVenta(descripcion, cantidad, unConsumible);
     }
     
-    public void generarEncabezado(int codigo, String descripcion, Date fecha, List<Detalle> unosDetalles, PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante){
+    public void generarEncabezado(int codigo, String descripcion, Calendar fecha, List<Detalle> unosDetalles, PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante){
         this.unaEmpresa.generarEncabezado(codigo, descripcion, fecha, unosDetalles, unaPersoneriaJuridica, unTipoComprobante);
     }
     
@@ -213,12 +216,12 @@ public class ControladoraVisual {
         this.unaEmpresa.sumarArticulo(cantidad, unArticulo);
     }
     
-    public void descontarArticulo(int cantidad, Articulo unArticulo){
-        this.unaEmpresa.descontarArticulo(cantidad, unArticulo);
+    public void descontarArticulo(int cantidad, int codigo){
+        this.unaEmpresa.descontarArticulo(cantidad, codigo);
     }
     
-    public boolean comprobarStock(Articulo unArticulo, int cantidad){
-        return this.unaEmpresa.comprobarStock(unArticulo, cantidad);
+    public boolean comprobarStock(int codigo, int cantidad){
+        return this.unaEmpresa.comprobarStock(codigo, cantidad);
     }
     
     public Proveedor buscarProveedor(int codigo){
@@ -277,6 +280,10 @@ public class ControladoraVisual {
         return this.unaEmpresa.buscarTecnologia(codigo);
     }
     
+    public DetalleCompraVenta buscarDetalleCompraVenta(int codigo){
+        return this.unaEmpresa.buscarDetalleCompraVenta(codigo);
+    }
+    
     public TipoTecnologia buscarTipoTecnologia(int codigo){
         return this.unaEmpresa.buscarTipoTecnologia(codigo);
     }
@@ -309,16 +316,40 @@ public class ControladoraVisual {
         this.unaEmpresa.generarProyecto(tiempoEstimado, unosConceptos, unasTecnologias, codigo, descripcion);
     }
     
-    public void crearTipoVenta(int codiog,String descripcion){
-        this.unaEmpresa.crearTipoVenta(codiog, descripcion);
+    public void crearTipoVenta(String descripcion) throws Exception{
+        this.unaEmpresa.crearTipoVenta(descripcion);
     }
     
-    public void crearTipoCompra(int codiog,String descripcion){
-        this.unaEmpresa.crearTipoCompra(codiog, descripcion);
+    public void modificarTipooVenta(int codigo,String descripcion) throws Exception{
+        this.unaEmpresa.modificarTipooVenta(codigo, descripcion);
     }
     
-    public void crearTipoLiquidacion(int codiog,String descripcion){
-        this.unaEmpresa.crearTipoLiquidacion(codiog, descripcion);
+    public void borrarTipoVenta(int codigo) throws Exception{
+        this.unaEmpresa.borrarTipoVenta(codigo);
+    }
+    
+    public void crearTipoCompra(String descripcion) throws Exception{
+        this.unaEmpresa.crearTipoCompra(descripcion);
+    }
+    
+    public void modificarTipoCompra(int codigo,String descripcion) throws Exception {
+        this.unaEmpresa.modificarTipoCompra(codigo, descripcion);
+    }
+    
+    public void borrarTipoCompra(int codigo) throws Exception{
+        this.unaEmpresa.borrarTipoCompra(codigo);
+    }
+    
+    public void crearTipoLiquidacion(String descripcion) throws Exception{
+        this.unaEmpresa.crearTipoLiquidacion(descripcion);
+    }
+    
+    public void modificarTipoLiquidacion(int codigo,String descripcion) throws Exception{
+        this.unaEmpresa.modificarTipoLiquidacion(codigo, descripcion);
+    }
+    
+    public void borrarTipoLiquidacion(int codigo) throws Exception{
+        this.unaEmpresa.borrarTipoLiquidacion(codigo);
     }
     
     public void crearArticulo(String nombre,String descripcion,Double precio,int cantidad) throws Exception{
@@ -375,5 +406,17 @@ public class ControladoraVisual {
     
     public List<Concepto> traerConcepto(){
         return this.unaEmpresa.traerConcepto();
+    }
+
+    public List<TipoVenta> traerTipoVenta(){
+        return this.unaEmpresa.traerTipoVenta();
+    }
+
+    public List<TipoCompra> traerTipoCompra() {
+        return this.unaEmpresa.traerTipoCompra();
+    }
+
+    public List<TipoLiquidacion> traerTipoLiquidacion() {
+        return this.unaEmpresa.traerLiquidacion();
     }
 }

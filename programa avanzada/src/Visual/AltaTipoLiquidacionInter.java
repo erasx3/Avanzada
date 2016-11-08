@@ -5,6 +5,12 @@
  */
 package Visual;
 
+import Logica.TipoLiquidacion;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Facu
@@ -12,10 +18,14 @@ package Visual;
 public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
+    private DefaultTableModel modeloLiquidacion;
     
     public AltaTipoLiquidacionInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        txtCodigo.setVisible(false);
         this.miControladoraVisual=miControladoraVisual;
+        this.modeloLiquidacion=(DefaultTableModel) this.tblLiquidacion.getModel();
+        refrescarVentana();
     }
 
     /**
@@ -35,17 +45,33 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
         cmdBorrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLiquidacion = new javax.swing.JTable();
+        txtCodigo = new javax.swing.JTextField();
 
         setClosable(true);
         setTitle("Tipo de Liquidacion");
 
         cmdAgregar.setText("Agregar");
+        cmdAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Descripcion:");
 
         cmdModificar.setText("Modificar");
+        cmdModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificarActionPerformed(evt);
+            }
+        });
 
         cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
 
         tblLiquidacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,6 +92,11 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        tblLiquidacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblLiquidacionMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblLiquidacion);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -84,7 +115,9 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCodigo)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -97,7 +130,9 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addGap(20, 20, 20)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -106,7 +141,7 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
                             .addComponent(cmdModificar)
                             .addComponent(cmdBorrar)
                             .addComponent(cmdAgregar))))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,6 +158,44 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
+        try {
+            this.miControladoraVisual.crearTipoLiquidacion(txtDescripcion.getText());
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaTipoLiquidacionInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdAgregarActionPerformed
+
+    private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
+        try {
+            this.miControladoraVisual.modificarTipoLiquidacion(Integer.parseInt(txtCodigo.getText()), txtDescripcion.getText());
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaTipoLiquidacionInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+    }//GEN-LAST:event_cmdModificarActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+        try {
+            this.miControladoraVisual.borrarTipoLiquidacion(Integer.parseInt(txtCodigo.getText()));
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(AltaTipoLiquidacionInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void tblLiquidacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLiquidacionMouseClicked
+        txtCodigo.setText(null);
+        txtDescripcion.setText(null);
+        
+        int fila = this.tblLiquidacion.rowAtPoint(evt.getPoint());
+        
+        txtCodigo.setText(this.modeloLiquidacion.getValueAt(fila, 0).toString());
+        txtDescripcion.setText(this.modeloLiquidacion.getValueAt(fila, 1).toString());
+    }//GEN-LAST:event_tblLiquidacionMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAgregar;
@@ -132,6 +205,23 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblLiquidacion;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescarVentana() {
+        txtCodigo.setText(null);
+        txtDescripcion.setText(null);
+        modeloLiquidacion.setRowCount(0);
+        cargarTablaCompra();
+    }
+
+    private void cargarTablaCompra() {
+        Iterator<TipoLiquidacion> itTipoLiquidacion = this.miControladoraVisual.traerTipoLiquidacion().iterator();
+        TipoLiquidacion unTipo;
+        while(itTipoLiquidacion.hasNext()){
+            unTipo=itTipoLiquidacion.next();
+            modeloLiquidacion.addRow(new Object[]{unTipo.getCodigo(),unTipo.getDescripcion()});
+        }
+    }
 }
