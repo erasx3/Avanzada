@@ -11,37 +11,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
 
 /**
  *
  * @author eras
  */
-@MappedSuperclass
-public abstract class Detalle implements Serializable {
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Detalle implements Serializable  {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
-    @Basic
-    private String descripcion;
     @Basic
     private Double subtotal;
 
     public Detalle() {
     }
 
-    public Detalle(int codigo, String descripcion) {
+    public Detalle(int codigo, Double subtotal) {
         this.codigo = codigo;
-        this.descripcion = descripcion;
+        this.subtotal=subtotal;
     }
 
     public int getCodigo() {
         return codigo;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+   
 
     public Double getSubtotal() {
         return subtotal;
@@ -51,9 +50,7 @@ public abstract class Detalle implements Serializable {
         this.codigo = codigo;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+   
 
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;

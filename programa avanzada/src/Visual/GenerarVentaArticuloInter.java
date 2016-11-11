@@ -6,11 +6,17 @@
 package Visual;
 
 import Logica.Articulo;
+import Logica.Cliente;
 import Logica.Consumible;
+import Logica.Detalle;
 import Logica.DetalleCompraVenta;
+import Logica.TipoComprobante;
 import Logica.TipoVenta;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -23,12 +29,19 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloDetalle;
+    private int codigoDetalle;
+    private int fila;
+    private List<Detalle> unosDetalle;
 
     public GenerarVentaArticuloInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        this.cmdVenta.setEnabled(false);
+        this.cmdAgregarArticulo.setEnabled(false);
         this.txtCodigoCliente.setVisible(false);
         this.miControladoraVisual = miControladoraVisual;
         this.modeloDetalle = (DefaultTableModel) this.tblDetalleArticulo.getModel();
+        this.modeloDetalle.setRowCount(0);
+        refrescarVentanaArticulo();
         cargarCmbComprobantes();
     }
 
@@ -61,6 +74,12 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
         cmbComprobantes = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         cmdAgregarArticulo = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        cmdBorarDetalle = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        cmdVenta = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Venta de Articulo");
@@ -84,22 +103,27 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Codigo", "Descripcion", "Cantidad", "Articulo"
+                "Codigo", "Cantidad", "Articulo", "Subtotal"
             }
         ));
+        tblDetalleArticulo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDetalleArticuloMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDetalleArticulo);
 
         jLabel3.setText("Codigo Articulo:");
 
         jLabel4.setText("Nombre Articulo:");
 
-        lblCodigoArticulo.setText("xxxxxxx");
+        lblCodigoArticulo.setText("xxxxxx");
 
-        lblNombreArticulo.setText("nombre");
+        lblNombreArticulo.setText("Nombre");
 
         jLabel5.setText("Cantidad:");
 
-        lblNombreCliente.setText("nombre");
+        lblNombreCliente.setText("Nombre");
 
         cmdBuscarArticulo.setText("Buscar Articulo");
         cmdBuscarArticulo.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +134,7 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Precio:");
 
-        lblPrecio.setText("$$$");
+        lblPrecio.setText("0.00");
 
         cmbComprobantes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -123,48 +147,83 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel8.setText("$");
+
+        cmdBorarDetalle.setText("Borrar Renglon");
+        cmdBorarDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorarDetalleActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Total:");
+
+        jLabel10.setText("$");
+
+        lblTotal.setText("0.00");
+
+        cmdVenta.setText("Finalizar Venta");
+        cmdVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdVentaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblCodigoArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                                .addComponent(lblNombreArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblNombreCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCodigoCliente))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel7))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(cmbComprobantes, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel1))
+                                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(40, 40, 40)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cmdBuscarArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                                        .addComponent(cmdBuscarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                                        .addComponent(cldFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cmdAgregarArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblCodigoArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                            .addComponent(lblNombreArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNombreCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCodigoCliente))
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(cmbComprobantes, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel1))
-                                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cmdBuscarArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                                    .addComponent(cmdBuscarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                                    .addComponent(cldFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cmdAgregarArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmdVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdBorarDetalle, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -201,10 +260,20 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
                     .addComponent(lblNombreArticulo)
                     .addComponent(jLabel6)
                     .addComponent(lblPrecio)
-                    .addComponent(cmdAgregarArticulo))
+                    .addComponent(cmdAgregarArticulo)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cmdBorarDetalle)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel10)
+                        .addComponent(lblTotal)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmdVenta)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -220,16 +289,24 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
         ArticuloBusquedaInter articuloBusqueda = new ArticuloBusquedaInter(miControladoraVisual);
         MenuPrincipal.Escritorio.add(articuloBusqueda);
         articuloBusqueda.show();
+        this.cmdBuscarArticulo.setEnabled(false);
+        this.cmdAgregarArticulo.setEnabled(true);
     }//GEN-LAST:event_cmdBuscarArticuloActionPerformed
 
     private void cmdAgregarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarArticuloActionPerformed
         try {
             if (this.miControladoraVisual.comprobarStock(Integer.parseInt(lblCodigoArticulo.getText()), Integer.parseInt(txtCantidad.getText()))) {
                 Consumible unConsumible = this.miControladoraVisual.buscarArticulo(Integer.parseInt(lblCodigoArticulo.getText()));
-                int codigo = this.miControladoraVisual.generarDetalleCompraVenta(lblNombreArticulo.getText(), Integer.parseInt(txtCantidad.getText()), unConsumible);
+                Double subtotal = Integer.parseInt(txtCantidad.getText()) * Double.parseDouble(lblPrecio.getText());
+                Double total = subtotal + Double.parseDouble(lblTotal.getText());
+                this.lblTotal.setText(String.valueOf(total));
+                int codigo = this.miControladoraVisual.generarDetalleCompraVenta(Integer.parseInt(txtCantidad.getText()), unConsumible, subtotal);
                 this.miControladoraVisual.descontarArticulo(Integer.parseInt(txtCantidad.getText()), Integer.parseInt(lblCodigoArticulo.getText()));
                 cargarTablaDetaller(codigo);
                 refrescarVentanaArticulo();
+                this.cmdAgregarArticulo.setEnabled(false);
+                this.cmdBuscarArticulo.setEnabled(true);
+                this.cmdVenta.setEnabled(true);
             } else {
                 System.out.print("no existe sufienciente cantidad");
             }
@@ -238,25 +315,78 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmdAgregarArticuloActionPerformed
 
+    private void tblDetalleArticuloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetalleArticuloMouseClicked
+        this.fila = this.tblDetalleArticulo.rowAtPoint(evt.getPoint());
+        this.codigoDetalle = Integer.parseInt(this.modeloDetalle.getValueAt(fila, 0).toString());
+    }//GEN-LAST:event_tblDetalleArticuloMouseClicked
+
+    private void cmdBorarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorarDetalleActionPerformed
+        try {
+            DetalleCompraVenta unDetalle = this.miControladoraVisual.buscarDetalleCompraVenta(this.codigoDetalle);
+            int codigoArticulo = unDetalle.getUnConsumible().getCodigo();
+            this.miControladoraVisual.sumarArticulo(unDetalle.getCantidad(), codigoArticulo);
+            this.miControladoraVisual.borrarDetalleCompraVenta(unDetalle.getCodigo());
+            this.modeloDetalle.removeRow(this.fila);
+            this.lblTotal.setText(String.valueOf(Double.parseDouble(lblTotal.getText()) - unDetalle.getSubtotal()));
+        } catch (Exception ex) {
+            Logger.getLogger(GenerarVentaArticuloInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdBorarDetalleActionPerformed
+
+    private void cmdVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdVentaActionPerformed
+        this.unosDetalle = new LinkedList();
+        DetalleCompraVenta unDetalleCompraVenta;
+        Calendar fecha = new GregorianCalendar();
+        Cliente unCliente;
+        TipoComprobante unComprobante;
+        Double total = 0.00;
+        int codigo;
+        String cadena = (String) this.cmbComprobantes.getSelectedItem();
+        String[] partes = cadena.split("-");
+        int codigoComp = Integer.parseInt(partes[0]);
+        for (int i = 0; i < modeloDetalle.getRowCount(); i++) {
+            codigo = Integer.parseInt(this.modeloDetalle.getValueAt(i, 0).toString());
+            unDetalleCompraVenta = this.miControladoraVisual.buscarDetalleCompraVenta(codigo);
+            total = total + unDetalleCompraVenta.getSubtotal();
+            this.unosDetalle.add(unDetalleCompraVenta);
+        }
+        fecha = this.cldFecha.getCalendar();
+        unCliente = this.miControladoraVisual.buscarClient(Integer.parseInt(txtCodigoCliente.getText()));
+        unComprobante = this.miControladoraVisual.buscarTipoVenta(codigoComp);
+        try {
+            this.miControladoraVisual.generarEncabezado(fecha, unCliente, unComprobante,this.unosDetalle, total);
+            refrescarVentanaArticulo();
+            refrescarVentanaFinalizacion();
+        } catch (Exception ex) {
+            Logger.getLogger(GenerarVentaArticuloInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdVentaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser cldFecha;
     private javax.swing.JComboBox<String> cmbComprobantes;
     private javax.swing.JButton cmdAgregarArticulo;
+    private javax.swing.JButton cmdBorarDetalle;
     private javax.swing.JButton cmdBuscarArticulo;
     private javax.swing.JButton cmdBuscarCliente;
+    private javax.swing.JButton cmdVenta;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel lblCodigoArticulo;
     public static javax.swing.JLabel lblNombreArticulo;
     public static javax.swing.JLabel lblNombreCliente;
     public static javax.swing.JLabel lblPrecio;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JTable tblDetalleArticulo;
     private javax.swing.JTextField txtCantidad;
     public static javax.swing.JTextField txtCodigoCliente;
@@ -274,13 +404,20 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
 
     private void cargarTablaDetaller(int codigo) {
         DetalleCompraVenta unDetalle = this.miControladoraVisual.buscarDetalleCompraVenta(codigo);
-        modeloDetalle.addRow(new Object[]{unDetalle.getCodigo(),unDetalle.getDescripcion(),unDetalle.getCantidad(),unDetalle.getUnConsumible()});
+        modeloDetalle.addRow(new Object[]{unDetalle.getCodigo(), unDetalle.getCantidad(), unDetalle.getUnConsumible(), unDetalle.getSubtotal()});
+    }
+
+    private void refrescarVentanaArticulo() {
+        GenerarVentaArticuloInter.lblCodigoArticulo.setText("xxxxxx");
+        GenerarVentaArticuloInter.lblNombreArticulo.setText("Nombre");
+        GenerarVentaArticuloInter.lblPrecio.setText("0.00");
+        this.txtCantidad.setText(null);
     }
     
-    private void refrescarVentanaArticulo(){
-        lblCodigoArticulo.setText("xxxxx");
-        lblNombreArticulo.setText("nombre");
-        lblPrecio.setText("$$$");
-        txtCantidad.setText(null);
+    private void refrescarVentanaFinalizacion(){
+        this.modeloDetalle.setRowCount(0);
+        GenerarVentaArticuloInter.txtCodigoCliente.setText("Nombre");
+        GenerarVentaArticuloInter.lblCodigoArticulo.setText("xxxxxx");
+        this.lblTotal.setText("0.00");
     }
 }

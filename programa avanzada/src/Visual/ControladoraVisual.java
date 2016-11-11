@@ -60,7 +60,11 @@ public class ControladoraVisual {
     
     
     //Metodo de conexion con la Logica
-     public Cliente buscarCliente(long dni) {
+    public Cliente buscarClient(int codigo){
+        return this.unaEmpresa.buscarClient(codigo);
+    }
+    
+    public Cliente buscarCliente(long dni) {
         return this.unaEmpresa.buscarCliente(dni);
     }
 
@@ -108,8 +112,8 @@ public class ControladoraVisual {
         this.unaEmpresa.generarEstadoEquipo(codigo, descripcion, unEquipo, unTipoEstado, unaOrdenTrabajo);
     }
 
-    public void generarServicioTecnico(int codigo, String descripcion) {
-        this.unaEmpresa.generarServicioTecnico(codigo, descripcion);
+    public void generarServicioTecnico(String descripcion,Double subtotal,List unosDetallesCompraVenta) throws Exception {
+        this.unaEmpresa.generarServicioTecnico(descripcion,subtotal,unosDetallesCompraVenta);
     }
 
     public void generarServicioTercero(int codigo, String descripcion, Double monto, int ganancia) {
@@ -200,23 +204,27 @@ public class ControladoraVisual {
         return this.unaEmpresa.buscarServicioOrdenTrabajo(unCliente);
     }
     
-    public int generarDetalleCompraVenta(String descripcion, int cantidad, Consumible unConsumible) throws Exception{
-        return this.unaEmpresa.generarDetalleCompraVenta(descripcion, cantidad, unConsumible);
+    public int generarDetalleCompraVenta( int cantidad, Consumible unConsumible,Double subtotal) throws Exception{
+        return this.unaEmpresa.generarDetalleCompraVenta(cantidad, unConsumible,subtotal);
     }
     
-    public void generarEncabezado(int codigo, String descripcion, Calendar fecha, List<Detalle> unosDetalles, PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante){
-        this.unaEmpresa.generarEncabezado(codigo, descripcion, fecha, unosDetalles, unaPersoneriaJuridica, unTipoComprobante);
+    public void borrarDetalleCompraVenta(int codigo) throws Exception{
+        this.unaEmpresa.borrarDetalleCompraVenta(codigo);
+    }
+    
+    public void generarEncabezado(Calendar fecha,  PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante,List<Detalle> unosDetalles,Double total) throws Exception{
+        this.unaEmpresa.generarEncabezado(fecha, unaPersoneriaJuridica, unTipoComprobante,unosDetalles,total);
     }
     
     public Articulo buscarArticulo(int codigo){
         return this.unaEmpresa.buscarArticulo(codigo);
     }
     
-    public void sumarArticulo(int cantidad, Articulo unArticulo){
-        this.unaEmpresa.sumarArticulo(cantidad, unArticulo);
+    public void sumarArticulo(int cantidad, int codigo) throws Exception{
+        this.unaEmpresa.sumarArticulo(cantidad, codigo);
     }
     
-    public void descontarArticulo(int cantidad, int codigo){
+    public void descontarArticulo(int cantidad, int codigo) throws Exception{
         this.unaEmpresa.descontarArticulo(cantidad, codigo);
     }
     
@@ -252,8 +260,8 @@ public class ControladoraVisual {
         return this.unaEmpresa.buscarManoDeObra(unEmpleado, fechaInicio, fechaFin);
     }
     
-    public void generarDetalleLiquidacion(int codigo, String descripcion, ManoDeObra unaManoDeObra){
-        this.unaEmpresa.generarDetalleLiquidacion(codigo, descripcion, unaManoDeObra);
+    public void generarDetalleLiquidacion(ManoDeObra unaManoDeObra,Double subtotal){
+        this.unaEmpresa.generarDetalleLiquidacion(unaManoDeObra,subtotal);
     }
     
     public List<OrdenTrabajo> buscarOrdenTrabajo(Equipo unEquipo){

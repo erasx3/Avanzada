@@ -13,17 +13,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Pepe
  */
-public class ArticuloBusquedaInter extends javax.swing.JInternalFrame {
+public class ArticuloBusquedaSTInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modelosArticulo;
 
     /**
-     * Creates new form ArticuloBusquedaInter
+     * Creates new form ArticuloBuscquedaSTInter
      */
-    public ArticuloBusquedaInter(ControladoraVisual miControladoraVisual) {
+    public ArticuloBusquedaSTInter(ControladoraVisual miControladoraVisual) {
         initComponents();
-        this.miControladoraVisual=miControladoraVisual;
+        this.miControladoraVisual = miControladoraVisual;
         this.modelosArticulo = (DefaultTableModel) this.tblArticulo.getModel();
         refrescarVentana();
     }
@@ -76,22 +76,22 @@ public class ArticuloBusquedaInter extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblArticuloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblArticuloMouseClicked
-        GenerarVentaArticuloInter.lblCodigoArticulo.setText(null);
-        GenerarVentaArticuloInter.lblNombreArticulo.setText(null);
-        GenerarVentaArticuloInter.lblPrecio.setText(null);
-        
+        GenerarServicioTecnico.lblCodigoArticulo.setText(null);
+        GenerarServicioTecnico.lblNombreArticulo.setText(null);
+        GenerarServicioTecnico.lblPrecio.setText(null);
+
         int fila = this.tblArticulo.rowAtPoint(evt.getPoint());
-        
-        GenerarVentaArticuloInter.lblCodigoArticulo.setText(this.modelosArticulo.getValueAt(fila, 0).toString());
-        GenerarVentaArticuloInter.lblNombreArticulo.setText(this.modelosArticulo.getValueAt(fila, 1).toString());
-        GenerarVentaArticuloInter.lblPrecio.setText(this.modelosArticulo.getValueAt(fila, 3).toString());
+
+        GenerarServicioTecnico.lblCodigoArticulo.setText(this.modelosArticulo.getValueAt(fila, 0).toString());
+        GenerarServicioTecnico.lblNombreArticulo.setText(this.modelosArticulo.getValueAt(fila, 1).toString());
+        GenerarServicioTecnico.lblPrecio.setText(this.modelosArticulo.getValueAt(fila, 3).toString());
         this.dispose();
     }//GEN-LAST:event_tblArticuloMouseClicked
 
@@ -100,7 +100,7 @@ public class ArticuloBusquedaInter extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblArticulo;
     // End of variables declaration//GEN-END:variables
-
+    
     private void refrescarVentana() {
         modelosArticulo.setRowCount(0);
         cargarTablaArticulo();
@@ -114,5 +114,4 @@ public class ArticuloBusquedaInter extends javax.swing.JInternalFrame {
             modelosArticulo.addRow(new Object[]{unTipo.getCodigo(), unTipo.getNombre(), unTipo.getDescripcion(), unTipo.getPrecio(), unTipo.getCantidad()});
         }
     }
-
 }

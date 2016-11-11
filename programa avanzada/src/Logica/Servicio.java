@@ -32,6 +32,15 @@ public class Servicio extends Consumible{
         super(codigo, descripcion);
     }
 
+    public Servicio(Double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public Servicio(int codigo, String descripcion,Double subtotal ) {
+        super(codigo, descripcion);
+        this.subtotal = subtotal;
+    }
+
     public Double getSubtotal() {
         return subtotal;
     }

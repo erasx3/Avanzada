@@ -16,8 +16,8 @@ import javax.persistence.GenerationType;
  * @author Facu
  */
 @Entity
-public class Articulo extends Consumible implements Serializable{
-    
+public class Articulo extends Consumible implements Serializable {
+
     @Basic
     private String nombre;
     @Basic
@@ -29,17 +29,15 @@ public class Articulo extends Consumible implements Serializable{
     }
 
     public Articulo(int codigo, String nombre, String descripcion, Double precio, int cantidad) {
-        super(codigo,descripcion);
+        super(codigo, descripcion);
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
     }
 
-
     public String getNombre() {
         return nombre;
     }
-
 
     public Double getPrecio() {
         return precio;
@@ -49,13 +47,9 @@ public class Articulo extends Consumible implements Serializable{
         return cantidad;
     }
 
-   
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-   
 
     public void setPrecio(Double precio) {
         this.precio = precio;
@@ -64,27 +58,27 @@ public class Articulo extends Consumible implements Serializable{
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
-    
-    public boolean isArticulo(int codigo){
+
+    public boolean isArticulo(int codigo) {
         boolean aux = false;
-        if(super.getCodigo() == codigo){
+        if (super.getCodigo() == codigo) {
             aux = true;
         }
         return aux;
     }
-    
-    public void sumarArticulo(int cantidad){
+
+    public void sumarArticulo(int cantidad) {
         this.cantidad = this.cantidad + cantidad;
     }
-    
-    public void descontarArticulo(int cantidad){
+
+    public void descontarArticulo(int cantidad) {
         this.cantidad = this.cantidad - cantidad;
+
     }
-    
-    public boolean comprobarStock(int cantidad){
+
+    public boolean comprobarStock(int cantidad) {
         boolean aux = false;
-        if(this.getCantidad() >= cantidad){
+        if (this.getCantidad() >= cantidad) {
             aux = true;
         }
         return aux;
@@ -94,6 +88,5 @@ public class Articulo extends Consumible implements Serializable{
     public String toString() {
         return this.nombre;
     }
-    
-    
+
 }

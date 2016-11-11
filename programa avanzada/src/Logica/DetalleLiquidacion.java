@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -20,15 +21,15 @@ import javax.persistence.OneToOne;
 public class DetalleLiquidacion extends Detalle {
     
     //Relaciones
-    @OneToOne
+    @ManyToOne
     private ManoDeObra unaManoDeObra;
     
 
     public DetalleLiquidacion() {
     }
 
-    public DetalleLiquidacion(int codigo, String descripcion,ManoDeObra unaManoDeObra) {
-        super(codigo, descripcion);
+    public DetalleLiquidacion(int codigo, ManoDeObra unaManoDeObra,Double subtotal) {
+        super(codigo, subtotal);
         this.unaManoDeObra = unaManoDeObra;
     }
 

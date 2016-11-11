@@ -19,7 +19,6 @@ import javax.persistence.Table;
  * @author eras
  */
 @Entity
-@Table(name = "DetalleCompraVenta")
 public class DetalleCompraVenta extends Detalle{
     
     @Basic
@@ -29,8 +28,8 @@ public class DetalleCompraVenta extends Detalle{
     @ManyToOne
     private Consumible unConsumible;
 
-    public DetalleCompraVenta(int cantidad, int codigo, String descripcion, Consumible unConsumible) {
-        super(codigo, descripcion);
+    public DetalleCompraVenta(int cantidad, int codigo, Consumible unConsumible,Double subtotal) {
+        super(codigo, subtotal);
         this.cantidad = cantidad;
         this.unConsumible=unConsumible;
     }

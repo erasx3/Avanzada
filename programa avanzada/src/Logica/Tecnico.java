@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -19,18 +20,26 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Tecnico extends Servicio {
-    
+
     //Relaciones
     @OneToMany
-    private List<Articulo> unosArticulos;
+    private List<DetalleCompraVenta> unosDetalleCompraVentas=new LinkedList<DetalleCompraVenta>();
+
 
     public Tecnico() {
     }
 
-    public Tecnico(int codigo, String descripcion) {
-        super(codigo, descripcion);
+    public Tecnico(int codigo, String descripcion, Double subtotal,List unosDetallesCompraVenta) {
+        super(codigo, descripcion, subtotal);
+        this.unosDetalleCompraVentas.addAll(unosDetallesCompraVenta);
     }
-    
-       
-    
+
+    public List<DetalleCompraVenta> getUnosDetalleCompraVentas() {
+        return unosDetalleCompraVentas;
+    }
+
+    public void setUnosDetalleCompraVentas(List<DetalleCompraVenta> unosDetalleCompraVentas) {
+        this.unosDetalleCompraVentas = unosDetalleCompraVentas;
+    }
+
 }

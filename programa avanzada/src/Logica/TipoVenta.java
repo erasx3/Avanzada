@@ -16,7 +16,6 @@ import javax.persistence.Table;
  * @author eras
  */
 @Entity
-@Table(name="tipoventa")
 public class TipoVenta extends TipoComprobante {
 
     public TipoVenta() {

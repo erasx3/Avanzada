@@ -70,6 +70,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         mnuOrdendeTrabajo = new javax.swing.JMenuItem();
         mnuTurno = new javax.swing.JMenuItem();
         mnuConcepto = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        mnuServicioTecnico = new javax.swing.JMenuItem();
+        mnuServicioTercero = new javax.swing.JMenuItem();
+        mnuServicioProyecto = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         mnuBalanceVentas = new javax.swing.JMenuItem();
         mnuBalanceCompras = new javax.swing.JMenuItem();
@@ -285,6 +289,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(mnuConcepto);
 
+        jMenu7.setText("Servicio");
+
+        mnuServicioTecnico.setText("S. Tecnico");
+        mnuServicioTecnico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuServicioTecnicoActionPerformed(evt);
+            }
+        });
+        jMenu7.add(mnuServicioTecnico);
+
+        mnuServicioTercero.setText("S. Tercero");
+        mnuServicioTercero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuServicioTerceroActionPerformed(evt);
+            }
+        });
+        jMenu7.add(mnuServicioTercero);
+
+        mnuServicioProyecto.setText("Proyecto");
+        jMenu7.add(mnuServicioProyecto);
+
+        jMenu3.add(jMenu7);
+
         jMenuBar1.add(jMenu3);
 
         jMenu6.setText("Estadisticas");
@@ -490,6 +517,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         unProyecto.show();
     }//GEN-LAST:event_mnuProyectoActionPerformed
 
+    private void mnuServicioTecnicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuServicioTecnicoActionPerformed
+        GenerarServicioTecnico unServicioTecnico = new GenerarServicioTecnico(miControladoraVisual);
+        this.Escritorio.add(unServicioTecnico);
+        unServicioTecnico.show();
+    }//GEN-LAST:event_mnuServicioTecnicoActionPerformed
+
+    private void mnuServicioTerceroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuServicioTerceroActionPerformed
+        GenerarServicioTercero unServicioTercero=new GenerarServicioTercero(miControladoraVisual);
+        this.Escritorio.add(unServicioTercero);
+        unServicioTercero.show();
+    }//GEN-LAST:event_mnuServicioTerceroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -503,6 +542,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem manuTecnologia;
     private javax.swing.JMenuItem mnuActAdministrativa;
@@ -520,6 +560,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuOrdendeTrabajo;
     private javax.swing.JMenuItem mnuProveedor;
     private javax.swing.JMenuItem mnuProyecto;
+    private javax.swing.JMenuItem mnuServicioProyecto;
+    private javax.swing.JMenuItem mnuServicioTecnico;
+    private javax.swing.JMenuItem mnuServicioTercero;
     private javax.swing.JMenuItem mnuTipoCompra;
     private javax.swing.JMenuItem mnuTipoEstado;
     private javax.swing.JMenuItem mnuTipoLiquidacion;

@@ -6,6 +6,7 @@
 package Persistencia;
 
 import Logica.Encabezado;
+import Logica.TipoCompra;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;

@@ -7,16 +7,21 @@ package Logica;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.eclipse.persistence.internal.jpa.rs.metadata.model.Link;
 
 /**
  *
@@ -25,42 +30,37 @@ import javax.persistence.TemporalType;
 @Entity
 public class Encabezado implements Serializable {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+//    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
-    @Basic
-    private String descripcion;
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar fecha;
     @Basic
     private Double total;
     
     //Relaciones
-    @OneToOne
+    @ManyToOne
     private TipoComprobante unTipoComprobante;
     @OneToMany
-    private List<Detalle> unosDetalles;
-    @OneToOne
+    @JoinColumn(name = "EncabezadoFK", referencedColumnName = "codigo"  )
+    private List<Detalle> unosDetalles = new LinkedList<Detalle>();
+    @ManyToOne
     private PersoneriaJuridica unaPersoneriaJuridica;
     
 
     public Encabezado() {
     }
 
-    public Encabezado(int codigo, String descripcion, Calendar fecha, TipoComprobante unTipoComprobante, List<Detalle> unosDetalles, PersoneriaJuridica unaPersoneriaJuridica) {
+    public Encabezado(int codigo,Calendar fecha, TipoComprobante unTipoComprobante,List<Detalle> unosDetalles,  PersoneriaJuridica unaPersoneriaJuridica,Double total) {
         this.codigo = codigo;
-        this.descripcion = descripcion;
         this.fecha = fecha;
         this.unTipoComprobante = unTipoComprobante;
         this.unosDetalles.addAll(unosDetalles);
         this.unaPersoneriaJuridica = unaPersoneriaJuridica;
+        this.total=total;
     }
 
     public int getCodigo() {
         return codigo;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
     }
 
     public Calendar getFecha() {
@@ -75,16 +75,36 @@ public class Encabezado implements Serializable {
         this.codigo = codigo;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public void setFecha(Calendar fecha) {
         this.fecha = fecha;
     }
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public TipoComprobante getUnTipoComprobante() {
+        return unTipoComprobante;
+    }
+
+    public void setUnTipoComprobante(TipoComprobante unTipoComprobante) {
+        this.unTipoComprobante = unTipoComprobante;
+    }
+
+    public List<Detalle> getUnosDetalles() {
+        return unosDetalles;
+    }
+
+    public void setUnosDetalles(List<Detalle> unosDetalles) {
+        this.unosDetalles = unosDetalles;
+    }
+
+    public PersoneriaJuridica getUnaPersoneriaJuridica() {
+        return unaPersoneriaJuridica;
+    }
+
+    public void setUnaPersoneriaJuridica(PersoneriaJuridica unaPersoneriaJuridica) {
+        this.unaPersoneriaJuridica = unaPersoneriaJuridica;
     }
     
     
