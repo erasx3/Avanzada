@@ -5,6 +5,7 @@
  */
 package Visual;
 
+import Reporte.ControladoraReporte;
 import Logica.Actividad;
 import Logica.ActividadAdministrativa;
 import Logica.ActividadProyecto;
@@ -17,6 +18,7 @@ import Logica.Detalle;
 import Logica.DetalleCompraVenta;
 import Logica.Empleado;
 import Logica.Empresa;
+import Logica.Encabezado;
 import Logica.Equipo;
 import Logica.InterfaceConsumible;
 import Logica.ManoDeObra;
@@ -24,6 +26,7 @@ import Logica.OrdenTrabajo;
 import Logica.PersoneriaJuridica;
 import Logica.Proveedor;
 import Logica.Servicio;
+import Logica.Tecnico;
 import Logica.Tecnologia;
 import Logica.TipoCompra;
 import Logica.TipoComprobante;
@@ -48,9 +51,12 @@ public class ControladoraVisual {
     
      //Controladora Logica
     private Empresa unaEmpresa;
-
+    private ControladoraReporte miControladoraReporte;
+            
+  
     public ControladoraVisual() {
         this.unaEmpresa = new Empresa();
+        this.miControladoraReporte= new ControladoraReporte(unaEmpresa);
         this.unaEmpresa.ConexionConBD();
     }
     
@@ -115,7 +121,11 @@ public class ControladoraVisual {
     public void generarServicioTecnico(String descripcion,Double subtotal,List unosDetallesCompraVenta) throws Exception {
         this.unaEmpresa.generarServicioTecnico(descripcion,subtotal,unosDetallesCompraVenta);
     }
-
+    
+    public void borrarServicioTecnico(int codigo) throws Exception{
+        this.unaEmpresa.borrarServicioTecnico(codigo);
+    }
+    
     public void generarServicioTercero(int codigo, String descripcion, Double monto, int ganancia) {
         this.unaEmpresa.generarServicioTercero(codigo, descripcion, monto, ganancia);
     }
@@ -216,6 +226,10 @@ public class ControladoraVisual {
         this.unaEmpresa.generarEncabezado(fecha, unaPersoneriaJuridica, unTipoComprobante,unosDetalles,total);
     }
     
+    public void borrarEncabezado(int codigo) throws Exception{
+        this.unaEmpresa.borrarEncabezado(codigo);
+    }
+    
     public Articulo buscarArticulo(int codigo){
         return this.unaEmpresa.buscarArticulo(codigo);
     }
@@ -286,6 +300,10 @@ public class ControladoraVisual {
     
     public Tecnologia buscarTecnologia(int codigo){
         return this.unaEmpresa.buscarTecnologia(codigo);
+    }
+    
+    public Tecnico buscarServicioTecnico(int codigo){
+        return this.unaEmpresa.buscarServicioTecnico(codigo);
     }
     
     public DetalleCompraVenta buscarDetalleCompraVenta(int codigo){
@@ -426,5 +444,17 @@ public class ControladoraVisual {
 
     public List<TipoLiquidacion> traerTipoLiquidacion() {
         return this.unaEmpresa.traerLiquidacion();
+    }
+
+    public List<Tecnico> traerServicioTecnico() {
+        return this.unaEmpresa.traerServicioTecnico();
+    }
+
+    public List<Encabezado> traerEncabezado(){
+        return this.unaEmpresa.traerEncabezado();
+    }
+
+    public Encabezado buscarEncabezado(int codigo) {
+        return this.unaEmpresa.buscarEncabezado(codigo);
     }
 }

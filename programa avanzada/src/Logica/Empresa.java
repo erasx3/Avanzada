@@ -38,6 +38,8 @@ public class Empresa implements Serializable {
     @OneToMany
     private List<Encabezado> unosEncabezados = new LinkedList();
     @OneToMany
+    private List<PersoneriaJuridica> unasPersoneriaJuridicas = new LinkedList();
+    @OneToMany
     private List<Cliente> unosClientes = new LinkedList();
     @OneToMany
     private List<Proveedor> unosProveedores = new LinkedList();
@@ -51,6 +53,8 @@ public class Empresa implements Serializable {
     private List<ActividadProyecto> unasActProyecto = new LinkedList();
     @OneToMany
     private List<ActividadTecnica> unasActTecnicas = new LinkedList();
+    @OneToMany
+    private List<TipoComprobante> unosTiposComprobantes = new LinkedList();
     @OneToMany
     private List<TipoLiquidacion> unosTiposLiquidaciones = new LinkedList();
     @OneToMany
@@ -153,9 +157,10 @@ public class Empresa implements Serializable {
     }
 
     public void crearCliente(String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil) throws Exception {
-        int codigo = generarCliente();
+        int codigo = generarCodigoPersoneria();
         Cliente unCliente = new Cliente(codigo, apellido, dni, cuil, nombre, direccion, telefono, email);
-        unosClientes.add(unCliente);
+        this.unosClientes.add(unCliente);
+        this.unasPersoneriaJuridicas.add(unCliente);
         Persistencia.crearCliente(unCliente);
     }
 
@@ -173,7 +178,8 @@ public class Empresa implements Serializable {
 
     public void borrarCliente(int codigo) throws Exception {
         Cliente unCliente = buscarClient(codigo);
-        unosClientes.remove(unCliente);
+        this.unosClientes.remove(unCliente);
+        this.unasPersoneriaJuridicas.remove(unCliente);
         Persistencia.eliminarCliente(codigo);
     }
 
@@ -262,6 +268,13 @@ public class Empresa implements Serializable {
         unosServicios.add(unTecnico);
         Persistencia.crearTecnico(unTecnico);
     }
+    
+    public void borrarServicioTecnico(int codigo) throws Exception{
+        Tecnico unTecnico=buscarServicioTecnico(codigo);
+        this.unosTecnicos.remove(unTecnico);
+        this.unosServicios.remove(unTecnico);
+        Persistencia.eliminarTecnico(codigo);
+    }
 
     public void generarServicioTercero(int codigo, String descripcion, Double monto, int ganancia) {
         Tercero unTercero = new Tercero(codigo, descripcion, monto, ganancia);
@@ -310,9 +323,10 @@ public class Empresa implements Serializable {
     }
 
     public void crearEmpleado(String nombre, String apellido, String direccion, long telefono, String email, long dni, String cuil) throws Exception {
-        int codigo = generarCodigoEmpleado();
+        int codigo = generarCodigoPersoneria();
         Empleado unEmpleado = new Empleado(apellido, dni, cuil, codigo, nombre, direccion, telefono, email);
         unosEmpleados.add(unEmpleado);
+        unasPersoneriaJuridicas.add(unEmpleado);
         Persistencia.crearEmpleado(unEmpleado);
     }
 
@@ -331,6 +345,7 @@ public class Empresa implements Serializable {
     public void borrarEmpleado(int codigo) throws Exception {
         Empleado unEmpleado = buscarEmpleado(codigo);
         this.unosEmpleados.remove(unEmpleado);
+        this.unasPersoneriaJuridicas.remove(unEmpleado);
         Persistencia.eliminarEmpleado(codigo);
     }
 
@@ -525,8 +540,14 @@ public class Empresa implements Serializable {
     public void generarEncabezado(Calendar fecha, PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante, List<Detalle> unosDetalles, Double total) throws Exception {
         int codigo = generarCodigoEncabezado();
         Encabezado unEncabezado = new Encabezado(codigo, fecha, unTipoComprobante, unosDetalles, unaPersoneriaJuridica, total);
-        unosEncabezados.add(unEncabezado);
+        this.unosEncabezados.add(unEncabezado);
         Persistencia.crearEncabezado(unEncabezado);
+    }
+    
+    public void borrarEncabezado(int codigo) throws Exception{
+        Encabezado unEncabezado=buscarEncabezado(codigo);
+        this.unosEncabezados.remove(unEncabezado);
+        Persistencia.eliminarEncabezado(codigo);
     }
 
     public Articulo buscarArticulo(int codigo) {
@@ -560,7 +581,21 @@ public class Empresa implements Serializable {
         return unArticulo.comprobarStock(cantidad);
 
     }
+    
+    public Encabezado buscarEncabezado(int codigo) {
+        Encabezado aux = null;
+        Iterator itr = unosEncabezados.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Encabezado) itr.next();
+            if (aux.isEncabezado(codigo)) {
+                band = 1;
+            }
 
+        }
+        return aux;
+    }
+    
     public Proveedor buscarProveedor(int codigo) {
         Proveedor aux = null;
         Iterator itr = unosProveedores.iterator();
@@ -576,9 +611,10 @@ public class Empresa implements Serializable {
     }
 
     public void crearProveedor(String nombre, String direccion, long telefono, String email, String cuit) throws Exception {
-        int codigo = generarProveedor();
+        int codigo = generarCodigoPersoneria();
         Proveedor unProveedor = new Proveedor(cuit, codigo, nombre, direccion, telefono, email);
-        unosProveedores.add(unProveedor);
+        this.unosProveedores.add(unProveedor);
+        this.unasPersoneriaJuridicas.add(unProveedor);
         Persistencia.crearProveedor(unProveedor);
     }
 
@@ -595,6 +631,7 @@ public class Empresa implements Serializable {
     public void borrarProveedor(int codigo) throws Exception {
         Proveedor unProveedor = buscarProveedor(codigo);
         this.unosProveedores.remove(unProveedor);
+        this.unasPersoneriaJuridicas.remove(unProveedor);
         Persistencia.eliminarProveedor(codigo);
     }
 
@@ -774,9 +811,10 @@ public class Empresa implements Serializable {
     }
 
     public void crearTipoVenta(String descripcion) throws Exception {
-        int codigo = generarCodigoTipoVenta();
+        int codigo = generarCodigoTipoComprobante();
         TipoVenta unTipoVenta = new TipoVenta(codigo, descripcion);
-        unosTiposVentas.add(unTipoVenta);
+        this.unosTiposVentas.add(unTipoVenta);
+        this.unosTiposComprobantes.add(unTipoVenta);
         Persistencia.crearTipoVenta(unTipoVenta);
     }
 
@@ -788,14 +826,16 @@ public class Empresa implements Serializable {
 
     public void borrarTipoVenta(int codigo) throws Exception {
         TipoVenta unTipoVenta = buscarTipoVenta(codigo);
-        unosTiposVentas.remove(unTipoVenta);
+        this.unosTiposVentas.remove(unTipoVenta);
+        this.unosTiposComprobantes.remove(unTipoVenta);
         Persistencia.eliminarTipoVenta(codigo);
     }
 
     public void crearTipoCompra(String descripcion) throws Exception {
-        int codigo = generarCodigoTipoCompra();
+        int codigo = generarCodigoTipoComprobante();
         TipoCompra unTipoCompra = new TipoCompra(codigo, descripcion);
-        unosTiposCompras.add(unTipoCompra);
+        this.unosTiposCompras.add(unTipoCompra);
+        this.unosTiposComprobantes.add(unTipoCompra);
         Persistencia.crearTipoCompra(unTipoCompra);
     }
 
@@ -807,14 +847,16 @@ public class Empresa implements Serializable {
 
     public void borrarTipoCompra(int codigo) throws Exception {
         TipoCompra unTipoCompra = buscarTipoCompra(codigo);
-        unosTiposCompras.remove(unTipoCompra);
+        this.unosTiposCompras.remove(unTipoCompra);
+        this.unosTiposComprobantes.remove(unTipoCompra);
         Persistencia.eliminarTipoCompra(codigo);
     }
 
     public void crearTipoLiquidacion(String descripcion) throws Exception {
-        int codigo = generarCodigoTipoLiquidacion();
+        int codigo = generarCodigoTipoComprobante();
         TipoLiquidacion unTipoLiquidacion = new TipoLiquidacion(codigo, descripcion);
         unosTiposLiquidaciones.add(unTipoLiquidacion);
+        unosTiposComprobantes.add(unTipoLiquidacion);
         Persistencia.crearTipoLiquidacion(unTipoLiquidacion);
     }
 
@@ -827,6 +869,7 @@ public class Empresa implements Serializable {
     public void borrarTipoLiquidacion(int codigo) throws Exception {
         TipoLiquidacion unTipoLiquidacion = buscarTipoLiquidacion(codigo);
         unosTiposLiquidaciones.remove(unTipoLiquidacion);
+        unosTiposComprobantes.remove(unTipoLiquidacion);
         Persistencia.eliminarTipoLiquidacion(codigo);
     }
 
@@ -870,6 +913,10 @@ public class Empresa implements Serializable {
         this.unosEncabezados = Persistencia.traerEncabezados();
         this.unosDetalles.addAll(this.unosDetallesCompraVenta);
         this.unosTecnicos = Persistencia.traerTecnicos();
+        this.unosServicios.addAll(this.unosTecnicos);
+        this.unosTiposComprobantes.addAll(unosTiposCompras);
+        this.unosTiposComprobantes.addAll(unosTiposVentas);
+        this.unosTiposComprobantes.addAll(unosTiposLiquidaciones);
     }
 
     public List<TipoTecnologia> traerTiposDeTecnologias() {
@@ -880,14 +927,14 @@ public class Empresa implements Serializable {
         return this.unosEmpleados;
     }
 
-    private int generarCodigoEmpleado() {
-        Iterator<Empleado> itEmpleado = this.unosEmpleados.iterator();
-        Empleado unEmp;
-        int codigo = 0;
-        while (itEmpleado.hasNext()) {
-            unEmp = itEmpleado.next();
-            if (unEmp.getCodigo() > codigo) {
-                codigo = unEmp.getCodigo();
+    private int generarCodigoPersoneria() {
+        Iterator<PersoneriaJuridica> itPersoneria = this.unasPersoneriaJuridicas.iterator();
+        PersoneriaJuridica unaPers;
+        int codigo = 4000;
+        while (itPersoneria.hasNext()) {
+            unaPers = itPersoneria.next();
+            if (unaPers.getCodigo() > codigo) {
+                codigo = unaPers.getCodigo();
             }
         }
         return codigo + 1;
@@ -1003,32 +1050,6 @@ public class Empresa implements Serializable {
         return this.unosConceptos;
     }
 
-    private int generarCliente() {
-        Iterator<Cliente> itCliente = this.unosClientes.iterator();
-        Cliente unCliente;
-        int codigo = 0;
-        while (itCliente.hasNext()) {
-            unCliente = itCliente.next();
-            if (unCliente.getCodigo() > codigo) {
-                codigo = unCliente.getCodigo();
-            }
-        }
-        return codigo + 1;
-    }
-
-    private int generarProveedor() {
-        Iterator<Proveedor> itProveedor = this.unosProveedores.iterator();
-        Proveedor unProveedor;
-        int codigo = 0;
-        while (itProveedor.hasNext()) {
-            unProveedor = itProveedor.next();
-            if (unProveedor.getCodigo() > codigo) {
-                codigo = unProveedor.getCodigo();
-            }
-        }
-        return codigo + 1;
-    }
-
     private int generarCodigoConcepto() {
         Iterator<Concepto> itConcepto = this.unosConceptos.iterator();
         Concepto unConcepto;
@@ -1055,19 +1076,33 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
+    
+    public Tecnico buscarServicioTecnico(int codigo){
+        Tecnico aux = null;
+        Iterator itr = unosTecnicos.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Tecnico) itr.next();
+            if (aux.isServicio(codigo)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
 
     public List<TipoVenta> traerTipoVenta() {
         return this.unosTiposVentas;
     }
 
-    private int generarCodigoTipoVenta() {
-        Iterator<TipoVenta> itLista = this.unosTiposVentas.iterator();
-        TipoVenta unaTipoVenta;
-        int codigoTipo = 0;
+    private int generarCodigoTipoComprobante() {
+        Iterator<TipoComprobante> itLista = this.unosTiposComprobantes.iterator();
+        TipoComprobante unaTipoComprobante;
+        int codigoTipo = 6000;
         while (itLista.hasNext()) {
-            unaTipoVenta = itLista.next();
-            if (unaTipoVenta.getCodigo() > codigoTipo) {
-                codigoTipo = unaTipoVenta.getCodigo();
+            unaTipoComprobante = itLista.next();
+            if (unaTipoComprobante.getCodigo() > codigoTipo) {
+                codigoTipo = unaTipoComprobante.getCodigo();
             }
         }
         return codigoTipo + 1;
@@ -1077,40 +1112,15 @@ public class Empresa implements Serializable {
         return this.unosTiposCompras;
     }
 
-    private int generarCodigoTipoCompra() {
-        Iterator<TipoCompra> itLista = this.unosTiposCompras.iterator();
-        TipoCompra unaTipoCompra;
-        int codigoTipo = 0;
-        while (itLista.hasNext()) {
-            unaTipoCompra = itLista.next();
-            if (unaTipoCompra.getCodigo() > codigoTipo) {
-                codigoTipo = unaTipoCompra.getCodigo();
-            }
-        }
-        return codigoTipo + 1;
-    }
 
     public List<TipoLiquidacion> traerLiquidacion() {
         return this.unosTiposLiquidaciones;
     }
 
-    private int generarCodigoTipoLiquidacion() {
-        Iterator<TipoLiquidacion> itLista = this.unosTiposLiquidaciones.iterator();
-        TipoLiquidacion unaTipoLiquidacion;
-        int codigoTipo = 0;
-        while (itLista.hasNext()) {
-            unaTipoLiquidacion = itLista.next();
-            if (unaTipoLiquidacion.getCodigo() > codigoTipo) {
-                codigoTipo = unaTipoLiquidacion.getCodigo();
-            }
-        }
-        return codigoTipo + 1;
-    }
-
     private int generarCodigoDetallerCompraVenta() {
         Iterator<Detalle> itLista = this.unosDetalles.iterator();
         Detalle unDetalle;
-        int codigoTipo = 0;
+        int codigoTipo = 20000;
         while (itLista.hasNext()) {
             unDetalle = itLista.next();
             if (unDetalle.getCodigo() > codigoTipo) {
@@ -1123,7 +1133,7 @@ public class Empresa implements Serializable {
     private int generarCodigoEncabezado() {
         Iterator<Encabezado> itLista = this.unosEncabezados.iterator();
         Encabezado unEncabezado;
-        int codigoTipo = 0;
+        int codigoTipo = 1000;
         while (itLista.hasNext()) {
             unEncabezado = itLista.next();
             if (unEncabezado.getCodigo() > codigoTipo) {
@@ -1136,7 +1146,7 @@ public class Empresa implements Serializable {
     private int generarCodigoServicioTecnico() {
         Iterator<Tecnico> itLista = this.unosTecnicos.iterator();
         Tecnico unTecnico;
-        int codigoTipo = 0;
+        int codigoTipo = 2000;
         while (itLista.hasNext()) {
             unTecnico = itLista.next();
             if (unTecnico.getCodigo() > codigoTipo) {
@@ -1144,5 +1154,13 @@ public class Empresa implements Serializable {
             }
         }
         return codigoTipo + 1;
+    }
+
+    public List<Tecnico> traerServicioTecnico() {
+        return this.unosTecnicos;
+    }
+
+    public List<Encabezado> traerEncabezado() {
+        return this.unosEncabezados;
     }
 }

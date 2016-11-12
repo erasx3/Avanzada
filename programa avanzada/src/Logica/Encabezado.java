@@ -29,6 +29,7 @@ import org.eclipse.persistence.internal.jpa.rs.metadata.model.Link;
  */
 @Entity
 public class Encabezado implements Serializable {
+
     @Id
 //    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
@@ -36,27 +37,26 @@ public class Encabezado implements Serializable {
     private Calendar fecha;
     @Basic
     private Double total;
-    
+
     //Relaciones
     @ManyToOne
     private TipoComprobante unTipoComprobante;
     @OneToMany
-    @JoinColumn(name = "EncabezadoFK", referencedColumnName = "codigo"  )
+    @JoinColumn(name = "EncabezadoFK", referencedColumnName = "codigo")
     private List<Detalle> unosDetalles = new LinkedList<Detalle>();
     @ManyToOne
     private PersoneriaJuridica unaPersoneriaJuridica;
-    
 
     public Encabezado() {
     }
 
-    public Encabezado(int codigo,Calendar fecha, TipoComprobante unTipoComprobante,List<Detalle> unosDetalles,  PersoneriaJuridica unaPersoneriaJuridica,Double total) {
+    public Encabezado(int codigo, Calendar fecha, TipoComprobante unTipoComprobante, List<Detalle> unosDetalles, PersoneriaJuridica unaPersoneriaJuridica, Double total) {
         this.codigo = codigo;
         this.fecha = fecha;
         this.unTipoComprobante = unTipoComprobante;
         this.unosDetalles.addAll(unosDetalles);
         this.unaPersoneriaJuridica = unaPersoneriaJuridica;
-        this.total=total;
+        this.total = total;
     }
 
     public int getCodigo() {
@@ -106,6 +106,13 @@ public class Encabezado implements Serializable {
     public void setUnaPersoneriaJuridica(PersoneriaJuridica unaPersoneriaJuridica) {
         this.unaPersoneriaJuridica = unaPersoneriaJuridica;
     }
-    
-    
+
+    public boolean isEncabezado(int codigo) {
+        boolean aux = false;
+        if (this.codigo == codigo) {
+            aux = true;
+        }
+        return aux;
+    }
+
 }

@@ -309,7 +309,9 @@ public class GenerarServicioTecnico extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmdGenerarServicioActionPerformed
 
     private void cmdVerServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdVerServiciosActionPerformed
-        
+        ListarServicioTecnicoInter unTecnicoInter = new ListarServicioTecnicoInter(miControladoraVisual);
+        MenuPrincipal.Escritorio.add(unTecnicoInter);
+        unTecnicoInter.show();
     }//GEN-LAST:event_cmdVerServiciosActionPerformed
 
 

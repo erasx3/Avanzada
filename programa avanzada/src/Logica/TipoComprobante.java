@@ -19,10 +19,10 @@ import javax.persistence.MappedSuperclass;
  * @author eras
  */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class TipoComprobante implements Serializable {
     @Id
-    @GeneratedValue(strategy=GenerationType.TABLE)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int codigo;
     @Basic
     private String descripcion;

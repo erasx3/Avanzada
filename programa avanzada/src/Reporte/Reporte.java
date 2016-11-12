@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logica;
+package Reporte;
 
+import Logica.Empleado;
+import Logica.Persistencia;
 import com.itextpdf.text.Document;
 import java.util.List;
 import com.itextpdf.text.DocumentException;

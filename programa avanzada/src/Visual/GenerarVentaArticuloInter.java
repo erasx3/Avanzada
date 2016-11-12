@@ -80,6 +80,7 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
         cmdVenta = new javax.swing.JButton();
+        cmdVerVentas = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Venta de Articulo");
@@ -169,6 +170,13 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
             }
         });
 
+        cmdVerVentas.setText("Ver Ventas");
+        cmdVerVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdVerVentasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,11 +223,14 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
                                         .addComponent(cmdAgregarArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 748, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(64, 64, 64)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmdVerVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmdVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -272,8 +283,10 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10)
                         .addComponent(lblTotal)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cmdVenta)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdVenta)
+                    .addComponent(cmdVerVentas))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -362,6 +375,12 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cmdVentaActionPerformed
 
+    private void cmdVerVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdVerVentasActionPerformed
+        ListarVentaArticulosInter unArticulosInter = new ListarVentaArticulosInter(miControladoraVisual);
+        MenuPrincipal.Escritorio.add(unArticulosInter);
+        unArticulosInter.show();
+    }//GEN-LAST:event_cmdVerVentasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser cldFecha;
@@ -371,6 +390,7 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
     private javax.swing.JButton cmdBuscarArticulo;
     private javax.swing.JButton cmdBuscarCliente;
     private javax.swing.JButton cmdVenta;
+    private javax.swing.JButton cmdVerVentas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
