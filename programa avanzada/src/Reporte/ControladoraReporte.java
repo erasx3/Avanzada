@@ -6,6 +6,8 @@
 package Reporte;
 
 import Logica.Empresa;
+import Logica.Encabezado;
+import com.itextpdf.text.DocumentException;
 
 /**
  *
@@ -17,5 +19,10 @@ public class ControladoraReporte {
     
     public ControladoraReporte(Empresa unaEmpresa){
         this.unaEmpresa=unaEmpresa;
+    }
+    
+    public void generarReporteVenta(Encabezado unEncabezado) throws DocumentException{
+        ReporteVenta unReporteVenta=new ReporteVenta(unaEmpresa);
+        unReporteVenta.generarReporteVenta(unEncabezado);
     }
 }

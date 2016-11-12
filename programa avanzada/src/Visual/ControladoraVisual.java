@@ -36,6 +36,7 @@ import Logica.TipoTecnologia;
 import Logica.TipoVenta;
 import Logica.Turno;
 import Persistencia.exceptions.NonexistentEntityException;
+import com.itextpdf.text.DocumentException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -59,11 +60,6 @@ public class ControladoraVisual {
         this.miControladoraReporte= new ControladoraReporte(unaEmpresa);
         this.unaEmpresa.ConexionConBD();
     }
-    
-    
-    
-    //Metodo Main
-    
     
     //Metodo de conexion con la Logica
     public Cliente buscarClient(int codigo){
@@ -456,5 +452,11 @@ public class ControladoraVisual {
 
     public Encabezado buscarEncabezado(int codigo) {
         return this.unaEmpresa.buscarEncabezado(codigo);
+    }
+    
+    //Metodos de Conexion con Controladora de Reportes
+    
+    public void generarReporteVenta(Encabezado unEncabezado) throws DocumentException{
+        this.miControladoraReporte.generarReporteVenta(unEncabezado);
     }
 }

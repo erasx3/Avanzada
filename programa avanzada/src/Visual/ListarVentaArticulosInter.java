@@ -10,6 +10,7 @@ import Logica.Detalle;
 import Logica.DetalleCompraVenta;
 import Logica.Encabezado;
 import Logica.TipoVenta;
+import com.itextpdf.text.DocumentException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -51,8 +52,9 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDetalle = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        cmdBorrarVenta = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        cmdImprimir = new javax.swing.JButton();
 
         setClosable(true);
         setResizable(true);
@@ -91,14 +93,21 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Detalles:");
 
-        jButton1.setText("Borrar Venta");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cmdBorrarVenta.setText("Borrar Venta");
+        cmdBorrarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cmdBorrarVentaActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Encabezado:");
+
+        cmdImprimir.setText("Imprimir Comprobante");
+        cmdImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdImprimirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,8 +119,9 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmdImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmdBorrarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,7 +141,9 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdBorrarVenta)
+                    .addComponent(cmdImprimir))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -158,20 +170,30 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_tblEncabezadoMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cmdBorrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarVentaActionPerformed
         int codigo=Integer.parseInt(this.tblEncabezado.getValueAt(this.fila, 0).toString());
-        this.miControladoraVisual.buscarEncabezado(codigo);
         try {
             this.miControladoraVisual.borrarEncabezado(codigo);
             refrescarVentana();
         } catch (Exception ex) {
             Logger.getLogger(ListarVentaArticulosInter.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cmdBorrarVentaActionPerformed
+
+    private void cmdImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdImprimirActionPerformed
+        int codigo=Integer.parseInt(this.tblEncabezado.getValueAt(this.fila, 0).toString());
+        Encabezado unEncabezado=this.miControladoraVisual.buscarEncabezado(codigo);
+        try {
+            this.miControladoraVisual.generarReporteVenta(unEncabezado);
+        } catch (DocumentException ex) {
+            Logger.getLogger(ListarVentaArticulosInter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdImprimirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton cmdBorrarVenta;
+    private javax.swing.JButton cmdImprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
