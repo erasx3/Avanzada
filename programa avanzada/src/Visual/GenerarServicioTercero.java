@@ -5,6 +5,10 @@
  */
 package Visual;
 
+import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Pepe
@@ -12,12 +16,14 @@ package Visual;
 public class GenerarServicioTercero extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
+
     /**
      * Creates new form generarServicioTercero
      */
     public GenerarServicioTercero(ControladoraVisual miControladoraVisual) {
         initComponents();
-        this.miControladoraVisual=miControladoraVisual;
+        this.miControladoraVisual = miControladoraVisual;
+        refrescarVentana();
     }
 
     /**
@@ -29,21 +35,187 @@ public class GenerarServicioTercero extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDescripcion = new javax.swing.JTextArea();
+        txtCosto = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtGanancia = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cmdGenerarServicio = new javax.swing.JButton();
+        cmdVerservicio = new javax.swing.JButton();
+
+        setClosable(true);
+        setResizable(true);
+        setTitle("Servicio de Terceros");
+
+        jLabel1.setText("Costo del Servicio:");
+
+        jLabel2.setText("Descripcion:");
+
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        jScrollPane1.setViewportView(txtDescripcion);
+
+        txtCosto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCostoActionPerformed(evt);
+            }
+        });
+        txtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCostoKeyReleased(evt);
+            }
+        });
+
+        jLabel3.setText("Porcentaje Ganancia:");
+
+        txtGanancia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtGananciaKeyReleased(evt);
+            }
+        });
+
+        jLabel4.setText("Total:");
+
+        lblTotal.setText("0.00");
+
+        jLabel6.setText("$");
+
+        cmdGenerarServicio.setText("Generar Servicio");
+        cmdGenerarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdGenerarServicioActionPerformed(evt);
+            }
+        });
+
+        cmdVerservicio.setText("Ver Servicios");
+        cmdVerservicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdVerservicioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmdVerservicio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmdGenerarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtGanancia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(txtCosto, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtGanancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTotal)
+                            .addComponent(jLabel6))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdGenerarServicio)
+                    .addComponent(cmdVerservicio))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtCostoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoKeyReleased
+//        DecimalFormat formato = new DecimalFormat("0.00");
+        Double total = Double.parseDouble(this.txtCosto.getText());
+        this.lblTotal.setText(String.valueOf(total));
+    }//GEN-LAST:event_txtCostoKeyReleased
+
+    private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
+
+    }//GEN-LAST:event_txtCostoActionPerformed
+
+    private void txtGananciaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGananciaKeyReleased
+//        DecimalFormat formato = new DecimalFormat("0.00");
+        Double total = Double.parseDouble(txtCosto.getText()) + (Double.parseDouble(txtCosto.getText()) * (Double.parseDouble(txtGanancia.getText()) / 100));
+        this.lblTotal.setText(String.valueOf(total));
+    }//GEN-LAST:event_txtGananciaKeyReleased
+
+    private void cmdGenerarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerarServicioActionPerformed
+        try {
+            Double total = Double.parseDouble(lblTotal.getText());
+            this.miControladoraVisual.generarServicioTercero(txtDescripcion.getText(), Double.parseDouble(txtCosto.getText()), Integer.parseInt(txtGanancia.getText()), total);
+            refrescarVentana();
+        } catch (Exception ex) {
+            Logger.getLogger(GenerarServicioTercero.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cmdGenerarServicioActionPerformed
+
+    private void cmdVerservicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdVerservicioActionPerformed
+       ListarServicioTerceroInter unTercero = new ListarServicioTerceroInter(miControladoraVisual);
+       MenuPrincipal.Escritorio.add(unTercero);
+       unTercero.show();
+    }//GEN-LAST:event_cmdVerservicioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdGenerarServicio;
+    private javax.swing.JButton cmdVerservicio;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JTextField txtCosto;
+    private javax.swing.JTextArea txtDescripcion;
+    private javax.swing.JTextField txtGanancia;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescarVentana() {
+        txtCosto.setText(null);
+        txtDescripcion.setText(null);
+        txtGanancia.setText(null);
+        lblTotal.setText("0.00");
+    }
 }

@@ -24,8 +24,8 @@ public class Tercero extends Servicio {
     public Tercero() {
     }
 
-    public Tercero(int codigo, String descripcion, Double monto, int ganancia) {
-        super(codigo, descripcion);
+    public Tercero(int codigo, String descripcion, Double monto, int ganancia,Double subtotal) {
+        super(codigo, descripcion,subtotal);
         this.monto = monto;
         this.ganancia = ganancia;
     }

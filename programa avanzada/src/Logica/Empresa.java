@@ -262,7 +262,7 @@ public class Empresa implements Serializable {
     }
 
     public void generarServicioTecnico(String descripcion, Double subtotal, List unosDetallesCompraVenta) throws Exception {
-        int codigo = generarCodigoServicioTecnico();
+        int codigo = generarCodigoServicio();
         Tecnico unTecnico = new Tecnico(codigo, descripcion, subtotal, unosDetallesCompraVenta);
         unosTecnicos.add(unTecnico);
         unosServicios.add(unTecnico);
@@ -276,11 +276,20 @@ public class Empresa implements Serializable {
         Persistencia.eliminarTecnico(codigo);
     }
 
-    public void generarServicioTercero(int codigo, String descripcion, Double monto, int ganancia) {
-        Tercero unTercero = new Tercero(codigo, descripcion, monto, ganancia);
-        unosTerceros.add(unTercero);
-        unosServicios.add(unTercero);
+    public void generarServicioTercero(String descripcion, Double monto, int ganancia,Double subtotal) throws Exception {
+        int codigo=generarCodigoServicio();
+        Tercero unTercero = new Tercero(codigo, descripcion, monto, ganancia,subtotal);
+        this.unosTerceros.add(unTercero);
+        this.unosServicios.add(unTercero);
+        Persistencia.crearTercero(unTercero);
 
+    }
+    
+    public void borrarServicioTercero(int codigo) throws Exception{
+        Tercero unTercero = buscarServicioTercero(codigo);
+        this.unosTerceros.remove(unTercero);
+        this.unosServicios.remove(unTercero);
+        Persistencia.eliminarTercero(codigo);
     }
 
     public void generarOrdenTrabajo(int codigo, String descripcion, Turno unTurno, Equipo unEquipo, Servicio unServicio) {
@@ -913,7 +922,9 @@ public class Empresa implements Serializable {
         this.unosEncabezados = Persistencia.traerEncabezados();
         this.unosDetalles.addAll(this.unosDetallesCompraVenta);
         this.unosTecnicos = Persistencia.traerTecnicos();
+        this.unosTerceros=Persistencia.traerTerceros();
         this.unosServicios.addAll(this.unosTecnicos);
+        this.unosServicios.addAll(this.unosTerceros);
         this.unosTiposComprobantes.addAll(unosTiposCompras);
         this.unosTiposComprobantes.addAll(unosTiposVentas);
         this.unosTiposComprobantes.addAll(unosTiposLiquidaciones);
@@ -1011,7 +1022,7 @@ public class Empresa implements Serializable {
     private int generarCodigoArticulo() {
         Iterator<Articulo> itLista = this.unosArticulos.iterator();
         Articulo unTipo;
-        int codigoTipo = 0;
+        int codigoTipo = 40000;
         while (itLista.hasNext()) {
             unTipo = itLista.next();
             if (unTipo.getCodigo() > codigoTipo) {
@@ -1090,6 +1101,20 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
+    
+    public Tercero buscarServicioTercero(int codigo) {
+        Tercero aux = null;
+        Iterator itr = unosTerceros.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Tercero) itr.next();
+            if (aux.isServicio(codigo)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
 
     public List<TipoVenta> traerTipoVenta() {
         return this.unosTiposVentas;
@@ -1143,14 +1168,14 @@ public class Empresa implements Serializable {
         return codigoTipo + 1;
     }
 
-    private int generarCodigoServicioTecnico() {
-        Iterator<Tecnico> itLista = this.unosTecnicos.iterator();
-        Tecnico unTecnico;
+    private int generarCodigoServicio() {
+        Iterator<Servicio> itLista = this.unosServicios.iterator();
+        Servicio unServicio;
         int codigoTipo = 2000;
         while (itLista.hasNext()) {
-            unTecnico = itLista.next();
-            if (unTecnico.getCodigo() > codigoTipo) {
-                codigoTipo = unTecnico.getCodigo();
+            unServicio = itLista.next();
+            if (unServicio.getCodigo() > codigoTipo) {
+                codigoTipo = unServicio.getCodigo();
             }
         }
         return codigoTipo + 1;
@@ -1163,4 +1188,10 @@ public class Empresa implements Serializable {
     public List<Encabezado> traerEncabezado() {
         return this.unosEncabezados;
     }
+
+    public List<Tercero> traerServicioTercero() {
+        return this.unosTerceros;
+    }
+
+    
 }

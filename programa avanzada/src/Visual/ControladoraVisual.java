@@ -28,6 +28,7 @@ import Logica.Proveedor;
 import Logica.Servicio;
 import Logica.Tecnico;
 import Logica.Tecnologia;
+import Logica.Tercero;
 import Logica.TipoCompra;
 import Logica.TipoComprobante;
 import Logica.TipoEstado;
@@ -122,8 +123,12 @@ public class ControladoraVisual {
         this.unaEmpresa.borrarServicioTecnico(codigo);
     }
     
-    public void generarServicioTercero(int codigo, String descripcion, Double monto, int ganancia) {
-        this.unaEmpresa.generarServicioTercero(codigo, descripcion, monto, ganancia);
+    public void generarServicioTercero(String descripcion, Double monto, int ganancia,Double subtotal) throws Exception {
+        this.unaEmpresa.generarServicioTercero(descripcion, monto, ganancia,subtotal);
+    }
+    
+    public void borrarServicioTercero(int codigo) throws Exception{
+        this.unaEmpresa.borrarServicioTercero(codigo);
     }
 
     public void generarOrdenTrabajo(int codigo, String descripcion, Turno unTurno, Equipo unEquipo, Servicio unServicio) {
@@ -302,6 +307,10 @@ public class ControladoraVisual {
         return this.unaEmpresa.buscarServicioTecnico(codigo);
     }
     
+    private Tercero buscarServicioTercero(int codigo){
+        return this.unaEmpresa.buscarServicioTercero(codigo);
+    }
+    
     public DetalleCompraVenta buscarDetalleCompraVenta(int codigo){
         return this.unaEmpresa.buscarDetalleCompraVenta(codigo);
     }
@@ -454,9 +463,15 @@ public class ControladoraVisual {
         return this.unaEmpresa.buscarEncabezado(codigo);
     }
     
+    public List<Tercero> traerServicioTercero() {
+        return this.unaEmpresa.traerServicioTercero();
+    }
+    
     //Metodos de Conexion con Controladora de Reportes
     
     public void generarReporteVenta(Encabezado unEncabezado) throws DocumentException{
         this.miControladoraReporte.generarReporteVenta(unEncabezado);
     }
+
+    
 }

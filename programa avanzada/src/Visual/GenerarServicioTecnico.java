@@ -130,6 +130,9 @@ public class GenerarServicioTecnico extends javax.swing.JInternalFrame {
         jLabel9.setText("Precio del Servicio:");
 
         txtPrecioServicio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPrecioServicioKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioServicioKeyTyped(evt);
             }
@@ -288,7 +291,7 @@ public class GenerarServicioTecnico extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmdAgregarArticuloActionPerformed
 
     private void txtPrecioServicioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioServicioKeyTyped
-        this.lblTotal.setText(txtPrecioServicio.getText());
+       
     }//GEN-LAST:event_txtPrecioServicioKeyTyped
 
     private void cmdGenerarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerarServicioActionPerformed
@@ -313,6 +316,10 @@ public class GenerarServicioTecnico extends javax.swing.JInternalFrame {
         MenuPrincipal.Escritorio.add(unTecnicoInter);
         unTecnicoInter.show();
     }//GEN-LAST:event_cmdVerServiciosActionPerformed
+
+    private void txtPrecioServicioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioServicioKeyReleased
+         this.lblTotal.setText(txtPrecioServicio.getText());
+    }//GEN-LAST:event_txtPrecioServicioKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
