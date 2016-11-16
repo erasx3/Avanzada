@@ -5,8 +5,17 @@
  */
 package Visual;
 
+import Logica.Cliente;
+import Logica.Consumible;
+import Logica.Detalle;
+import Logica.DetalleCompraVenta;
+import Logica.TipoComprobante;
 import Logica.TipoVenta;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,12 +26,16 @@ public class GenerarVentaServicioInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloDetalle;
-    
+    private List<Detalle> unosDetalle;
+    private int fila;
+    private int codigoDetalle;
+
     public GenerarVentaServicioInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         GenerarVentaServicioInter.txtCodigoCliente.setVisible(false);
-        this.miControladoraVisual=miControladoraVisual;
-        this.modeloDetalle=(DefaultTableModel)this.tblDetalleServicio.getModel();
+        this.miControladoraVisual = miControladoraVisual;
+        this.modeloDetalle = (DefaultTableModel) this.tblDetalleServicio.getModel();
+        refrescarVentana();
         cargarCmbComprobante();
     }
 
@@ -253,13 +266,11 @@ public class GenerarVentaServicioInter extends javax.swing.JInternalFrame {
     private void cmdBorarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorarDetalleActionPerformed
         try {
             DetalleCompraVenta unDetalle = this.miControladoraVisual.buscarDetalleCompraVenta(this.codigoDetalle);
-            int codigoArticulo = unDetalle.getUnConsumible().getCodigo();
-            this.miControladoraVisual.sumarArticulo(unDetalle.getCantidad(), codigoArticulo);
             this.miControladoraVisual.borrarDetalleCompraVenta(unDetalle.getCodigo());
             this.modeloDetalle.removeRow(this.fila);
             this.lblTotal.setText(String.valueOf(Double.parseDouble(lblTotal.getText()) - unDetalle.getSubtotal()));
         } catch (Exception ex) {
-            Logger.getLogger(GenerarVentaArticuloInter.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }//GEN-LAST:event_cmdBorarDetalleActionPerformed
 
@@ -274,21 +285,21 @@ public class GenerarVentaServicioInter extends javax.swing.JInternalFrame {
         String cadena = (String) this.cmbComprobantes.getSelectedItem();
         String[] partes = cadena.split("-");
         int codigoComp = Integer.parseInt(partes[0]);
-        for (int i = 0; i < modeloDetalle.getRowCount(); i++) {
+        for (int i = 0; i < this.modeloDetalle.getRowCount(); i++) {
             codigo = Integer.parseInt(this.modeloDetalle.getValueAt(i, 0).toString());
             unDetalleCompraVenta = this.miControladoraVisual.buscarDetalleCompraVenta(codigo);
             total = total + unDetalleCompraVenta.getSubtotal();
             this.unosDetalle.add(unDetalleCompraVenta);
         }
         fecha = this.cldFecha.getCalendar();
-        unCliente = this.miControladoraVisual.buscarClient(Integer.parseInt(txtCodigoCliente.getText()));
+        unCliente = this.miControladoraVisual.buscarClient(Integer.parseInt(GenerarVentaServicioInter.txtCodigoCliente.getText()));
         unComprobante = this.miControladoraVisual.buscarTipoVenta(codigoComp);
         try {
-            this.miControladoraVisual.generarEncabezado(fecha, unCliente, unComprobante,this.unosDetalle, total);
+            this.miControladoraVisual.generarEncabezado(fecha, unCliente, unComprobante, this.unosDetalle, total);
             refrescarVentanaArticulo();
-            refrescarVentanaFinalizacion();
+            refrescarVentana();
         } catch (Exception ex) {
-            Logger.getLogger(GenerarVentaArticuloInter.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }//GEN-LAST:event_cmdVentaActionPerformed
 
@@ -313,23 +324,20 @@ public class GenerarVentaServicioInter extends javax.swing.JInternalFrame {
 
     private void cmdAgregarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarServicioActionPerformed
         try {
-            if (this.miControladoraVisual.comprobarStock(Integer.parseInt(lblCodigoServicio.getText()), Integer.parseInt(txtCantidad.getText()))) {
-                Consumible unConsumible = this.miControladoraVisual.buscarArticulo(Integer.parseInt(lblCodigoServicio.getText()));
-                Double subtotal = Integer.parseInt(txtCantidad.getText()) * Double.parseDouble(lblPrecio.getText());
-                Double total = subtotal + Double.parseDouble(lblTotal.getText());
-                this.lblTotal.setText(String.valueOf(total));
-                int codigo = this.miControladoraVisual.generarDetalleCompraVenta(lblNombreServicio.getText(), Integer.parseInt(txtCantidad.getText()), unConsumible, subtotal);
-                this.miControladoraVisual.descontarArticulo(Integer.parseInt(txtCantidad.getText()), Integer.parseInt(lblCodigoServicio.getText()));
-                cargarTablaDetaller(codigo);
-                refrescarVentanaArticulo();
-                this.cmdAgregarServicio.setEnabled(false);
-                this.cmdBuscaServicio.setEnabled(true);
-                this.cmdVenta.setEnabled(true);
-            } else {
-                System.out.print("no existe sufienciente cantidad");
-            }
+            Consumible unConsumible = this.miControladoraVisual.buscarServicio(Integer.parseInt(lblCodigoServicio.getText()));
+            Double subtotal = Double.parseDouble(lblPrecio.getText());
+            Double total = subtotal + Double.parseDouble(lblTotal.getText());
+            int cantidad = 1;
+            this.lblTotal.setText(String.valueOf(total));
+            int codigo = this.miControladoraVisual.generarDetalleCompraVenta(cantidad, unConsumible, subtotal);
+            cargarTablaDetaller(codigo);
+            refrescarVentanaArticulo();
+            this.cmdAgregarServicio.setEnabled(false);
+            this.cmdBuscaServicio.setEnabled(true);
+            this.cmdVenta.setEnabled(true);
+
         } catch (Exception ex) {
-            Logger.getLogger(GenerarVentaArticuloInter.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }//GEN-LAST:event_cmdAgregarServicioActionPerformed
 
@@ -369,5 +377,27 @@ public class GenerarVentaServicioInter extends javax.swing.JInternalFrame {
             unTipo = itTipo.next();
             this.cmbComprobantes.addItem(unTipo.toString());
         }
+    }
+
+    private void refrescarVentana() {
+        this.modeloDetalle.setRowCount(0);
+        GenerarVentaServicioInter.txtCodigoCliente.setText(null);
+        GenerarVentaServicioInter.lblNombreCliente.setText("Cliente");
+        GenerarVentaServicioInter.lblNombreServicio.setText("Servicio");
+        GenerarVentaServicioInter.lblCodigoServicio.setText("xxxxxx");
+        GenerarVentaServicioInter.lblPrecio.setText("0.00");
+        this.lblTotal.setText("0.00");
+    }
+
+    private void cargarTablaDetaller(int codigo) {
+        DetalleCompraVenta unDetalle = this.miControladoraVisual.buscarDetalleCompraVenta(codigo);
+
+        this.modeloDetalle.addRow(new Object[]{unDetalle.getCodigo(), unDetalle.getUnConsumible().getDescripcion(), unDetalle.getCantidad(),String.valueOf(unDetalle.getUnConsumible().getClass()),unDetalle.getSubtotal()});
+    }
+
+    private void refrescarVentanaArticulo() {
+        GenerarVentaServicioInter.lblCodigoServicio.setText("xxxxxx");
+        GenerarVentaServicioInter.lblNombreServicio.setText("Servicio");
+        this.lblPrecio.setText("0.00");
     }
 }

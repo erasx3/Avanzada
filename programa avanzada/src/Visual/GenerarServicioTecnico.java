@@ -352,6 +352,7 @@ public class GenerarServicioTecnico extends javax.swing.JInternalFrame {
         this.txtDescripcion.setText(null);
         this.txtCantidad.setText(null);
         this.txtPrecioServicio.setText("0.00");
+        this.lblTotal.setText("0.00");
         GenerarServicioTecnico.lblCodigoArticulo.setText("xxxxxx");
         GenerarServicioTecnico.lblNombreArticulo.setText("Nombre");
         GenerarServicioTecnico.lblPrecio.setText("0.00");

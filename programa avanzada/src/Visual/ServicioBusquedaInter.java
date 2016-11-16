@@ -83,6 +83,11 @@ public class ServicioBusquedaInter extends javax.swing.JInternalFrame {
                 "Codigo", "Descripcion", "Costo", "Ganancia", "Total"
             }
         ));
+        tblServicioTercero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblServicioTerceroMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblServicioTercero);
 
         jLabel1.setText("Servicios de Terceros:");
@@ -136,8 +141,22 @@ public class ServicioBusquedaInter extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblServicioTecnicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblServicioTecnicoMouseClicked
-        // TODO add your handling code here:
+        int fila = this.tblServicioTecnico.rowAtPoint(evt.getPoint());
+        
+        GenerarVentaServicioInter.lblCodigoServicio.setText(this.modeloServTecnico.getValueAt(fila, 0).toString());
+        GenerarVentaServicioInter.lblNombreServicio.setText(this.modeloServTecnico.getValueAt(fila, 1).toString());
+        GenerarVentaServicioInter.lblPrecio.setText(this.modeloServTecnico.getValueAt(fila, 2).toString());
+        this.dispose();
     }//GEN-LAST:event_tblServicioTecnicoMouseClicked
+
+    private void tblServicioTerceroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblServicioTerceroMouseClicked
+        int fila = this.tblServicioTecnico.rowAtPoint(evt.getPoint());
+        
+        GenerarVentaServicioInter.lblCodigoServicio.setText(this.modeloServTercero.getValueAt(fila, 0).toString());
+        GenerarVentaServicioInter.lblNombreServicio.setText(this.modeloServTercero.getValueAt(fila, 1).toString());
+        GenerarVentaServicioInter.lblPrecio.setText(this.modeloServTercero.getValueAt(fila, 4).toString());
+        this.dispose();
+    }//GEN-LAST:event_tblServicioTerceroMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

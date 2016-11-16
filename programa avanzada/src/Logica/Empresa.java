@@ -374,7 +374,7 @@ public class Empresa implements Serializable {
     }
 
     public Actividad buscarActividad(int codigo) {
-        Actividad aux = new Actividad();
+        Actividad aux = null;
         Iterator itr = unasActividades.iterator();
         int band = 0;
         while (itr.hasNext() && band == 0) {
@@ -431,10 +431,10 @@ public class Empresa implements Serializable {
     }
 
     public void crearActividadAdministrativa(String descripcion, Double precioHora) throws Exception {
-        int codigo = generarCodigoActAdministrativa();
+        int codigo = generarCodigoAct();
         ActividadAdministrativa unaActividadAdministrativa = new ActividadAdministrativa(precioHora, codigo, descripcion);
-        unasActividades.add(unaActividadAdministrativa);
-        unasActAdministrativas.add(unaActividadAdministrativa);
+        this.unasActividades.add(unaActividadAdministrativa);
+        this.unasActAdministrativas.add(unaActividadAdministrativa);
         Persistencia.crearActividadAdministrativa(unaActividadAdministrativa);
     }
 
@@ -447,16 +447,16 @@ public class Empresa implements Serializable {
 
     public void borrarActAdministrativa(int codigo) throws NonexistentEntityException, Exception {
         ActividadAdministrativa unaActAdministrativa = buscarActAdministrativa(codigo);
-        unasActividades.remove(unaActAdministrativa);
-        unasActAdministrativas.remove(unaActAdministrativa);
+        this.unasActividades.remove(unaActAdministrativa);
+        this.unasActAdministrativas.remove(unaActAdministrativa);
         Persistencia.eliminarActividadAdministrativa(codigo);
     }
 
     public void crearActividadTecnica(String descripcion, Double precioFijo) throws Exception {
-        int codigo = generarCodigoActTecnica();
+        int codigo = generarCodigoAct();
         ActividadTecnica unaActividadTecnica = new ActividadTecnica(precioFijo, codigo, descripcion);
-        unasActividades.add(unaActividadTecnica);
-        unasActTecnicas.add(unaActividadTecnica);
+        this.unasActividades.add(unaActividadTecnica);
+        this.unasActTecnicas.add(unaActividadTecnica);
         Persistencia.crearActividadTecnica(unaActividadTecnica);
     }
 
@@ -469,15 +469,16 @@ public class Empresa implements Serializable {
 
     public void borrarActividadTecnica(int codigo) throws NonexistentEntityException, Exception {
         ActividadTecnica unaActTecnica = buscarActTecnica(codigo);
-        unasActividades.remove(unaActTecnica);
-        unasActTecnicas.remove(unaActTecnica);
+        this.unasActividades.remove(unaActTecnica);
+        this.unasActTecnicas.remove(unaActTecnica);
         Persistencia.eliminarActividadTecnica(codigo);
     }
 
     public void crearActividadProyecto(String descripcion, Double porcentaje) throws Exception {
+        int codigo = generarCodigoAct();
         ActividadProyecto unaActividadProyecto = new ActividadProyecto(codigo, descripcion, porcentaje);
-        unasActividades.add(unaActividadProyecto);
-        unasActProyecto.add(unaActividadProyecto);
+        this.unasActividades.add(unaActividadProyecto);
+        this.unasActProyecto.add(unaActividadProyecto);
         Persistencia.crearActividadProyecto(unaActividadProyecto);
     }
 
@@ -490,14 +491,14 @@ public class Empresa implements Serializable {
 
     public void borrarActividadProyecto(int codigo) throws Exception {
         ActividadProyecto unaActividadProyecto = buscarActividadProyecto(codigo);
-        unasActividades.remove(unaActividadProyecto);
-        unasActProyecto.remove(unaActividadProyecto);
+        this.unasActividades.remove(unaActividadProyecto);
+        this.unasActProyecto.remove(unaActividadProyecto);
         Persistencia.eliminarActividadProyecto(codigo);
     }
 
     public void generarManoDeObra(int codigo, long horasTrabajadas, Date fecha, Empleado unEmpleado, Servicio unServicio, Actividad unaActividad) {
         ManoDeObra unaManoDeObra = new ManoDeObra(codigo, horasTrabajadas, fecha, unaActividad, unServicio, unEmpleado);
-        unasManosDeObras.add(unaManoDeObra);
+        this.unasManosDeObras.add(unaManoDeObra);
     }
 
     public TipoVenta buscarTipoVenta(int codigo) {
@@ -928,6 +929,9 @@ public class Empresa implements Serializable {
         this.unosTiposComprobantes.addAll(unosTiposCompras);
         this.unosTiposComprobantes.addAll(unosTiposVentas);
         this.unosTiposComprobantes.addAll(unosTiposLiquidaciones);
+        this.unasActividades.addAll(unasActAdministrativas);
+        this.unasActividades.addAll(unasActTecnicas);
+        this.unasActividades.addAll(unasActProyecto);
     }
 
     public List<TipoTecnologia> traerTiposDeTecnologias() {
@@ -985,14 +989,14 @@ public class Empresa implements Serializable {
         return this.unasActAdministrativas;
     }
 
-    private int generarCodigoActAdministrativa() {
-        Iterator<ActividadAdministrativa> itLista = this.unasActAdministrativas.iterator();
-        ActividadAdministrativa unaActAdministrativa;
-        int codigo = 0;
+    private int generarCodigoAct() {
+        Iterator<Actividad> itLista = this.unasActividades.iterator();
+        Actividad unaAct;
+        int codigo = 50000;
         while (itLista.hasNext()) {
-            unaActAdministrativa = itLista.next();
-            if (unaActAdministrativa.getCodigo() > codigo) {
-                codigo = unaActAdministrativa.getCodigo();
+            unaAct = itLista.next();
+            if (unaAct.getCodigo() > codigo) {
+                codigo = unaAct.getCodigo();
             }
         }
         return codigo + 1;
@@ -1000,19 +1004,6 @@ public class Empresa implements Serializable {
 
     public List<ActividadProyecto> traerActProyecto() {
         return this.unasActProyecto;
-    }
-
-    private int generarCodigoActProyecto() {
-        Iterator<ActividadProyecto> itLista = this.unasActProyecto.iterator();
-        ActividadProyecto unaActProyecto;
-        int codigo = 0;
-        while (itLista.hasNext()) {
-            unaActProyecto = itLista.next();
-            if (unaActProyecto.getCodigo() > codigo) {
-                codigo = unaActProyecto.getCodigo();
-            }
-        }
-        return codigo + 1;
     }
 
     public List<Articulo> traerArticulo() {
@@ -1031,20 +1022,7 @@ public class Empresa implements Serializable {
         }
         return codigoTipo + 1;
     }
-
-    private int generarCodigoActTecnica() {
-        Iterator<ActividadTecnica> itLista = this.unasActTecnicas.iterator();
-        ActividadTecnica unaActTecnica;
-        int codigo = 0;
-        while (itLista.hasNext()) {
-            unaActTecnica = itLista.next();
-            if (unaActTecnica.getCodigo() > codigo) {
-                codigo = unaActTecnica.getCodigo();
-            }
-        }
-        return codigo + 1;
-    }
-
+    
     public List<ActividadTecnica> traerActTecnica() {
         return this.unasActTecnicas;
     }
