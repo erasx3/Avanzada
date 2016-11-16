@@ -6,6 +6,7 @@
 package Logica;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -20,16 +21,17 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Proyecto extends Servicio implements Serializable {
+
     @Basic
     private Float tiempoEstimado;
-    
+
     //Relaciones
     @OneToMany
-    private List<Concepto> unosConceptos;
+    private List<Concepto> unosConceptos = new LinkedList<>();
     @OneToMany
-    private List<Tecnologia> unasTecnologias;
+    private List<Tecnologia> unasTecnologias = new LinkedList<>();
     @OneToMany
-    private List<OrdenTrabajo> unasOrdenesTrabajos;
+    private List<OrdenTrabajo> unasOrdenesTrabajos = new LinkedList<>();
 
     public Proyecto() {
     }
@@ -69,7 +71,6 @@ public class Proyecto extends Servicio implements Serializable {
     public void setUnasOrdenesTrabajos(List<OrdenTrabajo> unasOrdenesTrabajos) {
         this.unasOrdenesTrabajos = unasOrdenesTrabajos;
     }
-    
 
     public Float getTiempoEstimado() {
         return tiempoEstimado;
@@ -78,6 +79,5 @@ public class Proyecto extends Servicio implements Serializable {
     public void setTiempoEstimado(Float tiempoEstimado) {
         this.tiempoEstimado = tiempoEstimado;
     }
-    
-    
+
 }

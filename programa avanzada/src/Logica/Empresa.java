@@ -815,9 +815,12 @@ public class Empresa implements Serializable {
         Persistencia.eliminarTecnologia(codigo);
     }
 
-    public void generarProyecto(Float tiempoEstimado, List<Concepto> unosConceptos, List<Tecnologia> unasTecnologias, int codigo, String descripcion) {
+    public void generarProyecto(Float tiempoEstimado, List<Concepto> unosConceptos, List<Tecnologia> unasTecnologias, String descripcion) throws Exception {
+        int codigo = generarCodigoServicio();
         Proyecto unProyecto = new Proyecto(tiempoEstimado, unosConceptos, unasTecnologias, codigo, descripcion);
-        unosProyectos.add(unProyecto);
+        this.unosProyectos.add(unProyecto);
+        this.unosServicios.add(unProyecto);
+        Persistencia.crearProyecto(unProyecto);
     }
 
     public void crearTipoVenta(String descripcion) throws Exception {
@@ -924,14 +927,16 @@ public class Empresa implements Serializable {
         this.unosDetalles.addAll(this.unosDetallesCompraVenta);
         this.unosTecnicos = Persistencia.traerTecnicos();
         this.unosTerceros=Persistencia.traerTerceros();
+        this.unosProyectos=Persistencia.traerProyectos();
         this.unosServicios.addAll(this.unosTecnicos);
         this.unosServicios.addAll(this.unosTerceros);
-        this.unosTiposComprobantes.addAll(unosTiposCompras);
-        this.unosTiposComprobantes.addAll(unosTiposVentas);
-        this.unosTiposComprobantes.addAll(unosTiposLiquidaciones);
-        this.unasActividades.addAll(unasActAdministrativas);
-        this.unasActividades.addAll(unasActTecnicas);
-        this.unasActividades.addAll(unasActProyecto);
+        this.unosServicios.addAll(this.unosProyectos);
+        this.unosTiposComprobantes.addAll(this.unosTiposCompras);
+        this.unosTiposComprobantes.addAll(this.unosTiposVentas);
+        this.unosTiposComprobantes.addAll(this.unosTiposLiquidaciones);
+        this.unasActividades.addAll(this.unasActAdministrativas);
+        this.unasActividades.addAll(this.unasActTecnicas);
+        this.unasActividades.addAll(this.unasActProyecto);
     }
 
     public List<TipoTecnologia> traerTiposDeTecnologias() {

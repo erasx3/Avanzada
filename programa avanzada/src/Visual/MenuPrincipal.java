@@ -308,6 +308,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu7.add(mnuServicioTercero);
 
         mnuServicioProyecto.setText("Proyecto");
+        mnuServicioProyecto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuServicioProyectoActionPerformed(evt);
+            }
+        });
         jMenu7.add(mnuServicioProyecto);
 
         jMenu3.add(jMenu7);
@@ -528,6 +533,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.Escritorio.add(unServicioTercero);
         unServicioTercero.show();
     }//GEN-LAST:event_mnuServicioTerceroActionPerformed
+
+    private void mnuServicioProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuServicioProyectoActionPerformed
+        AltaProyectoInter unAltaProyectoInter = new AltaProyectoInter(miControladoraVisual);
+        this.Escritorio.add(unAltaProyectoInter);
+        unAltaProyectoInter.show();
+    }//GEN-LAST:event_mnuServicioProyectoActionPerformed
 
     /**
      * @param args the command line arguments

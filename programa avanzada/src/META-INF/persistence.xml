@@ -25,6 +25,7 @@
     <class>Logica.Servicio</class>
     <class>Logica.Tecnico</class>
     <class>Logica.Tercero</class>
+    <class>Logica.Proyecto</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

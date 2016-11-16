@@ -63,6 +63,10 @@ public class ControladoraVisual {
     }
     
     //Metodo de conexion con la Logica
+    public Concepto buscarConcepto(int codigo){
+        return this.unaEmpresa.buscarConcepto(codigo);
+    }
+    
     public Cliente buscarClient(int codigo){
         return this.unaEmpresa.buscarClient(codigo);
     }
@@ -343,8 +347,8 @@ public class ControladoraVisual {
         this.unaEmpresa.borrarTecnologia(codigo);
     }
     
-    public void generarProyecto(Float tiempoEstimado, List<Concepto> unosConceptos, List<Tecnologia> unasTecnologias, int codigo, String descripcion){
-        this.unaEmpresa.generarProyecto(tiempoEstimado, unosConceptos, unasTecnologias, codigo, descripcion);
+    public void generarProyecto(Float tiempoEstimado, List<Concepto> unosConceptos, List<Tecnologia> unasTecnologias,String descripcion) throws Exception{
+        this.unaEmpresa.generarProyecto(tiempoEstimado, unosConceptos, unasTecnologias,descripcion);
     }
     
     public void crearTipoVenta(String descripcion) throws Exception{
