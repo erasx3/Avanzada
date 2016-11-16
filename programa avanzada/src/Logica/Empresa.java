@@ -358,6 +358,187 @@ public class Empresa implements Serializable {
         Persistencia.eliminarEmpleado(codigo);
     }
 
+    public Actividad buscarActividad(String descripcion) {
+        Actividad aux = null;
+        Iterator itr = unasActividades.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Actividad) itr.next();
+            if (aux.isActividad(descripcion)) {
+                band = 1;
+            }
+        }
+        return aux;
+    }
+    
+    
+    public Articulo buscarArticulo(String descripcion) {
+        Articulo aux = null;
+        Iterator itr = unosArticulos.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Articulo) itr.next();
+            if (aux.isArticulo(descripcion)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
+    
+    
+    public Empleado buscarEmpleado(Long dni) {
+        Empleado aux = null;
+        Iterator itr = unosEmpleados.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Empleado) itr.next();
+            if (aux.isEmpleado(dni)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
+    
+    
+    public Equipo buscarEquipo(String descripcion) {
+        Equipo aux = null;
+        Iterator itr = unosEquipos.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Equipo) itr.next();
+            if (aux.isEquipo(descripcion)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
+    
+    
+    public Proveedor buscarProveedor(String cuit) {
+        Proveedor aux = null;
+        Iterator itr = unosProveedores.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Proveedor) itr.next();
+            if (aux.isProveedor(cuit)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
+    
+    
+    public Tecnologia buscarTecnologia(String descripcion) {
+        Tecnologia aux = null;
+        Iterator itr = unasTecnologias.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Tecnologia) itr.next();
+            if (aux.isTecnologia(descripcion)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
+    
+    
+    
+    public TipoTecnologia buscarTipoTecnologia(String nombre) {
+        TipoTecnologia aux = null;
+        Iterator itr = unosTiposTecnologias.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (TipoTecnologia) itr.next();
+            if (aux.isTipoTecnologia(nombre)) {
+                band = 1;
+            }
+        }
+        return aux;
+    }
+    
+    
+    public TipoComprobante buscarTipoComprobante(String descripcion) {
+        TipoComprobante aux = null;
+        Iterator itr = unosTiposComprobantes.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (TipoComprobante) itr.next();
+            if (aux.isTipoComprobante(descripcion)) {
+                band = 1;
+            }
+        }
+        return aux;
+    }
+    
+    
+    
+    public TipoEstado buscarTipoEstado(String nombre) {
+        TipoEstado aux = null;
+        Iterator itr = unosTiposEstados.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (TipoEstado) itr.next();
+            if (aux.isTipoEstado(nombre)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
+    
+    
+    
+    public OrdenTrabajo buscarOrdenTrabajo(String descripcion) {
+        OrdenTrabajo aux = null;
+        Iterator itr = unasOrdenesTrabajos.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (OrdenTrabajo) itr.next();
+            if (aux.isOrdenTrabajo(descripcion)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+
+    }
+    
+    
+    
+    public Turno buscarTurno(String descripcion) {
+        Turno aux = null;
+        Iterator itr = unosTurnos.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Turno) itr.next();
+            if (aux.isTurno(descripcion)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
+    
+    
+    public Concepto buscarConcepto(String descripcion) {
+        Concepto aux = null;
+        Iterator itr = unosConceptos.iterator();
+        int band = 0;
+        while (itr.hasNext() && band == 0) {
+            aux = (Concepto) itr.next();
+            if (aux.isConcepto(descripcion)) {
+                band = 1;
+            }
+
+        }
+        return aux;
+    }
+    
     public Servicio buscarServicio(int codigo) {
         Servicio aux = null;
         Iterator itr = unosServicios.iterator();
@@ -1176,185 +1357,4 @@ public class Empresa implements Serializable {
         return this.unosTerceros;
     }
 
-    //Metodos facu
-    public Actividad buscarActividad(String descripcion) {
-        Actividad aux = null;
-        Iterator itr = unasActividades.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (Actividad) itr.next();
-            if (aux.isActividad(descripcion)) {
-                band = 1;
-            }
-        }
-        return aux;
-    }
-    
-    
-    public Articulo buscarArticulo(String descripcion) {
-        Articulo aux = null;
-        Iterator itr = unosArticulos.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (Articulo) itr.next();
-            if (aux.isArticulo(descripcion)) {
-                band = 1;
-            }
-
-        }
-        return aux;
-    }
-    
-    
-    public Empleado buscarEmpleado(Long dni) {
-        Empleado aux = null;
-        Iterator itr = unosEmpleados.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (Empleado) itr.next();
-            if (aux.isEmpleado(dni)) {
-                band = 1;
-            }
-
-        }
-        return aux;
-    }
-    
-    
-    public Equipo buscarEquipo(String descripcion) {
-        Equipo aux = null;
-        Iterator itr = unosEquipos.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (Equipo) itr.next();
-            if (aux.isEquipo(descripcion)) {
-                band = 1;
-            }
-
-        }
-        return aux;
-    }
-    
-    
-    public Proveedor buscarProveedor(String cuit) {
-        Proveedor aux = null;
-        Iterator itr = unosProveedores.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (Proveedor) itr.next();
-            if (aux.isProveedor(cuit)) {
-                band = 1;
-            }
-
-        }
-        return aux;
-    }
-    
-    
-    public Tecnologia buscarTecnologia(String descripcion) {
-        Tecnologia aux = null;
-        Iterator itr = unasTecnologias.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (Tecnologia) itr.next();
-            if (aux.isTecnologia(descripcion)) {
-                band = 1;
-            }
-
-        }
-        return aux;
-    }
-    
-    
-    
-    public TipoTecnologia buscarTipoTecnologia(String nombre) {
-        TipoTecnologia aux = null;
-        Iterator itr = unosTiposTecnologias.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (TipoTecnologia) itr.next();
-            if (aux.isTipoTecnologia(nombre)) {
-                band = 1;
-            }
-        }
-        return aux;
-    }
-    
-    
-    public TipoComprobante buscarTipoComprobante(String descripcion) {
-        TipoComprobante aux = null;
-        Iterator itr = unosTiposComprobantes.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (TipoComprobante) itr.next();
-            if (aux.isTipoComprobante(descripcion)) {
-                band = 1;
-            }
-        }
-        return aux;
-    }
-    
-    
-    
-    public TipoEstado buscarTipoEstado(String nombre) {
-        TipoEstado aux = null;
-        Iterator itr = unosTiposEstados.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (TipoEstado) itr.next();
-            if (aux.isTipoEstado(nombre)) {
-                band = 1;
-            }
-
-        }
-        return aux;
-    }
-    
-    
-    
-    public OrdenTrabajo buscarOrdenTrabajo(String descripcion) {
-        OrdenTrabajo aux = null;
-        Iterator itr = unasOrdenesTrabajos.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (OrdenTrabajo) itr.next();
-            if (aux.isOrdenTrabajo(descripcion)) {
-                band = 1;
-            }
-
-        }
-        return aux;
-
-    }
-    
-    
-    
-    public Turno buscarTurno(String descripcion) {
-        Turno aux = null;
-        Iterator itr = unosTurnos.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (Turno) itr.next();
-            if (aux.isTurno(descripcion)) {
-                band = 1;
-            }
-
-        }
-        return aux;
-    }
-    
-    
-    public Concepto buscarConcepto(String descripcion) {
-        Concepto aux = null;
-        Iterator itr = unosConceptos.iterator();
-        int band = 0;
-        while (itr.hasNext() && band == 0) {
-            aux = (Concepto) itr.next();
-            if (aux.isConcepto(descripcion)) {
-                band = 1;
-            }
-
-        }
-        return aux;
-    }
 }

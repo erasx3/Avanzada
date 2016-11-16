@@ -67,6 +67,69 @@ public class ControladoraVisual {
         return this.unaEmpresa.buscarConcepto(codigo);
     }
     
+    public Actividad buscarActividad(String descripcion) {
+        return this.unaEmpresa.buscarActividad(descripcion);
+    }
+    
+    
+    public Articulo buscarArticulo(String descripcion) {
+        return this.unaEmpresa.buscarArticulo(descripcion);
+    }
+    
+    
+    public Empleado buscarEmpleado(Long dni) {
+        return this.unaEmpresa.buscarEmpleado(dni);
+    }
+    
+    
+    public Equipo buscarEquipo(String descripcion) {
+        return this.unaEmpresa.buscarEquipo(descripcion);
+    }
+    
+    
+    public Proveedor buscarProveedor(String cuit) {
+        return this.unaEmpresa.buscarProveedor(cuit);
+    }
+    
+    
+    public Tecnologia buscarTecnologia(String descripcion) {
+        return this.unaEmpresa.buscarTecnologia(descripcion);
+    }
+    
+    
+    
+    public TipoTecnologia buscarTipoTecnologia(String nombre) {
+        return this.unaEmpresa.buscarTipoTecnologia(nombre);
+    }
+    
+    
+    public TipoComprobante buscarTipoComprobante(String descripcion) {
+       return this.unaEmpresa.buscarTipoComprobante(descripcion);
+    }
+    
+    
+    
+    public TipoEstado buscarTipoEstado(String nombre) {
+       return this.unaEmpresa.buscarTipoEstado(nombre);
+    }
+    
+    
+    
+    public OrdenTrabajo buscarOrdenTrabajo(String descripcion) {
+        return this.unaEmpresa.buscarOrdenTrabajo(descripcion);
+    }
+    
+    
+    
+    public Turno buscarTurno(String descripcion) {
+        return this.unaEmpresa.buscarTurno(descripcion);
+    }
+    
+    
+    public Concepto buscarConcepto(String descripcion) {
+        return this.unaEmpresa.buscarConcepto(descripcion);
+    }
+    
     public Cliente buscarClient(int codigo){
         return this.unaEmpresa.buscarClient(codigo);
     }
@@ -477,5 +540,4 @@ public class ControladoraVisual {
         this.miControladoraReporte.generarReporteVenta(unEncabezado);
     }
 
-    
 }
