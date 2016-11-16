@@ -63,6 +63,14 @@ public class Equipo implements Serializable {
         return aux;
     }
     
+    public boolean isEquipo(String descripcion){
+        boolean aux = false;
+        if (this.getDescripcion().equals(descripcion)) {
+            aux = true;
+        }
+        return aux;
+    }
+    
     public void agregarEstado(Estado unEstado){
     }
     

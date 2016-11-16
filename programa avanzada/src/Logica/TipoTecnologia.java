@@ -66,6 +66,14 @@ public class TipoTecnologia implements Serializable {
         }
         return aux;
     }
+    
+    public boolean isTipoTecnologia(String nombre){
+        boolean aux = false;
+        if (this.getNombre().equals(nombre)) {
+            aux = true;
+        }
+        return aux;
+    }
 
     @Override
     public String toString() {

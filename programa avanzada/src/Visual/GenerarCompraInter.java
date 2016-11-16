@@ -5,6 +5,10 @@
  */
 package Visual;
 
+import Logica.TipoCompra;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Facu
@@ -12,10 +16,17 @@ package Visual;
 public class GenerarCompraInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
+    private DefaultTableModel modeloDetalle;
     
     public GenerarCompraInter(ControladoraVisual miControladoraVisual) {
         initComponents();
+        GenerarCompraInter.txtCodigoProveedor.setVisible(false);
         this.miControladoraVisual=miControladoraVisual;
+        this.modeloDetalle=(DefaultTableModel)this.tblDetallesCompraVenta.getModel();
+        this.cmdAgregarArticulo.setEnabled(false);
+        this.cmdGenerarCompra.setEnabled(false);
+        refrescarVentana();
+        cargarCmbCompra();
     }
 
     /**
@@ -27,24 +38,285 @@ public class GenerarCompraInter extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txtCodigoProveedor = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        lblNombreProveedor = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cmbComprobanteCompra = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        lblCodigoArticulo = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblNombreArticulo = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lblPrecioArticulo = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtCantidadArticulo = new javax.swing.JTextField();
+        cmdBuscarArticulo = new javax.swing.JButton();
+        cmdAgregarArticulo = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblDetallesCompraVenta = new javax.swing.JTable();
+        cmdBorrarRenglon = new javax.swing.JButton();
+        cmdCrearArticulo = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
+        cmdGenerarCompra = new javax.swing.JButton();
+        cmdVerCompras = new javax.swing.JButton();
+        cmdBuscarProveedor = new javax.swing.JButton();
+
         setClosable(true);
         setTitle("Compra");
+
+        jLabel1.setText("Nombre Proveedor:");
+
+        lblNombreProveedor.setText("Proveedor");
+
+        jLabel2.setText("Comprobante:");
+
+        cmbComprobanteCompra.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setText("Codigo Articulo:");
+
+        lblCodigoArticulo.setText("xxxxxx");
+
+        jLabel4.setText("Nombre Articulo:");
+
+        lblNombreArticulo.setText("Articulo");
+
+        jLabel5.setText("Precio:");
+
+        jLabel6.setText("$");
+
+        lblPrecioArticulo.setText("0.00");
+
+        jLabel7.setText("Cantidad:");
+
+        cmdBuscarArticulo.setText("Buscar Articulo");
+        cmdBuscarArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBuscarArticuloActionPerformed(evt);
+            }
+        });
+
+        cmdAgregarArticulo.setText("Agregar Articulo");
+        cmdAgregarArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregarArticuloActionPerformed(evt);
+            }
+        });
+
+        tblDetallesCompraVenta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Articulo", "Cantidad", "Subtotal"
+            }
+        ));
+        jScrollPane1.setViewportView(tblDetallesCompraVenta);
+
+        cmdBorrarRenglon.setText("Borrar Renglon");
+
+        cmdCrearArticulo.setText("Crear Articulo");
+
+        jLabel8.setText("Total:");
+
+        jLabel9.setText("$");
+
+        lblTotal.setText("0.00");
+
+        cmdGenerarCompra.setText("Generar Compra");
+
+        cmdVerCompras.setText("Ver Compras");
+
+        cmdBuscarProveedor.setText("Buscar Proveedor");
+        cmdBuscarProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBuscarProveedorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(2, 2, 2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNombreProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblCodigoArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblNombreArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblPrecioArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cmbComprobanteCompra, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtCantidadArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(44, 44, 44))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(128, 128, 128)
+                                .addComponent(txtCodigoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdAgregarArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdBuscarArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdBuscarProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmdCrearArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmdVerCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmdBorrarRenglon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmdGenerarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))))
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCodigoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblNombreProveedor)
+                    .addComponent(jLabel2)
+                    .addComponent(cmbComprobanteCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdBuscarProveedor))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lblCodigoArticulo)
+                    .addComponent(jLabel7)
+                    .addComponent(txtCantidadArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdBuscarArticulo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lblNombreArticulo)
+                    .addComponent(jLabel5)
+                    .addComponent(lblPrecioArticulo)
+                    .addComponent(cmdAgregarArticulo)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmdBorrarRenglon)
+                    .addComponent(cmdCrearArticulo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(jLabel9)
+                        .addComponent(lblTotal)
+                        .addComponent(cmdGenerarCompra))
+                    .addComponent(cmdVerCompras, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmdBuscarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarArticuloActionPerformed
+      BusquedaArticuloCompraInter unArticuloCompraInter = new BusquedaArticuloCompraInter(miControladoraVisual);
+      MenuPrincipal.Escritorio.add(unArticuloCompraInter);
+      unArticuloCompraInter.show();
+    }//GEN-LAST:event_cmdBuscarArticuloActionPerformed
+
+    private void cmdBuscarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarProveedorActionPerformed
+       BusquedaProveedorInter unBusquedaProveedorInter = new BusquedaProveedorInter(miControladoraVisual);
+       MenuPrincipal.Escritorio.add(unBusquedaProveedorInter);
+       unBusquedaProveedorInter.show();
+    }//GEN-LAST:event_cmdBuscarProveedorActionPerformed
+
+    private void cmdAgregarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarArticuloActionPerformed
+       
+    }//GEN-LAST:event_cmdAgregarArticuloActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbComprobanteCompra;
+    private javax.swing.JButton cmdAgregarArticulo;
+    private javax.swing.JButton cmdBorrarRenglon;
+    private javax.swing.JButton cmdBuscarArticulo;
+    private javax.swing.JButton cmdBuscarProveedor;
+    private javax.swing.JButton cmdCrearArticulo;
+    private javax.swing.JButton cmdGenerarCompra;
+    private javax.swing.JButton cmdVerCompras;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JLabel lblCodigoArticulo;
+    public static javax.swing.JLabel lblNombreArticulo;
+    public static javax.swing.JLabel lblNombreProveedor;
+    public static javax.swing.JLabel lblPrecioArticulo;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JTable tblDetallesCompraVenta;
+    private javax.swing.JTextField txtCantidadArticulo;
+    public static javax.swing.JTextField txtCodigoProveedor;
     // End of variables declaration//GEN-END:variables
+
+    private void refrescarVentana() {
+        GenerarCompraInter.txtCodigoProveedor.setText(null);
+        GenerarCompraInter.lblNombreProveedor.setText("Proveedor");
+        GenerarCompraInter.lblCodigoArticulo.setText("xxxxxx");
+        GenerarCompraInter.lblNombreArticulo.setText("Articulo");
+        GenerarCompraInter.lblPrecioArticulo.setText("0.00");
+        this.cmbComprobanteCompra.removeAllItems();
+        this.modeloDetalle.setRowCount(0);
+        this.lblTotal.setText("0.00");
+        this.txtCantidadArticulo.setText(null);
+    }
+
+    private void cargarCmbCompra() {
+        Iterator<TipoCompra> itCompra = this.miControladoraVisual.traerTipoCompra().iterator();
+        TipoCompra unTipoCompra;
+        while(itCompra.hasNext()){
+            unTipoCompra=itCompra.next();
+            this.cmbComprobanteCompra.addItem(unTipoCompra.toString());
+        }
+    }
 }

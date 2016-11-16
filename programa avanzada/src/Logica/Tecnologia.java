@@ -76,6 +76,14 @@ public class Tecnologia implements Serializable {
         }
         return aux;
     }
+    
+    public boolean isTecnologia(String descripcion){
+        boolean aux = false;
+        if (this.getDescripcion().equals(descripcion)) {
+            aux = true;
+        }
+        return aux;
+    }
 
     @Override
     public String toString() {

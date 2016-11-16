@@ -45,5 +45,12 @@ public class Proveedor extends PersoneriaJuridica{
         return aux;
     }
     
+    public boolean isProveedor(String cuit){
+        boolean aux = false;
+        if(this.getCuit().equals(cuit)){
+            aux = true;
+        }
+        return aux;
+    }
     
 }

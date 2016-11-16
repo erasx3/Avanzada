@@ -118,6 +118,15 @@ public class Turno implements Serializable {
         return aux;
     }
     
+    public boolean isTurno(String descripcion){
+        boolean aux = false;
+        if(this.getDescripcion().equals(descripcion)){
+            aux = true;
+        }
+        return aux;
+    }
+
+    
     public void agregarOrden(OrdenTrabajo unaOrdenTrabajo){
         this.unaOrdenTrabajo = unaOrdenTrabajo;
     }

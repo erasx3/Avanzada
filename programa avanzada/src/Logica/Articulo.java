@@ -66,6 +66,14 @@ public class Articulo extends Consumible implements Serializable {
         }
         return aux;
     }
+    
+    public boolean isArticulo(String descripcion){
+        boolean aux = false;
+        if (super.getDescripcion().equals(descripcion)) {
+            aux = true;
+        }
+        return aux;
+    } 
 
     public void sumarArticulo(int cantidad) {
         this.cantidad = this.cantidad + cantidad;

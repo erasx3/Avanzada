@@ -54,4 +54,12 @@ public abstract class TipoComprobante implements Serializable {
     public boolean isComprobante(int codigo){
         return true;
     }
+    
+    public boolean isTipoComprobante(String descripcion){
+        boolean aux = false;
+        if (this.getDescripcion().equals(descripcion)) {
+            aux = true;
+        }
+        return aux;
+    }
 }

@@ -68,5 +68,12 @@ public class Empleado extends PersoneriaJuridica implements Serializable{
         return aux;
     }
     
-    
+    public boolean isEmpleado(long dni){
+        boolean aux = false;
+        if(this.getDni() == dni){
+            aux = true;
+        }
+        return aux;
+    }
+
 }

@@ -30,8 +30,8 @@ public class Proyecto extends Servicio implements Serializable {
     private List<Concepto> unosConceptos = new LinkedList<>();
     @OneToMany
     private List<Tecnologia> unasTecnologias = new LinkedList<>();
-    @OneToMany
-    private List<OrdenTrabajo> unasOrdenesTrabajos = new LinkedList<>();
+//    @OneToMany
+//    private List<OrdenTrabajo> unasOrdenesTrabajos = new LinkedList<>();
 
     public Proyecto() {
     }
@@ -64,13 +64,13 @@ public class Proyecto extends Servicio implements Serializable {
         this.unasTecnologias = unasTecnologias;
     }
 
-    public List<OrdenTrabajo> getUnasOrdenesTrabajos() {
-        return unasOrdenesTrabajos;
-    }
-
-    public void setUnasOrdenesTrabajos(List<OrdenTrabajo> unasOrdenesTrabajos) {
-        this.unasOrdenesTrabajos = unasOrdenesTrabajos;
-    }
+//    public List<OrdenTrabajo> getUnasOrdenesTrabajos() {
+//        return unasOrdenesTrabajos;
+//    }
+//
+//    public void setUnasOrdenesTrabajos(List<OrdenTrabajo> unasOrdenesTrabajos) {
+//        this.unasOrdenesTrabajos = unasOrdenesTrabajos;
+//    }
 
     public Float getTiempoEstimado() {
         return tiempoEstimado;

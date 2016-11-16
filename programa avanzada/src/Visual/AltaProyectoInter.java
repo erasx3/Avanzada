@@ -26,8 +26,6 @@ public class AltaProyectoInter extends javax.swing.JInternalFrame {
     private DefaultTableModel modeloProyecto;
     public static DefaultTableModel modeloConceptoProyec;
     public static DefaultTableModel modeloTecnologiaProyec;
-    private List<Concepto> unosConceptos;
-    private List<Tecnologia> unasTecnologias;
     private Concepto unConcepto;
     private Tecnologia unaTecnologia;
     private int filaConcepto;
@@ -287,25 +285,24 @@ public class AltaProyectoInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmdBorrarTecnologiaActionPerformed
 
     private void cmdGenerarProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerarProyectoActionPerformed
-        this.unosConceptos = new LinkedList<>();
-        this.unasTecnologias = new LinkedList<>();
+        List<Concepto> unosConceptos = new LinkedList<>();
+        List<Tecnologia> unasTecnologias = new LinkedList<>();
         Concepto unConcepto;
         Tecnologia unaTecnologia;
         int codigo;
         for (int i = 0; i < AltaProyectoInter.modeloConceptoProyec.getRowCount(); i++) {
             codigo = Integer.parseInt(AltaProyectoInter.modeloConceptoProyec.getValueAt(i, 0).toString());
             unConcepto = this.miControladoraVisual.buscarConcepto(codigo);
-            this.unosConceptos.add(unConcepto);
+            unosConceptos.add(unConcepto);
         }
         for (int i = 0; i < AltaProyectoInter.modeloTecnologiaProyec.getRowCount(); i++) {
             codigo = Integer.parseInt(AltaProyectoInter.modeloConceptoProyec.getValueAt(i, 0).toString());
             unaTecnologia = this.miControladoraVisual.buscarTecnologia(codigo);
-            this.unasTecnologias.add(unaTecnologia);
+            unasTecnologias.add(unaTecnologia);
         }
         try {
-            this.miControladoraVisual.generarProyecto(Float.valueOf(this.txtTiempoEstimado.getText()), this.unosConceptos, this.unasTecnologias, this.txtDescripcion.getText());
-            this.unosConceptos.removeAll(unosConceptos);
-            this.unasTecnologias.remove(unasTecnologias);
+            this.miControladoraVisual.generarProyecto(Float.valueOf(this.txtTiempoEstimado.getText()),unosConceptos, unasTecnologias, this.txtDescripcion.getText());
+            refrescarVentana();
         } catch (Exception ex) {
             Logger.getLogger(AltaProyectoInter.class.getName()).log(Level.SEVERE, null, ex);
         }

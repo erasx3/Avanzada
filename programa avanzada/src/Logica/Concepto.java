@@ -72,5 +72,12 @@ public class Concepto implements Serializable {
         return aux;
     }
     
+    public boolean isConcepto(String descripcion){
+        boolean aux = false;
+        if (this.getDescripcion().equals(descripcion)) {
+            aux = true;
+        }
+        return aux;
+    }
     
 }

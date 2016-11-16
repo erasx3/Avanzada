@@ -113,12 +113,14 @@ public class OrdenTrabajo implements Serializable {
         }
         return aux;
     }
-
-    public void add(OrdenTrabajo ordenTrabajo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public boolean isOrdenTrabajo(String descripcion){
+        boolean aux = false;
+        if(this.getDescripcion().equals(descripcion)){
+            aux = true;
+        }
+        return aux;
     }
 
-    public void remove(OrdenTrabajo ordenTrabajo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 }

@@ -34,4 +34,11 @@ public class TipoCompra extends TipoComprobante implements Serializable {
         }
         return aux;
     }
+
+    @Override
+    public String toString() {
+        return super.getCodigo()+"-"+super.getDescripcion();
+    }
+    
+    
 }

@@ -56,4 +56,12 @@ public class TipoEstado implements Serializable {
         return aux;
     }
     
+    public boolean isTipoEstado(String nombre){
+        boolean aux = false;
+        if(this.getNombre().equals(nombre)){
+            aux = true;
+        }
+        return aux;
+    }
+
 }

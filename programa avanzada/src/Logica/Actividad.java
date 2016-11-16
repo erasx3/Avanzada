@@ -61,4 +61,12 @@ public abstract class Actividad implements Serializable {
         }
         return aux;
     }
+    
+    public boolean isActividad(String descripcion){
+        boolean aux = false;
+        if (this.getDescripcion().equals(descripcion)) {
+            aux = true;
+        }
+        return aux;
+    }
 }
