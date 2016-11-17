@@ -726,7 +726,7 @@ public class Empresa implements Serializable {
             aux = (Turno) itr.next();
             if (aux.isCliente(unCliente)) {
                 aux3 = aux.getUnaOrdenTrabajo();
-                aux2 = aux3.getUnosServicios();//preguntar si se puede ahcer asi
+                aux2 = aux3.getUnosServicios();
             }
 
         }
@@ -760,6 +760,7 @@ public class Empresa implements Serializable {
     public void borrarEncabezado(int codigo) throws Exception {
         Encabezado unEncabezado = buscarEncabezado(codigo);
         this.unosEncabezados.remove(unEncabezado);
+        this.sEncabezado(unosEncabezados);
         Persistencia.eliminarEncabezado(codigo);
     }
 
@@ -1151,6 +1152,9 @@ public class Empresa implements Serializable {
         this.unosClientes = Persistencia.traerClientes();
         this.unosDetallesCompraVenta = Persistencia.traerDetallesCompraVenta();
         this.unosEncabezados = Persistencia.traerEncabezados();
+        this.unasPersoneriaJuridicas.addAll(this.unosClientes);
+        this.unasPersoneriaJuridicas.addAll(this.unosProveedores);
+        this.unasPersoneriaJuridicas.addAll(this.unosEmpleados);
         this.sEncabezado(unosEncabezados);
         this.unosDetalles.addAll(this.unosDetallesCompraVenta);
         this.unosTecnicos = Persistencia.traerTecnicos();
@@ -1418,11 +1422,15 @@ public class Empresa implements Serializable {
     public void sEncabezado(List<Encabezado> unosEncabezados) {
         Iterator<Encabezado> itEncabezado = unosEncabezados.iterator();
         Encabezado unEncabezado;
-
+        this.unosEncabezadosVentaArticulo.removeAll(unosEncabezadosVentaArticulo);
+        this.unosEncabezadosVentaServicio.removeAll(unosEncabezadosVentaServicio);
+        this.unosEncabezadosCompra.removeAll(unosEncabezadosCompra);
+        this.unosEncabezadosLiquidacion.removeAll(unosEncabezadosLiquidacion);
         while (itEncabezado.hasNext()) {
             unEncabezado = itEncabezado.next();
             if (unEncabezado.getUnTipoComprobante().isTipo().equals("TipoVenta")) {
                 this.unosEncabezadosVentaArticulo.add(unEncabezado);
+                this.unosEncabezadosVentaServicio.add(unEncabezado);
             }
             if (unEncabezado.getUnTipoComprobante().isTipo().equals("TipoCompra")) {
                 this.unosEncabezadosCompra.add(unEncabezado);
@@ -1431,6 +1439,54 @@ public class Empresa implements Serializable {
                 this.unosEncabezadosCompra.add(unEncabezado);
             }
         }
+    }
+
+    public int CalcularTotalVentas() {
+        int total = 0;
+        Iterator<Encabezado> itEncabezado = this.unosEncabezadosVentaArticulo.iterator();
+        Encabezado unEncabezado;
+        while (itEncabezado.hasNext()) {
+            unEncabezado = itEncabezado.next();
+            total = total + 1;
+        }
+        return total;
+    }
+
+    public int CalcularTotalCompras() {
+        int total = 0;
+        Iterator<Encabezado> itEncabezado = this.unosEncabezadosCompra.iterator();
+        Encabezado unEncabezado;
+        while (itEncabezado.hasNext()) {
+            unEncabezado = itEncabezado.next();
+            total = total + 1;
+        }
+        return total;
+    }
+
+    public Double CalcularTotalVentasArticulos() {
+        Double total = 0.00;
+        Iterator<Encabezado> itEncabezado = this.unosEncabezadosVentaArticulo.iterator();
+        Encabezado unEncabezado;
+        while (itEncabezado.hasNext()) {
+            unEncabezado = itEncabezado.next();
+            total = total + unEncabezado.getTotal();
+        }
+        return total;
+    }
+
+    public Double calcularTotalCompras() {
+        Double total = 0.00;
+        Iterator<Encabezado> itEncabezado = this.unosEncabezadosCompra.iterator();
+        Encabezado unEncabezado;
+        while (itEncabezado.hasNext()) {
+            unEncabezado = itEncabezado.next();
+            total = total + unEncabezado.getTotal();
+        }
+        return total;
+    }
+
+    public Double calcularBalance() {
+        return this.CalcularTotalVentasArticulos() - this.calcularTotalCompras();
     }
 
 }

@@ -77,6 +77,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         mnuBalanceVentas = new javax.swing.JMenuItem();
         mnuBalanceCompras = new javax.swing.JMenuItem();
+        mnuBalanceEmpresa = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -337,6 +338,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jMenu6.add(mnuBalanceCompras);
 
+        mnuBalanceEmpresa.setText("Balance Empresa");
+        mnuBalanceEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuBalanceEmpresaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(mnuBalanceEmpresa);
+
         jMenuBar1.add(jMenu6);
 
         jInternalFrame1.setJMenuBar(jMenuBar1);
@@ -487,13 +496,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuLiquidacionActionPerformed
 
     private void mnuBalanceVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBalanceVentasActionPerformed
-        EstadVentasInter EstadVenta = new EstadVentasInter(this.miControladoraVisual);
+        BalanceVentasInter EstadVenta = new BalanceVentasInter(miControladoraVisual);
         this.Escritorio.add(EstadVenta);
         EstadVenta.show();
     }//GEN-LAST:event_mnuBalanceVentasActionPerformed
 
     private void mnuBalanceComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBalanceComprasActionPerformed
-        EstadComprasInter EstadCompra = new EstadComprasInter(this.miControladoraVisual);
+        BalanceComprasInter EstadCompra = new BalanceComprasInter(miControladoraVisual);
         this.Escritorio.add(EstadCompra);
         EstadCompra.show();
     }//GEN-LAST:event_mnuBalanceComprasActionPerformed
@@ -540,6 +549,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         unAltaProyectoInter.show();
     }//GEN-LAST:event_mnuServicioProyectoActionPerformed
 
+    private void mnuBalanceEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuBalanceEmpresaActionPerformed
+        BalanceGeneralInter miBalanceGeneralInter = new BalanceGeneralInter(miControladoraVisual);
+        MenuPrincipal.Escritorio.add(miBalanceGeneralInter);
+        miBalanceGeneralInter.show();
+    }//GEN-LAST:event_mnuBalanceEmpresaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -561,6 +576,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuActTecnica;
     private javax.swing.JMenuItem mnuArticulo;
     private javax.swing.JMenuItem mnuBalanceCompras;
+    private javax.swing.JMenuItem mnuBalanceEmpresa;
     private javax.swing.JMenuItem mnuBalanceVentas;
     private javax.swing.JMenuItem mnuCliente;
     private javax.swing.JMenuItem mnuCompra;

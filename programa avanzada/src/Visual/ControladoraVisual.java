@@ -559,7 +559,6 @@ public class ControladoraVisual {
         return this.unaEmpresa.traerEncabezadoVentaArticulo();
     }
     
-    //Metodos de Conexion con Controladora de Reportes
     
     public void generarReporteVenta(Encabezado unEncabezado, FileOutputStream archivo) throws DocumentException{
         this.miControladoraReporte.generarReporteVenta(unEncabezado, archivo);
@@ -573,6 +572,27 @@ public class ControladoraVisual {
         return this.unaEmpresa.traerEncabezadoCompra();
     }
 
+    public int CalcularTotalCompras(){
+        return this.unaEmpresa.CalcularTotalCompras();
+    }
     
+    public int CalcularTotalVentas(){
+        return this.unaEmpresa.CalcularTotalVentas();
+    }
+    
+    public Double CalcularTotalVentasArticulos() {
+        return this.unaEmpresa.CalcularTotalVentasArticulos();
+    }
+    
+    public Double calcularTotalCompras(){
+        return this.unaEmpresa.calcularTotalCompras();
+    }
+    
+     public Double calcularBalance(){
+         return this.unaEmpresa.calcularBalance();
+     }
 
+     public void generarReporteBalanceVentas(List<Encabezado> unosEncabezados, FileOutputStream archivo) throws DocumentException{
+         this.miControladoraReporte.generarReporteBalanceVentas(unosEncabezados, archivo);
+     }
 }

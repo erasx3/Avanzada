@@ -9,6 +9,7 @@ import Logica.Empresa;
 import Logica.Encabezado;
 import com.itextpdf.text.DocumentException;
 import java.io.FileOutputStream;
+import java.util.List;
 
 /**
  *
@@ -26,4 +27,9 @@ public class ControladoraReporte {
         ReporteVenta unReporteVenta=new ReporteVenta(unaEmpresa);
         unReporteVenta.generarReporteVenta(unEncabezado, archivo);
     }
+    
+     public void generarReporteBalanceVentas(List<Encabezado> unosEncabezados, FileOutputStream archivo) throws DocumentException{
+         ReporteBalanceVentas unBalanceVentas=new ReporteBalanceVentas(unaEmpresa);
+         unBalanceVentas.generarReporteBalanceVentas(unosEncabezados, archivo);
+     }
 }
