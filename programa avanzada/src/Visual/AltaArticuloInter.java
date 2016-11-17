@@ -10,6 +10,7 @@ import Persistencia.exceptions.NonexistentEntityException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,12 +21,12 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloArticulo;
-    
+
     public AltaArticuloInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         txtCodigo.setVisible(false);
-        this.miControladoraVisual=miControladoraVisual;
-        this.modeloArticulo= (DefaultTableModel)this.tblArticulo.getModel();
+        this.miControladoraVisual = miControladoraVisual;
+        this.modeloArticulo = (DefaultTableModel) this.tblArticulo.getModel();
         refrescarVentana();
     }
 
@@ -229,16 +230,22 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
-        
+
     }//GEN-LAST:event_txtPrecioActionPerformed
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            this.miControladoraVisual.crearArticulo(txtNombre.getText(), txtDescripcion.getText(), Double.parseDouble(txtPrecioLista.getText()), Double.parseDouble(txtPorcentajeDesc.getText()), Double.parseDouble(txtPrecio.getText()), Integer.parseInt(txtCantidad.getText()), Integer.parseInt(txtCantidadMinima.getText()));
-            refrescarVentana();
+            Articulo unArticulo = this.miControladoraVisual.buscarArticulo(this.txtDescripcion.getText());
+            if (unArticulo == null) {
+                this.miControladoraVisual.crearArticulo(txtNombre.getText(), txtDescripcion.getText(), Double.parseDouble(txtPrecioLista.getText()), Double.parseDouble(txtPorcentajeDesc.getText()), Double.parseDouble(txtPrecio.getText()), Integer.parseInt(txtCantidad.getText()), Integer.parseInt(txtCantidadMinima.getText()));
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaArticuloInter.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        }
     }//GEN-LAST:event_cmdAgregarActionPerformed
 
     private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
@@ -248,7 +255,7 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(AltaArticuloInter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_cmdModificarActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
@@ -258,26 +265,26 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(AltaArticuloInter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_cmdBorrarActionPerformed
 
     private void tblArticuloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblArticuloMouseClicked
-       txtCodigo.setText(null);
-       txtNombre.setText(null);
-       txtDescripcion.setText(null);
-       txtPrecio.setText(null);
-       txtCantidadMinima.setText(null);
-       txtPorcentajeDesc.setText(null);
-       txtPrecioLista.setText(null);
-       txtCantidad.setText(null);
-       
-       int fila = this.tblArticulo.rowAtPoint(evt.getPoint());
-       
-       txtCodigo.setText(this.modeloArticulo.getValueAt(fila, 0).toString());
-       txtNombre.setText(this.modeloArticulo.getValueAt(fila, 1).toString());
-       txtDescripcion.setText(this.modeloArticulo.getValueAt(fila, 2).toString());
-       txtPrecio.setText(this.modeloArticulo.getValueAt(fila, 3).toString());
-       txtCantidad.setText(this.modeloArticulo.getValueAt(fila, 4).toString());
+        txtCodigo.setText(null);
+        txtNombre.setText(null);
+        txtDescripcion.setText(null);
+        txtPrecio.setText(null);
+        txtCantidadMinima.setText(null);
+        txtPorcentajeDesc.setText(null);
+        txtPrecioLista.setText(null);
+        txtCantidad.setText(null);
+
+        int fila = this.tblArticulo.rowAtPoint(evt.getPoint());
+
+        txtCodigo.setText(this.modeloArticulo.getValueAt(fila, 0).toString());
+        txtNombre.setText(this.modeloArticulo.getValueAt(fila, 1).toString());
+        txtDescripcion.setText(this.modeloArticulo.getValueAt(fila, 2).toString());
+        txtPrecio.setText(this.modeloArticulo.getValueAt(fila, 3).toString());
+        txtCantidad.setText(this.modeloArticulo.getValueAt(fila, 4).toString());
     }//GEN-LAST:event_tblArticuloMouseClicked
 
 
@@ -316,12 +323,11 @@ public class AltaArticuloInter extends javax.swing.JInternalFrame {
     }
 
     private void cargarTablaArticulo() {
-        Iterator <Articulo> itArticulo = this.miControladoraVisual.traerArticulo().iterator();
+        Iterator<Articulo> itArticulo = this.miControladoraVisual.traerArticulo().iterator();
         Articulo unTipo;
-        while(itArticulo.hasNext())
-        {
+        while (itArticulo.hasNext()) {
             unTipo = itArticulo.next();
-            modeloArticulo.addRow(new Object[]{unTipo.getCodigo(),unTipo.getNombre(),unTipo.getDescripcion(),unTipo.getPrecioLista(),unTipo.getPrecioVenta(),unTipo.getDescuentoMayorista(),unTipo.getCantidadMinima(),unTipo.getCantidad()});
+            modeloArticulo.addRow(new Object[]{unTipo.getCodigo(), unTipo.getNombre(), unTipo.getDescripcion(), unTipo.getPrecioLista(), unTipo.getPrecioVenta(), unTipo.getDescuentoMayorista(), unTipo.getCantidadMinima(), unTipo.getCantidad()});
         }
     }
 }

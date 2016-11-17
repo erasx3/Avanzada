@@ -159,7 +159,9 @@ public class Empresa implements Serializable {
             if (aux.isCliente(dni)) {
                 band = 1;
             }
-
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
     }
@@ -375,6 +377,9 @@ public class Empresa implements Serializable {
             if (aux.isActividad(descripcion)) {
                 band = 1;
             }
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
     }
@@ -388,7 +393,9 @@ public class Empresa implements Serializable {
             if (aux.isArticulo(descripcion)) {
                 band = 1;
             }
-
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
     }
@@ -402,7 +409,9 @@ public class Empresa implements Serializable {
             if (aux.isEmpleado(dni)) {
                 band = 1;
             }
-
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
     }
@@ -416,7 +425,9 @@ public class Empresa implements Serializable {
             if (aux.isEquipo(descripcion)) {
                 band = 1;
             }
-
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
     }
@@ -430,7 +441,9 @@ public class Empresa implements Serializable {
             if (aux.isProveedor(cuit)) {
                 band = 1;
             }
-
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
     }
@@ -444,7 +457,9 @@ public class Empresa implements Serializable {
             if (aux.isTecnologia(descripcion)) {
                 band = 1;
             }
-
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
     }
@@ -457,6 +472,9 @@ public class Empresa implements Serializable {
             aux = (TipoTecnologia) itr.next();
             if (aux.isTipoTecnologia(nombre)) {
                 band = 1;
+            }
+            if (band == 0) {
+                aux = null;
             }
         }
         return aux;
@@ -471,6 +489,9 @@ public class Empresa implements Serializable {
             if (aux.isTipoComprobante(descripcion)) {
                 band = 1;
             }
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
     }
@@ -484,7 +505,9 @@ public class Empresa implements Serializable {
             if (aux.isTipoEstado(nombre)) {
                 band = 1;
             }
-
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
     }
@@ -498,7 +521,9 @@ public class Empresa implements Serializable {
             if (aux.isOrdenTrabajo(descripcion)) {
                 band = 1;
             }
-
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
 
@@ -513,7 +538,9 @@ public class Empresa implements Serializable {
             if (aux.isTurno(descripcion)) {
                 band = 1;
             }
-
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
     }
@@ -527,7 +554,9 @@ public class Empresa implements Serializable {
             if (aux.isConcepto(descripcion)) {
                 band = 1;
             }
-
+            if (band == 0) {
+                aux = null;
+            }
         }
         return aux;
     }

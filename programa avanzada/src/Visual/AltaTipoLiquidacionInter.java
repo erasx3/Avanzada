@@ -5,10 +5,12 @@
  */
 package Visual;
 
+import Logica.TipoComprobante;
 import Logica.TipoLiquidacion;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,12 +21,12 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloLiquidacion;
-    
+
     public AltaTipoLiquidacionInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         txtCodigo.setVisible(false);
-        this.miControladoraVisual=miControladoraVisual;
-        this.modeloLiquidacion=(DefaultTableModel) this.tblLiquidacion.getModel();
+        this.miControladoraVisual = miControladoraVisual;
+        this.modeloLiquidacion = (DefaultTableModel) this.tblLiquidacion.getModel();
         refrescarVentana();
     }
 
@@ -160,8 +162,14 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            this.miControladoraVisual.crearTipoLiquidacion(txtDescripcion.getText());
-            refrescarVentana();
+            TipoComprobante unTipoCompra = this.miControladoraVisual.buscarTipoComprobante(this.txtDescripcion.getText());
+            if (unTipoCompra == null) {
+                this.miControladoraVisual.crearTipoLiquidacion(txtDescripcion.getText());
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaTipoLiquidacionInter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -174,7 +182,7 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(AltaTipoLiquidacionInter.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
+
     }//GEN-LAST:event_cmdModificarActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
@@ -189,9 +197,9 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
     private void tblLiquidacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLiquidacionMouseClicked
         txtCodigo.setText(null);
         txtDescripcion.setText(null);
-        
+
         int fila = this.tblLiquidacion.rowAtPoint(evt.getPoint());
-        
+
         txtCodigo.setText(this.modeloLiquidacion.getValueAt(fila, 0).toString());
         txtDescripcion.setText(this.modeloLiquidacion.getValueAt(fila, 1).toString());
     }//GEN-LAST:event_tblLiquidacionMouseClicked
@@ -219,9 +227,9 @@ public class AltaTipoLiquidacionInter extends javax.swing.JInternalFrame {
     private void cargarTablaCompra() {
         Iterator<TipoLiquidacion> itTipoLiquidacion = this.miControladoraVisual.traerTipoLiquidacion().iterator();
         TipoLiquidacion unTipo;
-        while(itTipoLiquidacion.hasNext()){
-            unTipo=itTipoLiquidacion.next();
-            modeloLiquidacion.addRow(new Object[]{unTipo.getCodigo(),unTipo.getDescripcion()});
+        while (itTipoLiquidacion.hasNext()) {
+            unTipo = itTipoLiquidacion.next();
+            modeloLiquidacion.addRow(new Object[]{unTipo.getCodigo(), unTipo.getDescripcion()});
         }
     }
 }

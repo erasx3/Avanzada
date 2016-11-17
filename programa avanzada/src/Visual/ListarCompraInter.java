@@ -10,8 +10,11 @@ import Logica.DetalleCompraVenta;
 import Logica.Encabezado;
 import Logica.Proveedor;
 import Logica.TipoCompra;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -182,7 +185,11 @@ public class ListarCompraInter extends javax.swing.JInternalFrame {
         int codigo = Integer.parseInt(this.tblEncabezado.getValueAt(this.fila, 0).toString());
         Encabezado unEncabezado = this.miControladoraVisual.buscarEncabezado(codigo);
         try {
-            this.miControladoraVisual.generarReporteVenta(unEncabezado);
+            JFileChooser file = new JFileChooser();
+                file.showSaveDialog(this);
+                File guarda = file.getSelectedFile();         
+                FileOutputStream archivo = new FileOutputStream(guarda);
+                this.miControladoraVisual.generarReporteVenta(unEncabezado, archivo);
         } catch (Exception ex) {
 
         }

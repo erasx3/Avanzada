@@ -9,6 +9,7 @@ import Logica.Proveedor;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -205,8 +206,14 @@ public class AltaProveedorInter extends javax.swing.JInternalFrame {
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            this.micontroladoraVisual.crearProveedor(txtNombre.getText(), txtDireccion.getText(), Long.parseLong(txtTelefono.getText()), txtEmail.getText(), txtCuit.getText());
-            refrescarVentana();
+            Proveedor unProveedor = this.micontroladoraVisual.buscarProveedor(this.txtCuit.getText());
+            if (unProveedor == null) {
+                this.micontroladoraVisual.crearProveedor(txtNombre.getText(), txtDireccion.getText(), Long.parseLong(txtTelefono.getText()), txtEmail.getText(), txtCuit.getText());
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaProveedorInter.class.getName()).log(Level.SEVERE, null, ex);
         }

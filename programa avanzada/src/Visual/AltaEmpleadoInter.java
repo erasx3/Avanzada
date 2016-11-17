@@ -9,6 +9,7 @@ import Logica.Empleado;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,12 +20,12 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloEmpleado;
-    
+
     public AltaEmpleadoInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         this.txtCodigo.setVisible(false);
-        this.miControladoraVisual=miControladoraVisual;
-        this.modeloEmpleado=(DefaultTableModel)tblEmpleado.getModel();
+        this.miControladoraVisual = miControladoraVisual;
+        this.modeloEmpleado = (DefaultTableModel) tblEmpleado.getModel();
         refrescarVentana();
     }
 
@@ -301,8 +302,14 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            this.miControladoraVisual.crearEmpleado(txtNombre.getText(), txtApellido.getText(), txtDireccion.getText(), Long.parseLong(txtTelefono.getText()), txtEmail.getText(), Long.parseLong(txtDni.getText()), txtCuil.getText());
-            refrescarVentana();
+            Empleado unEmpleado = this.miControladoraVisual.buscarEmpleado(Long.parseLong(this.txtDni.getText()));
+            if (unEmpleado == null) {
+                this.miControladoraVisual.crearEmpleado(txtNombre.getText(), txtApellido.getText(), txtDireccion.getText(), Long.parseLong(txtTelefono.getText()), txtEmail.getText(), Long.parseLong(txtDni.getText()), txtCuil.getText());
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaEmpleadoInter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -318,25 +325,25 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cmdModificarActionPerformed
 
     private void tblEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadoMouseClicked
-       txtCodigo.setText(null);
-       txtNombre.setText(null);
-       txtApellido.setText(null);
-       txtDireccion.setText(null);
-       txtEmail.setText(null);
-       txtTelefono.setText(null);
-       txtDni.setText(null);
-       txtCuil.setText(null);
-       
-       int fila=this.tblEmpleado.rowAtPoint(evt.getPoint());
-       
-       txtCodigo.setText(this.modeloEmpleado.getValueAt(fila, 0).toString());
-       txtDni.setText(this.modeloEmpleado.getValueAt(fila, 1).toString());
-       txtCuil.setText(this.modeloEmpleado.getValueAt(fila, 2).toString());
-       txtNombre.setText(this.modeloEmpleado.getValueAt(fila, 3).toString());
-       txtApellido.setText(this.modeloEmpleado.getValueAt(fila, 4).toString());
-       txtDireccion.setText(this.modeloEmpleado.getValueAt(fila, 5).toString());
-       txtEmail.setText(this.modeloEmpleado.getValueAt(fila, 6).toString());
-       txtTelefono.setText(this.modeloEmpleado.getValueAt(fila, 7).toString());
+        txtCodigo.setText(null);
+        txtNombre.setText(null);
+        txtApellido.setText(null);
+        txtDireccion.setText(null);
+        txtEmail.setText(null);
+        txtTelefono.setText(null);
+        txtDni.setText(null);
+        txtCuil.setText(null);
+
+        int fila = this.tblEmpleado.rowAtPoint(evt.getPoint());
+
+        txtCodigo.setText(this.modeloEmpleado.getValueAt(fila, 0).toString());
+        txtDni.setText(this.modeloEmpleado.getValueAt(fila, 1).toString());
+        txtCuil.setText(this.modeloEmpleado.getValueAt(fila, 2).toString());
+        txtNombre.setText(this.modeloEmpleado.getValueAt(fila, 3).toString());
+        txtApellido.setText(this.modeloEmpleado.getValueAt(fila, 4).toString());
+        txtDireccion.setText(this.modeloEmpleado.getValueAt(fila, 5).toString());
+        txtEmail.setText(this.modeloEmpleado.getValueAt(fila, 6).toString());
+        txtTelefono.setText(this.modeloEmpleado.getValueAt(fila, 7).toString());
     }//GEN-LAST:event_tblEmpleadoMouseClicked
 
 
@@ -378,12 +385,11 @@ public class AltaEmpleadoInter extends javax.swing.JInternalFrame {
     }
 
     private void cargarTablaEmpleado() {
-        Iterator<Empleado>itEmpleado=this.miControladoraVisual.traerEmpleado().iterator();
+        Iterator<Empleado> itEmpleado = this.miControladoraVisual.traerEmpleado().iterator();
         Empleado unEmpleado;
-        while(itEmpleado.hasNext())
-        {
-            unEmpleado=itEmpleado.next();
-            modeloEmpleado.addRow(new Object[]{unEmpleado.getCodigo(),unEmpleado.getDni(),unEmpleado.getCuil(),unEmpleado.getNombre(),unEmpleado.getApellido(),unEmpleado.getDireccion(),unEmpleado.getEmail(),unEmpleado.getTelefono()});
+        while (itEmpleado.hasNext()) {
+            unEmpleado = itEmpleado.next();
+            modeloEmpleado.addRow(new Object[]{unEmpleado.getCodigo(), unEmpleado.getDni(), unEmpleado.getCuil(), unEmpleado.getNombre(), unEmpleado.getApellido(), unEmpleado.getDireccion(), unEmpleado.getEmail(), unEmpleado.getTelefono()});
         }
     }
 }

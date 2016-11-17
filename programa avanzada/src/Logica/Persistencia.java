@@ -19,7 +19,7 @@ import Persistencia.EncabezadoJpaController;
 import Persistencia.EquipoJpaController;
 import Persistencia.EstadoJpaController;
 import Persistencia.ManoDeObraJpaController;
-import Persistencia.OrdenTrabajoJpaController;
+//import Persistencia.OrdenTrabajoJpaController;
 import Persistencia.ProveedorJpaController;
 import Persistencia.ProyectoJpaController;
 import Persistencia.TecnicoJpaController;
@@ -57,7 +57,7 @@ public class Persistencia {
     public static EquipoJpaController jpaEquipo;
     public static EstadoJpaController jpaEstado;
     public static ManoDeObraJpaController jpaManoDeObra;
-    public static OrdenTrabajoJpaController jpaOrdenTrabajo;
+//    public static OrdenTrabajoJpaController jpaOrdenTrabajo;
     public static ProveedorJpaController jpaProveedor;
     public static ProyectoJpaController jpaProyecto;
     public static TecnicoJpaController jpaTecnico;
@@ -91,7 +91,7 @@ public class Persistencia {
         jpaEquipo = new EquipoJpaController();
         jpaEstado = new EstadoJpaController();
         jpaManoDeObra = new ManoDeObraJpaController();
-        jpaOrdenTrabajo = new OrdenTrabajoJpaController();
+//        jpaOrdenTrabajo = new OrdenTrabajoJpaController();
         jpaProveedor = new ProveedorJpaController();
         jpaProyecto = new ProyectoJpaController();
         jpaTecnico = new TecnicoJpaController();
@@ -420,24 +420,24 @@ public class Persistencia {
     }
     
     
-    static void crearOrdenTrabajo(OrdenTrabajo unOrdenTrabajo) throws Exception
-    {
-        jpaOrdenTrabajo.create(unOrdenTrabajo);
-    }
-    
-    static void modificarOrdenTrabajo(OrdenTrabajo unOrdenTrabajo) throws Exception
-    {
-        jpaOrdenTrabajo.edit(unOrdenTrabajo);
-    }
-    
-    static void eliminarOrdenTrabajo(int codigo) throws Exception
-    {
-        jpaOrdenTrabajo.destroy(codigo);
-    }
-
-    static List<OrdenTrabajo> traerOrdenesTrabajos() {
-        return jpaOrdenTrabajo.findOrdenTrabajoEntities();
-    }
+//    static void crearOrdenTrabajo(OrdenTrabajo unOrdenTrabajo) throws Exception
+//    {
+//        jpaOrdenTrabajo.create(unOrdenTrabajo);
+//    }
+//    
+//    static void modificarOrdenTrabajo(OrdenTrabajo unOrdenTrabajo) throws Exception
+//    {
+//        jpaOrdenTrabajo.edit(unOrdenTrabajo);
+//    }
+//    
+//    static void eliminarOrdenTrabajo(int codigo) throws Exception
+//    {
+//        jpaOrdenTrabajo.destroy(codigo);
+//    }
+//
+//    static List<OrdenTrabajo> traerOrdenesTrabajos() {
+//        return jpaOrdenTrabajo.findOrdenTrabajoEntities();
+//    }
     
     
     static void crearProveedor(Proveedor unProveedor) throws Exception

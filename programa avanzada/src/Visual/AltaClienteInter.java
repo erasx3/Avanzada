@@ -9,6 +9,7 @@ import Logica.Cliente;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,12 +23,12 @@ public class AltaClienteInter extends javax.swing.JInternalFrame {
      */
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloClientes;
-    
+
     public AltaClienteInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         txtCodigo.setVisible(false);
-        this.miControladoraVisual=miControladoraVisual;
-        this.modeloClientes= (DefaultTableModel) this.tblCliente.getModel();
+        this.miControladoraVisual = miControladoraVisual;
+        this.modeloClientes = (DefaultTableModel) this.tblCliente.getModel();
         refrescarVentana();
     }
 
@@ -275,12 +276,18 @@ public class AltaClienteInter extends javax.swing.JInternalFrame {
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            this.miControladoraVisual.crearCliente(txtNombre.getText(), txtApellido.getText(), txtDireccion.getText(), Long.parseLong(txtTelefono.getText()), txtEmail.getText(), Long.parseLong(txtDNI.getText()), txtCUIL.getText());
-            refrescarVentana();
+            Cliente unCliente = this.miControladoraVisual.buscarCliente(Long.parseLong(this.txtDNI.getText()));
+            if (unCliente == null) {
+                this.miControladoraVisual.crearCliente(txtNombre.getText(), txtApellido.getText(), txtDireccion.getText(), Long.parseLong(txtTelefono.getText()), txtEmail.getText(), Long.parseLong(txtDNI.getText()), txtCUIL.getText());
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaClienteInter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_cmdAgregarActionPerformed
 
     private void txtDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDNIActionPerformed
@@ -338,9 +345,9 @@ public class AltaClienteInter extends javax.swing.JInternalFrame {
         this.txtDireccion.setText(null);
         this.txtEmail.setText(null);
         this.txtTelefono.setText(null);
-        
-        int fila=this.tblCliente.rowAtPoint(evt.getPoint());
-        
+
+        int fila = this.tblCliente.rowAtPoint(evt.getPoint());
+
         this.txtCodigo.setText(this.modeloClientes.getValueAt(fila, 0).toString());
         this.txtDNI.setText(this.modeloClientes.getValueAt(fila, 1).toString());
         this.txtCUIL.setText(this.modeloClientes.getValueAt(fila, 2).toString());
@@ -390,12 +397,11 @@ public class AltaClienteInter extends javax.swing.JInternalFrame {
     }
 
     private void cargarTablaCliente() {
-        Iterator <Cliente> itCliente = this.miControladoraVisual.traerCliente().iterator();
+        Iterator<Cliente> itCliente = this.miControladoraVisual.traerCliente().iterator();
         Cliente unCliente;
-        while(itCliente.hasNext())
-        {
-            unCliente=itCliente.next();
-            modeloClientes.addRow(new Object[]{unCliente.getCodigo(),unCliente.getDni(),unCliente.getCuil(),unCliente.getNombre(),unCliente.getApellido(),unCliente.getDireccion(),unCliente.getEmail(),unCliente.getTelefono()});
+        while (itCliente.hasNext()) {
+            unCliente = itCliente.next();
+            modeloClientes.addRow(new Object[]{unCliente.getCodigo(), unCliente.getDni(), unCliente.getCuil(), unCliente.getNombre(), unCliente.getApellido(), unCliente.getDireccion(), unCliente.getEmail(), unCliente.getTelefono()});
         }
     }
 }

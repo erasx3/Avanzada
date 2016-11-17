@@ -5,10 +5,12 @@
  */
 package Visual;
 
+import Logica.TipoComprobante;
 import Logica.TipoVenta;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,12 +21,12 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloTipoVenta;
-    
+
     public AltaTipoVentaInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         this.txtCodigo.setVisible(false);
-        this.miControladoraVisual=miControladoraVisual;
-        this.modeloTipoVenta=(DefaultTableModel)this.tblVentas.getModel();
+        this.miControladoraVisual = miControladoraVisual;
+        this.modeloTipoVenta = (DefaultTableModel) this.tblVentas.getModel();
         refrescarVentana();
     }
 
@@ -160,8 +162,14 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
 
     private void cmdAgregar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregar2ActionPerformed
         try {
-            this.miControladoraVisual.crearTipoVenta(txtDescripcion.getText());
-            refrescarVentana();
+            TipoComprobante unTipoVenta = this.miControladoraVisual.buscarTipoComprobante(this.txtDescripcion.getText());
+            if (unTipoVenta == null) {
+                this.miControladoraVisual.crearTipoVenta(txtDescripcion.getText());
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaTipoVentaInter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -188,9 +196,9 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
     private void tblVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVentasMouseClicked
         txtCodigo.setText(null);
         txtDescripcion.setText(null);
-        
+
         int fila = this.tblVentas.rowAtPoint(evt.getPoint());
-        
+
         txtCodigo.setText(this.modeloTipoVenta.getValueAt(fila, 0).toString());
         txtDescripcion.setText(this.modeloTipoVenta.getValueAt(fila, 1).toString());
     }//GEN-LAST:event_tblVentasMouseClicked
@@ -213,14 +221,14 @@ public class AltaTipoVentaInter extends javax.swing.JInternalFrame {
         txtDescripcion.setText(null);
         modeloTipoVenta.setRowCount(0);
         cargarTablaVentas();
-}
+    }
 
     private void cargarTablaVentas() {
         Iterator<TipoVenta> itTipoVenta = this.miControladoraVisual.traerTipoVenta().iterator();
         TipoVenta unTipo;
-        while(itTipoVenta.hasNext()){
-            unTipo=itTipoVenta.next();
-            modeloTipoVenta.addRow(new Object[]{unTipo.getCodigo(),unTipo.getDescripcion()});
+        while (itTipoVenta.hasNext()) {
+            unTipo = itTipoVenta.next();
+            modeloTipoVenta.addRow(new Object[]{unTipo.getCodigo(), unTipo.getDescripcion()});
         }
     }
 }

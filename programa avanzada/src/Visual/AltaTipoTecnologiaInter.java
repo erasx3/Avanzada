@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,11 +21,11 @@ public class AltaTipoTecnologiaInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloTiposTecnologia;
+
     /**
      * Creates new form AltaTipoTecnologiaInter
      */
-    public AltaTipoTecnologiaInter(ControladoraVisual miControladoraVisual) 
-    {
+    public AltaTipoTecnologiaInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         this.txtCodigo.setVisible(false);
         this.miControladoraVisual = miControladoraVisual;
@@ -185,35 +186,41 @@ public class AltaTipoTecnologiaInter extends javax.swing.JInternalFrame {
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            miControladoraVisual.crearTipoTecnologia(this.txtNombre.getText(), this.txtDescripcion.getText());
-            refrescarVentana();
+            TipoTecnologia unTipoTecnologia = this.miControladoraVisual.buscarTipoTecnologia(this.txtNombre.getText());
+            if (unTipoTecnologia == null) {
+                miControladoraVisual.crearTipoTecnologia(this.txtNombre.getText(), this.txtDescripcion.getText());
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaTipoTecnologiaInter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_cmdAgregarActionPerformed
 
     private void tblTipoEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoEstadosMouseClicked
-       this.txtCodigo.setText(null);
-       this.txtNombre.setText(null);
-       this.txtDescripcion.setText(null);
-       
-       int fila= this.tblTipoEstados.rowAtPoint(evt.getPoint());
-       
-       this.txtCodigo.setText(this.modeloTiposTecnologia.getValueAt(fila, 0).toString());
-       this.txtNombre.setText(this.modeloTiposTecnologia.getValueAt(fila, 1).toString());
-       this.txtDescripcion.setText(this.modeloTiposTecnologia.getValueAt(fila, 2).toString());
+        this.txtCodigo.setText(null);
+        this.txtNombre.setText(null);
+        this.txtDescripcion.setText(null);
 
-             
+        int fila = this.tblTipoEstados.rowAtPoint(evt.getPoint());
+
+        this.txtCodigo.setText(this.modeloTiposTecnologia.getValueAt(fila, 0).toString());
+        this.txtNombre.setText(this.modeloTiposTecnologia.getValueAt(fila, 1).toString());
+        this.txtDescripcion.setText(this.modeloTiposTecnologia.getValueAt(fila, 2).toString());
+
+
     }//GEN-LAST:event_tblTipoEstadosMouseClicked
 
     private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
         try {
-            this.miControladoraVisual.modificarTipoTecnoligia(Integer.parseInt(txtCodigo.getText()),txtNombre.getText(), txtDescripcion.getText());
+            this.miControladoraVisual.modificarTipoTecnoligia(Integer.parseInt(txtCodigo.getText()), txtNombre.getText(), txtDescripcion.getText());
             refrescarVentana();
         } catch (Exception ex) {
             Logger.getLogger(AltaTipoTecnologiaInter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_cmdModificarActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
@@ -223,7 +230,7 @@ public class AltaTipoTecnologiaInter extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(AltaTipoTecnologiaInter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_cmdBorrarActionPerformed
 
 
@@ -241,25 +248,22 @@ public class AltaTipoTecnologiaInter extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void refrescarVentana() 
-    {
+    private void refrescarVentana() {
         this.txtCodigo.setText(null);
         this.txtDescripcion.setText(null);
         this.txtNombre.setText(null);
         this.modeloTiposTecnologia.setRowCount(0);
         cargarTablaTiposTecnologias();
-        
+
     }
 
-    private void cargarTablaTiposTecnologias() 
-    {
-        Iterator <TipoTecnologia> itTiposDeTecnologias = this.miControladoraVisual.traerTiposDeTecnologias().iterator();
+    private void cargarTablaTiposTecnologias() {
+        Iterator<TipoTecnologia> itTiposDeTecnologias = this.miControladoraVisual.traerTiposDeTecnologias().iterator();
         TipoTecnologia unTipo;
-        while(itTiposDeTecnologias.hasNext())
-        {
+        while (itTiposDeTecnologias.hasNext()) {
             unTipo = itTiposDeTecnologias.next();
-            modeloTiposTecnologia.addRow(new Object[]{unTipo.getCodigo(),unTipo.getNombre(),unTipo.getDescripcion()});
+            modeloTiposTecnologia.addRow(new Object[]{unTipo.getCodigo(), unTipo.getNombre(), unTipo.getDescripcion()});
         }
     }
-    
+
 }

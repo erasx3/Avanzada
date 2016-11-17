@@ -5,11 +5,13 @@
  */
 package Visual;
 
+import Logica.Actividad;
 import Logica.ActividadProyecto;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,11 +22,11 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloActProyecto;
-    
+
     public AltaActividadProyectoInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         txtCodigo.setVisible(false);
-        this.miControladoraVisual=miControladoraVisual;
+        this.miControladoraVisual = miControladoraVisual;
         this.modeloActProyecto = (DefaultTableModel) this.tblActividadProyecto.getModel();
         refrescarVentana();
     }
@@ -176,17 +178,23 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
-       
+
     }//GEN-LAST:event_txtDescripcionActionPerformed
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            this.miControladoraVisual.crearActividadProyecto(txtDescripcion.getText(), Double.valueOf(txtPorcentaje.getText()));
-            refrescarVentana();
+            Actividad unaActividad = this.miControladoraVisual.buscarActividad(this.txtDescripcion.getText());
+            if (unaActividad == null) {
+                this.miControladoraVisual.crearActividadProyecto(txtDescripcion.getText(), Double.valueOf(txtPorcentaje.getText()));
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaActividadProyectoInter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_cmdAgregarActionPerformed
 
     private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
@@ -195,7 +203,7 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
             refrescarVentana();
         } catch (Exception ex) {
             Logger.getLogger(AltaActividadProyectoInter.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        }
     }//GEN-LAST:event_cmdModificarActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
@@ -213,9 +221,9 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
         txtCodigo.setText(null);
         txtDescripcion.setText(null);
         txtPorcentaje.setText(null);
-        
+
         int fila = this.tblActividadProyecto.rowAtPoint(evt.getPoint());
-        
+
         txtCodigo.setText(this.modeloActProyecto.getValueAt(fila, 0).toString());
         txtDescripcion.setText(this.modeloActProyecto.getValueAt(fila, 1).toString());
         txtPorcentaje.setText(this.modeloActProyecto.getValueAt(fila, 2).toString());
@@ -245,12 +253,11 @@ public class AltaActividadProyectoInter extends javax.swing.JInternalFrame {
     }
 
     private void cargarTablaActProyecto() {
-        Iterator <ActividadProyecto> itActAdministrativa = this.miControladoraVisual.traerActProyecto().iterator();
+        Iterator<ActividadProyecto> itActAdministrativa = this.miControladoraVisual.traerActProyecto().iterator();
         ActividadProyecto unTipo;
-        while(itActAdministrativa.hasNext())
-        {
+        while (itActAdministrativa.hasNext()) {
             unTipo = itActAdministrativa.next();
-            modeloActProyecto.addRow(new Object[]{unTipo.getCodigo(),unTipo.getDescripcion(),unTipo.getPorcentaje()});
+            modeloActProyecto.addRow(new Object[]{unTipo.getCodigo(), unTipo.getDescripcion(), unTipo.getPorcentaje()});
         }
     }
 }

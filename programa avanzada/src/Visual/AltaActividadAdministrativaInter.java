@@ -5,11 +5,13 @@
  */
 package Visual;
 
+import Logica.Actividad;
 import Logica.ActividadAdministrativa;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,11 +22,11 @@ public class AltaActividadAdministrativaInter extends javax.swing.JInternalFrame
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloActAdministrativa;
-    
+
     public AltaActividadAdministrativaInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         this.txtCodigo.setVisible(false);
-        this.miControladoraVisual=miControladoraVisual;
+        this.miControladoraVisual = miControladoraVisual;
         this.modeloActAdministrativa = (DefaultTableModel) this.tblActividadAdministrativa.getModel();
         refrescarVentana();
     }
@@ -172,8 +174,14 @@ public class AltaActividadAdministrativaInter extends javax.swing.JInternalFrame
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            miControladoraVisual.crearActividadAdministrativa(txtDescripcion.getText(), Double.valueOf(txtPrecioPorHora.getText()));
-            refrescarVentana();
+            Actividad unaActividad = this.miControladoraVisual.buscarActividad(this.txtDescripcion.getText());
+            if (unaActividad == null) {
+                miControladoraVisual.crearActividadAdministrativa(txtDescripcion.getText(), Double.valueOf(txtPrecioPorHora.getText()));
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaActividadAdministrativaInter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -181,7 +189,7 @@ public class AltaActividadAdministrativaInter extends javax.swing.JInternalFrame
 
     private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
         try {
-            miControladoraVisual.modificarActividadAdministrativa(Integer.parseInt(txtCodigo.getText()), txtDescripcion.getText(),Double.valueOf(txtPrecioPorHora.getText()));
+            miControladoraVisual.modificarActividadAdministrativa(Integer.parseInt(txtCodigo.getText()), txtDescripcion.getText(), Double.valueOf(txtPrecioPorHora.getText()));
             refrescarVentana();
         } catch (Exception ex) {
             Logger.getLogger(AltaActividadAdministrativaInter.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,15 +207,15 @@ public class AltaActividadAdministrativaInter extends javax.swing.JInternalFrame
     }//GEN-LAST:event_cmdBorrarActionPerformed
 
     private void tblActividadAdministrativaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblActividadAdministrativaMouseClicked
-       txtCodigo.setText(null);
-       txtDescripcion.setText(null);
-       txtPrecioPorHora.setText(null);
-       
-       int fila = this.tblActividadAdministrativa.rowAtPoint(evt.getPoint());
-       
-       this.txtCodigo.setText(this.modeloActAdministrativa.getValueAt(fila, 0).toString());
-       this.txtDescripcion.setText(this.modeloActAdministrativa.getValueAt(fila, 1).toString());
-       this.txtPrecioPorHora.setText(this.modeloActAdministrativa.getValueAt(fila, 2).toString());
+        txtCodigo.setText(null);
+        txtDescripcion.setText(null);
+        txtPrecioPorHora.setText(null);
+
+        int fila = this.tblActividadAdministrativa.rowAtPoint(evt.getPoint());
+
+        this.txtCodigo.setText(this.modeloActAdministrativa.getValueAt(fila, 0).toString());
+        this.txtDescripcion.setText(this.modeloActAdministrativa.getValueAt(fila, 1).toString());
+        this.txtPrecioPorHora.setText(this.modeloActAdministrativa.getValueAt(fila, 2).toString());
     }//GEN-LAST:event_tblActividadAdministrativaMouseClicked
 
 
@@ -234,12 +242,11 @@ public class AltaActividadAdministrativaInter extends javax.swing.JInternalFrame
     }
 
     private void cargarTablaActAdministrativa() {
-        Iterator <ActividadAdministrativa> itActAdministrativa = this.miControladoraVisual.traerActAdministrativa().iterator();
+        Iterator<ActividadAdministrativa> itActAdministrativa = this.miControladoraVisual.traerActAdministrativa().iterator();
         ActividadAdministrativa unTipo;
-        while(itActAdministrativa.hasNext())
-        {
+        while (itActAdministrativa.hasNext()) {
             unTipo = itActAdministrativa.next();
-            modeloActAdministrativa.addRow(new Object[]{unTipo.getCodigo(),unTipo.getDescripcion(),unTipo.getPrecioHora()});
+            modeloActAdministrativa.addRow(new Object[]{unTipo.getCodigo(), unTipo.getDescripcion(), unTipo.getPrecioHora()});
         }
     }
 }

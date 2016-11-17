@@ -56,10 +56,8 @@
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txtCodigo" pref="150" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtNombre" alignment="0" pref="150" max="32767" attributes="0"/>
-                                  <Component id="txtDescripcion" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="txtNombre" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="txtDescripcion" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

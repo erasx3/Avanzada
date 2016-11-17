@@ -6,9 +6,11 @@
 package Visual;
 
 import Logica.TipoCompra;
+import Logica.TipoComprobante;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,12 +21,12 @@ public class AltaTipoCompraInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloCompra;
-    
+
     public AltaTipoCompraInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         txtCodigo.setVisible(false);
-        this.miControladoraVisual=miControladoraVisual;
-        this.modeloCompra=(DefaultTableModel)this.tblCompras.getModel();
+        this.miControladoraVisual = miControladoraVisual;
+        this.modeloCompra = (DefaultTableModel) this.tblCompras.getModel();
         refrescarVentana();
     }
 
@@ -160,8 +162,14 @@ public class AltaTipoCompraInter extends javax.swing.JInternalFrame {
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            this.miControladoraVisual.crearTipoCompra(txtDescripcion.getText());
-            refrescarVentana();
+            TipoComprobante unTipoCompra = this.miControladoraVisual.buscarTipoComprobante(this.txtDescripcion.getText());
+            if (unTipoCompra == null) {
+                this.miControladoraVisual.crearTipoCompra(txtDescripcion.getText());
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaTipoCompraInter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -188,9 +196,9 @@ public class AltaTipoCompraInter extends javax.swing.JInternalFrame {
     private void tblComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblComprasMouseClicked
         txtCodigo.setText(null);
         txtDescripcion.setText(null);
-        
+
         int fila = this.tblCompras.rowAtPoint(evt.getPoint());
-        
+
         txtCodigo.setText(this.modeloCompra.getValueAt(fila, 0).toString());
         txtDescripcion.setText(this.modeloCompra.getValueAt(fila, 1).toString());
     }//GEN-LAST:event_tblComprasMouseClicked
@@ -218,9 +226,9 @@ public class AltaTipoCompraInter extends javax.swing.JInternalFrame {
     private void cargarTablaCompra() {
         Iterator<TipoCompra> itTipoVenta = this.miControladoraVisual.traerTipoCompra().iterator();
         TipoCompra unTipo;
-        while(itTipoVenta.hasNext()){
-            unTipo=itTipoVenta.next();
-            modeloCompra.addRow(new Object[]{unTipo.getCodigo(),unTipo.getDescripcion()});
+        while (itTipoVenta.hasNext()) {
+            unTipo = itTipoVenta.next();
+            modeloCompra.addRow(new Object[]{unTipo.getCodigo(), unTipo.getDescripcion()});
         }
     }
 }

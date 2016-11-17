@@ -57,10 +57,8 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txtCodigo" pref="120" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txtDescripcion" alignment="0" pref="120" max="32767" attributes="0"/>
-                                  <Component id="txtPrecioFijo" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="txtDescripcion" alignment="0" pref="120" max="32767" attributes="0"/>
+                              <Component id="txtPrecioFijo" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

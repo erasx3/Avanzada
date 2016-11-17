@@ -5,10 +5,12 @@
  */
 package Visual;
 
+import Logica.Actividad;
 import Logica.ActividadTecnica;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,11 +21,11 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloActTecnica;
-    
+
     public AltaActividadTecnicaInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         this.txtCodigo.setVisible(false);
-        this.miControladoraVisual=miControladoraVisual;
+        this.miControladoraVisual = miControladoraVisual;
         this.modeloActTecnica = (DefaultTableModel) this.tblActividadTecnica.getModel();
         refrescarVentana();
     }
@@ -175,16 +177,21 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+
     private void txtDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDescripcionActionPerformed
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            miControladoraVisual.crearActividadTecnica(txtDescripcion.getText(), Double.valueOf(txtPrecioFijo.getText()));
-            refrescarVentana();
+            Actividad unaActividad = this.miControladoraVisual.buscarActividad(this.txtDescripcion.getText());
+            if (unaActividad == null) {
+                miControladoraVisual.crearActividadTecnica(txtDescripcion.getText(), Double.valueOf(txtPrecioFijo.getText()));
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaActividadAdministrativaInter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -192,12 +199,12 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
 
     private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
         try {
-            miControladoraVisual.modificarActividadTecnica(Integer.parseInt(txtCodigo.getText()), txtDescripcion.getText(),Double.valueOf(txtPrecioFijo.getText()));
+            miControladoraVisual.modificarActividadTecnica(Integer.parseInt(txtCodigo.getText()), txtDescripcion.getText(), Double.valueOf(txtPrecioFijo.getText()));
             refrescarVentana();
         } catch (Exception ex) {
             Logger.getLogger(AltaActividadTecnicaInter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_cmdModificarActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
@@ -207,26 +214,23 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             Logger.getLogger(AltaActividadTecnicaInter.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_cmdBorrarActionPerformed
 
     private void tblActividadTecnicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblActividadTecnicaMouseClicked
-       txtCodigo.setText(null);
-       txtDescripcion.setText(null);
-       txtPrecioFijo.setText(null);
-       
-       int fila = this.tblActividadTecnica.rowAtPoint(evt.getPoint());
-       
-       this.txtCodigo.setText(this.modeloActTecnica.getValueAt(fila, 0).toString());
-       this.txtDescripcion.setText(this.modeloActTecnica.getValueAt(fila, 1).toString());
-       this.txtPrecioFijo.setText(this.modeloActTecnica.getValueAt(fila, 2).toString());
+        txtCodigo.setText(null);
+        txtDescripcion.setText(null);
+        txtPrecioFijo.setText(null);
+
+        int fila = this.tblActividadTecnica.rowAtPoint(evt.getPoint());
+
+        this.txtCodigo.setText(this.modeloActTecnica.getValueAt(fila, 0).toString());
+        this.txtDescripcion.setText(this.modeloActTecnica.getValueAt(fila, 1).toString());
+        this.txtPrecioFijo.setText(this.modeloActTecnica.getValueAt(fila, 2).toString());
     }//GEN-LAST:event_tblActividadTecnicaMouseClicked
 
-    
-    
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAgregar;
     private javax.swing.JButton cmdBorrar;
@@ -248,18 +252,14 @@ public class AltaActividadTecnicaInter extends javax.swing.JInternalFrame {
         this.modeloActTecnica.setRowCount(0);
         cargarTablaActTecnica();
     }
-    
+
     private void cargarTablaActTecnica() {
-        Iterator <ActividadTecnica> itActTecnica = this.miControladoraVisual.traerActTecnica().iterator();
+        Iterator<ActividadTecnica> itActTecnica = this.miControladoraVisual.traerActTecnica().iterator();
         ActividadTecnica unTipo;
-        while(itActTecnica.hasNext())
-        {
+        while (itActTecnica.hasNext()) {
             unTipo = itActTecnica.next();
-            modeloActTecnica.addRow(new Object[]{unTipo.getCodigo(),unTipo.getDescripcion(),unTipo.getPrecioFijo()});
+            modeloActTecnica.addRow(new Object[]{unTipo.getCodigo(), unTipo.getDescripcion(), unTipo.getPrecioFijo()});
         }
     }
-    
-    
+
 }
-
-

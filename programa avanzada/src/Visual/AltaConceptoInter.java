@@ -9,6 +9,7 @@ import Logica.Concepto;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,16 +18,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AltaConceptoInter extends javax.swing.JInternalFrame {
 
-    private ControladoraVisual miControladoraVisual;  
+    private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloConcepto;
+
     /**
      * Creates new form AltaConceptoInter
      */
     public AltaConceptoInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         txtCodigo.setVisible(false);
-        this.miControladoraVisual=miControladoraVisual;
-        this.modeloConcepto=(DefaultTableModel)this.tblConcepto.getModel();
+        this.miControladoraVisual = miControladoraVisual;
+        this.modeloConcepto = (DefaultTableModel) this.tblConcepto.getModel();
         refrescarVentana();
     }
 
@@ -168,8 +170,14 @@ public class AltaConceptoInter extends javax.swing.JInternalFrame {
 
     private void cmdAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarActionPerformed
         try {
-            this.miControladoraVisual.generarConcepto(txtDescripcion.getText(), Double.parseDouble(txtMonto.getText()));
-            refrescarVentana();
+            Concepto unConcepto = this.miControladoraVisual.buscarConcepto(this.txtDescripcion.getText());
+            if (unConcepto == null) {
+                this.miControladoraVisual.generarConcepto(txtDescripcion.getText(), Double.parseDouble(txtMonto.getText()));
+                refrescarVentana();
+            } else {
+                Object msj = "Ya Existe";
+                JOptionPane.showMessageDialog(null, msj, "ERROR: Existencia", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (Exception ex) {
             Logger.getLogger(AltaConceptoInter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -197,9 +205,9 @@ public class AltaConceptoInter extends javax.swing.JInternalFrame {
         txtCodigo.setText(null);
         txtDescripcion.setText(null);
         txtMonto.setText(null);
-        
+
         int fila = this.tblConcepto.rowAtPoint(evt.getPoint());
-        
+
         txtCodigo.setText(this.modeloConcepto.getValueAt(fila, 0).toString());
         txtDescripcion.setText(this.modeloConcepto.getValueAt(fila, 1).toString());
         txtMonto.setText(this.modeloConcepto.getValueAt(fila, 2).toString());
@@ -231,9 +239,9 @@ public class AltaConceptoInter extends javax.swing.JInternalFrame {
     private void cargarTablaConcepto() {
         Iterator<Concepto> itConcepto = this.miControladoraVisual.traerConcepto().iterator();
         Concepto unConcep;
-        while(itConcepto.hasNext()){
-            unConcep=itConcepto.next();
-            modeloConcepto.addRow(new Object[]{unConcep.getCodigo(),unConcep.getDescripcion(),unConcep.getMonto()});
+        while (itConcepto.hasNext()) {
+            unConcep = itConcepto.next();
+            modeloConcepto.addRow(new Object[]{unConcep.getCodigo(), unConcep.getDescripcion(), unConcep.getMonto()});
         }
     }
 }
