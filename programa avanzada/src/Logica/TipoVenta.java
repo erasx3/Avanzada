@@ -32,7 +32,10 @@ public class TipoVenta extends TipoComprobante {
         }
         return aux;
     }
-
+    
+    public String isTipo(){
+        return "TipoVenta";
+    }
     @Override
     public String toString() {
         return super.getCodigo()+"-"+super.getDescripcion();

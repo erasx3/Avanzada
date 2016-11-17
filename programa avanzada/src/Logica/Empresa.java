@@ -276,24 +276,24 @@ public class Empresa implements Serializable {
         unosServicios.add(unTecnico);
         Persistencia.crearTecnico(unTecnico);
     }
-    
-    public void borrarServicioTecnico(int codigo) throws Exception{
-        Tecnico unTecnico=buscarServicioTecnico(codigo);
+
+    public void borrarServicioTecnico(int codigo) throws Exception {
+        Tecnico unTecnico = buscarServicioTecnico(codigo);
         this.unosTecnicos.remove(unTecnico);
         this.unosServicios.remove(unTecnico);
         Persistencia.eliminarTecnico(codigo);
     }
 
-    public void generarServicioTercero(String descripcion, Double monto, int ganancia,Double subtotal) throws Exception {
-        int codigo=generarCodigoServicio();
-        Tercero unTercero = new Tercero(codigo, descripcion, monto, ganancia,subtotal);
+    public void generarServicioTercero(String descripcion, Double monto, int ganancia, Double subtotal) throws Exception {
+        int codigo = generarCodigoServicio();
+        Tercero unTercero = new Tercero(codigo, descripcion, monto, ganancia, subtotal);
         this.unosTerceros.add(unTercero);
         this.unosServicios.add(unTercero);
         Persistencia.crearTercero(unTercero);
 
     }
-    
-    public void borrarServicioTercero(int codigo) throws Exception{
+
+    public void borrarServicioTercero(int codigo) throws Exception {
         Tercero unTercero = buscarServicioTercero(codigo);
         this.unosTerceros.remove(unTercero);
         this.unosServicios.remove(unTercero);
@@ -378,8 +378,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    
+
     public Articulo buscarArticulo(String descripcion) {
         Articulo aux = null;
         Iterator itr = unosArticulos.iterator();
@@ -393,8 +392,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    
+
     public Empleado buscarEmpleado(Long dni) {
         Empleado aux = null;
         Iterator itr = unosEmpleados.iterator();
@@ -408,8 +406,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    
+
     public Equipo buscarEquipo(String descripcion) {
         Equipo aux = null;
         Iterator itr = unosEquipos.iterator();
@@ -423,8 +420,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    
+
     public Proveedor buscarProveedor(String cuit) {
         Proveedor aux = null;
         Iterator itr = unosProveedores.iterator();
@@ -438,8 +434,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    
+
     public Tecnologia buscarTecnologia(String descripcion) {
         Tecnologia aux = null;
         Iterator itr = unasTecnologias.iterator();
@@ -453,9 +448,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    
-    
+
     public TipoTecnologia buscarTipoTecnologia(String nombre) {
         TipoTecnologia aux = null;
         Iterator itr = unosTiposTecnologias.iterator();
@@ -468,8 +461,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    
+
     public TipoComprobante buscarTipoComprobante(String descripcion) {
         TipoComprobante aux = null;
         Iterator itr = unosTiposComprobantes.iterator();
@@ -482,9 +474,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    
-    
+
     public TipoEstado buscarTipoEstado(String nombre) {
         TipoEstado aux = null;
         Iterator itr = unosTiposEstados.iterator();
@@ -498,9 +488,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    
-    
+
     public OrdenTrabajo buscarOrdenTrabajo(String descripcion) {
         OrdenTrabajo aux = null;
         Iterator itr = unasOrdenesTrabajos.iterator();
@@ -515,9 +503,7 @@ public class Empresa implements Serializable {
         return aux;
 
     }
-    
-    
-    
+
     public Turno buscarTurno(String descripcion) {
         Turno aux = null;
         Iterator itr = unosTurnos.iterator();
@@ -531,8 +517,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    
+
     public Concepto buscarConcepto(String descripcion) {
         Concepto aux = null;
         Iterator itr = unosConceptos.iterator();
@@ -546,7 +531,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
+
     public Servicio buscarServicio(int codigo) {
         Servicio aux = null;
         Iterator itr = unosServicios.iterator();
@@ -742,9 +727,9 @@ public class Empresa implements Serializable {
         Persistencia.crearEncabezado(unEncabezado);
         return codigo;
     }
-    
-    public void borrarEncabezado(int codigo) throws Exception{
-        Encabezado unEncabezado=buscarEncabezado(codigo);
+
+    public void borrarEncabezado(int codigo) throws Exception {
+        Encabezado unEncabezado = buscarEncabezado(codigo);
         this.unosEncabezados.remove(unEncabezado);
         Persistencia.eliminarEncabezado(codigo);
     }
@@ -774,9 +759,9 @@ public class Empresa implements Serializable {
         unArticulo.descontarArticulo(cantidad);
         Persistencia.modificarArticulo(unArticulo);
     }
-    
-    public Double calcularTotal(int codigo,int cantidad){
-        Articulo unArticulo= buscarArticulo(codigo);
+
+    public Double calcularTotal(int codigo, int cantidad) {
+        Articulo unArticulo = buscarArticulo(codigo);
         return unArticulo.calcularTotal(cantidad);
     }
 
@@ -785,7 +770,7 @@ public class Empresa implements Serializable {
         return unArticulo.comprobarStock(cantidad);
 
     }
-    
+
     public Encabezado buscarEncabezado(int codigo) {
         Encabezado aux = null;
         Iterator itr = unosEncabezados.iterator();
@@ -799,7 +784,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
+
     public Proveedor buscarProveedor(int codigo) {
         Proveedor aux = null;
         Iterator itr = unosProveedores.iterator();
@@ -813,20 +798,20 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    public void agregarVentaArticulo(Encabezado unEncabezado){
+
+    public void agregarVentaArticulo(Encabezado unEncabezado) {
         this.unosEncabezadosVentaArticulo.add(unEncabezado);
     }
-    
-    public void agregarVentaServicio(Encabezado unEncabezado){
+
+    public void agregarVentaServicio(Encabezado unEncabezado) {
         this.unosEncabezadosVentaServicio.add(unEncabezado);
     }
-    
-    public void agregarCompra(Encabezado unEncabezado){
+
+    public void agregarCompra(Encabezado unEncabezado) {
         this.unosEncabezadosCompra.add(unEncabezado);
     }
-    
-    public void agregarLiquidacion(Encabezado unEncabezado){
+
+    public void agregarLiquidacion(Encabezado unEncabezado) {
         this.unosEncabezadosLiquidacion.add(unEncabezado);
     }
 
@@ -1096,14 +1081,14 @@ public class Empresa implements Serializable {
         Persistencia.eliminarTipoLiquidacion(codigo);
     }
 
-    public void crearArticulo(String nombre, String descripcion,Double precioLista,Double descuentoMayorista,Double precioVenta, int cantidad,int cantidadMinima) throws Exception {
+    public void crearArticulo(String nombre, String descripcion, Double precioLista, Double descuentoMayorista, Double precioVenta, int cantidad, int cantidadMinima) throws Exception {
         int codigo = generarCodigoArticulo();
         Articulo unArticulo = new Articulo(nombre, precioVenta, precioLista, descuentoMayorista, cantidadMinima, cantidad, codigo, descripcion);
         unosArticulos.add(unArticulo);
         Persistencia.crearArticulo(unArticulo);
     }
 
-    public void modificarArticulo(String nombre, String descripcion,Double precioLista,Double descuentoMayorista,Double precioVenta, int cantidad,int cantidadMinima) throws Exception {
+    public void modificarArticulo(String nombre, String descripcion, Double precioLista, Double descuentoMayorista, Double precioVenta, int cantidad, int cantidadMinima) throws Exception {
         Articulo unArticulo = buscarArticulo(codigo);
         unArticulo.setNombre(nombre);
         unArticulo.setDescripcion(descripcion);
@@ -1137,10 +1122,11 @@ public class Empresa implements Serializable {
         this.unosClientes = Persistencia.traerClientes();
         this.unosDetallesCompraVenta = Persistencia.traerDetallesCompraVenta();
         this.unosEncabezados = Persistencia.traerEncabezados();
+        this.sEncabezado(unosEncabezados);
         this.unosDetalles.addAll(this.unosDetallesCompraVenta);
         this.unosTecnicos = Persistencia.traerTecnicos();
-        this.unosTerceros=Persistencia.traerTerceros();
-        this.unosProyectos=Persistencia.traerProyectos();
+        this.unosTerceros = Persistencia.traerTerceros();
+        this.unosProyectos = Persistencia.traerProyectos();
         this.unosServicios.addAll(this.unosTecnicos);
         this.unosServicios.addAll(this.unosTerceros);
         this.unosServicios.addAll(this.unosProyectos);
@@ -1240,7 +1226,7 @@ public class Empresa implements Serializable {
         }
         return codigoTipo + 1;
     }
-    
+
     public List<ActividadTecnica> traerActTecnica() {
         return this.unasActTecnicas;
     }
@@ -1283,8 +1269,8 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
-    public Tecnico buscarServicioTecnico(int codigo){
+
+    public Tecnico buscarServicioTecnico(int codigo) {
         Tecnico aux = null;
         Iterator itr = unosTecnicos.iterator();
         int band = 0;
@@ -1297,7 +1283,7 @@ public class Empresa implements Serializable {
         }
         return aux;
     }
-    
+
     public Tercero buscarServicioTercero(int codigo) {
         Tercero aux = null;
         Iterator itr = unosTerceros.iterator();
@@ -1332,7 +1318,6 @@ public class Empresa implements Serializable {
     public List<TipoCompra> traerTipoCompra() {
         return this.unosTiposCompras;
     }
-
 
     public List<TipoLiquidacion> traerLiquidacion() {
         return this.unosTiposLiquidaciones;
@@ -1399,6 +1384,24 @@ public class Empresa implements Serializable {
 
     public List<Encabezado> traerEncabezadoCompra() {
         return this.unosEncabezadosCompra;
+    }
+
+    public void sEncabezado(List<Encabezado> unosEncabezados) {
+        Iterator<Encabezado> itEncabezado = unosEncabezados.iterator();
+        Encabezado unEncabezado;
+
+        while (itEncabezado.hasNext()) {
+            unEncabezado = itEncabezado.next();
+            if (unEncabezado.getUnTipoComprobante().isTipo().equals("TipoVenta")) {
+                this.unosEncabezadosVentaArticulo.add(unEncabezado);
+            }
+            if (unEncabezado.getUnTipoComprobante().isTipo().equals("TipoCompra")) {
+                this.unosEncabezadosCompra.add(unEncabezado);
+            }
+            if (unEncabezado.getUnTipoComprobante().isTipo().equals("TipoLiquidacion")) {
+                this.unosEncabezadosCompra.add(unEncabezado);
+            }
+        }
     }
 
 }

@@ -55,5 +55,8 @@ public abstract class Consumible {
         this.descripcion = descripcion;
     }
     
+    public String isConsumible(){
+        return "Consumible";
+    }
     
 }

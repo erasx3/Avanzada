@@ -147,6 +147,10 @@ public class Articulo extends Consumible implements Serializable {
         return aux;
     }
 
+    public String isConsumible(){
+        return "Articulo";
+    }
+    
     @Override
     public String toString() {
         return this.nombre;

@@ -34,6 +34,10 @@ public class TipoCompra extends TipoComprobante implements Serializable {
         }
         return aux;
     }
+    
+    public String isTipo(){
+        return "TipoCompra";
+    }
 
     @Override
     public String toString() {

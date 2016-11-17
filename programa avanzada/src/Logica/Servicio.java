@@ -58,6 +58,10 @@ public class Servicio extends Consumible{
         return aux;
     }
     
+    public String isConsumible(){
+        return "Servicio";
+    }
+    
     public void calcularSubtotal(){
         
     }

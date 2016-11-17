@@ -34,4 +34,8 @@ public class TipoLiquidacion extends TipoComprobante {
         }
         return aux;
     }
+    
+     public String isTipo(){
+        return "TipoLiquidacion";
+    }
 }

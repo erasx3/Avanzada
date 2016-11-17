@@ -62,4 +62,8 @@ public abstract class TipoComprobante implements Serializable {
         }
         return aux;
     }
+    
+    public String isTipo(){
+        return "soy un tipo";
+    }
 }
