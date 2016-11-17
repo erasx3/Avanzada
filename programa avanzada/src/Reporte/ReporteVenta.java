@@ -36,45 +36,39 @@ public class ReporteVenta {
         this.unaEmpresa = unaEmpresa;
     }
 
-    public void generarReporteVenta(Encabezado unEncabezado) throws DocumentException {
-        FileOutputStream archivo;
+    public void generarReporteVenta(Encabezado unEncabezado, FileOutputStream archivo) throws DocumentException {
         Cliente unCliente = (Cliente) unEncabezado.getUnaPersoneriaJuridica();
         TipoVenta unTipoVenta = (TipoVenta) unEncabezado.getUnTipoComprobante();
         List<Detalle> unosDetalleCompraVenta = unEncabezado.getUnosDetalles();
         Iterator<Detalle> itDetalle = unosDetalleCompraVenta.iterator();
         DetalleCompraVenta unDetalleCompraVenta;
         DecimalFormat formato = new DecimalFormat("0.00");
-        try {
-            Document documento = new Document();
-            archivo = new FileOutputStream("C:\\Users\\Pepe\\Desktop\\ReciboDeSueldo-" + unEncabezado.getCodigo() + unEncabezado.getUnaPersoneriaJuridica().getNombre() + ".pdf");
-            PdfWriter.getInstance((com.itextpdf.text.Document) documento, archivo);
-            documento.open();
-            documento.add(new Paragraph("GuaraSoft S.A."));
-            documento.add(new Paragraph("Comprobante de Compra: " + unEncabezado.getCodigo()));
-            documento.add(new Paragraph("Tipo de Comprobante: " + unTipoVenta.getDescripcion()));
-            documento.add(new Paragraph("Cliente: " + unCliente.getNombre() + " " + unCliente.getApellido()));
-            documento.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
-            PdfPTable unaTabla = new PdfPTable(4);
-            unaTabla.addCell("Codigo");
-            unaTabla.addCell("Articulo");
-            unaTabla.addCell("Cantidad");
-            unaTabla.addCell("Subtotal");
-            while (itDetalle.hasNext()) {
-                unDetalleCompraVenta = (DetalleCompraVenta) itDetalle.next();
-                unaTabla.addCell(String.valueOf(unDetalleCompraVenta.getCodigo()));
-                unaTabla.addCell(unDetalleCompraVenta.getUnConsumible().getDescripcion());
-                unaTabla.addCell(String.valueOf(String.valueOf(unDetalleCompraVenta.getCantidad())));
-                unaTabla.addCell(String.valueOf(unDetalleCompraVenta.getSubtotal()));
-            }
-            unaTabla.addCell("");
-            unaTabla.addCell("");
-            unaTabla.addCell("TOTAL:");
-            unaTabla.addCell("$" + formato.format(unEncabezado.getTotal()));
-            documento.add(unaTabla);
-            documento.close();
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ReporteVenta.class.getName()).log(Level.SEVERE, null, ex);
+        Document documento = new Document();
+        PdfWriter.getInstance((com.itextpdf.text.Document) documento, archivo);
+        documento.open();
+        documento.add(new Paragraph("GuaraSoft S.A."));
+        documento.add(new Paragraph("Comprobante de Compra: " + unEncabezado.getCodigo()));
+        documento.add(new Paragraph("Tipo de Comprobante: " + unTipoVenta.getDescripcion()));
+        documento.add(new Paragraph("Cliente: " + unCliente.getNombre() + " " + unCliente.getApellido()));
+        documento.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
+        PdfPTable unaTabla = new PdfPTable(4);
+        unaTabla.addCell("Codigo");
+        unaTabla.addCell("Articulo");
+        unaTabla.addCell("Cantidad");
+        unaTabla.addCell("Subtotal");
+        while (itDetalle.hasNext()) {
+            unDetalleCompraVenta = (DetalleCompraVenta) itDetalle.next();
+            unaTabla.addCell(String.valueOf(unDetalleCompraVenta.getCodigo()));
+            unaTabla.addCell(unDetalleCompraVenta.getUnConsumible().getDescripcion());
+            unaTabla.addCell(String.valueOf(String.valueOf(unDetalleCompraVenta.getCantidad())));
+            unaTabla.addCell(String.valueOf(unDetalleCompraVenta.getSubtotal()));
         }
+        unaTabla.addCell("");
+        unaTabla.addCell("");
+        unaTabla.addCell("TOTAL:");
+        unaTabla.addCell("$" + formato.format(unEncabezado.getTotal()));
+        documento.add(unaTabla);
+        documento.close();
+
     }
 }

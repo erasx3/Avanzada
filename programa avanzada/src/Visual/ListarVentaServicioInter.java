@@ -9,37 +9,34 @@ import Logica.Cliente;
 import Logica.Detalle;
 import Logica.DetalleCompraVenta;
 import Logica.Encabezado;
+import Logica.Proveedor;
+import Logica.TipoCompra;
 import Logica.TipoVenta;
-import com.itextpdf.text.DocumentException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Pepe
+ * @author pepex3
  */
-public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
+public class ListarVentaServicioInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloEncabezado;
     private DefaultTableModel modeloDetalle;
     private int fila;
-
     /**
-     * Creates new form ListarVentaArticulosInter
+     * Creates new form ListarVentaServicioInter
      */
-    public ListarVentaArticulosInter(ControladoraVisual miControladoraVisual) {
+    public ListarVentaServicioInter(ControladoraVisual miControladoraVisual) {
         initComponents();
-        this.miControladoraVisual = miControladoraVisual;
-        this.modeloEncabezado = (DefaultTableModel) this.tblEncabezado.getModel();
-        this.modeloDetalle = (DefaultTableModel) this.tblDetalle.getModel();
+        this.miControladoraVisual=miControladoraVisual;
+        this.modeloDetalle=(DefaultTableModel)this.tblDetalle.getModel();
+        this.modeloEncabezado=(DefaultTableModel)this.tblEncabezado.getModel();
         refrescarVentana();
     }
 
@@ -63,7 +60,7 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setResizable(true);
-        setTitle("Ventas de Articulos");
+        setTitle("Ventas Servicios");
 
         tblEncabezado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,7 +118,7 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 998, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cmdImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,47 +158,41 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
         List<Detalle> unosDetalle;
         this.modeloDetalle.setRowCount(0);
 
-        this.fila = this.tblEncabezado.rowAtPoint(evt.getPoint());
+        this.fila= this.tblEncabezado.rowAtPoint(evt.getPoint());
 
-        codigo = Integer.parseInt(this.modeloEncabezado.getValueAt(this.fila, 0).toString());
-        unEncabezado = this.miControladoraVisual.buscarEncabezado(codigo);
+        codigo=Integer.parseInt(this.modeloEncabezado.getValueAt(this.fila, 0).toString());
+        unEncabezado=this.miControladoraVisual.buscarEncabezado(codigo);
         unosDetalle = unEncabezado.getUnosDetalles();
 
         Iterator<Detalle> itDetalle = unosDetalle.iterator();
         DetalleCompraVenta unDetalleCompraVenta;
-        while (itDetalle.hasNext()) {
-            unDetalleCompraVenta = (DetalleCompraVenta) itDetalle.next();
-            modeloDetalle.addRow(new Object[]{unDetalleCompraVenta.getCodigo(), unDetalleCompraVenta.getUnConsumible().getDescripcion(), unDetalleCompraVenta.getCantidad(), unDetalleCompraVenta.getSubtotal()});
+        while(itDetalle.hasNext()){
+            unDetalleCompraVenta=(DetalleCompraVenta)itDetalle.next();
+            modeloDetalle.addRow(new Object[]{unDetalleCompraVenta.getCodigo(),unDetalleCompraVenta.getUnConsumible().getDescripcion(),unDetalleCompraVenta.getCantidad(),unDetalleCompraVenta.getSubtotal()});
         }
     }//GEN-LAST:event_tblEncabezadoMouseClicked
 
     private void cmdBorrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarVentaActionPerformed
-        int codigo = Integer.parseInt(this.tblEncabezado.getValueAt(this.fila, 0).toString());
+        int codigo=Integer.parseInt(this.tblEncabezado.getValueAt(this.fila, 0).toString());
         try {
             this.miControladoraVisual.borrarEncabezado(codigo);
             refrescarVentana();
         } catch (Exception ex) {
-            Logger.getLogger(ListarVentaArticulosInter.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }//GEN-LAST:event_cmdBorrarVentaActionPerformed
 
     private void cmdImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdImprimirActionPerformed
-        int codigo = Integer.parseInt(this.tblEncabezado.getValueAt(this.fila, 0).toString());
-        Encabezado unEncabezado = this.miControladoraVisual.buscarEncabezado(codigo);
+        int codigo=Integer.parseInt(this.tblEncabezado.getValueAt(this.fila, 0).toString());
+        Encabezado unEncabezado=this.miControladoraVisual.buscarEncabezado(codigo);
         try {
-
-            try {
-                JFileChooser file = new JFileChooser();
+            JFileChooser file = new JFileChooser();
                 file.showSaveDialog(this);
                 File guarda = file.getSelectedFile();         
                 FileOutputStream archivo = new FileOutputStream(guarda);
                 this.miControladoraVisual.generarReporteVenta(unEncabezado, archivo);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(ListarVentaArticulosInter.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } catch (DocumentException ex) {
-            Logger.getLogger(ListarVentaArticulosInter.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+           
         }
     }//GEN-LAST:event_cmdImprimirActionPerformed
 
@@ -224,15 +215,15 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
     }
 
     private void cargarTablaEncabezado() {
-        Iterator<Encabezado> itEncabezado = this.miControladoraVisual.traerEncabezadoVentaArticulo().iterator();
+        Iterator<Encabezado> itEncabezado = this.miControladoraVisual.traerEncabezadoVentaServicio().iterator();
         Encabezado unEncabezado;
         Cliente unCliente;
         TipoVenta unTipoVenta;
         while (itEncabezado.hasNext()) {
             unEncabezado = itEncabezado.next();
-            unCliente = (Cliente) unEncabezado.getUnaPersoneriaJuridica();
-            unTipoVenta = (TipoVenta) unEncabezado.getUnTipoComprobante();
-            modeloEncabezado.addRow(new Object[]{unEncabezado.getCodigo(), unTipoVenta.getDescripcion(), unCliente.getNombre() + " " + unCliente.getApellido(), unEncabezado.getFecha(), unEncabezado.getTotal()});
+            unCliente=(Cliente)unEncabezado.getUnaPersoneriaJuridica();
+            unTipoVenta=(TipoVenta)unEncabezado.getUnTipoComprobante();
+            modeloEncabezado.addRow(new Object[]{unEncabezado.getCodigo(),unTipoVenta.getDescripcion(),unCliente.getNombre()+" "+unCliente.getApellido(),unEncabezado.getFecha(),unEncabezado.getTotal()});
         }
     }
 }

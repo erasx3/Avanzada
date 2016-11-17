@@ -38,6 +38,14 @@ public class Empresa implements Serializable {
     @OneToMany
     private List<Encabezado> unosEncabezados = new LinkedList();
     @OneToMany
+    private List<Encabezado> unosEncabezadosVentaArticulo = new LinkedList();
+    @OneToMany
+    private List<Encabezado> unosEncabezadosVentaServicio = new LinkedList();
+    @OneToMany
+    private List<Encabezado> unosEncabezadosCompra = new LinkedList();
+    @OneToMany
+    private List<Encabezado> unosEncabezadosLiquidacion = new LinkedList();
+    @OneToMany
     private List<PersoneriaJuridica> unasPersoneriaJuridicas = new LinkedList();
     @OneToMany
     private List<Cliente> unosClientes = new LinkedList();
@@ -578,7 +586,6 @@ public class Empresa implements Serializable {
             if (aux.isActividad(codigo)) {
                 band = 1;
             }
-
         }
         return aux;
     }
@@ -728,11 +735,12 @@ public class Empresa implements Serializable {
         Persistencia.eliminarDetalleCompraVenta(codigo);
     }
 
-    public void generarEncabezado(Calendar fecha, PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante, List<Detalle> unosDetalles, Double total) throws Exception {
+    public int generarEncabezado(Calendar fecha, PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante, List<Detalle> unosDetalles, Double total) throws Exception {
         int codigo = generarCodigoEncabezado();
         Encabezado unEncabezado = new Encabezado(codigo, fecha, unTipoComprobante, unosDetalles, unaPersoneriaJuridica, total);
         this.unosEncabezados.add(unEncabezado);
         Persistencia.crearEncabezado(unEncabezado);
+        return codigo;
     }
     
     public void borrarEncabezado(int codigo) throws Exception{
@@ -765,6 +773,11 @@ public class Empresa implements Serializable {
         Articulo unArticulo = buscarArticulo(codigo);
         unArticulo.descontarArticulo(cantidad);
         Persistencia.modificarArticulo(unArticulo);
+    }
+    
+    public Double calcularTotal(int codigo,int cantidad){
+        Articulo unArticulo= buscarArticulo(codigo);
+        return unArticulo.calcularTotal(cantidad);
     }
 
     public boolean comprobarStock(int codigo, int cantidad) {
@@ -799,6 +812,22 @@ public class Empresa implements Serializable {
 
         }
         return aux;
+    }
+    
+    public void agregarVentaArticulo(Encabezado unEncabezado){
+        this.unosEncabezadosVentaArticulo.add(unEncabezado);
+    }
+    
+    public void agregarVentaServicio(Encabezado unEncabezado){
+        this.unosEncabezadosVentaServicio.add(unEncabezado);
+    }
+    
+    public void agregarCompra(Encabezado unEncabezado){
+        this.unosEncabezadosCompra.add(unEncabezado);
+    }
+    
+    public void agregarLiquidacion(Encabezado unEncabezado){
+        this.unosEncabezadosLiquidacion.add(unEncabezado);
     }
 
     public void crearProveedor(String nombre, String direccion, long telefono, String email, String cuit) throws Exception {
@@ -1067,19 +1096,22 @@ public class Empresa implements Serializable {
         Persistencia.eliminarTipoLiquidacion(codigo);
     }
 
-    public void crearArticulo(String nombre, String descripcion, Double precio, int cantidad) throws Exception {
+    public void crearArticulo(String nombre, String descripcion,Double precioLista,Double descuentoMayorista,Double precioVenta, int cantidad,int cantidadMinima) throws Exception {
         int codigo = generarCodigoArticulo();
-        Articulo unArticulo = new Articulo(codigo, nombre, descripcion, precio, cantidad);
+        Articulo unArticulo = new Articulo(nombre, precioVenta, precioLista, descuentoMayorista, cantidadMinima, cantidad, codigo, descripcion);
         unosArticulos.add(unArticulo);
         Persistencia.crearArticulo(unArticulo);
     }
 
-    public void modificarArticulo(int codigo, String nombre, String descripcion, Double precio, int cantidad) throws Exception {
+    public void modificarArticulo(String nombre, String descripcion,Double precioLista,Double descuentoMayorista,Double precioVenta, int cantidad,int cantidadMinima) throws Exception {
         Articulo unArticulo = buscarArticulo(codigo);
         unArticulo.setNombre(nombre);
         unArticulo.setDescripcion(descripcion);
-        unArticulo.setPrecio(precio);
+        unArticulo.setPrecioLista(precioLista);
+        unArticulo.setPrecioVenta(precioVenta);
+        unArticulo.setDescuentoMayorista(descuentoMayorista);
         unArticulo.setCantidad(cantidad);
+        unArticulo.setCantidadMinima(cantidadMinima);
         Persistencia.modificarArticulo(unArticulo);
     }
 
@@ -1355,6 +1387,18 @@ public class Empresa implements Serializable {
 
     public List<Tercero> traerServicioTercero() {
         return this.unosTerceros;
+    }
+
+    public List<Encabezado> traerEncabezadoVentaArticulo() {
+        return this.unosEncabezadosVentaArticulo;
+    }
+
+    public List<Encabezado> traerEncabezadoVentaServicio() {
+        return this.unosEncabezadosVentaServicio;
+    }
+
+    public List<Encabezado> traerEncabezadoCompra() {
+        return this.unosEncabezadosCompra;
     }
 
 }

@@ -46,13 +46,13 @@ public class ArticuloBusquedaInter extends javax.swing.JInternalFrame {
 
         tblArticulo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Nombre", "Descripcion", "Precio", "Cantidad"
+                "Codigo", "Nombre", "Descripcion", "Precio de Lista", "Precio de Venta", "Porcentaje Descuento", "Cantidad Minima", "Stock"
             }
         ));
         tblArticulo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -91,7 +91,7 @@ public class ArticuloBusquedaInter extends javax.swing.JInternalFrame {
         
         GenerarVentaArticuloInter.lblCodigoArticulo.setText(this.modelosArticulo.getValueAt(fila, 0).toString());
         GenerarVentaArticuloInter.lblNombreArticulo.setText(this.modelosArticulo.getValueAt(fila, 1).toString());
-        GenerarVentaArticuloInter.lblPrecio.setText(this.modelosArticulo.getValueAt(fila, 3).toString());
+        GenerarVentaArticuloInter.lblPrecio.setText(this.modelosArticulo.getValueAt(fila, 4).toString());
         this.dispose();
     }//GEN-LAST:event_tblArticuloMouseClicked
 
@@ -111,7 +111,7 @@ public class ArticuloBusquedaInter extends javax.swing.JInternalFrame {
         Articulo unTipo;
         while (itArticulo.hasNext()) {
             unTipo = itArticulo.next();
-            modelosArticulo.addRow(new Object[]{unTipo.getCodigo(), unTipo.getNombre(), unTipo.getDescripcion(), unTipo.getPrecio(), unTipo.getCantidad()});
+            modelosArticulo.addRow(new Object[]{unTipo.getCodigo(),unTipo.getNombre(),unTipo.getDescripcion(),unTipo.getPrecioLista(),unTipo.getPrecioVenta(),unTipo.getDescuentoMayorista(),unTipo.getCantidadMinima(),unTipo.getCantidad()});
         }
     }
 

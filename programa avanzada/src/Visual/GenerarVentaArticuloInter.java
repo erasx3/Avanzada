@@ -10,6 +10,7 @@ import Logica.Cliente;
 import Logica.Consumible;
 import Logica.Detalle;
 import Logica.DetalleCompraVenta;
+import Logica.Encabezado;
 import Logica.TipoComprobante;
 import Logica.TipoVenta;
 import java.util.Calendar;
@@ -308,7 +309,7 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
         try {
             if (this.miControladoraVisual.comprobarStock(Integer.parseInt(lblCodigoArticulo.getText()), Integer.parseInt(txtCantidad.getText()))) {
                 Consumible unConsumible = this.miControladoraVisual.buscarArticulo(Integer.parseInt(lblCodigoArticulo.getText()));
-                Double subtotal = Integer.parseInt(txtCantidad.getText()) * Double.parseDouble(lblPrecio.getText());
+                Double subtotal = this.miControladoraVisual.calcularTotal(Integer.parseInt(lblCodigoArticulo.getText()),Integer.parseInt(this.txtCantidad.getText()) );
                 Double total = subtotal + Double.parseDouble(lblTotal.getText());
                 this.lblTotal.setText(String.valueOf(total));
                 int codigo = this.miControladoraVisual.generarDetalleCompraVenta(Integer.parseInt(txtCantidad.getText()), unConsumible, subtotal);
@@ -346,6 +347,8 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
 
     private void cmdVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdVentaActionPerformed
         this.unosDetalle = new LinkedList();
+        Encabezado unEncabezado;
+        int codigoEncb;
         DetalleCompraVenta unDetalleCompraVenta;
         Calendar fecha = new GregorianCalendar();
         Cliente unCliente;
@@ -365,7 +368,9 @@ public class GenerarVentaArticuloInter extends javax.swing.JInternalFrame {
         unCliente = this.miControladoraVisual.buscarClient(Integer.parseInt(txtCodigoCliente.getText()));
         unComprobante = this.miControladoraVisual.buscarTipoVenta(codigoComp);
         try {
-            this.miControladoraVisual.generarEncabezado(fecha, unCliente, unComprobante,this.unosDetalle, total);
+            codigoEncb=this.miControladoraVisual.generarEncabezado(fecha, unCliente, unComprobante,this.unosDetalle, total);
+            unEncabezado=this.miControladoraVisual.buscarEncabezado(codigoEncb);
+            this.miControladoraVisual.agregarVentaArticulo(unEncabezado);
             refrescarVentanaArticulo();
             refrescarVentanaFinalizacion();
         } catch (Exception ex) {

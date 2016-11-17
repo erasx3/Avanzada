@@ -21,26 +21,51 @@ public class Articulo extends Consumible implements Serializable {
     @Basic
     private String nombre;
     @Basic
-    private Double precio;
+    private Double precioVenta;
+    @Basic
+    private Double precioLista;
+    @Basic
+    private Double DescuentoMayorista;
+    @Basic
+    private int cantidadMinima;
     @Basic
     private int cantidad;
 
     public Articulo() {
     }
 
-    public Articulo(int codigo, String nombre, String descripcion, Double precio, int cantidad) {
+    public Articulo(int codigo, String nombre, String descripcion, Double precioVenta, int cantidad) {
         super(codigo, descripcion);
         this.nombre = nombre;
-        this.precio = precio;
+        this.precioVenta = precioVenta;
         this.cantidad = cantidad;
     }
 
+    public Articulo(String nombre, Double precioVenta, Double precioLista, Double DescuentoMayorista, int cantidadMinima, int cantidad) {
+        this.nombre = nombre;
+        this.precioVenta = precioVenta;
+        this.precioLista = precioLista;
+        this.DescuentoMayorista = DescuentoMayorista;
+        this.cantidadMinima = cantidadMinima;
+        this.cantidad = cantidad;
+    }
+
+    public Articulo(String nombre, Double precioVenta, Double precioLista, Double DescuentoMayorista, int cantidadMinima, int cantidad, int codigo, String descripcion) {
+        super(codigo, descripcion);
+        this.nombre = nombre;
+        this.precioVenta = precioVenta;
+        this.precioLista = precioLista;
+        this.DescuentoMayorista = DescuentoMayorista;
+        this.cantidadMinima = cantidadMinima;
+        this.cantidad = cantidad;
+    }
+    
     public String getNombre() {
         return nombre;
     }
 
-    public Double getPrecio() {
-        return precio;
+    public Double getPrecioVenta() {
+        return precioVenta;
     }
 
     public int getCantidad() {
@@ -51,14 +76,38 @@ public class Articulo extends Consumible implements Serializable {
         this.nombre = nombre;
     }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
+    public void setPrecioVenta(Double precio) {
+        this.precioVenta = precio;
     }
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+    
+    public Double getPrecioLista() {
+        return precioLista;
+    }
 
+    public void setPrecioLista(Double precioLista) {
+        this.precioLista = precioLista;
+    }
+
+    public Double getDescuentoMayorista() {
+        return DescuentoMayorista;
+    }
+
+    public void setDescuentoMayorista(Double DescuentoMayorista) {
+        this.DescuentoMayorista = DescuentoMayorista;
+    }
+
+    public int getCantidadMinima() {
+        return cantidadMinima;
+    }
+
+    public void setCantidadMinima(int cantidadMinima) {
+        this.cantidadMinima = cantidadMinima;
+    }
+    
     public boolean isArticulo(int codigo) {
         boolean aux = false;
         if (super.getCodigo() == codigo) {
@@ -81,9 +130,15 @@ public class Articulo extends Consumible implements Serializable {
 
     public void descontarArticulo(int cantidad) {
         this.cantidad = this.cantidad - cantidad;
-
     }
 
+    public Double calcularTotal(int cantidad){
+        Double aux=this.precioVenta*cantidad;
+        if(cantidad>=this.cantidadMinima){
+            aux=(this.precioVenta-(this.precioVenta*(this.DescuentoMayorista/100)))*cantidad;
+        }
+        return aux;
+    }    
     public boolean comprobarStock(int cantidad) {
         boolean aux = false;
         if (this.getCantidad() >= cantidad) {

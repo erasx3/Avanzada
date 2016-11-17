@@ -38,6 +38,7 @@ import Logica.TipoVenta;
 import Logica.Turno;
 import Persistencia.exceptions.NonexistentEntityException;
 import com.itextpdf.text.DocumentException;
+import java.io.FileOutputStream;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -290,8 +291,8 @@ public class ControladoraVisual {
         this.unaEmpresa.borrarDetalleCompraVenta(codigo);
     }
     
-    public void generarEncabezado(Calendar fecha,  PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante,List<Detalle> unosDetalles,Double total) throws Exception{
-        this.unaEmpresa.generarEncabezado(fecha, unaPersoneriaJuridica, unTipoComprobante,unosDetalles,total);
+    public int generarEncabezado(Calendar fecha,  PersoneriaJuridica unaPersoneriaJuridica, TipoComprobante unTipoComprobante,List<Detalle> unosDetalles,Double total) throws Exception{
+        return this.unaEmpresa.generarEncabezado(fecha, unaPersoneriaJuridica, unTipoComprobante,unosDetalles,total);
     }
     
     public void borrarEncabezado(int codigo) throws Exception{
@@ -310,8 +311,28 @@ public class ControladoraVisual {
         this.unaEmpresa.descontarArticulo(cantidad, codigo);
     }
     
+    public Double calcularTotal(int codigo,int cantidad){
+        return this.unaEmpresa.calcularTotal(codigo, cantidad);
+    }
+    
     public boolean comprobarStock(int codigo, int cantidad){
         return this.unaEmpresa.comprobarStock(codigo, cantidad);
+    }
+    
+    public void agregarVentaArticulo(Encabezado unEncabezado){
+        this.unaEmpresa.agregarVentaArticulo(unEncabezado);
+    }
+    
+    public void agregarVentaServicio(Encabezado unEncabezado){
+        this.unaEmpresa.agregarVentaServicio(unEncabezado);
+    }
+    
+    public void agregarCompra(Encabezado unEncabezado){
+        this.unaEmpresa.agregarCompra(unEncabezado);
+    }
+    
+    public void agregarLiquidacion(Encabezado unEncabezado){
+        this.unaEmpresa.agregarLiquidacion(unEncabezado);
     }
     
     public Proveedor buscarProveedor(int codigo){
@@ -450,12 +471,12 @@ public class ControladoraVisual {
         this.unaEmpresa.borrarTipoLiquidacion(codigo);
     }
     
-    public void crearArticulo(String nombre,String descripcion,Double precio,int cantidad) throws Exception{
-        this.unaEmpresa.crearArticulo(nombre, descripcion, precio, cantidad);
+    public void crearArticulo(String nombre, String descripcion,Double precioLista,Double descuentoMayorista,Double precioVenta, int cantidad,int cantidadMinima) throws Exception{
+        this.unaEmpresa.crearArticulo(nombre, descripcion, precioLista, descuentoMayorista, precioVenta, cantidad, cantidadMinima);
     }
     
-    public void modificarArticulo(int codigo,String nombre,String descripcion,Double precio, int cantidad) throws Exception{
-        this.unaEmpresa.modificarArticulo(codigo, nombre, descripcion, precio, cantidad);
+    public void modificarArticulo(String nombre, String descripcion,Double precioLista,Double descuentoMayorista,Double precioVenta, int cantidad,int cantidadMinima) throws Exception{
+        this.unaEmpresa.modificarArticulo(nombre, descripcion, precioLista, descuentoMayorista, precioVenta, cantidad, cantidadMinima);
     }
     
     public void borrarArticulo(int codigo) throws NonexistentEntityException{
@@ -534,10 +555,24 @@ public class ControladoraVisual {
         return this.unaEmpresa.traerServicioTercero();
     }
     
+    public List<Encabezado> traerEncabezadoVentaArticulo() {
+        return this.unaEmpresa.traerEncabezadoVentaArticulo();
+    }
+    
     //Metodos de Conexion con Controladora de Reportes
     
-    public void generarReporteVenta(Encabezado unEncabezado) throws DocumentException{
-        this.miControladoraReporte.generarReporteVenta(unEncabezado);
+    public void generarReporteVenta(Encabezado unEncabezado, FileOutputStream archivo) throws DocumentException{
+        this.miControladoraReporte.generarReporteVenta(unEncabezado, archivo);
     }
+
+    public List<Encabezado> traerEncabezadoVentaServicio() {
+        return this.unaEmpresa.traerEncabezadoVentaServicio();
+    }
+
+    public List<Encabezado> traerEncabezadoCompra() {
+        return this.unaEmpresa.traerEncabezadoCompra();
+    }
+
+    
 
 }

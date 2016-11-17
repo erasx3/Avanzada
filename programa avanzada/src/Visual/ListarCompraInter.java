@@ -5,27 +5,20 @@
  */
 package Visual;
 
-import Logica.Cliente;
 import Logica.Detalle;
 import Logica.DetalleCompraVenta;
 import Logica.Encabezado;
-import Logica.TipoVenta;
-import com.itextpdf.text.DocumentException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import Logica.Proveedor;
+import Logica.TipoCompra;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Pepe
+ * @author pepex3
  */
-public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
+public class ListarCompraInter extends javax.swing.JInternalFrame {
 
     private ControladoraVisual miControladoraVisual;
     private DefaultTableModel modeloEncabezado;
@@ -33,13 +26,13 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
     private int fila;
 
     /**
-     * Creates new form ListarVentaArticulosInter
+     * Creates new form ListarCompraInter
      */
-    public ListarVentaArticulosInter(ControladoraVisual miControladoraVisual) {
+    public ListarCompraInter(ControladoraVisual miControladoraVisual) {
         initComponents();
         this.miControladoraVisual = miControladoraVisual;
-        this.modeloEncabezado = (DefaultTableModel) this.tblEncabezado.getModel();
-        this.modeloDetalle = (DefaultTableModel) this.tblDetalle.getModel();
+        this.modeloDetalle=(DefaultTableModel)this.tblDetalle.getModel();
+        this.modeloEncabezado=(DefaultTableModel)this.tblEncabezado.getModel();
         refrescarVentana();
     }
 
@@ -63,7 +56,7 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setResizable(true);
-        setTitle("Ventas de Articulos");
+        setTitle("Compras");
 
         tblEncabezado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,7 +66,7 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Comprobante", "Cliente", "Fecha", "Total"
+                "Codigo", "Comprobante", "Proveedor", "Fecha", "Total"
             }
         ));
         tblEncabezado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -121,7 +114,7 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cmdImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,7 +174,7 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
             this.miControladoraVisual.borrarEncabezado(codigo);
             refrescarVentana();
         } catch (Exception ex) {
-            Logger.getLogger(ListarVentaArticulosInter.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }//GEN-LAST:event_cmdBorrarVentaActionPerformed
 
@@ -189,19 +182,9 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
         int codigo = Integer.parseInt(this.tblEncabezado.getValueAt(this.fila, 0).toString());
         Encabezado unEncabezado = this.miControladoraVisual.buscarEncabezado(codigo);
         try {
+            this.miControladoraVisual.generarReporteVenta(unEncabezado);
+        } catch (Exception ex) {
 
-            try {
-                JFileChooser file = new JFileChooser();
-                file.showSaveDialog(this);
-                File guarda = file.getSelectedFile();         
-                FileOutputStream archivo = new FileOutputStream(guarda);
-                this.miControladoraVisual.generarReporteVenta(unEncabezado, archivo);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(ListarVentaArticulosInter.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        } catch (DocumentException ex) {
-            Logger.getLogger(ListarVentaArticulosInter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_cmdImprimirActionPerformed
 
@@ -218,21 +201,21 @@ public class ListarVentaArticulosInter extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void refrescarVentana() {
-        this.modeloDetalle.setRowCount(0);;
+        this.modeloDetalle.setRowCount(0);
         this.modeloEncabezado.setRowCount(0);
-        cargarTablaEncabezado();
+        cargarTabla();
     }
 
-    private void cargarTablaEncabezado() {
-        Iterator<Encabezado> itEncabezado = this.miControladoraVisual.traerEncabezadoVentaArticulo().iterator();
+    private void cargarTabla() {
+        Iterator<Encabezado> itEncabezado = this.miControladoraVisual.traerEncabezadoCompra().iterator();
         Encabezado unEncabezado;
-        Cliente unCliente;
-        TipoVenta unTipoVenta;
+        Proveedor unProveedor;
+        TipoCompra unTipoCompra;
         while (itEncabezado.hasNext()) {
             unEncabezado = itEncabezado.next();
-            unCliente = (Cliente) unEncabezado.getUnaPersoneriaJuridica();
-            unTipoVenta = (TipoVenta) unEncabezado.getUnTipoComprobante();
-            modeloEncabezado.addRow(new Object[]{unEncabezado.getCodigo(), unTipoVenta.getDescripcion(), unCliente.getNombre() + " " + unCliente.getApellido(), unEncabezado.getFecha(), unEncabezado.getTotal()});
+            unProveedor=(Proveedor)unEncabezado.getUnaPersoneriaJuridica();
+            unTipoCompra=(TipoCompra)unEncabezado.getUnTipoComprobante();
+            modeloEncabezado.addRow(new Object[]{unEncabezado.getCodigo(),unTipoCompra.getDescripcion(),unProveedor.getNombre(),unEncabezado.getFecha(),unEncabezado.getTotal()});
         }
     }
 }

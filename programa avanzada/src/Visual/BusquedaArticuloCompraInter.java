@@ -45,13 +45,13 @@ public class BusquedaArticuloCompraInter extends javax.swing.JInternalFrame {
 
         tblArticulo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Nombre", "Cantidad", "Precio"
+                "Codigo", "Nombre", "Descripcion", "Precio de Lista", "Precio de Venta", "Porcentaje Descuento", "Cantidad  Minima", "Stock"
             }
         ));
         tblArticulo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,7 +106,7 @@ public class BusquedaArticuloCompraInter extends javax.swing.JInternalFrame {
         Articulo unArticulo;
         while (itArticulo.hasNext()) {
             unArticulo = itArticulo.next();
-            this.modeloArticulo.addRow(new Object[]{unArticulo.getCodigo(),unArticulo.getNombre(),unArticulo.getCantidad(),unArticulo.getPrecio()});
+            this.modeloArticulo.addRow(new Object[]{unArticulo.getCodigo(),unArticulo.getNombre(),unArticulo.getDescripcion(),unArticulo.getPrecioLista(),unArticulo.getPrecioVenta(),unArticulo.getDescuentoMayorista(),unArticulo.getCantidadMinima(),unArticulo.getCantidad()});
         }
     }
 }
