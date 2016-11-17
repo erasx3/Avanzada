@@ -36,6 +36,8 @@ public class Empresa implements Serializable {
 
     //Relaciones
     @OneToMany
+    private List<Usuario> unosUsuarios = new LinkedList();
+    @OneToMany
     private List<Encabezado> unosEncabezados = new LinkedList();
     @OneToMany
     private List<Encabezado> unosEncabezadosVentaArticulo = new LinkedList();
@@ -1169,6 +1171,7 @@ public class Empresa implements Serializable {
         this.unasActividades.addAll(this.unasActAdministrativas);
         this.unasActividades.addAll(this.unasActTecnicas);
         this.unasActividades.addAll(this.unasActProyecto);
+        this.unosUsuarios=Persistencia.traerUsuario();
     }
 
     public List<TipoTecnologia> traerTiposDeTecnologias() {
@@ -1489,4 +1492,16 @@ public class Empresa implements Serializable {
         return this.CalcularTotalVentasArticulos() - this.calcularTotalCompras();
     }
 
+    public boolean isIngresoValido(String usuario, String contrasenia) {
+        boolean aux = false;
+        Iterator<Usuario> itUsuario = this.unosUsuarios.iterator();
+        Usuario unUsuario;
+        while (itUsuario.hasNext()) {
+            unUsuario = itUsuario.next();
+            if (unUsuario.isIngresoValido(usuario, contrasenia)) {
+                aux = true;
+            }
+        }
+        return aux;
+    }
 }

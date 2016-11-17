@@ -32,6 +32,7 @@ import Persistencia.TipoLiquidacionJpaController;
 import Persistencia.TipoTecnologiaJpaController;
 import Persistencia.TipoVentaJpaController;
 import Persistencia.TurnoJpaController;
+import Persistencia.UsuarioJpaController;
 import Persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
 
@@ -68,6 +69,7 @@ public class Persistencia {
     public static TipoLiquidacionJpaController jpaLiquidacion;
     public static TipoVentaJpaController jpaTipoVenta;
     public static TurnoJpaController jpaTurno;
+    public static UsuarioJpaController jpaUsuario;
 
     
     
@@ -102,6 +104,7 @@ public class Persistencia {
         jpaLiquidacion = new TipoLiquidacionJpaController();
         jpaTipoVenta = new TipoVentaJpaController();
         jpaTurno = new TurnoJpaController();
+        jpaUsuario=new UsuarioJpaController();
         
     }
     
@@ -124,6 +127,10 @@ public class Persistencia {
         return jpaTipoTecnologia.findTipoTecnologiaEntities();
     }
     
+    static List<Usuario> traerUsuario(){
+        return jpaUsuario.findUsuarioEntities();
+    }
+     
     static void crearTecnologia(Tecnologia unaTecnologia) throws Exception
     {
         jpaTecnologia.create(unaTecnologia);
